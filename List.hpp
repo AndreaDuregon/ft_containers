@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/14 17:58:44 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/15 15:57:34 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 #include <iostream>
 
-template <typename T>
-struct Node
-{
-	T		value;
-	Node	*next;
-	Node	*prev;
-};
 
 namespace ft
 {
-	template <class T> class ListIterator
+	template <typename T>
+	struct Node
+	{
+		T		value;
+		Node	*next;
+		Node	*prev;
+	};
+
+	template <class T> class listIterator
 	{
 	private:
 		Node<T>	*curr;
@@ -33,40 +34,60 @@ namespace ft
 		typedef std::ptrdiff_t 	difference_type;
 		typedef T*				pointer;
 		typedef T&				reference;
-		ListIterator();
-		ListIterator(ListIterator const &copy);
-		~ListIterator();
+		listIterator() {};
+		listIterator(listIterator const &copy) {};
+		~listIterator() {};
 
-		typedef ListIterator<T> iterator;
+		typedef listIterator<T> iterator;
 
 		T			&operator * ();
 		iterator	&operator ++ ();
 		iterator	&operator ++ (int);
-		// ListIterator &operator -- (ListIterator const &op);
-		// ListIterator &operator --(int) (ListIterator const &op);
-		// ListIterator &operator -> (ListIterator const &op);
-		// ListIterator &operator [] (ListIterator const &op);
+		iterator	&operator -- ();
+		iterator	&operator -- (int);
+		T			*operator -> ();
 	};
 	
 	template <typename T>
-	T	&ListIterator<T>::operator * ()
+	T	&listIterator<T>::operator * ()
 	{
 		return this->curr->value;
 	}
 
 	template <typename T>
-	typename ListIterator<T>::iterator	&ListIterator<T>::operator ++ (int)
+	T	*listIterator<T>::operator -> ()
+	{
+		return &this->curr->value;
+	}
+
+	template <typename T>
+	typename listIterator<T>::iterator	&listIterator<T>::operator ++ (int)
 	{
 		this->curr = this->curr->next;
 		return this->curr;
 	}
 
 	template <typename T>
-	typename ListIterator<T>::iterator	&ListIterator<T>::operator ++ ()
+	typename listIterator<T>::iterator	&listIterator<T>::operator ++ ()
 	{
-		ListIterator<T>::iterator temp = this;
+		listIterator<T>::iterator temp = this;
 		this->curr = this->curr->next;
-		return this;
+		return this->curr;
+	}
+
+	template <typename T>
+	typename listIterator<T>::iterator	&listIterator<T>::operator -- ()
+	{
+		listIterator<T>::iterator temp = this;
+		this->curr = this->curr->prev;
+		return this->curr;
+	}
+
+	template <typename T>
+	typename listIterator<T>::iterator	&listIterator<T>::operator -- (int)
+	{
+		this->curr = this->curr->prev;
+		return this->curr;
 	}
 
 	
@@ -79,7 +100,7 @@ namespace ft
 		List(/* args */);
 		~List();
 
-		//typedef List<Node *>::ListIterator iterator;
+		//typedef List<Node *>::listIterator iterator;
 	};
 
 }
