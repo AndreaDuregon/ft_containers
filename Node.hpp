@@ -3,8 +3,9 @@
 namespace ft
 {
     template <typename T>
-	struct Node
+	class Node
 	{
+		public:
 		T		value;
 		Node	*next;
 		Node	*prev;

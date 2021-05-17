@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 14:51:28 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/17 15:02:33 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,24 @@ namespace ft
 		ft::Node<T> *nEnd;
 	public:
 		typedef typename ft::listIterator<T> iterator;
-		list(/* args */) {};
+		list(/* args */) {
+			this->nBegin = new Node();
+			this->nEnd = new Node();
+			this->nBegin->next = this->nEnd;
+			this->nBegin->prev = 0;
+			this->nBegin->value = 0;
+			this->nEnd->prev = this->nBegin;
+			this->nEnd->next = 0;
+			this->nEnd->value = 0;
+		};
 		~list() {};
 
 		//iter section
-		iterator begin();
+		iterator begin()
+		{
+			return new iterator (this->nBegin);
+		};
+		
 		const_iterator begin() const;
 		iterator end();
 		const_iterator end() const;
