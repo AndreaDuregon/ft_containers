@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 14:51:28 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/17 16:28:04 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,43 @@ namespace ft
 
   		void merge (list& x);
 		template <class Compare>
-  		void merge (list& x, Compare comp);
+  		void merge (list& x, Compare comp)
+		{
+			ft::list<T> tmp(*this);
 
-  		void sort();
+			for (size_t i = 0; i < count; i++)
+			{
+				/* code */
+			}
+			
+		}
+
+  		void sort(); // DA FINIRE
 
 		template <class Compare>
-		void sort (Compare comp);
-		void reverse();
+		void sort (Compare comp) //DA FINIRE
+		{}
+
+		void reverse()
+		{
+			iterator it_end(this->end());
+			iterator it_begin(this->begin());
+			ft::list<T> tmp;
+			iterator tmp_end(tmp->end());
+			iterator tmp_begin(tmp->begin());
+
+			for (size_t i = 0; i < this->size(); i++)
+			{
+				tmp.push_back(*it);
+				it_end--;
+			}
+			for (size_t i = 0; i < this->size(); i++)
+			{
+				*it_begin = *tmp_begin;
+				it_begin++;
+				tmp_begin++;
+			}
+		}
 
 	};
 } 
