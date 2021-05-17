@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 15:02:33 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/17 15:54:10 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,26 @@ namespace ft
 			return new iterator (this->nBegin);
 		};
 		
-		const_iterator begin() const;
-		iterator end();
-		const_iterator end() const;
-		reverse_iterator rbegin();
+		const_iterator begin() const
+		{
+			return new iterator(this->nBegin);
+		};
+		
+		iterator end()
+		{
+			return new iterator(this->nEnd);
+		};
+		
+		const_iterator end() const
+		{
+			return new iterator(this->nEnd);
+			
+		};
+		
+		reverse_iterator rbegin()
+		{
+			return n	
+		}
 		const_reverse_iterator rbegin() const;
     	reverse_iterator rend();
 		const_reverse_iterator rend() const;
