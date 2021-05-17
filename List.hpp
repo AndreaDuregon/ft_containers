@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:16:01 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:24:53 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,21 @@ namespace ft
 		
 		void assign (size_type n, const value_type& val);								//fill
 		void push_front (const value_type& val);
-		void pop_front();
+		void pop_front()
+		{
+			iterator it(this->begin());
+
+			erase(it);
+		}
+
 		void push_back (const value_type& val);
 		
-		void pop_back();
+		void pop_back()
+		{
+			iterator it(this->end());
+
+			this->erase();
+		}
 
 		iterator insert (iterator position, const value_type& val)
 		{
@@ -291,16 +302,14 @@ namespace ft
 		void unique()
 		{
 			iterator it_this(this->begin());
-			iterator it_x(x.begin());
+			iterator it_x(this->begin());
 
-			for (size_t i = 0; i < x.size(); i++)
+			it_x++;
+			for (size_t k = 0; k < this->size(); k++)
 			{
-				for (size_t k = 0; k < this->size(); k++)
-				{
-					if (*it_x == *it_this))
-						this->erase(it_x);
-					it_this++;
-				}
+				if (*it_x == *it_this))
+					this->erase(it_x);
+				it_this++;
 				it_x++;
 			}
 		}
