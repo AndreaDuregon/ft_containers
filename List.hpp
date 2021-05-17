@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:16:39 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:18:02 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,43 +144,295 @@ namespace ft
 		
 		void pop_back();
 
-		iterator insert (iterator position, const value_type& val);
-	   	void insert (iterator position, size_type n, const value_type& val);
+		iterator insert (iterator position, const value_type& val)
+		{
+			iterator it_next;
+
+			it_next = position;
+			it_next++;
+			node = new Node(val);
+			*position.curr->next = &node;
+			node.prev = &(*position);
+			node.next = &(*it_next);
+			this->size++;
+		}
+
+	   	void insert (iterator position, size_type n, const value_type& val)
+		{
+			size_type	i;
+			ft::Node<T> node;
+
+			i = 0;
+			while (i < n)
+			{
+				insert(position, val);
+				i++;
+				position++;
+			}
+		}
 		
 		template <class InputIterator>
-		void insert (iterator position, InputIterator first, InputIterator last);
+		void insert (iterator position, InputIterator first, InputIterator last)
+		{
+			while (first != last)
+			{
+				
+				position++;
+				first++;
+			}
+			
+		}
 		
 		template <class InputIterator>
-		iterator erase (iterator position);
+		iterator erase (iterator position)
+		{
+			iterator it_prev;
+			iterator it_next;
+
+			it_prev = position;
+			it_next = position;
+			it_prev--;
+			it_next--;
+			delete(*position);
+			*it_prev.curr->next = *it_next;
+			*it_next.curr->prev = *it_prev;
+			this->size--;
+		}
+
 		template <class InputIterator>
-		iterator erase (iterator first, iterator last);
+		iterator erase (iterator first, iterator last)
+		{
+			while (first != last)
+			{
+				this->erase(first);
+				first++;
+			}
+		}
 		
-		void swap (list& x);
-		void resize (size_type n, value_type val = value_type());
-		void clear();
+		void swap (list& x)
+		{
+			ft::list tmp();
+
+			tmp = *this;
+			*this = x;
+			x = tmp;
+		}
+
+		void resize (size_type n, value_type val = value_type())
+		{
+			ft::list tmp(*this);
+			iterator it_tmp(tmp.begin())
+
+			this->clear();
+			for (size_t i = 0; i < n; i++)
+			{
+				if (i > this->size())
+					this->push_back(val);
+				else
+				{
+					this->push_back(*it_tmp.curr->value);
+					it_tmp++;
+				}
+			}
+		}
+
+		void clear()
+		{
+			iterator it(this->begin());
+
+			for (size_t i = 0; i < this->size(); i++)
+			{
+				this->erase(it);
+				it++;
+			}	
+		}
 
 		//operations
-		void splice (iterator position, list& x);										//entire list (1)	
-		void splice (iterator position, list& x, iterator i);							//single element (2)	
-		void splice (iterator position, list& x, iterator first, iterator last);		//element range (3)	
+		void splice (iterator position, list& x)
+		{
+			this->insert(position, x.begin(), x.end());
+		}
+	
+		void splice (iterator position, list& x, iterator i)
+		{
+			this->insert(position, i, x.end());
+		}
+
+		void splice (iterator position, list& x, iterator first, iterator last)
+		{
+			this->insert(position, first, last);
+		}
 		
-		void remove (const value_type& val);
+		void remove (const value_type& val)
+		{
+			iterator it(this->begin());
+			
+			for (size_t i = 0; i < this->size(); i++)
+			{
+				if (*it.curr->value == val)
+					this->erase(it);
+				it++;
+			}
+		}
+
 		template <class Predicate>
-		void remove_if (Predicate pred);
+		void remove_if (Predicate pred)
+		{
+			iterator it(this->begin());
+			
+			for (size_t i = 0; i < this->size(); i++)
+			{
+				if (pred(*it))
+					this->erase(it);
+				it++;
+			}
+			
+		}
 		
-		void unique();
+		void unique()
+		{
+			iterator it_this(this->begin());
+			iterator it_x(x.begin());
+
+			for (size_t i = 0; i < x.size(); i++)
+			{
+				for (size_t k = 0; k < this->size(); k++)
+				{
+					if (*it_x == *it_this))
+						this->erase(it_x);
+					it_this++;
+				}
+				it_x++;
+			}
+		}
+
 		template <class BinaryPredicate>
-  		void unique (BinaryPredicate binary_pred);
+  		void unique (BinaryPredicate binary_pred)
+		{
+			iterator it_this(this->begin());
+			iterator it_x(x.begin());
 
-  		void merge (list& x);
+			for (size_t i = 0; i < x.size(); i++)
+			{
+				for (size_t k = 0; k < this->size(); k++)
+				{
+					if (binary_pred(*it_x, *it_this))
+						this->erase(it_x);
+					it_this++;
+				}
+				it_x++;
+			}
+		}
+
+  		void merge (list& x)
+		{
+			iterator it_this(this->begin());
+			iterator it_x(x.begin());
+
+			for (size_t i = 0; i < x.size(); i++)
+			{
+				for (size_t k = 0; k < this->size(); k++)
+				{
+					if (!(*it_x < *it_this))
+					{
+						this->insert(it_this, value_type, *it_x.curr->value)
+						this->erase(it_x);
+					}
+					it_this++;
+				}
+				it_x++;
+			}
+		}
+
 		template <class Compare>
-  		void merge (list& x, Compare comp);
+  		void merge (list& x, Compare comp)
+		{
+			iterator it_this(this->begin());
+			iterator it_x(x.begin());
 
-  		void sort();
+			for (size_t i = 0; i < x.size(); i++)
+			{
+				for (size_t k = 0; k < this->size(); k++)
+				{
+					if (!comp(*it_x, it_this))
+					{
+						this->insert(it_this, value_type, *it_x.curr->value)
+						this->erase(it_x);
+					}
+					it_this++;
+				}
+				it_x++;
+			}
+			
+		}
+
+  		void sort()
+		{
+			iterator	it_i(this->begin());
+			iterator	it_k(this->begin());
+			T			tmp;
+
+			for (size_t i = 0; i < this->size; i++)
+			{
+				for (size_t k = i; k < this->size; i++)
+				{
+					if (*it_i < *it_k)
+					{
+						tmp = *it_i.curr;
+						*it_i = *it_k;
+						*it_k = tmp;
+					}
+					it_k++;
+				}
+				it_i++;
+			}
+			
+		}
 
 		template <class Compare>
-		void sort (Compare comp);
-		void reverse();
+		void sort (Compare comp)
+		{
+			iterator	it_i(this->begin());
+			iterator	it_k(this->begin());
+			T			tmp;
+
+			for (size_t i = 0; i < this->size; i++)
+			{
+				for (size_t k = i; k < this->size; i++)
+				{
+					if (comp(*it_i, *it_k))
+					{
+						tmp = *it_i.curr;
+						*it_i = *it_k;
+						*it_k = tmp;
+					}
+					it_k++;
+				}
+				it_i++;
+			}
+			
+		}
+
+		void reverse()
+		{
+			iterator it_end(this->end());
+			iterator it_begin(this->begin());
+			ft::list<T> tmp;
+			iterator tmp_end(tmp->end());
+			iterator tmp_begin(tmp->begin());
+
+			for (size_t i = 0; i < this->size(); i++)
+			{
+				tmp.push_back(*it);
+				it_end--;
+			}
+			for (size_t i = 0; i < this->size(); i++)
+			{
+				*it_begin = *tmp_begin;
+				it_begin++;
+				tmp_begin++;
+			}
+		}
 
 	};
 } 
