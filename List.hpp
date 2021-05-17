@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 15:22:07 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 16:04:31 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ namespace ft
 		ft::Node<T> *nEnd;
 	public:
 		/* MEMBER */
-		//typedef ????							iterator_category
 		typedef T								value_type;
-		typedef std::ptrdiff_t 					difference_type;
-		typedef	value_type*						pointer;
+		//typedef ???							allocator_type;
 		typedef value_type&						reference;
+		typedef const value_type&				const_reference;
+		typedef	value_type*						pointer;
+		typedef	const value_type*				const_pointer;
+		typedef typename ft::listIterator<T>	iterator;
+		typedef typename ft::listIterator<T>	const_iterator;
+		typedef	typename ft::listIterator<T>	reverse_iterator;
+		typedef	typename ft::listIterator<T>	const_reverse_iterator;
+		typedef std::ptrdiff_t 					difference_type;
+		typedef size_t							size_type;
 
 		list(/* args */) {
 			this->nBegin = new Node<T>();

@@ -10,18 +10,11 @@ namespace ft
 			Node<T>	*curr;
 		public:
 			/* MEMBER */
+			//typedef ????							iterator_category
 			typedef T								value_type;
-			//typedef ???							allocator_type;
-			typedef value_type&						reference;
-			typedef const value_type&				const_reference;
-			typedef	value_type*						pointer;
-			typedef	const value_type*				const_pointer;
-			typedef typename ft::listIterator<T>	iterator;
-			typedef typename ft::listIterator<T>	const_iterator;
-			typedef	typename ft::listIterator<T>	reverse_iterator;
-			typedef	typename ft::listIterator<T>	const_reverse_iterator;
 			typedef std::ptrdiff_t 					difference_type;
-			typedef size_t							size_type;
+			typedef	value_type*						pointer;
+			typedef value_type&						reference;
 	
 			listIterator() {};
 			listIterator(listIterator const &copy) {};
