@@ -16,6 +16,8 @@
         "memory": "cpp",
         "__node_handle": "cpp",
         "memory_resource": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp"
     }
 }

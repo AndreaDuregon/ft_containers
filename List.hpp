@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 16:18:37 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 16:27:32 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 
 namespace ft
 {
-	template < class T > class list
+	template < class T, class Allocator = std::allocator<T> > class list
 	{
 	private:
-		ft::Node<T> *nBegin;
-		ft::Node<T> *nEnd;
+		ft::Node<T>		*_Begin;
+		ft::Node<T>		*_End;
+		unsigned int	_size;
 	public:
 		/* MEMBER */
 		typedef T								value_type;
-		//typedef ???							allocator_type;
+		typedef Allocator						allocator_type;
 		typedef value_type&						reference;
 		typedef const value_type&				const_reference;
 		typedef	value_type*						pointer;
@@ -37,61 +38,66 @@ namespace ft
 		typedef size_t							size_type;
 
 		list(/* args */) {
-			this->nBegin = new Node<T>();
-			this->nEnd = new Node<T>();
-			this->nBegin->next = this->nEnd;
-			this->nBegin->prev = 0;
-			this->nBegin->value = 0;
-			this->nEnd->prev = this->nBegin;
-			this->nEnd->next = 0;
-			this->nEnd->value = 0;
+			this->_Begin = new Node<T>();
+			this->_End = new Node<T>();
+			this->_Begin->next = this->_End;
+			this->_Begin->prev = 0;
+			this->_Begin->value = 0;
+			this->_End->prev = this->_Begin;
+			this->_End->next = 0;
+			this->_End->value = 0;
 		};
 		~list() {};
 
 		//iter section
 		iterator begin()
 		{
-			return new iterator (this->nBegin);
+			return new iterator (this->_Begin);
 		};
 		
 		const_iterator begin() const
 		{
-			return new iterator(this->nBegin);
+			return new iterator(this->_Begin);
 		};
 		
 		iterator end()
 		{
-			return new iterator(this->nEnd);
+			return new iterator(this->_End);
 		};
 		
 		const_iterator end() const
 		{
-			return new iterator(this->nEnd);
+			return new iterator(this->_End);
 			
 		};
 		
 		reverse_iterator rbegin()
 		{
-			return new reverse_iterator(this->nBegin);
+			return new reverse_iterator(this->_Begin);
 		}
 
 		const_reverse_iterator rbegin() const
 		{
-			return new const_reverse_iterator(this->rbegin);
+			return new const_reverse_iterator(this->_Begin);
 		}
 
 		reverse_iterator rend()
 		{
-			return new reverse_iterator(this->nEnd);	
+			return new reverse_iterator(this->_End);	
 		}
 
 		const_reverse_iterator rend() const
 		{
-			return new const_reverse_iterator(this->nEnd);	
+			return new const_reverse_iterator(this->_End);	
 		}
 		
 		// Capacity
-		bool empty() const;
+		bool empty() const
+		{
+			if (this->_size == 0)
+				return true;
+			return false;
+		}
 		size_type size() const;
 		size_type max_size() const;
 		
