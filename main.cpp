@@ -15,14 +15,14 @@ int main(void)
     std::cout << YELLOW <<"TESTER LIST" << OFF <<std::endl;
 
     std::list<int> sys_list;
-    std::list<int>::iterator sys_it;
+    sys_list.push_back(10);
+    std::list<int>::iterator sys_it = sys_list.begin();
+    std::cout << *sys_it << std::endl;
 
     ft::list<int> list;
-    ft::list<int>::iterator it;
+    sys_list.push_back(10);
+    ft::list<int>::iterator it = list.begin();
+    std::cout << *it << std::endl;
 
-
-
-
-    
 
 }

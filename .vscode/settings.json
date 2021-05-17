@@ -11,6 +11,11 @@
         "list": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "functional": "cpp",
+        "memory": "cpp",
+        "__node_handle": "cpp",
+        "memory_resource": "cpp",
+        "sstream": "cpp"
     }
 }

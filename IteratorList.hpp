@@ -9,14 +9,22 @@ namespace ft
 		private:
 			Node<T>	*curr;
 		public:
-			typedef T				value_type;
-			typedef std::ptrdiff_t 	difference_type;
-			typedef T*				pointer;
-			typedef T&				reference;
+			/* MEMBER */
+			typedef T								value_type;
+			//typedef	0							allocator_type;
+			typedef value_type&						reference;
+			typedef const value_type&				const_reference;
+			typedef	value_type*						pointer;
+			typedef	const value_type*				const_pointer;
+			typedef typename ft::listIterator<T>	iterator;
+			typedef typename ft::listIterator<T>	const_iterator;
+			typedef	typename ft::listIterator<T>	reverse_iterator;
+			typedef	typename ft::listIterator<T>	const_reverse_iterator;
+			typedef std::ptrdiff_t 					difference_type;
+			typedef size_t							size_type;
+	
 			listIterator() {};
 			listIterator(listIterator const &copy) {};
-
-			typedef listIterator<T> iterator;
 
 			T			&operator * ()
 			{
@@ -51,6 +59,11 @@ namespace ft
 			T			*operator -> ()
 			{
 				return &this->curr->value;
+			}
+
+			void operator = (Node<T> &node)
+			{
+				this->curr = node;
 			}
 	};
 }
