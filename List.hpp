@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 16:28:04 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/17 16:49:40 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,88 @@
 
 namespace ft
 {
-	template < class T > class list
+	template < class T, class Allocator = std::allocator<T> > class list
 	{
 	private:
-		ft::Node<T> *nBegin;
-		ft::Node<T> *nEnd;
+		ft::Node<T>		*_Begin;
+		ft::Node<T>		*_End;
+		unsigned int	_size;
 	public:
-		typedef typename ft::listIterator<T> iterator;
-		list(/* args */) {};
+		/* MEMBER */
+		typedef T								value_type;
+		typedef Allocator						allocator_type;
+		typedef value_type&						reference;
+		typedef const value_type&				const_reference;
+		typedef	value_type*						pointer;
+		typedef	const value_type*				const_pointer;
+		typedef typename ft::listIterator<T>	iterator;
+		typedef typename ft::clistIterator<T>	const_iterator;
+		typedef	typename ft::rlistIterator<T>	reverse_iterator;
+		typedef	typename ft::rclistIterator<T>	const_reverse_iterator;
+		typedef std::ptrdiff_t 					difference_type;
+		typedef size_t							size_type;
+
+		list(/* args */) {
+			this->_Begin = new Node<T>();
+			this->_End = new Node<T>();
+			this->_Begin->next = this->_End;
+			this->_Begin->prev = 0;
+			this->_Begin->value = 0;
+			this->_End->prev = this->_Begin;
+			this->_End->next = 0;
+			this->_End->value = 0;
+		};
 		~list() {};
 
 		//iter section
-		iterator begin();
-		const_iterator begin() const;
-		iterator end();
-		const_iterator end() const;
-		reverse_iterator rbegin();
-		const_reverse_iterator rbegin() const;
-    	reverse_iterator rend();
-		const_reverse_iterator rend() const;
+		iterator begin()
+		{
+			return new iterator (this->_Begin);
+		};
+		
+		const_iterator begin() const
+		{
+			return new iterator(this->_Begin);
+		};
+		
+		iterator end()
+		{
+			return new iterator(this->_End);
+		};
+		
+		const_iterator end() const
+		{
+			return new iterator(this->_End);
+			
+		};
+		
+		reverse_iterator rbegin()
+		{
+			return new reverse_iterator(this->_Begin);
+		}
+
+		const_reverse_iterator rbegin() const
+		{
+			return new const_reverse_iterator(this->_Begin);
+		}
+
+		reverse_iterator rend()
+		{
+			return new reverse_iterator(this->_End);	
+		}
+
+		const_reverse_iterator rend() const
+		{
+			return new const_reverse_iterator(this->_End);	
+		}
 		
 		// Capacity
-		bool empty() const;
+		bool empty() const
+		{
+			if (this->_size == 0)
+				return true;
+			return false;
+		}
 		size_type size() const;
 		size_type max_size() const;
 		
@@ -48,8 +108,7 @@ namespace ft
 		const_reference back() const;
 		
 		// Modifiers
-		template <class listIterator>
-  		void assign (InputIterator first, InputIterator last);							//range
+  		void assign (iterator first, iterator last);							//range
 		
 		void assign (size_type n, const value_type& val);								//fill
 		void push_front (const value_type& val);
@@ -57,17 +116,16 @@ namespace ft
 		void push_back (const value_type& val);
 		void pop_back();
 
-		template <class listIterator>
-		listIterator insert (iterator position, const value_type& val);
+		iterator insert (iterator position, const value_type& val);
 	   	void insert (iterator position, size_type n, const value_type& val);
 		
 		template <class InputIterator>
-    	void insert (iterator position, InputIterator first, InputIterator last);
+		void insert (iterator position, InputIterator first, InputIterator last);
 		
 		template <class InputIterator>
-		Listiterator erase (iterator position);
+		iterator erase (iterator position);
 		template <class InputIterator>
-		Listiterator erase (iterator first, iterator last);
+		iterator erase (iterator first, iterator last);
 		
 		void swap (list& x);
 		void resize (size_type n, value_type val = value_type());
@@ -99,11 +157,52 @@ namespace ft
 			
 		}
 
-  		void sort(); // DA FINIRE
+  		void sort()
+		{
+			iterator	it_i(this->begin());
+			iterator	it_k(this->begin());
+			T			tmp;
+
+			for (size_t i = 0; i < this->size; i++)
+			{
+				for (size_t k = i; k < this->size; i++)
+				{
+					if (*it_i < *it_k)
+					{
+						tmp = *it_i.curr;
+						*it_i = *it_k;
+						*it_k = tmp;
+					}
+					it_k++;
+				}
+				it_i++;
+			}
+			
+		}
 
 		template <class Compare>
-		void sort (Compare comp) //DA FINIRE
-		{}
+		void sort (Compare comp)
+		{
+			iterator	it_i(this->begin());
+			iterator	it_k(this->begin());
+			T			tmp;
+
+			for (size_t i = 0; i < this->size; i++)
+			{
+				for (size_t k = i; k < this->size; i++)
+				{
+					if (comp(*it_i, *it_k))
+					{
+						tmp = *it_i.curr;
+						*it_i = *it_k;
+						*it_k = tmp;
+					}
+					it_k++;
+				}
+				it_i++;
+			}
+			
+		}
 
 		void reverse()
 		{
