@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:14:04 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:16:39 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,38 @@ namespace ft
 		}
 		size_type size() const
 		{
-			return this->_size;
-		}
+			if (this->_size == 0)
+				return true;
+			return false;
+		};
+		// SYS richiesta per sapere max value allocabile
 		size_type max_size() const
 		{
-			return 0;
-		}
+			return 0;	
+		};
 		
 		//Elem access
-		reference front();
-		const_reference front() const;
-		reference back();
-		const_reference back() const;
+		reference front()
+		{
+			return &this->_Begin->value;
+		};
+		
+		const_reference front() const
+		{
+			return &this->_Begin->value;
+
+		};
+		
+		reference back()
+		{
+			return &this->_End->prev->value;	
+		};
+
+		
+		const_reference back() const
+		{
+			return &this->_End->prev->value;
+		};
 		
 		// Modifiers
   		void assign (iterator first, iterator last);							//range

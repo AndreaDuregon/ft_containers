@@ -48,7 +48,7 @@ namespace ft
 				return this->_curr;
 			}
 
-			T			*operator -> ()
+			T				*operator -> ()
 			{
 				return &this->_curr->value;
 			}
