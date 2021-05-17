@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:10:33 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/17 18:11:17 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ namespace ft
 		//iter section
 		iterator begin()
 		{
-			return new iterator (this->_Begin);
+			return iterator (this->_Begin);
 		};
 		
 		const_iterator begin() const
@@ -140,6 +140,7 @@ namespace ft
 		void push_front (const value_type& val);
 		void pop_front();
 		void push_back (const value_type& val);
+		
 		void pop_back();
 
 		iterator insert (iterator position, const value_type& val);
