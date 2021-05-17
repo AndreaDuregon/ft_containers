@@ -64,32 +64,57 @@ namespace ft
 			T	const		*operator -> ()
 			{
 				return &this->curr->value;
-			}	
-	};
-	
-	template <class T> class rlistIterator : public listIterator
-	{
-		public:
-			listIterator<T>		&operator -- ()
+			}
+			clistIterator<T>	&operator ++ ()
 			{
 				this->curr = this->curr->next;
 				return this->curr->prev;
 			}
 
-			listIterator<T>		&operator -- (int)
+			clistIterator<T>	&operator ++ (int)
 			{
 				this->curr = this->curr->next;
 				return this->curr;
 			}
 
-			listIterator<T>		&operator ++ ()
+			clistIterator<T>	&operator -- ()
+			{
+				this->curr = this->curr->prev;
+				return this->next;
+			}
+
+			clistIterator<T>	&operator -- (int)
+			{
+				this->curr = this->curr->prev;
+				return this->curr;
+			}
+
+
+	};
+	
+	template <class T> class rlistIterator : public listIterator
+	{
+		public:
+			rlistIterator<T>		&operator -- ()
+			{
+				this->curr = this->curr->next;
+				return this->curr->prev;
+			}
+
+			rlistIterator<T>		&operator -- (int)
+			{
+				this->curr = this->curr->next;
+				return this->curr;
+			}
+
+			rlistIterator<T>		&operator ++ ()
 			{
 				listIterator<T>::iterator temp = this;
 				this->curr = this->curr->prev;
 				return this->curr;
 			}
 
-			listIterator<T>		&operator ++ (int)
+			rlistIterator<T>		&operator ++ (int)
 			{
 				this->curr = this->curr->prev;
 				return this->curr;
@@ -106,7 +131,31 @@ namespace ft
 			T	const		*operator -> ()
 			{
 				return &this->curr->value;
-			}	
+			}
+			rclistIterator<T>		&operator -- ()
+			{
+				this->curr = this->curr->next;
+				return this->curr->prev;
+			}
+
+			rclistIterator<T>		&operator -- (int)
+			{
+				this->curr = this->curr->next;
+				return this->curr;
+			}
+
+			rclistIterator<T>		&operator ++ ()
+			{
+				listIterator<T>::iterator temp = this;
+				this->curr = this->curr->prev;
+				return this->curr;
+			}
+
+			rclistIterator<T>		&operator ++ (int)
+			{
+				this->curr = this->curr->prev;
+				return this->curr;
+			}
 	};
 	
 
