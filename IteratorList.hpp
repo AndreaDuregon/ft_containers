@@ -6,44 +6,43 @@ namespace ft
 {
 	template <class T> class listIterator
 	{
-		private:
+		protected:
 			Node<T>	*curr;
 		public:
 			/* MEMBER */
-			//typedef ????							iterator_category
-			typedef T								value_type;
-			typedef std::ptrdiff_t 					difference_type;
-			typedef	value_type*						pointer;
-			typedef value_type&						reference;
-	
+			//typedef ???			iterator_category;
+			typedef T				value_type;
+			typedef std::ptrdiff_t 	difference_type;
+			typedef value_type *	pointer;
+			typedef value_type &	reference;
 			listIterator() {};
 			listIterator(listIterator const &copy) {};
+
 
 			T			&operator * ()
 			{
 				return this->curr->value;
 			}
 
-			iterator	&operator ++ ()
+			listIterator<T>	&operator ++ ()
 			{
 				this->curr = this->curr->next;
 				return this->curr->prev;
 			}
 
-			iterator	&operator ++ (int)
+			listIterator<T>	&operator ++ (int)
 			{
 				this->curr = this->curr->next;
 				return this->curr;
 			}
 
-			iterator	&operator -- ()
+			listIterator<T>	&operator -- ()
 			{
-				listIterator<T>::iterator temp = this;
 				this->curr = this->curr->prev;
-				return this->curr;
+				return this->next;
 			}
 
-			iterator	&operator -- (int)
+			listIterator<T>	&operator -- (int)
 			{
 				this->curr = this->curr->prev;
 				return this->curr;
@@ -53,10 +52,62 @@ namespace ft
 			{
 				return &this->curr->value;
 			}
-
-			void operator = (Node<T> &node)
+	};
+	
+	template <class T> class clistIterator : public listIterator
+	{
+		public:
+			T	const		&operator * ()
 			{
-				this->curr = node;
+				return this->curr->value;
+			}
+			T	const		*operator -> ()
+			{
+				return &this->curr->value;
+			}	
+	};
+	
+	template <class T> class rlistIterator : public listIterator
+	{
+		public:
+			listIterator<T>		&operator -- ()
+			{
+				this->curr = this->curr->next;
+				return this->curr->prev;
+			}
+
+			listIterator<T>		&operator -- (int)
+			{
+				this->curr = this->curr->next;
+				return this->curr;
+			}
+
+			listIterator<T>		&operator ++ ()
+			{
+				listIterator<T>::iterator temp = this;
+				this->curr = this->curr->prev;
+				return this->curr;
+			}
+
+			listIterator<T>		&operator ++ (int)
+			{
+				this->curr = this->curr->prev;
+				return this->curr;
 			}
 	};
-}
+
+	template <class T> class rclistIterator : public rlistIterator
+	{
+		public:
+			T	const		&operator * ()
+			{
+				return this->curr->value;
+			}
+			T	const		*operator -> ()
+			{
+				return &this->curr->value;
+			}	
+	};
+	
+
+};
