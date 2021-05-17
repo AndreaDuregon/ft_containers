@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:15:38 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:16:01 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ namespace ft
 		//iter section
 		iterator begin()
 		{
-			return new iterator (this->_Begin);
+			return iterator (this->_Begin);
 		};
 		
 		const_iterator begin() const
@@ -98,14 +98,40 @@ namespace ft
 				return true;
 			return false;
 		}
-		size_type size() const;
-		size_type max_size() const;
+		size_type size() const
+		{
+			if (this->_size == 0)
+				return true;
+			return false;
+		};
+		// SYS richiesta per sapere max value allocabile
+		size_type max_size() const
+		{
+			return 0;	
+		};
 		
 		//Elem access
-		reference front();
-		const_reference front() const;
-		reference back();
-		const_reference back() const;
+		reference front()
+		{
+			return &this->_Begin->value;
+		};
+		
+		const_reference front() const
+		{
+			return &this->_Begin->value;
+
+		};
+		
+		reference back()
+		{
+			return &this->_End->prev->value;	
+		};
+
+		
+		const_reference back() const
+		{
+			return &this->_End->prev->value;
+		};
 		
 		// Modifiers
   		void assign (iterator first, iterator last);							//range
@@ -114,6 +140,7 @@ namespace ft
 		void push_front (const value_type& val);
 		void pop_front();
 		void push_back (const value_type& val);
+		
 		void pop_back();
 
 		iterator insert (iterator position, const value_type& val)
