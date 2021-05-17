@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:18:02 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:25:33 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,12 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
+			ft::Node<T> node;
 			iterator it_next;
 
 			it_next = position;
 			it_next++;
-			node = new Node(val);
+			node = new Node<T>(val);
 			*position.curr->next = &node;
 			node.prev = &(*position);
 			node.next = &(*it_next);
@@ -211,7 +212,7 @@ namespace ft
 		
 		void swap (list& x)
 		{
-			ft::list tmp();
+			ft::list<T> tmp;
 
 			tmp = *this;
 			*this = x;
@@ -220,8 +221,8 @@ namespace ft
 
 		void resize (size_type n, value_type val = value_type())
 		{
-			ft::list tmp(*this);
-			iterator it_tmp(tmp.begin())
+			ft::list<T> tmp(*this);
+			iterator it_tmp(tmp.begin());
 
 			this->clear();
 			for (size_t i = 0; i < n; i++)
@@ -292,7 +293,7 @@ namespace ft
 		void unique()
 		{
 			iterator it_this(this->begin());
-			iterator it_x(x.begin());
+			iterator it_x(this->begin());
 
 			for (size_t i = 0; i < x.size(); i++)
 			{

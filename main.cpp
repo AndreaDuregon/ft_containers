@@ -31,25 +31,16 @@ int main(void)
 	} catch (const char* msg) {
 		std::cout << RED << "FALLITO - " << msg <<OFF << std::endl;
 	}
-	{
+	try {
 		std::cout << YELLOW <<"* INIZIALIZZA ITERATORE" << OFF <<std::endl;
 		std::list<int> sys_list;
 		std::list<int>::iterator sys_it = sys_list.begin();
 		ft::list<int> list;
 		ft::list<int>::iterator it = list.begin();
-		if (*sys_it == *it)
-			std::cout << GREEN << "PASSATO" << std::endl;
-		else
-			std::cout << RED << "ERRATO" << std::endl;
+		if (*sys_it != *it)
+			throw  "ITER BEGIN";
+		std::cout << GREEN << "PASSATO" << std::endl;
+	} catch (const char* msg) {
+		std::cout << RED << "FALLITO - " << msg <<OFF << std::endl;
 	}
-	{
-		std::cout << YELLOW <<"* FUNZIONI LISTA" << OFF <<std::endl;
-		std::list<int> sys_list;
-		ft::list<int> list;
-		if (*sys_list.begin() == *list.begin())
-			std::cout << GREEN << "PASSATO" << std::endl;
-		else
-			std::cout << RED << "ERRATO" << std::endl;
-	}
-
 }
