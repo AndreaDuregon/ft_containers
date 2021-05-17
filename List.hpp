@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:26:39 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:35:53 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,17 @@ namespace ft
 		};
 		
 		// Modifiers
-  		void assign (iterator first, iterator last);							//range
+  		void assign (iterator first, iterator last);
 		
-		void assign (size_type n, const value_type& val);								//fill
-		void push_front (const value_type& val);
+		void assign (size_type n, const value_type& val);
+		
+		void push_front (const value_type& val)
+		{
+			iterator begin(this->begin());
+
+			this->insert(begin, val);
+		}
+
 		void pop_front()
 		{
 			iterator it(this->begin());
@@ -146,7 +153,12 @@ namespace ft
 			erase(it);
 		}
 
-		void push_back (const value_type& val);
+		void push_back (const value_type& val)
+		{
+			iterator end(this->end());
+
+			this->insert(end, val);
+		}
 		
 		void pop_back()
 		{
@@ -309,7 +321,7 @@ namespace ft
 			it_x++;
 			for (size_t k = 0; k < this->size(); k++)
 			{
-				if (*it_x == *it_this))
+				if (*it_x == *it_this)
 					this->erase(it_x);
 				it_this++;
 				it_x++;
@@ -320,16 +332,14 @@ namespace ft
   		void unique (BinaryPredicate binary_pred)
 		{
 			iterator it_this(this->begin());
-			iterator it_x(x.begin());
+			iterator it_x(this->begin());
 
-			for (size_t i = 0; i < x.size(); i++)
+			it_x++;
+			for (size_t k = 0; k < this->size(); k++)
 			{
-				for (size_t k = 0; k < this->size(); k++)
-				{
-					if (binary_pred(*it_x, *it_this))
-						this->erase(it_x);
-					it_this++;
-				}
+				if (binary_pred(*it_x, *it_this))
+					this->erase(it_x);
+				it_this++;
 				it_x++;
 			}
 		}
@@ -345,7 +355,7 @@ namespace ft
 				{
 					if (!(*it_x < *it_this))
 					{
-						this->insert(it_this, value_type, *it_x.curr->value)
+						this->insert(it_this, 1, *it_x.curr->value);
 						this->erase(it_x);
 					}
 					it_this++;
@@ -364,10 +374,12 @@ namespace ft
 			{
 				for (size_t k = 0; k < this->size(); k++)
 				{
-					if (!comp(*it_x, it_this))
+					if (comp(*it_x, *it_this))
 					{
-						this->insert(it_this, value_type, *it_x.curr->value)
+						it_this++;
+						this->insert(it_this, 1, *it_x.curr->value);
 						this->erase(it_x);
+						it_this--;
 					}
 					it_this++;
 				}
@@ -433,7 +445,7 @@ namespace ft
 
 			for (size_t i = 0; i < this->size(); i++)
 			{
-				tmp.push_back(*it);
+				tmp.push_back(*it_end);
 				it_end--;
 			}
 			for (size_t i = 0; i < this->size(); i++)
