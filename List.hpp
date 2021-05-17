@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 11:46:47 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:43:55 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,20 @@
 
 namespace ft
 {
-	template < class T, class Alloc = std::allocator<T> > class List
+	template < class T > class list
 	{
 	private:
-		/* data */
+		ft::Node<T> *nBegin;
+		ft::Node<T> *nEnd;
 	public:
-		List(/* args */);
-		~List();
+		typedef typename ft::listIterator<T> iterator;
+		list(/* args */) {};
+		~list() {};
 
-		//typedef List<Node *>::listIterator iterator;
+		
+		iterator begin (void)
+		{
+			return new listIterator<T>();
+		}
 	};
-}
+} 
