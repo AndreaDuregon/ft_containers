@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:24:53 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:25:30 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ namespace ft
 			this->_End->prev = this->_Begin;
 			this->_End->next = 0;
 			this->_End->value = 0;
+			this->_size = 0;
 		};
 		~list() {};
 
@@ -57,38 +58,38 @@ namespace ft
 		
 		const_iterator begin() const
 		{
-			return new iterator(this->_Begin);
+			return iterator(this->_Begin);
 		};
 		
 		iterator end()
 		{
-			return new iterator(this->_End);
+			return iterator(this->_End);
 		};
 		
 		const_iterator end() const
 		{
-			return new iterator(this->_End);
+			return iterator(this->_End);
 			
 		};
 		
 		reverse_iterator rbegin()
 		{
-			return new reverse_iterator(this->_Begin);
+			return reverse_iterator(this->_Begin);
 		}
 
 		const_reverse_iterator rbegin() const
 		{
-			return new const_reverse_iterator(this->_Begin);
+			return const_reverse_iterator(this->_Begin);
 		}
 
 		reverse_iterator rend()
 		{
-			return new reverse_iterator(this->_End);	
+			return reverse_iterator(this->_End);	
 		}
 
 		const_reverse_iterator rend() const
 		{
-			return new const_reverse_iterator(this->_End);	
+			return const_reverse_iterator(this->_End);	
 		}
 		
 		// Capacity

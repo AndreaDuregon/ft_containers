@@ -145,7 +145,6 @@ namespace ft
 
 			rclistIterator<T>		&operator ++ ()
 			{
-				listIterator<T>::iterator temp = this;
 				this->curr = this->curr->prev;
 				return this->curr;
 			}
