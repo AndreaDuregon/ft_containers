@@ -11,7 +11,7 @@ namespace ft
 		public:
 			/* MEMBER */
 			typedef T								value_type;
-			//typedef	0							allocator_type;
+			//typedef ???							allocator_type;
 			typedef value_type&						reference;
 			typedef const value_type&				const_reference;
 			typedef	value_type*						pointer;

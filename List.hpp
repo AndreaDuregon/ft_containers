@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 15:21:27 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 15:22:07 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ namespace ft
 		ft::Node<T> *nEnd;
 	public:
 		/* MEMBER */
-		///typedef 0								iterator_category
+		//typedef ????							iterator_category
 		typedef T								value_type;
 		typedef std::ptrdiff_t 					difference_type;
 		typedef	value_type*						pointer;
