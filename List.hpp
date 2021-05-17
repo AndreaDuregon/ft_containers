@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 15:54:10 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/17 16:09:36 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@ namespace ft
 		ft::Node<T> *nBegin;
 		ft::Node<T> *nEnd;
 	public:
-		typedef typename ft::listIterator<T> iterator;
+		/* MEMBER */
+		//typedef ????							iterator_category
+		typedef T								value_type;
+		typedef std::ptrdiff_t 					difference_type;
+		typedef	value_type*						pointer;
+		typedef value_type&						reference;
+
 		list(/* args */) {
-			this->nBegin = new Node();
-			this->nEnd = new Node();
+			this->nBegin = new Node<T>();
+			this->nEnd = new Node<T>();
 			this->nBegin->next = this->nEnd;
 			this->nBegin->prev = 0;
 			this->nBegin->value = 0;
@@ -62,7 +68,7 @@ namespace ft
 			return n	
 		}
 		const_reverse_iterator rbegin() const;
-    	reverse_iterator rend();
+		reverse_iterator rend();
 		const_reverse_iterator rend() const;
 		
 		// Capacity
@@ -77,8 +83,7 @@ namespace ft
 		const_reference back() const;
 		
 		// Modifiers
-		template <class listIterator>
-  		void assign (InputIterator first, InputIterator last);							//range
+  		void assign (iterator first, iterator last);							//range
 		
 		void assign (size_type n, const value_type& val);								//fill
 		void push_front (const value_type& val);
@@ -86,17 +91,16 @@ namespace ft
 		void push_back (const value_type& val);
 		void pop_back();
 
-		template <class listIterator>
-		listIterator insert (iterator position, const value_type& val);
+		iterator insert (iterator position, const value_type& val);
 	   	void insert (iterator position, size_type n, const value_type& val);
 		
 		template <class InputIterator>
-    	void insert (iterator position, InputIterator first, InputIterator last);
+		void insert (iterator position, InputIterator first, InputIterator last);
 		
 		template <class InputIterator>
-		Listiterator erase (iterator position);
+		iterator erase (iterator position);
 		template <class InputIterator>
-		Listiterator erase (iterator first, iterator last);
+		iterator erase (iterator first, iterator last);
 		
 		void swap (list& x);
 		void resize (size_type n, value_type val = value_type());
