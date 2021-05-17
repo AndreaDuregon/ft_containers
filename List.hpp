@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 16:13:43 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 16:18:37 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ namespace ft
 		typedef	value_type*						pointer;
 		typedef	const value_type*				const_pointer;
 		typedef typename ft::listIterator<T>	iterator;
-		typedef typename ft::listIterator<T>	const_iterator;
-		typedef	typename ft::listIterator<T>	reverse_iterator;
-		typedef	typename ft::listIterator<T>	const_reverse_iterator;
+		typedef typename ft::clistIterator<T>	const_iterator;
+		typedef	typename ft::rlistIterator<T>	reverse_iterator;
+		typedef	typename ft::rclistIterator<T>	const_reverse_iterator;
 		typedef std::ptrdiff_t 					difference_type;
 		typedef size_t							size_type;
 
@@ -72,11 +72,23 @@ namespace ft
 		
 		reverse_iterator rbegin()
 		{
-			return n	
+			return new reverse_iterator(this->nBegin);
 		}
-		const_reverse_iterator rbegin() const;
-		reverse_iterator rend();
-		const_reverse_iterator rend() const;
+
+		const_reverse_iterator rbegin() const
+		{
+			return new const_reverse_iterator(this->rbegin);
+		}
+
+		reverse_iterator rend()
+		{
+			return new reverse_iterator(this->nEnd);	
+		}
+
+		const_reverse_iterator rend() const
+		{
+			return new const_reverse_iterator(this->nEnd);	
+		}
 		
 		// Capacity
 		bool empty() const;

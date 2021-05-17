@@ -25,5 +25,4 @@ int main(void)
     ft::list<int>::iterator it = list.begin();
     std::cout << *it << std::endl;
 
-
 }
