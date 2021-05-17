@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 17:33:40 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:14:04 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ namespace ft
 			this->_End->prev = this->_Begin;
 			this->_End->next = 0;
 			this->_End->value = 0;
+			this->_size = 0;
 		};
 		~list() {};
 
@@ -57,38 +58,38 @@ namespace ft
 		
 		const_iterator begin() const
 		{
-			return new iterator(this->_Begin);
+			return iterator(this->_Begin);
 		};
 		
 		iterator end()
 		{
-			return new iterator(this->_End);
+			return iterator(this->_End);
 		};
 		
 		const_iterator end() const
 		{
-			return new iterator(this->_End);
+			return iterator(this->_End);
 			
 		};
 		
 		reverse_iterator rbegin()
 		{
-			return new reverse_iterator(this->_Begin);
+			return reverse_iterator(this->_Begin);
 		}
 
 		const_reverse_iterator rbegin() const
 		{
-			return new const_reverse_iterator(this->_Begin);
+			return const_reverse_iterator(this->_Begin);
 		}
 
 		reverse_iterator rend()
 		{
-			return new reverse_iterator(this->_End);	
+			return reverse_iterator(this->_End);	
 		}
 
 		const_reverse_iterator rend() const
 		{
-			return new const_reverse_iterator(this->_End);	
+			return const_reverse_iterator(this->_End);	
 		}
 		
 		// Capacity
@@ -98,8 +99,14 @@ namespace ft
 				return true;
 			return false;
 		}
-		size_type size() const;
-		size_type max_size() const;
+		size_type size() const
+		{
+			return this->_size;
+		}
+		size_type max_size() const
+		{
+			return 0;
+		}
 		
 		//Elem access
 		reference front();
