@@ -15,7 +15,6 @@ template <class T> class listIterator
 		typedef T&				reference;
 		listIterator() {};
 		listIterator(listIterator const &copy) {};
-		~listIterator() {};
 
 		typedef listIterator<T> iterator;
 
