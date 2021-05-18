@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/18 18:32:10 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/18 18:33:18 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ namespace ft
 	private:
 		ft::Node<T>		*_Begin;
 		ft::Node<T>		*_End;
-		unsigned int	_size;
+		size_t			_size;
 	public:
 		/* MEMBER */
 		typedef T								value_type;
@@ -49,18 +49,29 @@ namespace ft
 			this->_End->value = 0;
 			this->_size = 0;
 		};
-		~list() 
-		{
-			iterator it(this->begin());
-			iterator last(this->end());
-
-			while (it != last)
-			{
-				delete it._curr;
-				it++;
-			}
-			
+		list(size_type n, const_reference val=value_type()) {
+			this->_Begin = new Node<T>();
+			this->_End = new Node<T>();
+			this->_Begin->next = this->_End;
+			this->_Begin->prev = 0;
+			this->_Begin->value = 0;
+			this->_End->prev = this->_Begin;
+			this->_End->next = 0;
+			this->_End->value = 0;
+			this->_size = 0;
 		};
+		list(iterator first, iterator last){
+			this->_Begin = new Node<T>();
+			this->_End = new Node<T>();
+			this->_Begin->next = this->_End;
+			this->_Begin->prev = 0;
+			this->_Begin->value = 0;
+			this->_End->prev = this->_Begin;
+			this->_End->next = 0;
+			this->_End->value = 0;
+			this->_size = 0;
+		};
+		~list() {};
 
 		//iter section
 		iterator begin()
@@ -68,9 +79,9 @@ namespace ft
 			return iterator (this->_Begin);
 		};
 		
-		const_iterator begin() const
+		const_iterator cbegin() const
 		{
-			return iterator(this->_Begin);
+			return const_iterator(this->_Begin);
 		};
 		
 		iterator end()
@@ -78,9 +89,9 @@ namespace ft
 			return iterator(this->_End);
 		};
 		
-		const_iterator end() const
+		const_iterator cend() const
 		{
-			return iterator(this->_End);
+			return const_iterator(this->_End);
 			
 		};
 		
@@ -89,7 +100,7 @@ namespace ft
 			return reverse_iterator(this->_Begin);
 		}
 
-		const_reverse_iterator rbegin() const
+		const_reverse_iterator crbegin() const
 		{
 			return const_reverse_iterator(this->_Begin);
 		}
@@ -99,7 +110,7 @@ namespace ft
 			return reverse_iterator(this->_End);	
 		}
 
-		const_reverse_iterator rend() const
+		const_reverse_iterator crend() const
 		{
 			return const_reverse_iterator(this->_End);	
 		}
@@ -224,6 +235,7 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
+<<<<<<< HEAD
 			Node<T> *node  = new Node<T>();
 			iterator prev(position);
 
@@ -235,6 +247,18 @@ namespace ft
 			node->value = val;
 			prev++;
 			return prev;
+=======
+			ft::Node<T> *node;
+			iterator it_next;
+
+			it_next = position;
+			it_next++;
+			node = new Node<T>(val);
+			*position._curr->next = &node;
+			node->prev = &(*position);
+			node->next = &(*it_next);
+			this->size++;
+>>>>>>> afc96c6134dcc1ac6d672a60265414aca55e580d
 		}
 
 	   	void insert (iterator position, size_type n, const value_type& val)
