@@ -6,13 +6,14 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/17 18:35:53 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/18 18:32:10 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include "IteratorList.hpp"
 #include <iostream>
+#include <unistd.h>
 
 namespace ft
 {
@@ -39,7 +40,7 @@ namespace ft
 
 		list(/* args */) {
 			this->_Begin = new Node<T>();
-			this->_End = new Node<T>();
+			this->_End = this->_Begin;
 			this->_Begin->next = this->_End;
 			this->_Begin->prev = 0;
 			this->_Begin->value = 0;
@@ -48,7 +49,18 @@ namespace ft
 			this->_End->value = 0;
 			this->_size = 0;
 		};
-		~list() {};
+		~list() 
+		{
+			iterator it(this->begin());
+			iterator last(this->end());
+
+			while (it != last)
+			{
+				delete it._curr;
+				it++;
+			}
+			
+		};
 
 		//iter section
 		iterator begin()
@@ -95,15 +107,11 @@ namespace ft
 		// Capacity
 		bool empty() const
 		{
-			if (this->_size == 0)
-				return true;
-			return false;
+			
 		}
 		size_type size() const
 		{
-			if (this->_size == 0)
-				return true;
-			return false;
+			return this->_size;
 		};
 		// SYS richiesta per sapere max value allocabile
 		size_type max_size() const
@@ -135,325 +143,215 @@ namespace ft
 		};
 		
 		// Modifiers
-  		void assign (iterator first, iterator last);
+  		void assign (iterator first, iterator last)
+		{
+			//clear the list
+			while(first != last)
+			{
+				this->push_back(first._curr->value);
+				first++;
+			}
+		}
 		
-		void assign (size_type n, const value_type& val);
+		void assign (size_type n, const value_type& val)
+		{
+			//clear the list
+			for (size_t i = 0; i < n; i++)
+			{
+				this->push_back(val);
+			}
+			
+		}
 		
 		void push_front (const value_type& val)
 		{
-			iterator begin(this->begin());
-
-			this->insert(begin, val);
+			Node<T> *node = new Node<T>();
+			iterator first(this->begin());
+			
+			node->value = val;
+			node->prev = 0;
+			node->next = first._curr;
+			first._curr->prev = node;
+			this->_Begin = node;
+			this->_size++;
 		}
 
 		void pop_front()
 		{
 			iterator it(this->begin());
 
-			erase(it);
+			if (this->_size > 0)
+			{
+				it++;
+				delete this->_Begin;
+				it._curr->prev = 0;
+				this->_Begin = it._curr;
+				this->_size--;
+			}
 		}
 
 		void push_back (const value_type& val)
 		{
-			iterator end(this->end());
-
-			this->insert(end, val);
+			Node<T> *node = new Node<T>();
+			iterator last(this->end());
+			iterator penlast(this->end());
+			
+			penlast--;
+			node->value = val;
+			node->prev = penlast._curr;
+			node->next = last._curr;
+			last._curr->prev = node;
+			penlast._curr->next = node;
+			this->_size++;
 		}
 		
 		void pop_back()
 		{
 			iterator it(this->end());
+			iterator penit(this->end());
 
-			this->erase();
+			if (this->_size > 0)
+			{
+				it--;
+				penit--;
+				penit--;
+				delete it._curr;
+				penit._curr->next = this->_End;
+				this->_End->prev = penit._curr;
+				this->_size--;
+			}
 		}
 
 		iterator insert (iterator position, const value_type& val)
 		{
-			ft::Node<T> node;
-			iterator it_next;
+			Node<T> *node  = new Node<T>();
+			iterator prev(position);
 
-			it_next = position;
-			it_next++;
-			node = new Node<T>(val);
-			*position.curr->next = &node;
-			node.prev = &(*position);
-			node.next = &(*it_next);
-			this->size++;
+			prev--;
+			prev._curr->next = node;
+			node->prev = prev._curr;
+			position._curr->prev = node;
+			node->next = position._curr;
+			node->value = val;
+			prev++;
+			return prev;
 		}
 
 	   	void insert (iterator position, size_type n, const value_type& val)
 		{
-			size_type	i;
-			ft::Node<T> node;
-
-			i = 0;
-			while (i < n)
-			{
-				insert(position, val);
-				i++;
-				position++;
-			}
+			
 		}
 		
 		template <class InputIterator>
 		void insert (iterator position, InputIterator first, InputIterator last)
 		{
-			while (first != last)
-			{
-				
-				position++;
-				first++;
-			}
 			
 		}
 		
 		template <class InputIterator>
 		iterator erase (iterator position)
 		{
-			iterator it_prev;
-			iterator it_next;
-
-			it_prev = position;
-			it_next = position;
-			it_prev--;
-			it_next--;
-			delete(*position);
-			*it_prev.curr->next = *it_next;
-			*it_next.curr->prev = *it_prev;
-			this->size--;
+			
 		}
 
 		template <class InputIterator>
 		iterator erase (iterator first, iterator last)
 		{
-			while (first != last)
-			{
-				this->erase(first);
-				first++;
-			}
+		
 		}
 		
 		void swap (list& x)
 		{
-			ft::list<T> tmp;
-
-			tmp = *this;
-			*this = x;
-			x = tmp;
+			
 		}
 
 		void resize (size_type n, value_type val = value_type())
 		{
-			ft::list<T> tmp(*this);
-			iterator it_tmp(tmp.begin());
-
-			this->clear();
-			for (size_t i = 0; i < n; i++)
-			{
-				if (i > this->size())
-					this->push_back(val);
-				else
-				{
-					this->push_back(*it_tmp.curr->value);
-					it_tmp++;
-				}
-			}
+			
 		}
 
 		void clear()
 		{
-			iterator it(this->begin());
-
-			for (size_t i = 0; i < this->size(); i++)
-			{
-				this->erase(it);
-				it++;
-			}	
+			
 		}
 
 		//operations
 		void splice (iterator position, list& x)
 		{
-			this->insert(position, x.begin(), x.end());
+			
 		}
 	
 		void splice (iterator position, list& x, iterator i)
 		{
-			this->insert(position, i, x.end());
+			
 		}
 
 		void splice (iterator position, list& x, iterator first, iterator last)
 		{
-			this->insert(position, first, last);
+			
 		}
 		
 		void remove (const value_type& val)
 		{
-			iterator it(this->begin());
 			
-			for (size_t i = 0; i < this->size(); i++)
-			{
-				if (*it.curr->value == val)
-					this->erase(it);
-				it++;
-			}
 		}
 
 		template <class Predicate>
 		void remove_if (Predicate pred)
 		{
-			iterator it(this->begin());
-			
-			for (size_t i = 0; i < this->size(); i++)
-			{
-				if (pred(*it))
-					this->erase(it);
-				it++;
-			}
 			
 		}
 		
 		void unique()
 		{
-			iterator it_this(this->begin());
-			iterator it_x(this->begin());
-
-			it_x++;
-			for (size_t k = 0; k < this->size(); k++)
-			{
-				if (*it_x == *it_this)
-					this->erase(it_x);
-				it_this++;
-				it_x++;
-			}
+			
 		}
 
 		template <class BinaryPredicate>
   		void unique (BinaryPredicate binary_pred)
 		{
-			iterator it_this(this->begin());
-			iterator it_x(this->begin());
-
-			it_x++;
-			for (size_t k = 0; k < this->size(); k++)
-			{
-				if (binary_pred(*it_x, *it_this))
-					this->erase(it_x);
-				it_this++;
-				it_x++;
-			}
+			
 		}
 
   		void merge (list& x)
 		{
-			iterator it_this(this->begin());
-			iterator it_x(x.begin());
-
-			for (size_t i = 0; i < x.size(); i++)
-			{
-				for (size_t k = 0; k < this->size(); k++)
-				{
-					if (!(*it_x < *it_this))
-					{
-						this->insert(it_this, 1, *it_x.curr->value);
-						this->erase(it_x);
-					}
-					it_this++;
-				}
-				it_x++;
-			}
+			
 		}
 
 		template <class Compare>
   		void merge (list& x, Compare comp)
 		{
-			iterator it_this(this->begin());
-			iterator it_x(x.begin());
-
-			for (size_t i = 0; i < x.size(); i++)
-			{
-				for (size_t k = 0; k < this->size(); k++)
-				{
-					if (comp(*it_x, *it_this))
-					{
-						it_this++;
-						this->insert(it_this, 1, *it_x.curr->value);
-						this->erase(it_x);
-						it_this--;
-					}
-					it_this++;
-				}
-				it_x++;
-			}
+			
 			
 		}
 
   		void sort()
 		{
-			iterator	it_i(this->begin());
-			iterator	it_k(this->begin());
-			T			tmp;
-
-			for (size_t i = 0; i < this->size; i++)
-			{
-				for (size_t k = i; k < this->size; i++)
-				{
-					if (*it_i < *it_k)
-					{
-						tmp = *it_i.curr;
-						*it_i = *it_k;
-						*it_k = tmp;
-					}
-					it_k++;
-				}
-				it_i++;
-			}
+			
 			
 		}
 
 		template <class Compare>
 		void sort (Compare comp)
 		{
-			iterator	it_i(this->begin());
-			iterator	it_k(this->begin());
-			T			tmp;
-
-			for (size_t i = 0; i < this->size; i++)
-			{
-				for (size_t k = i; k < this->size; i++)
-				{
-					if (comp(*it_i, *it_k))
-					{
-						tmp = *it_i.curr;
-						*it_i = *it_k;
-						*it_k = tmp;
-					}
-					it_k++;
-				}
-				it_i++;
-			}
 			
 		}
 
 		void reverse()
 		{
-			iterator it_end(this->end());
-			iterator it_begin(this->begin());
-			ft::list<T> tmp;
-			iterator tmp_end(tmp->end());
-			iterator tmp_begin(tmp->begin());
+			
+		}
 
-			for (size_t i = 0; i < this->size(); i++)
+		void	print()
+		{
+			iterator it(this->begin());
+			//nullterminato? nexfriks c entra qualcosa?
+			while (it._curr->next)
 			{
-				tmp.push_back(*it_end);
-				it_end--;
+				std::cout << it._curr->value << std::endl;
+				it++;
 			}
-			for (size_t i = 0; i < this->size(); i++)
-			{
-				*it_begin = *tmp_begin;
-				it_begin++;
-				tmp_begin++;
-			}
+			//sleep(10);
 		}
 
 	};

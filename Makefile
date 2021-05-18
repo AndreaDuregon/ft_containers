@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+         #
+#    By: forsili <forsili@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 11:15:19 by dmalori           #+#    #+#              #
-#    Updated: 2021/05/17 14:55:52 by dmalori          ###   ########.fr        #
+#    Updated: 2021/05/18 17:53:40 by forsili          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ On_IWhite	=	'\033[0;107m'	# White
 NAME		=	ft_containers
 SRC			=	main.cpp
 CC			=	clang++
-CFLAGS		=	# -Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS		=	-g# -Wall -Wextra -Werror -std=c++98 -pedantic
 
 all			:	$(NAME)
 

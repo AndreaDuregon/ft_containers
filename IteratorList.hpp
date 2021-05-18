@@ -7,8 +7,8 @@ namespace ft
 	template <class T> class listIterator
 	{
 		protected:
-			Node<T>	*_curr;
 		public:
+			Node<T>	*_curr;
 			/* MEMBER */
 			//typedef ???			iterator_category;
 			typedef T				value_type;
@@ -17,7 +17,13 @@ namespace ft
 			typedef value_type &	reference;
 			listIterator() {};
 			listIterator(Node<T> *curr) : _curr(curr) {};
-			listIterator(listIterator const &copy) {};
+			listIterator(listIterator const &copy)
+			{
+				this->_curr = new Node<T>();
+				this->_curr->next = copy._curr->next;
+				this->_curr->prev = copy._curr->prev;
+				this->_curr->value = copy._curr->value;
+			}
 
 			T			&operator * ()
 			{
@@ -26,31 +32,58 @@ namespace ft
 
 			listIterator<T>	&operator ++ ()
 			{
+				listIterator<T> tmp(*this);
 				this->_curr = this->_curr->next;
-				return this->_curr->prev;
+				return tmp;
 			}
 
 			listIterator<T>	&operator ++ (int)
 			{
 				this->_curr = this->_curr->next;
-				return this->_curr;
+				return *this;
 			}
 
 			listIterator<T>	&operator -- ()
 			{
 				this->_curr = this->_curr->prev;
-				return this->next;
+				return *this;
 			}
 
 			listIterator<T>	&operator -- (int)
 			{
+				listIterator<T> *temp =  new listIterator<T>();
+				temp->_curr = this->_curr;
 				this->_curr = this->_curr->prev;
-				return this->_curr;
+				return *temp;
 			}
 
 			T				*operator -> ()
 			{
 				return &this->_curr->value;
+			}
+
+			bool operator==(listIterator<T> const &other) const {
+			return (this->_curr == other._curr);
+			}
+
+			bool operator!=(listIterator<T> const &other) const {
+				return (this->_curr != other._curr);
+			}
+
+			bool operator<(listIterator<T> const &other) const {
+				return (this->_curr < other._curr);
+			}
+
+			bool operator<=(listIterator<T> const &other) const {
+				return (this->_curr <= other._curr);
+			}
+
+			bool operator>(listIterator<T> const &other) const {
+				return (this->_curr > other._curr);
+			}
+
+			bool operator>=(listIterator<T> const &other) const {
+				return (this->_curr >= other._curr);
 			}
 	};
 	

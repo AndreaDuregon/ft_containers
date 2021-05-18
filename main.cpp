@@ -43,4 +43,38 @@ int main(void)
 	} catch (const char* msg) {
 		std::cout << RED << "FALLITO - " << msg <<OFF << std::endl;
 	}
+	try
+	{
+		std::cout << YELLOW <<"* PUSH" << OFF <<std::endl;
+		ft::list<int> lst1;
+		ft::list<int> lst2;
+
+		std::cout << "ok" << std::endl;
+		lst1.push_front(99);
+		lst1.push_back(199);
+		lst1.push_front(9);
+		lst1.push_back(10);
+		lst1.print();
+		std::cout << YELLOW <<"POP" << OFF <<std::endl;
+		lst1.pop_back();
+		lst1.pop_front();
+		lst1.print();
+		//lst2.assign(lst1.begin(), lst1.end());
+		std::cout << YELLOW <<"* INSERT" << OFF <<std::endl;
+		ft::list<int> lst3;
+		ft::listIterator<int> it_start(lst1.begin());
+		ft::listIterator<int> it_end(lst1.end());
+		lst3.assign(it_start, it_end);
+		ft::listIterator<int> it(lst3.begin());
+
+		it++;
+		lst3.insert(it, 909);
+		lst3.print();
+		//lst2.assign(lst1.begin(), lst1.end());
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 }
