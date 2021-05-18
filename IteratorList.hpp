@@ -57,6 +57,9 @@ namespace ft
 	template <class T> class clistIterator : public listIterator<T>
 	{
 		public:
+			clistIterator() {};
+			clistIterator(Node<T> *curr) : listIterator<T>(curr) {};
+			clistIterator(clistIterator const &copy) {};
 			T	const		&operator * ()
 			{
 				return this->_curr->value;
@@ -95,6 +98,9 @@ namespace ft
 	template <class T> class rlistIterator : public listIterator<T>
 	{
 		public:
+			rlistIterator() {};
+			rlistIterator(Node<T> *curr) : listIterator<T>(curr) {};
+			rlistIterator(rlistIterator const &copy) {};
 			rlistIterator<T>		&operator -- ()
 			{
 				this->_curr = this->_curr->next;
@@ -120,9 +126,12 @@ namespace ft
 			}
 	};
 
-	template <class T> class rclistIterator : public rlistIterator<T>
+	template <class T> class rclistIterator : public listIterator<T>
 	{
 		public:
+			rclistIterator() {};
+			rclistIterator(Node<T> *curr) : listIterator<T>(curr) {};
+			rclistIterator(rclistIterator const &copy) {};
 			T	const		&operator * ()
 			{
 				return this->_curr->value;
