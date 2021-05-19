@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/19 14:38:22 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 15:09:32 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "IteratorList.hpp"
 #include <iostream>
 #include <unistd.h>
+#include <limits>
 
 namespace ft
 {
@@ -44,7 +45,6 @@ namespace ft
 			this->_End->value = 0;
 			this->_End->next = this->_Begin;
 			this->_End->prev = this->_Begin;
-
 			this->_size = 0;
 		};
 		list(size_type n, const_reference val=value_type()) {
@@ -125,7 +125,7 @@ namespace ft
 		// SYS richiesta per sapere max value allocabile
 		size_type max_size() const
 		{
-			return 0;	
+			return std::numeric_limits<size_type>::max() / (sizeof(Node<T>));	
 		};
 		
 		//Elem access
@@ -173,9 +173,7 @@ namespace ft
 		
 		void push_front (const value_type& val)
 		{
-			Node<T> *node = new Node<T>();
-			
-			node->value = val;
+			Node<T> *node = new Node<T>(val);
 			node->prev = this->_Begin;
 			node->next = this->_Begin->next;
 			this->_Begin->next->prev = node;
@@ -197,8 +195,7 @@ namespace ft
 
 		void push_back (const value_type& val)
 		{
-			Node<T> *node = new Node<T>();
-			node->value = val;
+			Node<T> *node = new Node<T>(val);
 			node->next = this->_End;
 			node->prev = this->_End->prev;
 			this->_End->prev->next = node;
@@ -220,7 +217,7 @@ namespace ft
 		iterator insert (iterator position, const value_type& val)
 		{
 			
-			Node<T> *node  = new Node<T>();
+			Node<T> *node  = new Node<T>(val);
 			iterator prev(position);
 
 			prev--;
@@ -228,7 +225,6 @@ namespace ft
 			node->prev = prev._curr;
 			position._curr->prev = node;
 			node->next = position._curr;
-			node->value = val;
 			prev++;
 			return prev;
 			/*
