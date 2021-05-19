@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/19 16:32:35 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 17:59:27 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ namespace ft
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
 			this->_size = 0;
-			for (; first != last; first++)
+			for (; first != last; ++first)
 				this->push_back(*first);
 		};
 

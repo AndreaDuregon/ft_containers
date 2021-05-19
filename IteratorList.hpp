@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:58:47 by dmalori           #+#    #+#             */
-/*   Updated: 2021/05/19 17:56:59 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 18:05:06 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ namespace ft
 
 			listIterator<T>	&operator ++ () 
 			{
-
-				return this->_curr;
+				//std::cout << "PREEEE" << std::endl;
+				this->_curr = this->_curr->next;
+				return *this;
 			}
 
 			listIterator<T>	&operator ++ (int)
 			{
-				this->_curr = this->_curr->next;
+				//std::cout << "POST" << std::endl;
+
 				return *this;
 			}
 
