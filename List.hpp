@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/19 11:46:56 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 12:49:03 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,22 @@ namespace ft
 		typedef size_t							size_type;
 
 		list(/* args */) {
-			this->_Begin = new Node<T>();
-			this->_End = this->_Begin;
-			this->_Begin->next = this->_End;
-			this->_Begin->prev = 0;
-			this->_Begin->value = 0;
-			this->_End->prev = this->_Begin;
-			this->_End->next = 0;
+			this->_End = new Node<T>();
+			this->_Begin = this->_End;
 			this->_End->value = 0;
+			this->_End->next = this->_Begin;
+			this->_End->prev = this->_Begin;
+
 			this->_size = 0;
 		};
 		list(size_type n, const_reference val=value_type()) {
 			this->_Begin = new Node<T>();
 			this->_End = new Node<T>();
 			this->_Begin->next = this->_End;
-			this->_Begin->prev = 0;
+			this->_Begin->prev = this->_End;
 			this->_Begin->value = 0;
 			this->_End->prev = this->_Begin;
-			this->_End->next = 0;
+			this->_End->next = this->_Begin;
 			this->_End->value = 0;
 			this->_size = 0;
 		};
@@ -64,10 +62,10 @@ namespace ft
 			this->_Begin = new Node<T>();
 			this->_End = new Node<T>();
 			this->_Begin->next = this->_End;
-			this->_Begin->prev = 0;
+			this->_Begin->prev = this->_End;
 			this->_Begin->value = 0;
 			this->_End->prev = this->_Begin;
-			this->_End->next = 0;
+			this->_End->next = this->_Begin;
 			this->_End->value = 0;
 			this->_size = 0;
 		};
@@ -76,7 +74,7 @@ namespace ft
 		//iter section
 		iterator begin()
 		{
-			return iterator (this->_Begin);
+			return iterator (this->_Begin->next);
 		};
 		
 		const_iterator cbegin() const
@@ -86,7 +84,7 @@ namespace ft
 		
 		iterator end()
 		{
-			return iterator(this->_End);
+			return iterator(this->_End->prev);
 		};
 		
 		const_iterator cend() const
@@ -178,26 +176,23 @@ namespace ft
 		void push_front (const value_type& val)
 		{
 			Node<T> *node = new Node<T>();
-			iterator first(this->begin());
 			
 			node->value = val;
-			node->prev = 0;
-			node->next = first._curr;
-			first._curr->prev = node;
-			this->_Begin = node;
+			node->prev = this->_Begin;
+			node->next = this->_Begin->next;
+			this->_Begin->next->prev = node;
+			this->_Begin->next = node;
 			this->_size++;
 		}
 
 		void pop_front()
 		{
-			iterator it(this->begin());
-
 			if (this->_size > 0)
 			{
-				it++;
-				delete this->_Begin;
-				it._curr->prev = 0;
-				this->_Begin = it._curr;
+				Node<T> *del = this->_Begin->next;
+				this->_Begin->next->next->prev = this->_Begin;
+				this->_Begin->next = this->_Begin->next->next;
+				delete del;
 				this->_size--;
 			}
 		}
@@ -205,31 +200,21 @@ namespace ft
 		void push_back (const value_type& val)
 		{
 			Node<T> *node = new Node<T>();
-			iterator last(this->end());
-			iterator penlast(this->end());
-			
-			penlast--;
 			node->value = val;
-			node->prev = penlast._curr;
-			node->next = last._curr;
-			last._curr->prev = node;
-			penlast._curr->next = node;
+			node->next = this->_End;
+			node->prev = this->_End->prev;
+			this->_End->prev->next = node;
+			this->_End->prev = node;
 			this->_size++;
 		}
 		
 		void pop_back()
 		{
-			iterator it(this->end());
-			iterator penit(this->end());
-
 			if (this->_size > 0)
 			{
-				it--;
-				penit--;
-				penit--;
-				delete it._curr;
-				penit._curr->next = this->_End;
-				this->_End->prev = penit._curr;
+				Node<T> *del = this->_End->prev;
+				del->prev->next = this->_End;
+				this->_End->prev = del->prev;
 				this->_size--;
 			}
 		}

@@ -338,7 +338,7 @@ int main(void)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "PUSH BACK 99, 78, 33 (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+	std::cout << "PUSH BACK 99, 78, 33 [99, 78, 33] (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
 
 	/* SIZE AFTER PUSH */
 	if (sys_list.size() == our_list.size())
@@ -361,7 +361,7 @@ int main(void)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "PUSH FRONT 12 (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+	std::cout << "PUSH FRONT 12 [12, 99, 78, 33](BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
 
 	/* SIZE AFTER PUSH */
 	if (sys_list.size() == our_list.size())
@@ -377,7 +377,7 @@ int main(void)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "POP FRONT (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+	std::cout << "POP FRONT [99, 78, 33] (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
 
 	/* SIZE AFTER POP */
 	if (sys_list.size() == our_list.size())
@@ -386,10 +386,6 @@ int main(void)
 		std::cout << RED;
 	std::cout << "SIZE AFTER POP: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
-	sys_list.push_back(5);
-	our_list.push_back(5);
-	sys_list.push_back(105);
-	our_list.push_back(105);
 	/* END */
 	if (*sys_list.end() == *our_list.end())
 		std::cout << GREEN;
@@ -450,6 +446,49 @@ int main(void)
 	std::cout << YELLOW <<"* LIST ITERATOR METHODS [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> sys_list;
 	ft::list<int> our_list;
-	
+	std::list<int>::iterator sys_it = sys_list.begin();
+	ft::list<int>::iterator our_it = our_list.begin();
+
+	/* END EMPTY */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "BEGIN EMPTY: " << *sys_it << " == " << *our_it << OFF << std::endl;
+
+	sys_it = sys_list.end();
+	our_it = our_list.end();
+	/* END EMPTY */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "END EMPTY: " << *sys_it << " == " << *our_it << OFF << std::endl;
+
+	sys_list.push_back(1);
+	sys_list.push_back(2);
+	sys_list.push_back(32);
+	our_list.push_back(1);
+	our_list.push_back(2);
+	our_list.push_back(32);
+
+	sys_it = sys_list.begin();
+	our_it = our_list.begin();
+	/* BEGIN [1,2,3] */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "BEGIN [1, 2, 3]: " << *sys_it << " == " << *our_it << OFF << std::endl;
+
+	sys_it = sys_list.end();
+	our_it = our_list.end();
+	/* END [1, 2, 3] */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "END [1, 2, 3]: " << *sys_it << " == " << *our_it << OFF << std::endl;
+
 	} catch (std::exception &e){}
 }
