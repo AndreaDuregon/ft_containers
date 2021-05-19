@@ -287,7 +287,21 @@ int main(void)
 		std::cout << RED;
 	sys_it = sys_list.begin();
 	our_it = our_list.begin();
-	std::cout << "BEGIN++ [1, 2, 32]: " << *sys_it++ << " == " << *our_it++ << OFF << std::endl;
+	std::cout << "BEGIN++ (1 time) [1, 2, 32]: " << *sys_it++ << " == " << *our_it++ << OFF << std::endl;
+
+	/* BEGIN++ [1,2,3] */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;	
+	std::cout << "BEGIN++ (2 time) [1, 2, 32]: " << *sys_it++ << " == " << *our_it++ << OFF << std::endl;
+
+	/* BEGIN++ [1,2,3] */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;	
+	std::cout << "BEGIN++ (3 time) [1, 2, 32]: " << *sys_it++ << " == " << *our_it++ << OFF << std::endl;
 
 	sys_it = sys_list.end();
 	our_it = our_list.end();
