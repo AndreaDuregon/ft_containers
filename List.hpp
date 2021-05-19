@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/19 14:37:32 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 14:38:22 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ namespace ft
 			this->_End->prev = this->_Begin;
 			this->_size = 0;
 			for (size_type i = 0; i < n; i++)
-				this->push_front(val);
+				this->push_back(val);
 		};
 		list(iterator first, iterator last){
 			this->_End = new Node<T>();
@@ -65,7 +65,7 @@ namespace ft
 			this->_End->prev = this->_Begin;
 			this->_size = 0;
 			for (; first != last; first++)
-				this->push_front(*first);
+				this->push_back(*first);
 		};
 		~list() {};
 
