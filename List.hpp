@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/19 12:49:03 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 14:28:11 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ namespace ft
 		
 		iterator end()
 		{
-			return iterator(this->_End->prev);
+			return iterator(this->_End);
 		};
 		
 		const_iterator cend() const
@@ -133,12 +133,12 @@ namespace ft
 		//Elem access
 		reference front()
 		{
-			return this->_Begin->value;
+			return this->_Begin->next->value;
 		};
 		
 		const_reference front() const
 		{
-			return this->_Begin->value;
+			return this->_Begin->next->value;
 
 		};
 		

@@ -46,34 +46,6 @@ int main(void)
 		std::cout << RED;
 	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
 
-	/* END */
-	if (*sys_list.end() == *our_list.end())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "END: " << *sys_list.end() << " == " << *our_list.end() << OFF << std::endl;
-
-	/* CEND */
-	if (*sys_list.cend() == *our_list.cend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CEND: " << *sys_list.cend() << " == " << *our_list.cend() << OFF << std::endl;
-
-	/* REND */
-	if (*sys_list.rend() == *our_list.rend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "REND: " << *sys_list.rend() << " == " << *our_list.rend() << OFF << std::endl;
-
-	/* CREND */
-	if (*sys_list.crend() == *our_list.crend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CREND: " << *sys_list.crend() << " == " << *our_list.crend() << OFF << std::endl;
-
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
 		std::cout << GREEN;
@@ -121,34 +93,6 @@ int main(void)
 		std::cout << RED;
 	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
 
-	/* END */
-	if (*sys_list.end() == *our_list.end())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "END: " << *sys_list.end() << " == " << *our_list.end() << OFF << std::endl;
-
-	/* CEND */
-	if (*sys_list.cend() == *our_list.cend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CEND: " << *sys_list.cend() << " == " << *our_list.cend() << OFF << std::endl;
-
-	/* REND */
-	if (*sys_list.rend() == *our_list.rend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "REND: " << *sys_list.rend() << " == " << *our_list.rend() << OFF << std::endl;
-
-	/* CREND */
-	if (*sys_list.crend() == *our_list.crend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CREND: " << *sys_list.crend() << " == " << *our_list.crend() << OFF << std::endl;
-
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
 		std::cout << GREEN;
@@ -195,34 +139,6 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
-
-	/* END */
-	if (*sys_list.end() == *our_list.end())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "END: " << *sys_list.end() << " == " << *our_list.end() << OFF << std::endl;
-
-	/* CEND */
-	if (*sys_list.cend() == *our_list.cend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CEND: " << *sys_list.cend() << " == " << *our_list.cend() << OFF << std::endl;
-
-	/* REND */
-	if (*sys_list.rend() == *our_list.rend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "REND: " << *sys_list.rend() << " == " << *our_list.rend() << OFF << std::endl;
-
-	/* CREND */
-	if (*sys_list.crend() == *our_list.crend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CREND: " << *sys_list.crend() << " == " << *our_list.crend() << OFF << std::endl;
 
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
@@ -272,34 +188,6 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
-
-	/* END */
-	if (*sys_list.end() == *our_list.end())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "END: " << *sys_list.end() << " == " << *our_list.end() << OFF << std::endl;
-
-	/* CEND */
-	if (*sys_list.cend() == *our_list.cend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CEND: " << *sys_list.cend() << " == " << *our_list.cend() << OFF << std::endl;
-
-	/* REND */
-	if (*sys_list.rend() == *our_list.rend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "REND: " << *sys_list.rend() << " == " << *our_list.rend() << OFF << std::endl;
-
-	/* CREND */
-	if (*sys_list.crend() == *our_list.crend())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CREND: " << *sys_list.crend() << " == " << *our_list.crend() << OFF << std::endl;
 
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
@@ -386,47 +274,12 @@ int main(void)
 		std::cout << RED;
 	std::cout << "SIZE AFTER POP: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
-	/* END */
-	if (*sys_list.end() == *our_list.end())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "END: " << *sys_list.end() << " == " << *our_list.end() << OFF << std::endl;
-
-	/* --END */
-	if (*--sys_list.end() == *--our_list.end())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "--END: " << *--sys_list.end() << " == " << *--our_list.end() << OFF << std::endl;
-
-	/* ++END */
-	if (*++sys_list.end() == *++our_list.end())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "++END: " << *++sys_list.end() << " == " << *++our_list.end() << OFF << std::endl;
-
 	/* BEGIN */
 	if (*sys_list.begin() == *our_list.begin())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
 	std::cout << "BEGIN: " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;	
-
-	/* ++BEGIN */
-	if (*++sys_list.begin() == *++our_list.begin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "++BEGIN: " << *++sys_list.begin() << " == " << *++our_list.begin() << OFF << std::endl;
-
-	/* --BEGIN */
-	if (*--sys_list.begin() == *--our_list.begin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "--BEGIN: " << *--sys_list.begin() << " == " << *--our_list.begin() << OFF << std::endl;
 
 	/* FRONT */
 	if (sys_list.front() == our_list.front())
@@ -449,21 +302,12 @@ int main(void)
 	std::list<int>::iterator sys_it = sys_list.begin();
 	ft::list<int>::iterator our_it = our_list.begin();
 
-	/* END EMPTY */
+	/* BEGIN EMPTY */
 	if (*sys_it == *our_it)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
 	std::cout << "BEGIN EMPTY: " << *sys_it << " == " << *our_it << OFF << std::endl;
-
-	sys_it = sys_list.end();
-	our_it = our_list.end();
-	/* END EMPTY */
-	if (*sys_it == *our_it)
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "END EMPTY: " << *sys_it << " == " << *our_it << OFF << std::endl;
 
 	sys_list.push_back(1);
 	sys_list.push_back(2);
@@ -479,16 +323,38 @@ int main(void)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "BEGIN [1, 2, 3]: " << *sys_it << " == " << *our_it << OFF << std::endl;
+	std::cout << "BEGIN [1, 2, 32]: " << *sys_it << " == " << *our_it << OFF << std::endl;
 
-	sys_it = sys_list.end();
-	our_it = our_list.end();
-	/* END [1, 2, 3] */
+	++sys_it;
+	++our_it;
+	/* ++BEGIN [1,2,3] */
 	if (*sys_it == *our_it)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "END [1, 2, 3]: " << *sys_it << " == " << *our_it << OFF << std::endl;
+	std::cout << "++BEGIN [1, 2, 32]: " << *sys_it << " == " << *our_it << OFF << std::endl;
+
+	sys_it = sys_list.end();
+	our_it = our_list.end();
+	--sys_it;
+	--our_it;
+	/* --END [1, 2, 32] */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "--END [1, 2, 32]: " << *sys_it << " == " << *our_it << OFF << std::endl;
+
+	sys_it = sys_list.end();
+	our_it = our_list.end();
+	++sys_it;
+	++our_it;
+	/* END++ [1, 2, 32] */
+	if (*sys_it == *our_it)
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "++END [1, 2, 32]: " << *sys_it << " == " << *our_it << OFF << std::endl;
 
 	} catch (std::exception &e){}
 }
