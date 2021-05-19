@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:58:47 by dmalori           #+#    #+#             */
-/*   Updated: 2021/05/19 12:33:46 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 17:56:59 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ namespace ft
 			listIterator(Node<T> *curr) : _curr(curr) {};
 			listIterator(listIterator const &copy)
 			{
-				this->_curr = new Node<T>();
-				this->_curr->next = copy._curr->next;
-				this->_curr->prev = copy._curr->prev;
-				this->_curr->value = copy._curr->value;
+				*this = copy;
+			}
+
+			listIterator<T> &operator = (listIterator const &copy)
+			{
+				this->_curr = copy._curr;
+				return *this;
 			}
 
 			T			&operator * ()
@@ -42,11 +45,10 @@ namespace ft
 				return this->_curr->value;
 			}
 
-			listIterator<T>	&operator ++ ()
+			listIterator<T>	&operator ++ () 
 			{
-				listIterator<T> tmp(*this);
-				this->_curr = this->_curr->next;
-				return tmp;
+
+				return this->_curr;
 			}
 
 			listIterator<T>	&operator ++ (int)

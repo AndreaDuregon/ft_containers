@@ -25,26 +25,12 @@ int main(void)
 		std::cout << RED;
 	std::cout << "BEGIN: " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
 
-	/* CBEGIN */
-	if (*sys_list.cbegin() == *our_list.cbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CBEGIN: " << *sys_list.cbegin() << " == " << *our_list.cbegin() << OFF << std::endl;
-
 	/* RBEGIN */
 	if (*sys_list.rbegin() == *our_list.rbegin())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
 	std::cout << "RBEGIN: " << *sys_list.rbegin() << " == " << *our_list.rbegin() << OFF << std::endl;
-
-	/* CRBEGIN */
-	if (*sys_list.crbegin() == *our_list.crbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
 
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
@@ -72,26 +58,12 @@ int main(void)
 		std::cout << RED;
 	std::cout << "BEGIN: " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
 
-	/* CBEGIN */
-	if (*sys_list.cbegin() == *our_list.cbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CBEGIN: " << *sys_list.cbegin() << " == " << *our_list.cbegin() << OFF << std::endl;
-
 	/* RBEGIN */
 	if (*sys_list.rbegin() == *our_list.rbegin())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
 	std::cout << "RBEGIN: " << *sys_list.rbegin() << " == " << *our_list.rbegin() << OFF << std::endl;
-
-	/* CRBEGIN */
-	if (*sys_list.crbegin() == *our_list.crbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
 
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
@@ -119,26 +91,12 @@ int main(void)
 		std::cout << RED;
 	std::cout << "BEGIN: " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
 
-	/* CBEGIN */
-	if (*sys_list.cbegin() == *our_list.cbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CBEGIN: " << *sys_list.cbegin() << " == " << *our_list.cbegin() << OFF << std::endl;
-
 	/* RBEGIN */
 	if (*sys_list.rbegin() == *our_list.rbegin())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
 	std::cout << "RBEGIN: " << *sys_list.rbegin() << " == " << *our_list.rbegin() << OFF << std::endl;
-
-	/* CRBEGIN */
-	if (*sys_list.crbegin() == *our_list.crbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
 
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
@@ -168,26 +126,12 @@ int main(void)
 		std::cout << RED;
 	std::cout << "BEGIN: " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
 
-	/* CBEGIN */
-	if (*sys_list.cbegin() == *our_list.cbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CBEGIN: " << *sys_list.cbegin() << " == " << *our_list.cbegin() << OFF << std::endl;
-
 	/* RBEGIN */
 	if (*sys_list.rbegin() == *our_list.rbegin())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
 	std::cout << "RBEGIN: " << *sys_list.rbegin() << " == " << *our_list.rbegin() << OFF << std::endl;
-
-	/* CRBEGIN */
-	if (*sys_list.crbegin() == *our_list.crbegin())
-		std::cout << GREEN;
-	else
-		std::cout << RED;
-	std::cout << "CRBEGIN: " << *sys_list.crbegin() << " == " << *our_list.crbegin() << OFF << std::endl;
 
 	/* SIZE */
 	if (sys_list.size() == our_list.size())
@@ -334,8 +278,20 @@ int main(void)
 		std::cout << RED;
 	std::cout << "++BEGIN [1, 2, 32]: " << *sys_it << " == " << *our_it << OFF << std::endl;
 
+	sys_it = sys_list.begin();
+	our_it = our_list.begin();
+	/* BEGIN++ [1,2,3] */
+	if (*sys_it++ == *our_it++)
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	sys_it = sys_list.begin();
+	our_it = our_list.begin();
+	std::cout << "BEGIN++ [1, 2, 32]: " << *sys_it++ << " == " << *our_it++ << OFF << std::endl;
+
 	sys_it = sys_list.end();
 	our_it = our_list.end();
+
 	--sys_it;
 	--our_it;
 	/* --END [1, 2, 32] */

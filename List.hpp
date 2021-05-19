@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/19 15:09:32 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/19 16:32:35 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ namespace ft
 	template < class T, class Allocator = std::allocator<T> > class list
 	{
 	private:
-		ft::Node<T>		*_Begin;
-		ft::Node<T>		*_End;
+		ft::Node<T>		*_end;
 		size_t			_size;
 	public:
 		/* MEMBER */
@@ -40,75 +39,75 @@ namespace ft
 		typedef size_t							size_type;
 
 		list(/* args */) {
-			this->_End = new Node<T>();
-			this->_Begin = this->_End;
-			this->_End->value = 0;
-			this->_End->next = this->_Begin;
-			this->_End->prev = this->_Begin;
+			this->_end = new Node<T>();
+			this->_end->value = 0;
+			this->_end->next = this->_end;
+			this->_end->prev = this->_end;
 			this->_size = 0;
 		};
 		list(size_type n, const_reference val=value_type()) {
-			this->_End = new Node<T>();
-			this->_Begin = this->_End;
-			this->_End->value = 0;
-			this->_End->next = this->_Begin;
-			this->_End->prev = this->_Begin;
+			this->_end = new Node<T>();
+			this->_end->value = 0;
+			this->_end->next = this->_end;
+			this->_end->prev = this->_end;
 			this->_size = 0;
 			for (size_type i = 0; i < n; i++)
 				this->push_back(val);
 		};
 		list(iterator first, iterator last){
-			this->_End = new Node<T>();
-			this->_Begin = this->_End;
-			this->_End->value = 0;
-			this->_End->next = this->_Begin;
-			this->_End->prev = this->_Begin;
+			this->_end = new Node<T>();
+			this->_end->value = 0;
+			this->_end->next = this->_end;
+			this->_end->prev = this->_end;
 			this->_size = 0;
 			for (; first != last; first++)
 				this->push_back(*first);
 		};
-		~list() {};
+
+		virtual ~list() {
+			this->clear();
+		};
 
 		//iter section
 		iterator begin()
 		{
-			return iterator (this->_Begin->next);
+			return iterator (this->_end->next);
 		};
 		
-		const_iterator cbegin() const
+		const_iterator begin() const
 		{
-			return const_iterator(this->_Begin->next);
+			return const_iterator(this->_end->next);
 		};
 		
 		iterator end()
 		{
-			return iterator(this->_End);
+			return iterator(this->_end);
 		};
 		
-		const_iterator cend() const
+		const_iterator end() const
 		{
-			return const_iterator(this->_End);
+			return const_iterator(this->_end);
 			
 		};
 		
 		reverse_iterator rbegin()
 		{
-			return reverse_iterator(this->_Begin->next);
+			return reverse_iterator(this->_end->next);
 		}
 
-		const_reverse_iterator crbegin() const
+		const_reverse_iterator rbegin() const
 		{
-			return const_reverse_iterator(this->_Begin->next);
+			return const_reverse_iterator(this->_end->next);
 		}
 
 		reverse_iterator rend()
 		{
-			return reverse_iterator(this->_End);	
+			return reverse_iterator(this->_end);	
 		}
 
-		const_reverse_iterator crend() const
+		const_reverse_iterator rend() const
 		{
-			return const_reverse_iterator(this->_End);	
+			return const_reverse_iterator(this->_end);	
 		}
 		
 		// Capacity
@@ -131,23 +130,23 @@ namespace ft
 		//Elem access
 		reference front()
 		{
-			return this->_Begin->next->value;
+			return this->_end->next->value;
 		};
 		
 		const_reference front() const
 		{
-			return this->_Begin->next->value;
+			return this->_end->next->value;
 
 		};
 		
 		reference back()
 		{
-			return this->_End->prev->value;	
+			return this->_end->prev->value;	
 		};
 
 		const_reference back() const
 		{
-			return this->_End->prev->value;
+			return this->_end->prev->value;
 		};
 		
 		// Modifiers
@@ -167,17 +166,16 @@ namespace ft
 			for (size_t i = 0; i < n; i++)
 			{
 				this->push_back(val);
-			}
-			
+			}	
 		}
 		
 		void push_front (const value_type& val)
 		{
 			Node<T> *node = new Node<T>(val);
-			node->prev = this->_Begin;
-			node->next = this->_Begin->next;
-			this->_Begin->next->prev = node;
-			this->_Begin->next = node;
+			node->prev = this->_end;
+			node->next = this->_end->next;
+			this->_end->next->prev = node;
+			this->_end->next = node;
 			this->_size++;
 		}
 
@@ -185,9 +183,9 @@ namespace ft
 		{
 			if (this->_size > 0)
 			{
-				Node<T> *del = this->_Begin->next;
-				this->_Begin->next->next->prev = this->_Begin;
-				this->_Begin->next = this->_Begin->next->next;
+				Node<T> *del = this->_end->next;
+				this->_end->next->next->prev = this->_end;
+				this->_end->next = this->_end->next->next;
 				delete del;
 				this->_size--;
 			}
@@ -196,10 +194,10 @@ namespace ft
 		void push_back (const value_type& val)
 		{
 			Node<T> *node = new Node<T>(val);
-			node->next = this->_End;
-			node->prev = this->_End->prev;
-			this->_End->prev->next = node;
-			this->_End->prev = node;
+			node->next = this->_end;
+			node->prev = this->_end->prev;
+			this->_end->prev->next = node;
+			this->_end->prev = node;
 			this->_size++;
 		}
 		
@@ -207,16 +205,17 @@ namespace ft
 		{
 			if (this->_size > 0)
 			{
-				Node<T> *del = this->_End->prev;
-				del->prev->next = this->_End;
-				this->_End->prev = del->prev;
+				Node<T> *del = this->_end->prev;
+				this->_end->prev->prev->next = this->_end;
+				this->_end->prev = this->_end->prev->prev;
+				delete del;
 				this->_size--;
 			}
 		}
 
 		iterator insert (iterator position, const value_type& val)
 		{
-			
+			/*
 			Node<T> *node  = new Node<T>(val);
 			iterator prev(position);
 
@@ -227,6 +226,7 @@ namespace ft
 			node->next = position._curr;
 			prev++;
 			return prev;
+			*/
 			/*
 			ft::Node<T> *node;
 			iterator it_next;
@@ -276,7 +276,11 @@ namespace ft
 
 		void clear()
 		{
-			
+			while(this->begin() != this->end())
+			{
+				this->pop_back();
+			}
+			delete this->_end;
 		}
 
 		//operations
