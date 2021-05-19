@@ -13,7 +13,7 @@
 
 int main(void)
 {
-	{
+	try {
 	std::cout << YELLOW <<"INIT LISTA VUOTA [SYS vs OUR]" << OFF <<std::endl;   
 	std::list<int> sys_list;
 	ft::list<int> our_list;
@@ -87,8 +87,8 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
-	}
-	{
+	}  catch (std::exception &e){}
+	try {
 	std::cout << YELLOW <<"INIT LISTA 1 PARAMETRO (20) [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> sys_list(20);
 	ft::list<int> our_list(20);
@@ -162,8 +162,8 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
-	}
-	{
+	}  catch (std::exception &e){}
+	try {
 	std::cout << YELLOW <<"INIT LISTA 2 PARAMETRI (20,100) [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> sys_list(20, 100);
 	ft::list<int> our_list(20, 100);
@@ -237,8 +237,8 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
-	}
-	{
+	} catch (std::exception &e){}
+	try {
 	std::cout << YELLOW <<"INIT LISTA 2 ITERATORI (begin, end) [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> copy_sys_list(5,10);
 	std::list<int> sys_list(copy_sys_list.begin(), copy_sys_list.end());
@@ -314,39 +314,142 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
-	}
-	try
-	{
-		std::cout << YELLOW <<"* PUSH" << OFF <<std::endl;
-		ft::list<int> lst1;
-		ft::list<int> lst2;
+	} catch (std::exception &e){}
+	try	{
+	std::cout << YELLOW <<"* LIST METHODS [SYS vs OUR]" << OFF <<std::endl;
+	std::list<int> sys_list;
+	ft::list<int> our_list;
 
-		std::cout << "ok" << std::endl;
-		lst1.push_front(99);
-		lst1.push_back(199);
-		lst1.push_front(9);
-		lst1.push_back(10);
-		lst1.print();
-		std::cout << YELLOW <<"POP" << OFF <<std::endl;
-		lst1.pop_back();
-		lst1.pop_front();
-		lst1.print();
-		//lst2.assign(lst1.begin(), lst1.end());
-		std::cout << YELLOW <<"* INSERT" << OFF <<std::endl;
-		ft::list<int> lst3;
-		ft::listIterator<int> it_start(lst1.begin());
-		ft::listIterator<int> it_end(lst1.end());
-		lst3.assign(it_start, it_end);
-		ft::listIterator<int> it(lst3.begin());
+	/* EMPTY */
+	if (sys_list.empty() == our_list.empty())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "EMPTY: " << sys_list.empty() << " == " << our_list.empty() << OFF << std::endl;
 
-		it++;
-		lst3.insert(it, 909);
-		lst3.print();
-		//lst2.assign(lst1.begin(), lst1.end());
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	sys_list.push_back(99);
+	sys_list.push_back(78);
+	sys_list.push_back(33);
+	our_list.push_back(99);
+	our_list.push_back(78);	
+	our_list.push_back(33);	
+	/* PUSH BACK */
+	if (*sys_list.begin() == *our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "PUSH BACK 99, 78, 33 (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+
+	/* SIZE AFTER PUSH */
+	if (sys_list.size() == our_list.size())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "SIZE AFTER PUSH: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	/* EMPTY */
+	if (sys_list.empty() == our_list.empty())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "EMPTY: " << sys_list.empty() << " == " << our_list.empty() << OFF << std::endl;
+
+	sys_list.push_front(12);
+	our_list.push_front(12);
+	/* PUSH FRONT */
+	if (*sys_list.begin() == *our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "PUSH FRONT 12 (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+
+	/* SIZE AFTER PUSH */
+	if (sys_list.size() == our_list.size())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "SIZE AFTER PUSH: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	sys_list.pop_front();
+	our_list.pop_front();	
+	/* POP FRONT */
+	if (*sys_list.begin() == *our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "POP FRONT (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+
+	/* SIZE AFTER POP */
+	if (sys_list.size() == our_list.size())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "SIZE AFTER POP: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	sys_list.push_back(5);
+	our_list.push_back(5);
+	sys_list.push_back(105);
+	our_list.push_back(105);
+	/* END */
+	if (*sys_list.end() == *our_list.end())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "END: " << *sys_list.end() << " == " << *our_list.end() << OFF << std::endl;
+
+	/* --END */
+	if (*--sys_list.end() == *--our_list.end())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "--END: " << *--sys_list.end() << " == " << *--our_list.end() << OFF << std::endl;
+
+	/* ++END */
+	if (*++sys_list.end() == *++our_list.end())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "++END: " << *++sys_list.end() << " == " << *++our_list.end() << OFF << std::endl;
+
+	/* BEGIN */
+	if (*sys_list.begin() == *our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "BEGIN: " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;	
+
+	/* ++BEGIN */
+	if (*++sys_list.begin() == *++our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "++BEGIN: " << *++sys_list.begin() << " == " << *++our_list.begin() << OFF << std::endl;
+
+	/* --BEGIN */
+	if (*--sys_list.begin() == *--our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "--BEGIN: " << *--sys_list.begin() << " == " << *--our_list.begin() << OFF << std::endl;
+
+	/* FRONT */
+	if (sys_list.front() == our_list.front())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "FRONT: " << sys_list.front() << " == " << our_list.front() << OFF << std::endl;
+
+	/* BACK */
+	if (sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "BACK: " << sys_list.back() << " == " << our_list.back() << OFF << std::endl;
+	} catch (std::exception &e){}
+	try {
+	std::cout << YELLOW <<"* LIST ITERATOR METHODS [SYS vs OUR]" << OFF <<std::endl;
+	std::list<int> sys_list;
+	ft::list<int> our_list;
 	
+	} catch (std::exception &e){}
 }

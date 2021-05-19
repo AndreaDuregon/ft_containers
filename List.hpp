@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/18 18:33:18 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/19 11:46:56 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,9 @@ namespace ft
 		// Capacity
 		bool empty() const
 		{
-			
+			if (this->_size == 0)
+				return true;
+			return false;
 		}
 		size_type size() const
 		{
@@ -133,24 +135,23 @@ namespace ft
 		//Elem access
 		reference front()
 		{
-			return &this->_Begin->value;
+			return this->_Begin->value;
 		};
 		
 		const_reference front() const
 		{
-			return &this->_Begin->value;
+			return this->_Begin->value;
 
 		};
 		
 		reference back()
 		{
-			return &this->_End->prev->value;	
+			return this->_End->prev->value;	
 		};
 
-		
 		const_reference back() const
 		{
-			return &this->_End->prev->value;
+			return this->_End->prev->value;
 		};
 		
 		// Modifiers
@@ -235,7 +236,7 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
-<<<<<<< HEAD
+			
 			Node<T> *node  = new Node<T>();
 			iterator prev(position);
 
@@ -247,7 +248,7 @@ namespace ft
 			node->value = val;
 			prev++;
 			return prev;
-=======
+			/*
 			ft::Node<T> *node;
 			iterator it_next;
 
@@ -258,7 +259,7 @@ namespace ft
 			node->prev = &(*position);
 			node->next = &(*it_next);
 			this->size++;
->>>>>>> afc96c6134dcc1ac6d672a60265414aca55e580d
+			*/
 		}
 
 	   	void insert (iterator position, size_type n, const value_type& val)
