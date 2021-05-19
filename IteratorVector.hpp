@@ -6,7 +6,7 @@
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:43:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/19 12:34:27 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/19 12:48:44 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ namespace ft
 
 		reference	operator * ()
 		{
-			return (*this->vec_p);
-		}
-
-		reference	operator [] (size_t	n)
-		{
-			pointer	temp = this->vec_p;
-			for (size_t i = 0; i < n; i++)
-				temp++;
 			return (*this->vec_p);
 		}
 
@@ -126,14 +118,6 @@ namespace ft
 			return (*this->vec_p);
 		}
 
-		const_reference	operator [] (size_t	n)
-		{
-			pointer	temp = this->vec_p;
-			for (size_t i = 0; i < n; i++)
-				temp++;
-			return (*this->vec_p);
-		}
-		
 		constVectorIterator	&operator ++ ()
 		{
 			pointer	temp = this->vec_p;
