@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:58:47 by dmalori           #+#    #+#             */
-/*   Updated: 2021/05/19 18:21:38 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/19 18:25:34 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ namespace ft
 
 			listIterator<T>	operator-- (int)
 			{
-				listIterator<T> *temp =  new listIterator<T>();
-				temp->_curr = this->_curr;
-				this->_curr = this->_curr->prev;
+				listIterator<T> temp(this->_curr);
+				this->operator++();
 				return *temp;
 			}
 
