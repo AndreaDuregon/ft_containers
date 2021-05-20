@@ -24,6 +24,7 @@ static bool uguali(std::list<T> sys_list, ft::list<T> our_list)
 	ft::listIterator<T> our_it = our_list.begin();
 	ft::listIterator<T> sys_it = our_list.begin();
 
+
 	return true;
 }
 
