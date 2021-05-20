@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 12:48:42 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:51:13 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
-			/*
+		
 			Node<T> *node  = new Node<T>(val);
 			iterator prev(position);
 
@@ -227,19 +227,6 @@ namespace ft
 			node->next = position._curr;
 			prev++;
 			return prev;
-			*/
-			/*
-			ft::Node<T> *node;
-			iterator it_next;
-
-			it_next = position;
-			it_next++;
-			node = new Node<T>(val);
-			*position._curr->next = &node;
-			node->prev = &(*position);
-			node->next = &(*it_next);
-			this->size++;
-			*/
 		}
 
 	   	void insert (iterator position, size_type n, const value_type& val)
