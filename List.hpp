@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:42:28 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 16:47:12 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ namespace ft
 		typedef	typename ft::rclistIterator<T>	const_reverse_iterator;
 		typedef std::ptrdiff_t 					difference_type;
 		typedef size_t							size_type;
+		typedef void*							Compare;
 
 		//ok
 		list(/* args */) {
@@ -278,6 +279,14 @@ namespace ft
 		//ok
 		void resize (size_type n, value_type val = value_type())
 		{
+			while (this->_size > n)
+			{
+				this->pop_back();
+			}
+			while (this->_size < n)
+			{
+				this->push_back(val);
+			}
 			
 		}
 		//ok
@@ -371,10 +380,23 @@ namespace ft
 			} 
 		}
 
-		template <class Compare>
 		void sort (Compare comp)
 		{
-			//iterator it()
+			iterator it(this->begin());
+			T tmp;
+			it.operator++();
+			while(it != this->_end)
+			{
+				if(comp(it._curr->value, it._curr->prev->value))
+				{
+					tmp = it._curr->value;
+					it._curr->value = it._curr->prev->value;
+					it._curr->prev->value = tmp; 
+					it = this->begin();
+				}
+				else
+					it.operator++();
+			} 
 		}
 		//ok
 		void reverse()
