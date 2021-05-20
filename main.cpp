@@ -490,6 +490,31 @@ int main(void)
 		std::cout << RED;
 	std::cout << "MERGE (other List): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
+	sys_list.clear();
+	our_list.clear();
+	sys_list.push_back(100);
+	our_list.push_back(100);
+	sys_list.push_back(85);
+	our_list.push_back(85);
+	sys_list.push_back(12);
+	our_list.push_back(12);
+	sys_list.push_back(200);
+	our_list.push_back(200);
+	sys_list2.clear();
+	our_list2.clear();
+	sys_list2.push_back(0);
+	our_list2.push_back(0);
+	sys_list2.push_back(56);
+	our_list2.push_back(56);
+	/* ASSIGN */
+	sys_list.assign(sys_list2.begin(), sys_list2.end());
+	our_list.assign(our_list2.begin(), our_list2.end());
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "ASSIGN (BEGIN, END): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
 
 	} catch (std::exception &e){}
 

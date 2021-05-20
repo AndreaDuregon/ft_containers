@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:33:37 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 16:42:28 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ namespace ft
 			return this->_end->prev->value;
 		};
 		
-		//ok
   		void assign (iterator first, iterator last)
 		{
 			//clear the list
@@ -163,7 +162,7 @@ namespace ft
 				first++;
 			}
 		}
-		//ok
+
 		void assign (size_type n, const value_type& val)
 		{
 			//clear the list
@@ -233,7 +232,7 @@ namespace ft
 			this->_size++;
 			return prev;
 		}
-
+		//ok
 	   	void insert (iterator position, size_type n, const value_type& val)
 		{
 			for (size_type i = 0; i < n; i++)
@@ -249,7 +248,7 @@ namespace ft
 				workingIter.operator++();
 			}
 		}
-		
+		//ok
 		iterator erase (iterator position)
 		{
 			position._curr->prev->next = position._curr->next;
@@ -258,7 +257,7 @@ namespace ft
 			this->_size--;
 			return position;
 		}
-
+		//ok
 		iterator erase (iterator first, iterator last)
 		{
 			iterator it(first._curr);
@@ -276,12 +275,12 @@ namespace ft
 			x->_end = this->_end;
 			this->_end = temp.end;
 		}
-
+		//ok
 		void resize (size_type n, value_type val = value_type())
 		{
 			
 		}
-
+		//ok
 		void clear()
 		{
 			while(this->begin() != this->end())
@@ -291,7 +290,6 @@ namespace ft
 			this->_size = 0;
 		}
 
-		//operations
 		void splice (iterator position, list& x)
 		{
 			
@@ -306,7 +304,7 @@ namespace ft
 		{
 			
 		}
-		
+		//ok
 		void remove (const value_type& val)
 		{
 			
@@ -317,7 +315,7 @@ namespace ft
 		{
 			
 		}
-		
+		//ok
 		void unique()
 		{
 			iterator iter(this->begin());
@@ -328,7 +326,7 @@ namespace ft
 				iter.operator++();
 			} 
 		}
-
+		
 		template <class BinaryPredicate>
   		void unique (BinaryPredicate binary_pred)
 		{
@@ -341,7 +339,7 @@ namespace ft
 				iter.operator++();
 			} 
 		}
-
+		//ok
   		void merge (list& x)
 		{
 			
@@ -353,7 +351,7 @@ namespace ft
 			
 			
 		}
-
+		//ok
   		void sort()
 		{
 			iterator it(this->begin());
@@ -378,7 +376,7 @@ namespace ft
 		{
 			//iterator it()
 		}
-
+		//ok
 		void reverse()
 		{
 			iterator it(this->begin());
