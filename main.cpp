@@ -46,6 +46,9 @@ int main(void)
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
 	}  catch (std::exception &e){}
+
+	/* ---------------------------------------- */
+
 	try {
 	std::cout << YELLOW <<"INIT LISTA 1 PARAMETRO (20) [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> sys_list(20);
@@ -79,6 +82,9 @@ int main(void)
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
 	}  catch (std::exception &e){}
+
+	/* ---------------------------------------- */
+
 	try {
 	std::cout << YELLOW <<"INIT LISTA 2 PARAMETRI (20,100) [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> sys_list(20, 100);
@@ -112,6 +118,9 @@ int main(void)
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
 	} catch (std::exception &e){}
+
+	/* ---------------------------------------- */
+
 	try {
 	std::cout << YELLOW <<"INIT LISTA 2 ITERATORI (begin, end) [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> copy_sys_list(5,10);
@@ -147,6 +156,9 @@ int main(void)
 		std::cout << RED;
 	std::cout << "MAX SIZE: " << sys_list.max_size() << " == " << our_list.max_size() << OFF << std::endl;
 	} catch (std::exception &e){}
+
+	/* ---------------------------------------- */
+
 	try	{
 	std::cout << YELLOW <<"* LIST METHODS [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> sys_list;
@@ -238,9 +250,21 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "BACK: " << sys_list.back() << " == " << our_list.back() << OFF << std::endl;
+
+	/* CLEAR */
+	sys_list.clear();
+	our_list.clear();
+	if (sys_list.size() == our_list.size())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "CLEAR: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 	} catch (std::exception &e){}
+
+	/* ---------------------------------------- */
+
 	try {
-	std::cout << YELLOW <<"* LIST ITERATOR METHODS [SYS vs OUR]" << OFF <<std::endl;
+	std::cout << YELLOW <<"* LIST ITERATOR OPERATOR [SYS vs OUR]" << OFF <<std::endl;
 	std::list<int> sys_list;
 	ft::list<int> our_list;
 	std::list<int>::iterator sys_it = sys_list.begin();

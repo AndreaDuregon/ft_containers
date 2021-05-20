@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/19 17:59:27 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:48:42 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ namespace ft
 
 		virtual ~list() {
 			this->clear();
+			delete this->_end;
 		};
 
 		//iter section
@@ -280,7 +281,7 @@ namespace ft
 			{
 				this->pop_back();
 			}
-			delete this->_end;
+			this->_size = 0;
 		}
 
 		//operations
