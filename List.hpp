@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:51:02 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 16:56:50 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,7 +351,14 @@ namespace ft
 		//ok
   		void merge (list& x)
 		{
-			
+			Node<T> tmp;
+			while(!x._size)
+			{
+				tmp = x.
+				x.pop_front();
+				this->push_back(tmp);
+			}
+			this->sort();
 		}
 
 		template <class Compare>
