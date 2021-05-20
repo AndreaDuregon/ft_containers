@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 15:11:48 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 16:23:55 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,9 @@ namespace ft
 		
 		void swap (list& x)
 		{
-			
+			list temp(x);
+			x->_end = this->_end;
+			this->_end = temp.end;
 		}
 
 		void resize (size_type n, value_type val = value_type())
@@ -354,27 +356,42 @@ namespace ft
 
   		void sort()
 		{
-			
+			iterator it(this->begin());
+			while(it != this->_end)
+			{
+				if(it._curr->value < it._curr->next->value)
+					std::cout << "ciao\n";
+			}
 			
 		}
 
 		template <class Compare>
 		void sort (Compare comp)
 		{
-			
+			//iterator it()
 		}
 
 		void reverse()
 		{
-			
-			
+			iterator it(this->begin());
+			iterator end(this->end());
+			end.operator--();
+			T tmp;
+			for (size_type i=0; i <= (this->_size/ 2); i++)
+			{
+				tmp = end._curr->value;
+				end._curr->value = it._curr->value;
+				it._curr->value= tmp;
+				it.operator++();
+				end.operator--();
+			}
 		}
 
 		void	print()
 		{
 			iterator it(this->begin());
 			//nullterminato? nexfriks c entra qualcosa?
-			while (it._curr->next)
+			while (it != this->end())
 			{
 				std::cout << it._curr->value << std::endl;
 				it++;

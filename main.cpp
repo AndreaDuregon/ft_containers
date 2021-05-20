@@ -281,6 +281,7 @@ int main(void)
 	std::cout << "INSERT 5 times 66 at 0 [(66, 66, 66), 999, 5, 99, 78, 33]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 	/* INSERT x */
+	//our_list.print();
 	sys_list.reverse();
 	our_list.reverse();
 	if (*sys_list.begin() == *our_list.begin() && sys_list.back() == our_list.back())
@@ -288,6 +289,8 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "REVERSE (BEGIN-BACK): " << *sys_list.begin() << "-" << sys_list.back() <<" == " << *our_list.begin() << "-" << our_list.back() << OFF << std::endl;
+
+	//our_list.print();
 
 	sys_list.push_back(1);
 	our_list.push_back(1);
