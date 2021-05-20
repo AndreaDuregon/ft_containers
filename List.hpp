@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:25:49 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 16:33:37 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,17 +356,21 @@ namespace ft
 
   		void sort()
 		{
-			/* iterator it(this->begin());
+			iterator it(this->begin());
 			T tmp;
+			it.operator++();
 			while(it != this->_end)
 			{
-				if(it._curr->value < it._curr->next->value)
+				if(it._curr->value < it._curr->prev->value)
 				{
 					tmp = it._curr->value;
-					it._curr->value = it._curr
-				}		
-			} */
-			
+					it._curr->value = it._curr->prev->value;
+					it._curr->prev->value = tmp; 
+					it = this->begin();
+				}
+				else
+					it.operator++();
+			} 
 		}
 
 		template <class Compare>
