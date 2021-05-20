@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 14:53:37 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 14:59:10 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ namespace ft
 				first++;
 			}
 		}
-		
+		//ok
 		void assign (size_type n, const value_type& val)
 		{
 			//clear the list
@@ -172,7 +172,7 @@ namespace ft
 				this->push_back(val);
 			}	
 		}
-		
+		//ok
 		void push_front (const value_type& val)
 		{
 			Node<T> *node = new Node<T>(val);
@@ -182,7 +182,7 @@ namespace ft
 			this->_end->next = node;
 			this->_size++;
 		}
-
+		//ok
 		void pop_front()
 		{
 			if (this->_size > 0)
@@ -194,7 +194,7 @@ namespace ft
 				this->_size--;
 			}
 		}
-
+		//ok
 		void push_back (const value_type& val)
 		{
 			Node<T> *node = new Node<T>(val);
@@ -204,7 +204,7 @@ namespace ft
 			this->_end->prev = node;
 			this->_size++;
 		}
-		
+		//ok
 		void pop_back()
 		{
 			if (this->_size > 0)
@@ -216,7 +216,7 @@ namespace ft
 				this->_size--;
 			}
 		}
-
+		//ok
 		iterator insert (iterator position, const value_type& val)
 		{
 		
@@ -242,12 +242,19 @@ namespace ft
 
 		void insert (iterator position, iterator first, iterator last)
 		{	
-			
+			iterator workingIter(first._curr);
+			while(workingIter._curr != last._curr)
+			{
+				this->insert(position, workingIter._curr->value);
+				workingIter.operator++();
+			}
 		}
 		
 		iterator erase (iterator position)
 		{
-			return 0;
+			position._curr->prev->next = position._curr->next;
+			position._curr->next->prev = position._curr->prev;
+			delete position._curr;
 		}
 
 		iterator erase (iterator first, iterator last)
@@ -303,7 +310,15 @@ namespace ft
 		
 		void unique()
 		{
-			
+			/* iterator iter(this->begin());
+			while(iter != this.end())
+			{
+				if(iter._curr->value == iter._curr->next->value)
+				{
+					this.
+				}
+			} */
+				
 		}
 
 		template <class BinaryPredicate>
