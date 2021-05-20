@@ -10,6 +10,19 @@
 #define OFF "\033[0m"
 /* END COLORS */
 
+template <class T>
+static bool uguali(std::list<T> sys_list, ft::list<T> our_list)
+{
+	if (sys_list.front() != our_list.front())
+		return false;
+	if (sys_list.back() != our_list.back())
+		return false;
+	if (sys_list.size() != our_list.size())
+		return false;
+	if (sys_list.empty() != our_list.empty())
+		return false;		
+	return true;
+}
 
 int main(void)
 {
