@@ -251,6 +251,22 @@ int main(void)
 		std::cout << RED;
 	std::cout << "BACK: " << sys_list.back() << " == " << our_list.back() << OFF << std::endl;
 
+
+	/* UNIQUE */
+	sys_list.push_back(1);
+	our_list.push_back(1);
+	sys_list.push_back(1);
+	our_list.push_back(1);
+	sys_list.push_back(1);
+	our_list.push_back(1);
+	sys_list.unique();
+	our_list.unique();
+	if (sys_list.size() == our_list.size())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "UNIQUE [99, 78, 33, 1, 1, 1]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
 	/* CLEAR */
 	sys_list.clear();
 	our_list.clear();
@@ -259,6 +275,7 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "CLEAR: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
 	} catch (std::exception &e){}
 
 	/* ---------------------------------------- */
