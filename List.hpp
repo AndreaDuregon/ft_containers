@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:23:55 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 16:25:49 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,12 +356,16 @@ namespace ft
 
   		void sort()
 		{
-			iterator it(this->begin());
+			/* iterator it(this->begin());
+			T tmp;
 			while(it != this->_end)
 			{
 				if(it._curr->value < it._curr->next->value)
-					std::cout << "ciao\n";
-			}
+				{
+					tmp = it._curr->value;
+					it._curr->value = it._curr
+				}		
+			} */
 			
 		}
 
