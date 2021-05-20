@@ -252,7 +252,34 @@ int main(void)
 	std::cout << "BACK: " << sys_list.back() << " == " << our_list.back() << OFF << std::endl;
 
 
-	/* UNIQUE */
+
+	/* INSERT at 0 */
+	sys_list.insert(sys_list.begin(), 999);
+	our_list.insert(our_list.begin(), 999);
+	if (*sys_list.begin() == *our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "INSERT at 0 [(999), 99, 78, 33]: " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+
+	/* INSERT at 1 */
+	sys_list.insert(++sys_list.begin(), 5);
+	our_list.insert(++our_list.begin(), 5);
+	if (*++sys_list.begin() == *++our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "INSERT at 1 [999, (5), 99, 78, 33]: " << *++sys_list.begin() << " == " << *++our_list.begin() << OFF << std::endl;
+
+	/* INSERT x */
+	sys_list.insert(++sys_list.begin(), 5);
+	our_list.insert(++our_list.begin(), 5);
+	if (*++sys_list.begin() == *++our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "INSERT x [999, (5), 99, 78, 33]: " << *++sys_list.begin() << " == " << *++our_list.begin() << OFF << std::endl;
+
 	sys_list.push_back(1);
 	our_list.push_back(1);
 	sys_list.push_back(1);
@@ -261,11 +288,12 @@ int main(void)
 	our_list.push_back(1);
 	sys_list.unique();
 	our_list.unique();
+	/* UNIQUE */
 	if (sys_list.size() == our_list.size())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "UNIQUE [99, 78, 33, 1, 1, 1]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+	std::cout << "UNIQUE [999, 5, 99, 78, 33, 1, 1, 1]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 	/* CLEAR */
 	sys_list.clear();
@@ -275,6 +303,8 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "CLEAR: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+
 
 	} catch (std::exception &e){}
 

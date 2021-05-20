@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 12:57:42 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 13:09:45 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,14 +218,16 @@ namespace ft
 		{
 		
 			Node<T> *node  = new Node<T>(val);
-			iterator prev(position);
+			iterator prev(position._curr);
 
-			prev--;
+			//prev._curr->prev->next = node;
+			prev.operator--();
 			prev._curr->next = node;
 			node->prev = prev._curr;
 			position._curr->prev = node;
 			node->next = position._curr;
-			prev++;
+			prev.operator++();
+			this->_size++;
 			return prev;
 		}
 
