@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 14:59:10 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 14:59:57 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,12 @@ namespace ft
 
 		iterator erase (iterator first, iterator last)
 		{
-			return 0;
+			iterator it(first._curr);
+			while(it != last)
+			{
+				this->erase(it);
+				it.operator++();
+			}
 		}
 		
 		void swap (list& x)
