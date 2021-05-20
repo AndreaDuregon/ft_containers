@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:38:55 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 16:45:49 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,14 @@ namespace ft
 
 		void resize (size_type n, value_type val = value_type())
 		{
+			while (this->_size > n)
+			{
+				this->pop_back();
+			}
+			while (this->_size < n)
+			{
+				this->push_back(val);
+			}
 			
 		}
 
