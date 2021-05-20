@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 15:00:27 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 15:11:48 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ namespace ft
 		typedef std::ptrdiff_t 					difference_type;
 		typedef size_t							size_type;
 
+		//ok
 		list(/* args */) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
@@ -45,6 +46,7 @@ namespace ft
 			this->_end->prev = this->_end;
 			this->_size = 0;
 		};
+		//ok
 		list(size_type n, const_reference val=value_type()) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
@@ -54,6 +56,7 @@ namespace ft
 			for (size_type i = 0; i < n; i++)
 				this->push_back(val);
 		};
+		//ok
 		list(iterator first, iterator last){
 			this->_end = new Node<T>();
 			this->_end->value = 0;
@@ -63,13 +66,13 @@ namespace ft
 			for (; first != last; ++first)
 				this->push_back(*first);
 		};
-
+		//ok
 		virtual ~list() {
 			this->clear();
 			delete this->_end;
 		};
 
-		//iter section
+		//ok
 		iterator begin()
 		{
 			return iterator (this->_end->next);
@@ -79,7 +82,7 @@ namespace ft
 		{
 			return const_iterator(this->_end->next);
 		};
-		
+		//ok
 		iterator end()
 		{
 			return iterator(this->_end);
@@ -111,24 +114,24 @@ namespace ft
 			return const_reverse_iterator(this->_end);	
 		}
 		
-		// Capacity
+		//ok
 		bool empty() const
 		{
 			if (this->_size == 0)
 				return true;
 			return false;
 		}
+		//ok
 		size_type size() const
 		{
 			return this->_size;
 		};
-		// SYS richiesta per sapere max value allocabile
+		//ok
 		size_type max_size() const
 		{
 			return std::numeric_limits<size_type>::max() / (sizeof(Node<T>));	
 		};
-		
-		//Elem access
+		//ok
 		reference front()
 		{
 			return this->_end->next->value;
@@ -139,7 +142,7 @@ namespace ft
 			return this->_end->next->value;
 
 		};
-		
+		//ok
 		reference back()
 		{
 			return this->_end->prev->value;	
@@ -150,7 +153,7 @@ namespace ft
 			return this->_end->prev->value;
 		};
 		
-		// Modifiers
+		//ok
   		void assign (iterator first, iterator last)
 		{
 			//clear the list
@@ -160,7 +163,7 @@ namespace ft
 				first++;
 			}
 		}
-		
+		//ok
 		void assign (size_type n, const value_type& val)
 		{
 			//clear the list
@@ -169,7 +172,7 @@ namespace ft
 				this->push_back(val);
 			}	
 		}
-		
+		//ok
 		void push_front (const value_type& val)
 		{
 			Node<T> *node = new Node<T>(val);
@@ -179,7 +182,7 @@ namespace ft
 			this->_end->next = node;
 			this->_size++;
 		}
-
+		//ok
 		void pop_front()
 		{
 			if (this->_size > 0)
@@ -191,7 +194,7 @@ namespace ft
 				this->_size--;
 			}
 		}
-
+		//ok
 		void push_back (const value_type& val)
 		{
 			Node<T> *node = new Node<T>(val);
@@ -201,7 +204,7 @@ namespace ft
 			this->_end->prev = node;
 			this->_size++;
 		}
-		
+		//ok
 		void pop_back()
 		{
 			if (this->_size > 0)
@@ -213,7 +216,7 @@ namespace ft
 				this->_size--;
 			}
 		}
-
+		//ok
 		iterator insert (iterator position, const value_type& val)
 		{
 		
@@ -252,6 +255,8 @@ namespace ft
 			position._curr->prev->next = position._curr->next;
 			position._curr->next->prev = position._curr->prev;
 			delete position._curr;
+			this->_size--;
+			return position;
 		}
 
 		iterator erase (iterator first, iterator last)
@@ -262,7 +267,7 @@ namespace ft
 				this->erase(it);
 				it.operator++();
 			}
-		
+			return it;
 		}
 		
 		void swap (list& x)
@@ -313,21 +318,26 @@ namespace ft
 		
 		void unique()
 		{
-			/* iterator iter(this->begin());
-			while(iter != this.end())
+			iterator iter(this->begin());
+			while(iter != this->end())
 			{
 				if(iter._curr->value == iter._curr->next->value)
-				{
-					this.
-				}
-			} */
-				
+					this->erase(iter);
+				iter.operator++();
+			} 
 		}
 
 		template <class BinaryPredicate>
   		void unique (BinaryPredicate binary_pred)
 		{
-			
+			iterator iter(this->begin());
+			iter.operator++();
+			while(iter != this->end())
+			{
+				if(binary_pred(iter._curr->prev, iter._curr->prev->value))
+					this->erase(iter);
+				iter.operator++();
+			} 
 		}
 
   		void merge (list& x)
@@ -356,6 +366,7 @@ namespace ft
 
 		void reverse()
 		{
+			
 			
 		}
 
