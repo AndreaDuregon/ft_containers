@@ -280,6 +280,15 @@ int main(void)
 		std::cout << RED;
 	std::cout << "INSERT 5 times 66 at 0 [(66, 66, 66), 999, 5, 99, 78, 33]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
+	/* INSERT x */
+	sys_list.reverse();
+	our_list.reverse();
+	if (*sys_list.begin() == *our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "REVERSE (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+
 	sys_list.push_back(1);
 	our_list.push_back(1);
 	sys_list.push_back(1);
