@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 12:57:36 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 13:17:09 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,18 @@ namespace ft
 
 	   	void insert (iterator position, size_type n, const value_type& val)
 		{
+			iterator prev(position._curr);
+			for (int i = 0; i < n; i++)
+			{
+				prev.operator--();
+				Node<T> *node = new Node<T>(val);
+				prev._curr->next = node;
+				node->prev = prev._curr;
+				position._curr->prev = node;
+				node->next = position._curr;
+				prev.operator++();
+			}
+			return prev;
 			
 		}
 		
