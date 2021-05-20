@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:51:02 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 17:02:09 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ namespace ft
 		{
 			return this->_end->prev->value;
 		};
-		
+		//ok
   		void assign (iterator first, iterator last)
 		{
 			this->clear();
@@ -163,7 +163,7 @@ namespace ft
 				first++;
 			}
 		}
-
+		//ok
 		void assign (size_type n, const value_type& val)
 		{
 			this->clear();
@@ -270,11 +270,11 @@ namespace ft
 			return it;
 		}
 		
-		void swap (list& x)
+		void swap (ft::list<T>& x)
 		{
-			list temp(x);
-			x->_end = this->_end;
-			this->_end = temp.end;
+			ft::list<T> temp(x);
+			x._end = this->_end;
+			this->_end = temp._end;
 		}
 		//ok
 		void resize (size_type n, value_type val = value_type())
