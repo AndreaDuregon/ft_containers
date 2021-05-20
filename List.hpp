@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 13:32:35 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 14:56:58 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,16 +239,21 @@ namespace ft
 
 		void insert (iterator position, iterator first, iterator last)
 		{	
-			
+			iterator workingIter(first._curr);
+			while(workingIter._curr != last._curr)
+			{
+				this->insert(position, workingIter._curr->value);
+				workingIter.operator++();
+			}
 		}
 		
-		template <class InputIterator>
 		iterator erase (iterator position)
 		{
-			
+			position._curr->prev->next = position._curr->next;
+			position._curr->next->prev = position._curr->prev;
+			delete position._curr;
 		}
 
-		template <class InputIterator>
 		iterator erase (iterator first, iterator last)
 		{
 		
@@ -302,7 +307,15 @@ namespace ft
 		
 		void unique()
 		{
-			
+			/* iterator iter(this->begin());
+			while(iter != this.end())
+			{
+				if(iter._curr->value == iter._curr->next->value)
+				{
+					this.
+				}
+			} */
+				
 		}
 
 		template <class BinaryPredicate>
