@@ -320,11 +320,11 @@ int main(void)
 	/* REVERSE */
 	sys_list.reverse();
 	our_list.reverse();
-	if (*sys_list.begin() == *our_list.begin() && sys_list.back() == our_list.back() && sys_list.size() == our_list.size())
+	if (*sys_list.begin() == *our_list.begin() && *++sys_list.begin() == *++our_list.begin() && sys_list.back() == our_list.back() && sys_list.size() == our_list.size())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "REVERSE (BEGIN-BACK): " << *sys_list.begin() << "-" << sys_list.back() <<" == " << *our_list.begin() << "-" << our_list.back() << OFF << std::endl;
+	std::cout << "REVERSE (0-1-N): " << *sys_list.begin() << "-" << *++sys_list.begin() << "-" <<sys_list.back() <<" == " << *our_list.begin() << "-" << *++our_list.begin() << "-" << our_list.back() << OFF << std::endl;
 
 	sys_list.clear();
 	our_list.clear();
@@ -464,6 +464,31 @@ int main(void)
 	else
 		std::cout << RED;
 	std::cout << "ERASE (BEGIN, END): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	sys_list.clear();
+	our_list.clear();
+	sys_list.push_back(100);
+	our_list.push_back(100);
+	sys_list.push_back(85);
+	our_list.push_back(85);
+	sys_list.push_back(12);
+	our_list.push_back(12);
+	sys_list.push_back(200);
+	our_list.push_back(200);
+	std::list<int> sys_list2;
+	ft::list<int> our_list2;
+	sys_list2.push_back(0);
+	our_list2.push_back(0);
+	sys_list2.push_back(56);
+	our_list2.push_back(56);
+	/* MERGE */
+	sys_list.merge(sys_list2);
+	our_list.merge(our_list2);
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "MERGE (other List): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 
 	} catch (std::exception &e){}
