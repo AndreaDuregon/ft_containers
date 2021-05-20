@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 16:47:12 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 16:50:14 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ namespace ft
 		
   		void assign (iterator first, iterator last)
 		{
-			//clear the list
+			this->clear();
 			while(first != last)
 			{
 				this->push_back(first._curr->value);
