@@ -10,6 +10,19 @@
 #define OFF "\033[0m"
 /* END COLORS */
 
+template <class T>
+static bool uguali(std::list<T> sys_list, ft::list<T> our_list)
+{
+	if (sys_list.front() != our_list.front())
+		return false;
+	if (sys_list.back() != our_list.back())
+		return false;
+	if (sys_list.size() != our_list.size())
+		return false;
+	if (sys_list.empty() != our_list.empty())
+		return false;		
+	return true;
+}
 
 int main(void)
 {
@@ -380,14 +393,16 @@ int main(void)
 	our_list.push_back(12);
 	sys_list.push_back(200);
 	our_list.push_back(200);
+	sys_list.push_back(200);
+	our_list.push_back(200);
 	/* REMOVE */
-	sys_list.remove(1);
-	our_list.remove(1);
+	sys_list.remove(200);
+	our_list.remove(200);
 	if (sys_list.size() == our_list.size())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "REMOVE (1): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+	std::cout << "REMOVE: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 	sys_list.clear();
 	our_list.clear();
@@ -513,7 +528,7 @@ int main(void)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "ASSIGN test 2 (BEGIN, END): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+	std::cout << "ASSIGN test 1 (BEGIN, END): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 	sys_list2.clear();
 	our_list2.clear();
@@ -540,6 +555,66 @@ int main(void)
 		std::cout << RED;
 	std::cout << "ASSIGN test 2 (BEGIN, END): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
+	sys_list.clear();
+	our_list.clear();
+	sys_list.push_back(100);
+	our_list.push_back(100);
+	sys_list.push_back(85);
+	our_list.push_back(85);
+	sys_list.push_back(12);
+	our_list.push_back(12);
+	sys_list.push_back(200);
+	our_list.push_back(200);
+	/* ASSIGN */
+	sys_list.assign(5, 99);
+	our_list.assign(5, 99);
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "ASSIGN test 1 (5, 99): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	sys_list.clear();
+	our_list.clear();
+	sys_list.push_back(0);
+	our_list.push_back(0);
+	sys_list.push_back(56);
+	our_list.push_back(56);
+	/* ASSIGN */
+	sys_list.assign(10, -1);
+	our_list.assign(10, -1);
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "ASSIGN test 2 (10, -1): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	sys_list.clear();
+	our_list.clear();
+	sys_list.push_back(0);
+	our_list.push_back(0);
+	sys_list.push_back(34);
+	our_list.push_back(34);
+	sys_list.push_back(56);
+	our_list.push_back(56);
+	sys_list2.clear();
+	our_list2.clear();
+	sys_list2.push_back(100);
+	our_list2.push_back(100);
+	sys_list2.push_back(85);
+	our_list2.push_back(85);
+	sys_list2.push_back(12);
+	our_list2.push_back(12);
+	sys_list2.push_back(200);
+	our_list2.push_back(200);
+	/* SWAP */
+	sys_list.swap(sys_list2);
+	our_list.swap(our_list2);
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "SWAP: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 	} catch (std::exception &e){}
 
