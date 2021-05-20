@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 13:32:35 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 14:53:37 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ namespace ft
 		typedef std::ptrdiff_t 					difference_type;
 		typedef size_t							size_type;
 
+		//ok
 		list(/* args */) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
@@ -45,6 +46,7 @@ namespace ft
 			this->_end->prev = this->_end;
 			this->_size = 0;
 		};
+		//ok
 		list(size_type n, const_reference val=value_type()) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
@@ -54,6 +56,7 @@ namespace ft
 			for (size_type i = 0; i < n; i++)
 				this->push_back(val);
 		};
+		//ok
 		list(iterator first, iterator last){
 			this->_end = new Node<T>();
 			this->_end->value = 0;
@@ -63,13 +66,13 @@ namespace ft
 			for (; first != last; ++first)
 				this->push_back(*first);
 		};
-
+		//ok
 		virtual ~list() {
 			this->clear();
 			delete this->_end;
 		};
 
-		//iter section
+		//ok
 		iterator begin()
 		{
 			return iterator (this->_end->next);
@@ -79,7 +82,7 @@ namespace ft
 		{
 			return const_iterator(this->_end->next);
 		};
-		
+		//ok
 		iterator end()
 		{
 			return iterator(this->_end);
@@ -111,24 +114,24 @@ namespace ft
 			return const_reverse_iterator(this->_end);	
 		}
 		
-		// Capacity
+		//ok
 		bool empty() const
 		{
 			if (this->_size == 0)
 				return true;
 			return false;
 		}
+		//ok
 		size_type size() const
 		{
 			return this->_size;
 		};
-		// SYS richiesta per sapere max value allocabile
+		//ok
 		size_type max_size() const
 		{
 			return std::numeric_limits<size_type>::max() / (sizeof(Node<T>));	
 		};
-		
-		//Elem access
+		//ok
 		reference front()
 		{
 			return this->_end->next->value;
@@ -139,7 +142,7 @@ namespace ft
 			return this->_end->next->value;
 
 		};
-		
+		//ok
 		reference back()
 		{
 			return this->_end->prev->value;	
@@ -150,7 +153,7 @@ namespace ft
 			return this->_end->prev->value;
 		};
 		
-		// Modifiers
+		//ok
   		void assign (iterator first, iterator last)
 		{
 			//clear the list
@@ -242,16 +245,14 @@ namespace ft
 			
 		}
 		
-		template <class InputIterator>
 		iterator erase (iterator position)
 		{
-			
+			return 0;
 		}
 
-		template <class InputIterator>
 		iterator erase (iterator first, iterator last)
 		{
-		
+			return 0;
 		}
 		
 		void swap (list& x)

@@ -283,11 +283,11 @@ int main(void)
 	/* INSERT x */
 	sys_list.reverse();
 	our_list.reverse();
-	if (*sys_list.begin() == *our_list.begin())
+	if (*sys_list.begin() == *our_list.begin() && sys_list.back() == our_list.back())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "REVERSE (BEGIN): " << *sys_list.begin() << " == " << *our_list.begin() << OFF << std::endl;
+	std::cout << "REVERSE (BEGIN-BACK): " << *sys_list.begin() << "-" << sys_list.back() <<" == " << *our_list.begin() << "-" << our_list.back() << OFF << std::endl;
 
 	sys_list.push_back(1);
 	our_list.push_back(1);
@@ -306,6 +306,24 @@ int main(void)
 		std::cout << RED;
 	std::cout << "UNIQUE [1, 66, 66, 66, 999, 5, 99, 78, 33, 1, 1, 1]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
+	/* SORT */
+	sys_list.sort();
+	our_list.sort();
+	if (sys_list.front() == our_list.front() && sys_list.back() == our_list.back() && *++sys_list.begin() == *++our_list.begin())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "SORT (0-1-N): " << sys_list.front() << "-" << *++sys_list.begin() << "-" << sys_list.back() << " == " << our_list.front() << "-" << *++our_list.begin() << "-" << our_list.back() << OFF << std::endl;	
+
+	/* REMOVE */
+	sys_list.remove(1);
+	our_list.remove(1);
+	if (sys_list.size() == our_list.size())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "REMOVE (1): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
 	/* CLEAR */
 	sys_list.clear();
 	our_list.clear();
@@ -315,6 +333,44 @@ int main(void)
 		std::cout << RED;
 	std::cout << "CLEAR: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
+
+	sys_list.push_back(85);
+	our_list.push_back(85);
+	/* RESIZE (10) */
+	sys_list.resize(10);
+	our_list.resize(10);
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "RESIZE (10): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	/* RESIZE (5, 100) */
+	sys_list.resize(5, 100);
+	our_list.resize(5, 100);
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "RESIZE (5, 100): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	/* ERASE (BEGIN) */
+	sys_list.erase(sys_list.begin());
+	our_list.erase(our_list.begin());
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "ERASE (BEGIN): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+
+	/* ERASE (BEGIN, END) */
+	sys_list.erase(sys_list.begin(), sys_list.end());
+	our_list.erase(our_list.begin(), our_list.end());
+	if (sys_list.size() == our_list.size() && sys_list.front() == our_list.front() && sys_list.back() == our_list.back())
+		std::cout << GREEN;
+	else
+		std::cout << RED;
+	std::cout << "ERASE (BEGIN, END): " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 
 	} catch (std::exception &e){}
