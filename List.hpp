@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 14:59:57 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 16:23:55 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,8 @@ namespace ft
 			position._curr->prev->next = position._curr->next;
 			position._curr->next->prev = position._curr->prev;
 			delete position._curr;
+			this->_size--;
+			return position;
 		}
 
 		iterator erase (iterator first, iterator last)
@@ -265,11 +267,14 @@ namespace ft
 				this->erase(it);
 				it.operator++();
 			}
+			return it;
 		}
 		
 		void swap (list& x)
 		{
-			
+			list temp(x);
+			x->_end = this->_end;
+			this->_end = temp.end;
 		}
 
 		void resize (size_type n, value_type val = value_type())
@@ -315,21 +320,26 @@ namespace ft
 		
 		void unique()
 		{
-			/* iterator iter(this->begin());
-			while(iter != this.end())
+			iterator iter(this->begin());
+			while(iter != this->end())
 			{
 				if(iter._curr->value == iter._curr->next->value)
-				{
-					this.
-				}
-			} */
-				
+					this->erase(iter);
+				iter.operator++();
+			} 
 		}
 
 		template <class BinaryPredicate>
   		void unique (BinaryPredicate binary_pred)
 		{
-			
+			iterator iter(this->begin());
+			iter.operator++();
+			while(iter != this->end())
+			{
+				if(binary_pred(iter._curr->prev, iter._curr->prev->value))
+					this->erase(iter);
+				iter.operator++();
+			} 
 		}
 
   		void merge (list& x)
@@ -346,26 +356,42 @@ namespace ft
 
   		void sort()
 		{
-			
+			iterator it(this->begin());
+			while(it != this->_end)
+			{
+				if(it._curr->value < it._curr->next->value)
+					std::cout << "ciao\n";
+			}
 			
 		}
 
 		template <class Compare>
 		void sort (Compare comp)
 		{
-			
+			//iterator it()
 		}
 
 		void reverse()
 		{
-			
+			iterator it(this->begin());
+			iterator end(this->end());
+			end.operator--();
+			T tmp;
+			for (size_type i=0; i <= (this->_size/ 2); i++)
+			{
+				tmp = end._curr->value;
+				end._curr->value = it._curr->value;
+				it._curr->value= tmp;
+				it.operator++();
+				end.operator--();
+			}
 		}
 
 		void	print()
 		{
 			iterator it(this->begin());
 			//nullterminato? nexfriks c entra qualcosa?
-			while (it._curr->next)
+			while (it != this->end())
 			{
 				std::cout << it._curr->value << std::endl;
 				it++;

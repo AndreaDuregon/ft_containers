@@ -490,7 +490,6 @@ int main(void)
 	our_list.push_back(1);
 	our_list.push_back(2);
 	our_list.push_back(32);
-
 	sys_it = sys_list.begin();
 	our_it = our_list.begin();
 	/* BEGIN [1,2,3] */
