@@ -256,7 +256,7 @@ int main(void)
 	/* INSERT at 0 */
 	sys_list.insert(sys_list.begin(), 999);
 	our_list.insert(our_list.begin(), 999);
-	if (*sys_list.begin() == *our_list.begin())
+	if (*sys_list.begin() == *our_list.begin() && sys_list.size() == our_list.size())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
@@ -265,20 +265,20 @@ int main(void)
 	/* INSERT at 1 */
 	sys_list.insert(++sys_list.begin(), 5);
 	our_list.insert(++our_list.begin(), 5);
-	if (*++sys_list.begin() == *++our_list.begin())
+	if (*++sys_list.begin() == *++our_list.begin() && sys_list.size() == our_list.size())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
 	std::cout << "INSERT at 1 [999, (5), 99, 78, 33]: " << *++sys_list.begin() << " == " << *++our_list.begin() << OFF << std::endl;
 
 	/* INSERT x */
-	sys_list.insert(++sys_list.begin(), 5);
-	our_list.insert(++our_list.begin(), 5);
-	if (*++sys_list.begin() == *++our_list.begin())
+	sys_list.insert(sys_list.begin(), 3, 66);
+	our_list.insert(our_list.begin(), 3, 66);
+	if (sys_list.size() == our_list.size() && *sys_list.begin() == *our_list.begin())
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "INSERT x [999, (5), 99, 78, 33]: " << *++sys_list.begin() << " == " << *++our_list.begin() << OFF << std::endl;
+	std::cout << "INSERT 5 times 66 at 0 [(66, 66, 66), 999, 5, 99, 78, 33]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 	sys_list.push_back(1);
 	our_list.push_back(1);
@@ -286,6 +286,8 @@ int main(void)
 	our_list.push_back(1);
 	sys_list.push_back(1);
 	our_list.push_back(1);
+	sys_list.push_front(1);
+	our_list.push_front(1);
 	sys_list.unique();
 	our_list.unique();
 	/* UNIQUE */
@@ -293,7 +295,7 @@ int main(void)
 		std::cout << GREEN;
 	else
 		std::cout << RED;
-	std::cout << "UNIQUE [999, 5, 99, 78, 33, 1, 1, 1]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
+	std::cout << "UNIQUE [1, 66, 66, 66, 999, 5, 99, 78, 33, 1, 1, 1]: " << sys_list.size() << " == " << our_list.size() << OFF << std::endl;
 
 	/* CLEAR */
 	sys_list.clear();

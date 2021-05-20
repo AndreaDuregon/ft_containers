@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 13:09:45 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/20 13:32:35 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,12 +233,12 @@ namespace ft
 
 	   	void insert (iterator position, size_type n, const value_type& val)
 		{
-			
+			for (size_type i = 0; i < n; i++)
+				this->insert(position, val);
 		}
-		
-		template <class InputIterator>
-		void insert (iterator position, InputIterator first, InputIterator last)
-		{
+
+		void insert (iterator position, iterator first, iterator last)
+		{	
 			
 		}
 		
