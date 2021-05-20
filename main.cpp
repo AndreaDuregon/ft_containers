@@ -20,7 +20,10 @@ static bool uguali(std::list<T> sys_list, ft::list<T> our_list)
 	if (sys_list.size() != our_list.size())
 		return false;
 	if (sys_list.empty() != our_list.empty())
-		return false;		
+		return false;
+	ft::listIterator<T> our_it = our_list.begin();
+	ft::listIterator<T> sys_it = our_list.begin();
+
 	return true;
 }
 

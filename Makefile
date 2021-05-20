@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: forsili <forsili@student.42.fr>            +#+  +:+       +#+         #
+#    By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 11:15:19 by dmalori           #+#    #+#              #
-#    Updated: 2021/05/18 17:53:40 by forsili          ###   ########.fr        #
+#    Updated: 2021/05/20 17:41:33 by dmalori          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,4 +105,14 @@ fclean		:	clean
 run			:	all
 				./$(NAME)
 
-.phony		:	all re clean fclean run
+push		:	fclean
+				git add .
+				git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
+				git push
+
+backup		:	fclean
+				git add .
+				git commit -m "backup"
+				git pull
+
+.phony		:	all re clean fclean run push backup
