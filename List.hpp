@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 12:51:13 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/20 12:57:36 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ namespace ft
 		{
 		
 			Node<T> *node  = new Node<T>(val);
-			iterator prev(position);
+			iterator prev(position._curr);
 
 			prev--;
 			prev._curr->next = node;
