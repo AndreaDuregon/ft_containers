@@ -14,16 +14,30 @@ template <class T>
 static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 {
 	if (sys_list.front() != our_list.front())
+	{
+		std::cout << "FRONT " << sys_list.front() << " != " << our_list.front() << " ";		
 		return false;
+	}
 	if (sys_list.back() != our_list.back())
+	{
+		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
 		return false;
+	}
 	if (sys_list.size() != our_list.size())
+	{
+		std::cout << "SIZE " << sys_list.size() << " != " << our_list.size() << " ";
 		return false;
+	}
 	if (sys_list.empty() != our_list.empty())
+	{
+		std::cout << "EMPTY " << sys_list.empty() << " != " << our_list.empty() << " ";
 		return false;
+	}
 	if (sys_list.max_size() != our_list.max_size())
+	{
+		std::cout << "MAX SIZE " << sys_list.max_size() << " != " << our_list.max_size() << " ";
 		return false;
-	
+	}
 	ft::listIterator<T> our_it_begin = our_list.begin();
 	std::list<int>::iterator sys_it_begin = sys_list.begin();
 	ft::listIterator<T> our_it_end = our_list.end();
