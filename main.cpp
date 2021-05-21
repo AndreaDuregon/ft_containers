@@ -470,7 +470,30 @@ int main(void)
 		sys_list.merge(sys_list2);
 		our_list.merge(our_list2);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
-		std::cout << "MERGE (OTHER LIST)" <<  OFF << std::endl;
+		std::cout << "MERGE (OTHER LIST) test 1" <<  OFF << std::endl;
+	}
+{
+		// MERGE 
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list.push_back(100);
+		our_list.push_back(100);
+		sys_list.push_back(85);
+		our_list.push_back(85);
+		sys_list.push_back(12);
+		our_list.push_back(12);
+		sys_list.push_back(200);
+		our_list.push_back(200);
+		sys_list2.push_back(0);
+		our_list2.push_back(0);
+		sys_list2.push_back(56);
+		our_list2.push_back(56);
+		sys_list2.merge(sys_list);
+		our_list2.merge(our_list);
+		if (equalSysFt(sys_list2, our_list2))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "MERGE (OTHER LIST) test 2" <<  OFF << std::endl;
 	}
 	{
 		//MERGE LIST COMPARE
