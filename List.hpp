@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/21 18:48:04 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/21 18:56:15 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -467,14 +467,5 @@ namespace ft
 				end.operator--();
 			}
 		}
-
-		void	print()
-		{
-			iterator it(this->begin());
-			//nullterminato? nexfriks c entra qualcosa?
-
-			//sleep(10);
-		}
-
 	};
 } 

@@ -12,7 +12,12 @@
 
 bool compareINT(int const &n1, int const &n2)
 {
-	return (n1 > n2);
+	return (n1 + 15 > n2 + 5 + n1);
+}
+
+bool predicateINT (int const &n1, int const &n2)
+{ 
+	return ( n1 != 1 && n2 != n1 ); 
 }
 
 template <class T>
@@ -46,11 +51,6 @@ static void print_our(ft::list<T> &list)
 template <class T>
 static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 {
-	if (sys_list.size() != our_list.size())
-	{
-		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
-		return false;
-	}
 	if (sys_list.empty() != our_list.empty())
 	{
 		std::cout << "EMPTY " << sys_list.empty() << " != " << our_list.empty() << " ";
@@ -310,6 +310,24 @@ int main(void)
 	}
 	{
 		//UNIQUE PREDICATE
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_front(33);
+		our_list.push_front(33);
+		sys_list.push_front(78);
+		our_list.push_front(78);
+		sys_list.push_back(1);
+		our_list.push_back(1);
+		sys_list.push_back(1);
+		our_list.push_back(1);
+		sys_list.push_back(1);
+		our_list.push_back(1);
+		sys_list.push_front(1);
+		our_list.push_front(1);
+		sys_list.unique(predicateINT);
+		//our_list.unique(predicateINT);
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "UNIQUE PREDICATE" <<  OFF << std::endl;
 	}
 	{
 		// SORT 
@@ -472,7 +490,7 @@ int main(void)
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "MERGE (OTHER LIST) test 1" <<  OFF << std::endl;
 	}
-{
+	{
 		// MERGE 
 		std::list<int> sys_list;
 		ft::list<int> our_list;
