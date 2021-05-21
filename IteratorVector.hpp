@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:43:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/21 12:21:15 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/21 16:19:49 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,30 @@ namespace ft
 			return (*this->vec_p);
 		}
 
-		VectorIterator	&operator ++ ()
+		VectorIterator	operator ++ ()
 		{
-			pointer	temp = this->vec_p;
 			this->vec_p++;
-			return temp;
+			return *this;
 		}
 	
-		VectorIterator	&operator ++ (int)
+		VectorIterator	operator ++ (int)
 		{
+			VectorIterator<T>	temp(this->vec_p);
 			this->vec_p++;
-			return *this;
-		}
-		
-		VectorIterator	&operator -- ()
-		{
-			pointer	temp = this->vec_p;
-			this->vec_p--;
 			return temp;
 		}
-
-		VectorIterator	&operator -- (int)
+		
+		VectorIterator	operator -- ()
 		{
 			this->vec_p--;
 			return *this;
+		}
+
+		VectorIterator	operator -- (int)
+		{
+			VectorIterator<T>	temp(this->vec_p);
+			this->vec_p--;
+			return temp;
 		}
 
 		pointer			operator -> ()
