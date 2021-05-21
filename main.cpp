@@ -66,23 +66,6 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 	ft::listIterator<T> our_it_end = our_list.end();
 	std::list<int>::iterator  sys_it_end = sys_list.end();
 
-
-    while (sys_it_begin != sys_it_end)
-    {
-        std::cout << *sys_it_begin << " ";
-        sys_it_begin++;
-    }
-    std::cout << std::endl;
-    while (our_it_begin != our_it_end)
-    {
-        std::cout << *our_it_begin << " ";
-        our_it_begin++;
-    }
-    std::cout << std::endl;
-
-
-    our_it_begin = our_list.begin();
-    sys_it_begin = sys_list.begin();
 	while(sys_it_begin != sys_it_end)
 	{
 		if (*sys_it_begin != *our_it_begin)
@@ -433,6 +416,7 @@ int main(void)
 		std::cout << "RESIZE (NUMBER, NUMBER)" <<  OFF << std::endl;
 	}
 	{
+		// ERASE (BEGIN) 
 		std::list<int> sys_list;
 		ft::list<int> our_list;
 		sys_list.push_back(100);
@@ -443,7 +427,6 @@ int main(void)
 		our_list.push_back(12);
 		sys_list.push_back(200);
 		our_list.push_back(200);
-		// ERASE (BEGIN) 
 		sys_list.erase(sys_list.begin());
 		our_list.erase(our_list.begin());
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
