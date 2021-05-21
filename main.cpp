@@ -13,19 +13,19 @@
 template <class T>
 static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 {
+	if (sys_list.size() != our_list.size())
+	{
+		std::cout << "SIZE " << sys_list.size() << " != " << our_list.size() << " ";
+		return false;
+	}
 	if (sys_list.front() != our_list.front())
 	{
-		std::cout << "FRONT " << sys_list.front() << " != " << our_list.front() << " ";		
+		std::cout << "FRONT " << sys_list.front() << " != " << our_list.front() << " ";
 		return false;
 	}
 	if (sys_list.back() != our_list.back())
 	{
 		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
-		return false;
-	}
-	if (sys_list.size() != our_list.size())
-	{
-		std::cout << "SIZE " << sys_list.size() << " != " << our_list.size() << " ";
 		return false;
 	}
 	if (sys_list.empty() != our_list.empty())
@@ -56,7 +56,7 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 
 	while (our_it_begin != our_it_end)
 	{
-		if (*sys_it_begin != *our_it_begin)
+        if (*sys_it_begin != *our_it_begin)
 			return false;
 		sys_it_begin++;
 		our_it_begin++;

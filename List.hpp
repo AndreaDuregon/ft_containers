@@ -370,26 +370,39 @@ namespace ft
 		//ok
   		void merge (list& x)
 		{
-  		    Node<T> *tmp;
-  		    tmp = x._end->prev;
+
+            std::cout << "Pre :\n";
+            this->print();
+  		    //Node<T> *tmp;
+  		    if(x.empty())
+  		        return;
+  		    ///tmp = x._end->prev;
   		    this->_end->prev->next = x._end->next;
+
+
   		    x._end->prev->next = this->_end;
   		    x._end->next->prev = this->_end->prev;
-  		    this->_end->next = x._end->next;
-  		    this->_end->prev = tmp;
+  		    //this->_end->next = x._end->next;
+  		    this->_end->prev = x._end->prev;
   		    x._end->prev = x._end;
   		    x._end->next = x._end;
   		    this->_size += x._size;
   		    x._size = 0;
+  		    std::cout << "POST \n:";
   		    this->sort();
+            std::cout << "\n";
+            this->print();
+
+  		    //this->_end->prev->next = x._end->next;
+
 		}
 
-		template <class Compare>
+		/*template <class Compare>
   		void merge (list& x, Compare comp)
 		{
 			
 			
-		}
+		}*/
 		//ok
   		void sort()
 		{
@@ -452,7 +465,7 @@ namespace ft
 			while (it != this->end())
 			{
 				std::cout << it._curr->value << std::endl;
-				it++;
+				it.operator++();
 			}
 			//sleep(10);
 		}
