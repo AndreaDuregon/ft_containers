@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/19 20:07:07 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/21 12:54:19 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ namespace ft
 		std::allocator<value_type>	alloc;
 
 	public:
+
+		// MEMBER FUNCTIONS
+		
 		vector()
 		{
 			this->vec = alloc.allocate(1);
@@ -58,6 +61,51 @@ namespace ft
 			alloc.deallocate(this->vec, this->vec_capacity); 
 		}
 
+		// ITERATOR
+
+		iterator 				begin()
+		{
+			return iterator(this->vec);
+		}
+
+		const_iterator			begin() const
+		{
+			return const_iterator(this->vec);
+		}
+
+		iterator				end()
+		{
+			return iterator(&this->vec[this->vec_size]);
+		}
+		
+		const_iterator			end() const
+		{
+			return const_iterator(&this->vec[this->vec_size]);
+		}
+
+		reverse_iterator 		rbegin()
+		{
+			return iterator(&this->vec[this->vec_size - 1]);
+			
+		}
+
+		const_reverse_iterator	rbegin() const
+		{
+			return const_iterator(&this->vec[this->vec_size - 1]);
+		}
+
+		reverse_iterator		rend()
+		{
+			return iterator(this->vec - 1);
+		}
+		
+		const_reverse_iterator	rend() const
+		{
+			return const_iterator(this->vec - 1);
+		}
+
+		// CAPACITY
+		
 		size_type	size() const
 		{
 			return this->vec_size;
@@ -73,7 +121,7 @@ namespace ft
 			if (n > this->vec_capacity)
 			{
 				pointer		temp = alloc.allocate(n);
-				for (int i = 0; i < this->size; i++)
+				for (int i = 0; i < this->vec_size; i++)
 					temp[i] = this->vec[i];
 				alloc.deallocate(this->vec, this->vec_capacity);
 				this->vec = temp;
@@ -85,11 +133,13 @@ namespace ft
 		{
 			if (n < this->vec_size)
 			{
-				for (int i = n; i < this->vec_size; i++)
-				{
-					delete (this->vec[i]);
-					this->size--;
-				}
+				pointer tmp = alloc.allocate(n);
+				for (int i = 0; i < n; i++)
+					tmp[i] = this->vec[i];
+				alloc.deallocate(this->vec, this->vec_capacity);
+				this->vec = tmp;
+				this->vec_capacity = n;
+				this->vec_size = n;
 			}
 			else if (n > this->vec_capacity)
 			{
@@ -97,9 +147,61 @@ namespace ft
 			}
 			if (n > this->vec_size)
 			{
-
+				if (val)
+				{
+					for (int i = this->vec_size; i < n; i++)
+					{
+						this->vec[i] = val;
+					}
+					this->vec_size = n;
+				}
 			}
 		}
 
+		void		push_back (const value_type& val)
+		{
+			if (this->vec_size == this->vec_capacity - 1)
+				reserve(this->vec_capacity * 2);
+			this->vec[this->vec_size] = val;
+			this->vec_size++;
+		}
+
+		size_type	capacity() const
+		{
+			return this->vec_capacity;
+		}
+
+		bool		empty() const
+		{
+			return (this->vec_size == 0);
+		}
+
+		// ELEMENT ACCESS
+
+		reference operator[] (size_type n)
+		{
+			iterator it1 = this->vec;
+			for (int i = 0; i != n; i++)
+				it1++;
+			return (*it1);
+		}
+
+		const_reference operator[] (size_type n) const
+		{
+			const_iterator it1;
+			for (int i = 0; i != n; i++)
+				it1++;
+			return (it1.vec_p);
+		}
+
+		reference		at (size_type n)
+		{
+			return (this->vec[n]);
+		}
+
+		const_reference at (size_type n) const
+		{
+			return (this->vec[n]);
+		}
 	};
 }

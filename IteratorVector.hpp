@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IteratorVector.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:43:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/19 12:48:44 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/21 12:21:15 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ namespace ft
 		typedef value_type const *	const_pointer;
 		typedef value_type &		reference;
 		typedef value_type const &	const_reference;
-	protected:
+
 		pointer		vec_p;
 	public:
 		VectorIterator()	{};
@@ -53,7 +53,7 @@ namespace ft
 		VectorIterator	&operator ++ (int)
 		{
 			this->vec_p++;
-			return this->vec_p;
+			return *this;
 		}
 		
 		VectorIterator	&operator -- ()
@@ -66,7 +66,7 @@ namespace ft
 		VectorIterator	&operator -- (int)
 		{
 			this->vec_p--;
-			return this->vec_p;
+			return *this;
 		}
 
 		pointer			operator -> ()
@@ -74,27 +74,27 @@ namespace ft
 			return &(*this->vec_p);
 		}
 
-		bool operator==(VectorIterator const &other) const {
+		bool			operator == (VectorIterator const &other) const {
 			return (this->vec_p == other.vec_p);
 		}
 
-		bool operator!=(VectorIterator const &other) const {
+		bool			operator != (VectorIterator const &other) const {
 			return (this->vec_p != other.vec_p);
 		}
 
-		bool operator<(VectorIterator const &other) const {
+		bool			operator < (VectorIterator const &other) const {
 			return (this->vec_p < other.vec_p);
 		}
 
-		bool operator<=(VectorIterator const &other) const {
+		bool			operator <= (VectorIterator const &other) const {
 			return (this->vec_p <= other.vec_p);
 		}
 
-		bool operator>(VectorIterator const &other) const {
+		bool			operator > (VectorIterator const &other) const {
 			return (this->vec_p > other.vec_p);
 		}
 
-		bool operator>=(VectorIterator const &other) const {
+		bool			operator >= (VectorIterator const &other) const {
 			return (this->vec_p >= other.vec_p);
 		}
 	};
@@ -113,32 +113,32 @@ namespace ft
 		constVectorIterator(pointer p) : VectorIterator<T>(p)	{}
 		constVectorIterator(constVectorIterator const &copy) : VectorIterator<T>(copy)	{}
 
-		const_reference		operator * ()
+		const_reference			operator * ()
 		{
 			return (*this->vec_p);
 		}
 
-		constVectorIterator	&operator ++ ()
+		constVectorIterator		&operator ++ ()
 		{
 			pointer	temp = this->vec_p;
 			this->vec_p++;
 			return temp;
 		}
 	
-		constVectorIterator	&operator ++ (int)
+		constVectorIterator		&operator ++ (int)
 		{
 			this->vec_p++;
 			return this->vec_p;
 		}
 		
-		constVectorIterator	&operator -- ()
+		constVectorIterator		&operator -- ()
 		{
 			pointer	temp = this->vec_p;
 			this->vec_p--;
 			return temp;
 		}
 
-		constVectorIterator	&operator -- (int)
+		constVectorIterator		&operator -- (int)
 		{
 			this->vec_p--;
 			return this->vec_p;
@@ -231,4 +231,4 @@ namespace ft
 			return this->vec_p;
 		}
 	};
-}	
+}
