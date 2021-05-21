@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 17:38:45 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/21 15:03:56 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,12 +272,14 @@ namespace ft
 		
 		void swap (ft::list<T>& x)
 		{
+			/*
 			ft::list<T> temp(x);
 			x._end = this->_end;
 			this->_end = temp._end;
 			size_type n = this->_size;
 			this->_size = x._size;
 			x._size = n;
+			*/
 		}
 		//ok
 		void resize (size_type n, value_type val = value_type())
@@ -367,14 +369,16 @@ namespace ft
 		//ok
   		void merge (list& x)
 		{
-			/* Node<T> tmp;
+			/*
+			Node<T> tmp;
 			while(!x._size)
 			{
 				tmp = x.
 				x.pop_front();
 				this->push_back(tmp);
 			}
-			this->sort(); */
+			this->sort();
+			*/
 		}
 
 		template <class Compare>
