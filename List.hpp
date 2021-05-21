@@ -326,11 +326,12 @@ namespace ft
             {
 			    if (it._curr->value == val)
                 {
+			        Node<T> *tmp;
+                    tmp = it._curr;
 			        it._curr->next->prev = it._curr->prev;
 			        it._curr->prev->next = it._curr->next;
                     this->_size--;
-			        it.operator--();
-			        delete (it._curr->next);
+			        delete (tmp);
                 }
 			    it.operator++();
             }
