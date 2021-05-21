@@ -445,7 +445,7 @@ namespace ft
 					tmp = it._curr->value;
 					it._curr->value = it._curr->prev->value;
 					it._curr->prev->value = tmp; 
-					it = this->begin();
+					it = ++this->begin();
 				}
 				else
 					it.operator++();
