@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/20 17:38:45 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/21 18:48:04 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ namespace ft
 		typedef	typename ft::rclistIterator<T>	const_reverse_iterator;
 		typedef std::ptrdiff_t 					difference_type;
 		typedef size_t							size_type;
-		typedef void*							Compare;
 
 		//ok
 		list(/* args */) {
@@ -239,7 +238,7 @@ namespace ft
 			for (size_type i = 0; i < n; i++)
 				this->insert(position, val);
 		}
-
+		//ok
 		void insert (iterator position, iterator first, iterator last)
 		{	
 			iterator workingIter(first._curr);
@@ -269,15 +268,17 @@ namespace ft
 			}
 			return it;
 		}
-		
+		//ok
 		void swap (ft::list<T>& x)
 		{
+			/*
 			ft::list<T> temp(x);
 			x._end = this->_end;
 			this->_end = temp._end;
 			size_type n = this->_size;
 			this->_size = x._size;
 			x._size = n;
+			*/
 		}
 		//ok
 		void resize (size_type n, value_type val = value_type())
@@ -324,11 +325,12 @@ namespace ft
             {
 			    if (it._curr->value == val)
                 {
+			        Node<T> *tmp;
+                    tmp = it._curr;
 			        it._curr->next->prev = it._curr->prev;
 			        it._curr->prev->next = it._curr->next;
                     this->_size--;
-			        it.operator--();
-			        delete (it._curr->next);
+			        delete (tmp);
                 }
 			    it.operator++();
             }
@@ -367,22 +369,49 @@ namespace ft
 		//ok
   		void merge (list& x)
 		{
-			/* Node<T> tmp;
-			while(!x._size)
-			{
-				tmp = x.
-				x.pop_front();
-				this->push_back(tmp);
-			}
-			this->sort(); */
+  		    iterator it(this->begin());
+  		    iterator itx(x.begin());
+  		    Node<T> *tmp;
+            while(it != this->end())
+  		    {
+                if (*it > *itx)
+                {
+                    tmp = itx._curr;
+                    itx._curr->next->prev = x._end;
+                    x._end->next = tmp->next;
+                    ++itx;
+
+                    tmp->next = it._curr;
+                    tmp->prev = it._curr->prev;
+                    it._curr->prev->next = tmp;
+                    it._curr->prev = tmp;
+                    x._size--;
+                    this->_size++;
+                    if(itx == x.end())
+                        return;
+                }
+                else
+                    ++it;
+  		    }
+            if (!x.empty())
+            {
+                this->_end->prev->next = itx._curr;
+                itx._curr->prev = this->_end->prev;
+                x._end->prev->next = this->_end;
+                this->_end->prev = x._end->prev;
+                x._end->next = x._end;
+                x._end->prev = x._end;
+            }
+            this->_size += x._size;
+            x._size = 0;
 		}
 
-		template <class Compare>
+		/*template <class Compare>
   		void merge (list& x, Compare comp)
 		{
 			
 			
-		}
+		}*/
 		//ok
   		void sort()
 		{
@@ -402,7 +431,8 @@ namespace ft
 					it.operator++();
 			} 
 		}
-
+		//ok
+		template <class Compare>
 		void sort (Compare comp)
 		{
 			iterator it(this->begin());
@@ -442,11 +472,7 @@ namespace ft
 		{
 			iterator it(this->begin());
 			//nullterminato? nexfriks c entra qualcosa?
-			while (it != this->end())
-			{
-				std::cout << it._curr->value << std::endl;
-				it++;
-			}
+
 			//sleep(10);
 		}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IteratorList.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:58:47 by dmalori           #+#    #+#             */
-/*   Updated: 2021/05/19 18:30:07 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/05/21 16:41:18 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ namespace ft
 			{
 				listIterator<T> temp(this->_curr);
 				this->operator--();
-				return *temp;
+				return temp;
 			}
 
 			T				*operator -> ()
