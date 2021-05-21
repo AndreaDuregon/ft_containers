@@ -8,21 +8,44 @@
 #define	GREEN "\033[0;32m"
 #define YELLOW "\033[0;33m"
 #define OFF "\033[0m"
-// END COLORS 
+// END COLORS
+
+bool compareINT(int const &n1, int const &n2)
+{
+	return (n1 > n2);
+}
+
+template <class T>
+static void print_sys(std::list<T> &list)
+{
+	std::list<int>::iterator sys_it_begin = list.begin();
+	std::list<int>::iterator  sys_it_end = list.end();
+
+	while (sys_it_begin != sys_it_end)
+	{
+		std::cout << *sys_it_begin << " ";
+		++sys_it_begin;	
+	}
+	std::cout << std::endl;
+}
+
+template <class T>
+static void print_our(ft::list<T> &list)
+{
+	ft::listIterator<T> our_it_begin = list.begin();
+	ft::listIterator<T> our_it_end = list.end();
+
+	while (our_it_begin != our_it_end)
+	{
+		std::cout << *our_it_begin << " ";
+		++our_it_begin;	
+	}
+	std::cout << std::endl;
+}
 
 template <class T>
 static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 {
-	if (sys_list.front() != our_list.front())
-	{
-		std::cout << "FRONT " << sys_list.front() << " != " << our_list.front() << " ";		
-		return false;
-	}
-	if (sys_list.back() != our_list.back())
-	{
-		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
-		return false;
-	}
 	if (sys_list.size() != our_list.size())
 	{
 		std::cout << "SIZE " << sys_list.size() << " != " << our_list.size() << " ";
@@ -46,7 +69,11 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 	while(sys_it_begin != sys_it_end)
 	{
 		if (*sys_it_begin != *our_it_begin)
+		{
+			print_sys(sys_list);
+			print_our(our_list);
 			return false;
+		}
 		sys_it_begin++;
 		our_it_begin++;
 	}
@@ -57,7 +84,11 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 	while (our_it_begin != our_it_end)
 	{
 		if (*sys_it_begin != *our_it_begin)
+		{
+			print_sys(sys_list);
+			print_our(our_list);
 			return false;
+		}
 		sys_it_begin++;
 		our_it_begin++;
 	}
@@ -186,7 +217,7 @@ int main(void)
 		sys_list.insert(sys_list.begin(), 999);
 		our_list.insert(our_list.begin(), 999);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
-		std::cout << "INSERT (INDEX 0, NUMBER) " << OFF << std::endl;
+		std::cout << "INSERT (ITERATOR, NUMBER) test 1" << OFF << std::endl;
 	}
 	{
 		// INSERT at 1 
@@ -199,7 +230,7 @@ int main(void)
 		sys_list.insert(++sys_list.begin(), 55);
 		our_list.insert(++our_list.begin(), 55);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
-		std::cout << "INSERT (INDEX 1, NUMBER): "  << OFF << std::endl;
+		std::cout << "INSERT (ITERATOR, NUMBER) test 2 "  << OFF << std::endl;
 	}
 	{
 		// INSERT x 
@@ -212,7 +243,30 @@ int main(void)
 		sys_list.insert(sys_list.begin(), 3, 66);
 		our_list.insert(our_list.begin(), 3, 66);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
-		std::cout << "INSERT (INDEX 0, NUMBER, NUMBER)" <<  OFF << std::endl;
+		std::cout << "INSERT (ITERATOR, NUMBER, NUMBER)" <<  OFF << std::endl;
+	}
+	{
+		// INSERT OTHER LIST
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.insert(++sys_list.begin(), sys_list2.begin(), sys_list2.end());
+		our_list.insert(++our_list.begin(), our_list2.begin(), our_list2.end());
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "INSERT (ITERATOR, ITERATOR, ITERATOR)" <<  OFF << std::endl;
 	}
 	{
 		// REVERSE 
@@ -255,6 +309,9 @@ int main(void)
 		std::cout << "UNIQUE" <<  OFF << std::endl;
 	}
 	{
+		//UNIQUE PREDICATE
+	}
+	{
 		// SORT 
 		std::list<int> sys_list;
 		ft::list<int> our_list;
@@ -278,6 +335,29 @@ int main(void)
 		std::cout << "SORT" <<  OFF << std::endl;
 	}
 	{
+		//SORT COMPARE
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(100);
+		our_list.push_back(100);
+		sys_list.push_back(85);
+		our_list.push_back(85);
+		sys_list.push_back(12);
+		our_list.push_back(12);
+		sys_list.push_back(200);
+		our_list.push_back(200);
+		sys_list.push_front(33);
+		our_list.push_front(33);
+		sys_list.push_front(78);
+		our_list.push_front(78);
+		sys_list.push_back(1);
+		our_list.push_back(1);
+		sys_list.sort(compareINT);
+		our_list.sort(compareINT);
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SORT COMPARE" <<  OFF << std::endl;
+	}
+	{
 		// REMOVE 
 		std::list<int> sys_list;
 		ft::list<int> our_list;
@@ -297,6 +377,9 @@ int main(void)
 		our_list.remove(200);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "REMOVE" <<  OFF << std::endl;
+	}
+	{
+		// REMOVE IF
 	}
 	{
 		// RESIZE (10) 
@@ -390,6 +473,9 @@ int main(void)
 		std::cout << "MERGE (OTHER LIST)" <<  OFF << std::endl;
 	}
 	{
+		//MERGE LIST COMPARE
+	}
+	{
 		// ASSIGN (IT, IT) test 2 
 		std::list<int> sys_list;
 		ft::list<int> our_list;
@@ -464,6 +550,15 @@ int main(void)
 		our_list.assign(10, -1);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "ASSIGN (NUMBER, NUMBER) test 2" <<  OFF << std::endl;
+	}
+	{
+		//SPLICE IT LIST 
+	}
+	{
+		//SPLICE IT LIST IT
+	}
+	{
+		//SPLICE IT LIST IT IT
 	}
 	{
 		// SWAP 
