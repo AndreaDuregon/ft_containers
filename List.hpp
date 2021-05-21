@@ -370,31 +370,43 @@ namespace ft
 		//ok
   		void merge (list& x)
 		{
+  		    iterator it(this->begin());
+  		    iterator itx(x.begin());
+  		    Node<T> *tmp;
+            while(it != this->end())
+  		    {
+                if (*it > *itx)
+                {
+                    tmp = itx._curr;
+                    itx._curr->next->prev = x._end;
+                    x._end->next = tmp->next;
+                    ++itx;
 
-            std::cout << "Pre :\n";
-            this->print();
-  		    //Node<T> *tmp;
-  		    if(x.empty())
-  		        return;
-  		    ///tmp = x._end->prev;
-  		    this->_end->prev->next = x._end->next;
+                    tmp->next = it._curr;
+                    tmp->prev = it._curr->prev;
+                    it._curr->prev->next = tmp;
+                    it._curr->prev = tmp;
+                    x._size--;
+                    this->_size++;
+                    if(itx == x.end())
+                        return;
+                }
+                else
+                    ++it;
+  		    }
+            if (!x.empty())
+            {
+                std::cout << "SOTTO!" << std::endl;
 
-
-  		    x._end->prev->next = this->_end;
-  		    x._end->next->prev = this->_end->prev;
-  		    //this->_end->next = x._end->next;
-  		    this->_end->prev = x._end->prev;
-  		    x._end->prev = x._end;
-  		    x._end->next = x._end;
-  		    this->_size += x._size;
-  		    x._size = 0;
-  		    std::cout << "POST \n:";
-  		    this->sort();
-            std::cout << "\n";
-            this->print();
-
-  		    //this->_end->prev->next = x._end->next;
-
+                this->_end->prev->next = itx._curr;
+                itx._curr->prev = this->_end->prev;
+                x._end->prev->next = this->_end;
+                this->_end->prev = x._end->prev;
+                x._end->next = x._end;
+                x._end->prev = x._end;
+            }
+            this->_size += x._size;
+            x._size = 0;
 		}
 
 		/*template <class Compare>
@@ -462,11 +474,7 @@ namespace ft
 		{
 			iterator it(this->begin());
 			//nullterminato? nexfriks c entra qualcosa?
-			while (it != this->end())
-			{
-				std::cout << it._curr->value << std::endl;
-				it.operator++();
-			}
+
 			//sleep(10);
 		}
 
