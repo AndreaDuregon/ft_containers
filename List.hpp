@@ -271,14 +271,12 @@ namespace ft
 		//ok
 		void swap (ft::list<T>& x)
 		{
-			/*
-			ft::list<T> temp(x);
+			Node<T> *temp = (x._end);
 			x._end = this->_end;
-			this->_end = temp._end;
+			this->_end = temp;
 			size_type n = this->_size;
 			this->_size = x._size;
 			x._size = n;
-			*/
 		}
 		//ok
 		void resize (size_type n, value_type val = value_type())
