@@ -319,7 +319,20 @@ namespace ft
 		//ok
 		void remove (const value_type& val)
 		{
-			
+			iterator it(this->begin());
+			while (it != this->_end)
+            {
+			    if (it._curr->value == val)
+                {
+			        it._curr->next->prev = it._curr->prev;
+			        it._curr->prev->next = it._curr->next;
+                    this->_size--;
+			        it.operator--();
+			        delete (it._curr->next);
+                }
+			    it.operator++();
+            }
+
 		}
 
 		template <class Predicate>
