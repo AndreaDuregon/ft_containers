@@ -48,7 +48,7 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 {
 	if (sys_list.size() != our_list.size())
 	{
-		std::cout << "SIZE " << sys_list.size() << " != " << our_list.size() << " ";
+		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
 		return false;
 	}
 	if (sys_list.empty() != our_list.empty())
@@ -66,6 +66,23 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 	ft::listIterator<T> our_it_end = our_list.end();
 	std::list<int>::iterator  sys_it_end = sys_list.end();
 
+
+    while (sys_it_begin != sys_it_end)
+    {
+        std::cout << *sys_it_begin << " ";
+        sys_it_begin++;
+    }
+    std::cout << std::endl;
+    while (our_it_begin != our_it_end)
+    {
+        std::cout << *our_it_begin << " ";
+        our_it_begin++;
+    }
+    std::cout << std::endl;
+
+
+    our_it_begin = our_list.begin();
+    sys_it_begin = sys_list.begin();
 	while(sys_it_begin != sys_it_end)
 	{
 		if (*sys_it_begin != *our_it_begin)
