@@ -396,8 +396,6 @@ namespace ft
   		    }
             if (!x.empty())
             {
-                std::cout << "SOTTO!" << std::endl;
-
                 this->_end->prev->next = itx._curr;
                 itx._curr->prev = this->_end->prev;
                 x._end->prev->next = this->_end;
