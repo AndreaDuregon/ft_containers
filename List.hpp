@@ -404,12 +404,45 @@ namespace ft
             x._size = 0;
 		}
 
-		/*template <class Compare>
+		template <class Compare>
   		void merge (list& x, Compare comp)
 		{
-			
-			
-		}*/
+			iterator it(this->begin());
+  		    iterator itx(x.begin());
+  		    Node<T> *tmp;
+            while(it != this->end())
+  		    {
+                if (comp(*it, *itx))
+                {
+                    tmp = itx._curr;
+                    itx._curr->next->prev = x._end;
+                    x._end->next = tmp->next;
+                    ++itx;
+
+                    tmp->next = it._curr;
+                    tmp->prev = it._curr->prev;
+                    it._curr->prev->next = tmp;
+                    it._curr->prev = tmp;
+                    x._size--;
+                    this->_size++;
+                    if(itx == x.end())
+                        return;
+                }
+                else
+                    ++it;
+  		    }
+            if (!x.empty())
+            {
+                this->_end->prev->next = itx._curr;
+                itx._curr->prev = this->_end->prev;
+                x._end->prev->next = this->_end;
+                this->_end->prev = x._end->prev;
+                x._end->next = x._end;
+                x._end->prev = x._end;
+            }
+            this->_size += x._size;
+            x._size = 0;
+		}
 		//ok
   		void sort()
 		{
