@@ -370,16 +370,18 @@ namespace ft
 		//ok
   		void merge (list& x)
 		{
-			/*
-			Node<T> tmp;
-			while(!x._size)
-			{
-				tmp = x.
-				x.pop_front();
-				this->push_back(tmp);
-			}
-			this->sort();
-			*/
+  		    Node<T> *tmp;
+  		    tmp = x._end->prev;
+  		    this->_end->prev->next = x._end->next;
+  		    x._end->prev->next = this->_end;
+  		    x._end->next->prev = this->_end->prev;
+  		    this->_end->next = x._end->next;
+  		    this->_end->prev = tmp;
+  		    x._end->prev = x._end;
+  		    x._end->next = x._end;
+  		    this->_size += x._size;
+  		    x._size = 0;
+  		    this->sort();
 		}
 
 		template <class Compare>
