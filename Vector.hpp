@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/21 18:50:45 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/22 11:23:21 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ namespace ft
 					}
 					this->vec_size = n;
 				}
+				else
+					this->vec_size = n;
 			}
 		}
 
@@ -316,6 +318,64 @@ namespace ft
 			}
 		}
 
+		iterator	erase(iterator position)
+		{
+			int			pos = 0;
+			iterator	it = this->begin();
+
+			while (it != position)
+			{
+				pos++;
+				it++;
+			}
+			for (size_t i = pos; i < this->vec_size; i++)
+				this->vec[i] = this->vec[i + 1];
+			this->vec_size--;
+			return (++position);
+		}
+
+		iterator	erase(iterator first, iterator last)
+		{	
+			while (last-- != first)
+			{
+				this->erase(last);
+			}
+			return first;
+		}
+		
+		void		swap(vector& x)
+		{
+			value_type	temp;
+			int			i = 0;
+			int			flag = 0;
+			size_t	oldSize;
+			if (this->vec_size <= x.size())
+			{
+				oldSize = this->vec_size;
+				this->vec_size = x.size();
+			}
+			else if (this->vec_size > x.size())
+			{
+				flag = 1;
+				oldSize = x.size();
+				
+				x.resize(this->vec_size);
+			}
+			while (i < this->vec_size)
+			{
+				//std::cout << this->vec[i] << " - " << x.vec[i] << std::endl;
+				temp = x.vec[i];
+				x.vec[i] = this->vec[i];
+				this->vec[i] = temp;
+				//std::cout << this->vec[i] << " * " << x.vec[i] << std::endl;
+				i++;
+			}
+			if (flag)
+				this->vec_size = oldSize;
+			else
+				x.resize(oldSize);
+		}
+		
 		void		clear()
 		{
 			alloc.deallocate(this->vec, this->vec_capacity);
