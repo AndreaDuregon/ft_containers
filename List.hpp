@@ -351,7 +351,7 @@ namespace ft
 				iter.operator++();
 			} 
 		}
-		
+		//ok
 		template <class BinaryPredicate>
   		void unique (BinaryPredicate binary_pred)
 		{
@@ -403,7 +403,7 @@ namespace ft
             this->_size += x._size;
             x._size = 0;
 		}
-
+		//ok
 		template <class Compare>
   		void merge (list& x, Compare comp)
 		{
