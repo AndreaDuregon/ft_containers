@@ -86,7 +86,7 @@ On_IWhite	=	'\033[0;107m'	# White
 NAME		=	ft_containers
 SRC			=	main.cpp
 CC			=	clang++
-CFLAGS		=	-g# -Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS		=	-g # -Wall -Wextra -Werror -std=c++98 -pedantic
 
 all			:	$(NAME)
 
@@ -103,7 +103,13 @@ fclean		:	clean
 				@rm -rf $(NAME)
 
 run			:	all
-				./$(NAME)
+				@./$(NAME)
+
+runList		:	all
+				@./$(NAME) list
+
+runVector	:	all
+				@./$(NAME) vector
 
 push		:	fclean
 				git add .
@@ -115,4 +121,4 @@ backup		:	fclean
 				git commit -m "backup"
 				git pull
 
-.phony		:	all re clean fclean run push backup
+.phony		:	all re clean fclean run push backup runList runVector

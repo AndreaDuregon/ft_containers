@@ -41,14 +41,14 @@ namespace ft
 	public:
 
 		// MEMBER FUNCTIONS
-		
+		//ok
 		vector()
 		{
 			this->vec = alloc.allocate(1);
 			this->vec_capacity = 1;
 			this->vec_size = 0;
 		}
-
+		//ok
 		vector(vector<T> const &copy)
 		{
 			this->vec = alloc.allocate(copy.vec_capacity);
@@ -57,7 +57,7 @@ namespace ft
 			this->vec_size = copy.vec_size;
 			this->vec_capacity = copy.vec_capacity;
 		}
-
+		//ok
 		vector(size_type n)
 		{
 			this->vec = alloc.allocate(n);
@@ -119,12 +119,12 @@ namespace ft
 		}
 
 		// CAPACITY
-		
+		//ok
 		size_type	size() const
 		{
 			return this->vec_size;
 		}
-
+		//ok
 		size_type	max_size() const
 		{
 			return (std::numeric_limits<value_type>::max());
@@ -178,7 +178,7 @@ namespace ft
 		{
 			return this->vec_capacity;
 		}
-
+		//ok
 		bool		empty() const
 		{
 			return (this->vec_size == 0);
@@ -259,7 +259,7 @@ namespace ft
 				i++;
 			}
 		}
-		
+		//ok
 		void		push_back(const value_type& val)
 		{
 			if (this->vec_size == this->vec_capacity - 1)
@@ -267,10 +267,10 @@ namespace ft
 			this->vec[this->vec_size] = val;
 			this->vec_size++;
 		}
-
+		//ok
 		void 		pop_back()
 		{
-			this->size--;
+			this->vec_size--;
 		}
 
 		iterator 	insert(iterator position, const value_type& val)
