@@ -271,7 +271,7 @@ namespace ft
 		{
 			this->vec_size--;
 		}
-
+		//ok
 		iterator 	insert(iterator position, const value_type& val)
 		{
 			int pos = 0;
@@ -301,22 +301,21 @@ namespace ft
 			this->vec_size++;
 			return it;
 		}
-
+		//ok
     	void 		insert(iterator position, size_type n, const value_type& val)
 		{
 			for (size_t i = 0; i < n; i++)
 				position = this->insert(position, val);
 		}
-
-		template <class InputIterator>
-    	void 		insert(iterator position, InputIterator first, InputIterator last)
+		//ok
+    	void 		insert(iterator position, iterator first, iterator last)
 		{
 			while (first != last--)
 			{
 				position = this->insert(position, *(last));
 			}
 		}
-
+		//ok
 		iterator	erase(iterator position)
 		{
 			int			pos = 0;
@@ -332,7 +331,7 @@ namespace ft
 			this->vec_size--;
 			return (++position);
 		}
-
+		//ok
 		iterator	erase(iterator first, iterator last)
 		{	
 			while (last-- != first)
@@ -341,7 +340,7 @@ namespace ft
 			}
 			return first;
 		}
-		
+		//ok
 		void		swap(vector& x)
 		{
 			value_type	temp;
@@ -374,7 +373,7 @@ namespace ft
 			else
 				x.resize(oldSize);
 		}
-		
+		//ok		
 		void		clear()
 		{
 			alloc.deallocate(this->vec, this->vec_capacity);
@@ -382,6 +381,5 @@ namespace ft
 			this->vec_capacity = 1;
 			this->vec_size = 0;
 		}
-
 	};
 }

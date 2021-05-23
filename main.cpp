@@ -1420,6 +1420,155 @@ static void testVECTOR(void)
 		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "INSERT (ITERATOR, INT) test 2" << OFF << std::endl;
 	}
+	{
+		// INSERT
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.insert(sys_vector.begin(), 6, 85);
+		our_vector.insert(our_vector.begin(), 6, 85);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT, INT) test 1" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.insert(++sys_vector.begin(), 6, 85);
+		our_vector.insert(++our_vector.begin(), 6, 85);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT, INT) test 2" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(111);
+		our_vector2.push_back(111);
+		sys_vector2.push_back(120);
+		our_vector2.push_back(120);
+		sys_vector2.push_back(850);
+		our_vector2.push_back(850);
+		sys_vector.insert(sys_vector.begin(), sys_vector2.begin(), sys_vector2.end());
+		our_vector.insert(our_vector.begin(), our_vector2.begin(), our_vector2.end());
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "INSERT (ITERATOR, ITERATOR, ITERATOR) test 1" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector2.push_back(111);
+		our_vector2.push_back(111);
+		sys_vector2.push_back(120);
+		our_vector2.push_back(120);
+		sys_vector2.push_back(850);
+		our_vector2.push_back(850);
+		sys_vector.insert(++sys_vector.begin(), sys_vector2.begin(), sys_vector2.end());
+		our_vector.insert(++our_vector.begin(), our_vector2.begin(), our_vector2.end());
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "INSERT (ITERATOR, ITERATOR, ITERATOR) test 2" << OFF << std::endl;
+	}
+	{
+		// ERASE
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.erase(++sys_vector.begin());
+		our_vector.erase(++our_vector.begin());
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "ERASE (ITERATOR)" << OFF << std::endl;
+	}
+	{
+		// ERASE
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.erase(++sys_vector.begin(), sys_vector.end());
+		our_vector.erase(++our_vector.begin(), our_vector.end());
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "ERASE (ITERATOR, ITERATOR)" << OFF << std::endl;
+	}
+	{
+		// SWAP
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector2.push_back(111);
+		our_vector2.push_back(111);
+		sys_vector2.push_back(120);
+		our_vector2.push_back(120);
+		sys_vector2.push_back(850);
+		our_vector2.push_back(850);
+		sys_vector.swap(sys_vector2);
+		our_vector.swap(our_vector2);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SWAP" << OFF << std::endl;
+	}
+
+	{
+		// CLEAR
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.clear();
+		our_vector.clear();
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "CELAR" << OFF << std::endl;
+	}
 }
 
 // -----------------------------MAIN------------------
