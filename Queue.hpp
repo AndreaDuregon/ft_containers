@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Stack.hpp                                          :+:      :+:    :+:   */
+/*   Queue.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/23 12:10:36 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/23 20:08:54 by aduregon         ###   ########.fr       */
+/*   Created: 2021/05/23 19:43:09 by aduregon          #+#    #+#             */
+/*   Updated: 2021/05/23 20:06:15 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 namespace ft
 {
-	template <class T, class Container = std::deque<int> > class stack
+	template <class T, class Container = std::deque<T> > class queue
 	{
 	public:
 		typedef	Container			container_type;
@@ -32,24 +32,24 @@ namespace ft
 	public:
 
 		// MEMBER FUNCTIONS
-		
-		explicit				stack(const container_type& ctnr = container_type())
+
+		explicit queue(const container_type& ctnr = container_type())
 		{
 			this->c = ctnr;
 		}
 
-		stack(stack const &copy)
+		queue(queue const &copy)
 		{
 			this->c = copy.c;
 		}
 
-		stack&					operator = (const stack& other)
+		queue&					operator = (const queue& other)
 		{
 			this->c = other.c;
 			return (*this);
 		}
 
-		virtual ~stack()	{}
+		virtual ~queue()	{}
 
 		bool					empty() const
 		{
@@ -61,12 +61,22 @@ namespace ft
 			return (this->c.size());
 		}
 
-		value_type&				top()
+		value_type&				front()
+		{
+			return (this->c.front());
+		}
+
+		const value_type&		front() const
+		{
+			return (this->c.front());
+		}
+
+		value_type&				back()
 		{
 			return (this->c.back());
 		}
-		
-		const value_type&		top() const
+
+		const value_type&		back() const
 		{
 			return (this->c.back());
 		}
@@ -78,43 +88,43 @@ namespace ft
 
 		void					pop()
 		{
-			this->c.pop_back();
+			this->c.pop_front();
 		}
 
 		// NON MEMBER FUNCTION OVERLOAD
 
 		template <class value_type, class container_type>
-		friend bool operator == (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
+		friend bool operator == (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c == rhs.c);
 		}
 		
 		template <class value_type, class container_type>
-		friend bool operator != (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
+		friend bool operator != (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c != rhs.c);
 		}
 
 		template <class value_type, class container_type>
-		friend bool operator <  (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
+		friend bool operator <  (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c < rhs.c);
 		}
 	
 		template <class value_type, class container_type>
-		friend bool operator <= (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
+		friend bool operator <= (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c <= rhs.c);
 		}
 	
 		template <class value_type, class container_type>
-		friend bool operator >  (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
+		friend bool operator >  (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c > rhs.c);
 		}
 	
 		template <class value_type, class container_type>
-		friend bool operator >= (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
+		friend bool operator >= (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c >= rhs.c);
 		}
