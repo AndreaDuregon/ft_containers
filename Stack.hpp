@@ -6,7 +6,7 @@
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:10:36 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/23 14:10:06 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/23 14:22:44 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,38 +68,38 @@ namespace ft
 
 		// NON MEMBER FUNCTION OVERLOAD
 
-		template <class oT, class oC>
-		friend bool operator == (const ft::stack<oT,oC>& lhs, const ft::stack<oT,oC>& rhs)
+		template <class value_type, class container_type>
+		friend bool operator == (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c == rhs.c);
 		}
 		
-		template <class oT, class oC>
-		friend bool operator != (const ft::stack<oT,oC>& lhs, const ft::stack<oT,oC>& rhs)
+		template <class value_type, class container_type>
+		friend bool operator != (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c != rhs.c);
 		}
 
-		template <class oT, class oC>
-		friend bool operator <  (const ft::stack<oT,oC>& lhs, const ft::stack<oT,oC>& rhs)
+		template <class value_type, class container_type>
+		friend bool operator <  (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c < rhs.c);
 		}
 	
-		template <class oT, class oC>
-		friend bool operator <= (const ft::stack<oT,oC>& lhs, const ft::stack<oT,oC>& rhs)
+		template <class value_type, class container_type>
+		friend bool operator <= (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c <= rhs.c);
 		}
 	
-		template <class oT, class oC>
-		friend bool operator >  (const ft::stack<oT,oC>& lhs, const ft::stack<oT,oC>& rhs)
+		template <class value_type, class container_type>
+		friend bool operator >  (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c > rhs.c);
 		}
 	
-		template <class oT, class oC>
-		friend bool operator >= (const ft::stack<oT,oC>& lhs, const ft::stack<oT,oC>& rhs)
+		template <class value_type, class container_type>
+		friend bool operator >= (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c >= rhs.c);
 		}
