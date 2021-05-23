@@ -76,7 +76,7 @@ namespace ft
 			return &tmp;
 		}
 		// ITERATOR
-
+		//ok
 		iterator 				begin()
 		{
 			return iterator(this->vec);
@@ -86,7 +86,7 @@ namespace ft
 		{
 			return const_iterator(this->vec);
 		}
-
+		//ok
 		iterator				end()
 		{
 			return iterator(&this->vec[this->vec_size]);
@@ -129,7 +129,7 @@ namespace ft
 		{
 			return (std::numeric_limits<value_type>::max());
 		}
-
+		//ok
 		void reserve (size_type n)
 		{
 			if (n > this->vec_capacity)
@@ -142,7 +142,7 @@ namespace ft
 				this->vec_capacity = n;
 			}
 		}
-
+		//ok
 		void		resize (size_type n, value_type val = value_type())
 		{
 			if (n < this->vec_size)
@@ -173,7 +173,7 @@ namespace ft
 					this->vec_size = n;
 			}
 		}
-
+		//ok
 		size_type	capacity() const
 		{
 			return this->vec_capacity;
@@ -193,7 +193,7 @@ namespace ft
 				it1++;
 			return (*it1);
 		}
-
+		//ok
 		const_reference operator[] (size_type n) const
 		{
 			const_iterator it1;
@@ -201,7 +201,7 @@ namespace ft
 				it1++;
 			return (it1.vec_p);
 		}
-
+		//ok
 		reference		at (size_type n)
 		{
 			return (this->vec[n]);
@@ -211,7 +211,7 @@ namespace ft
 		{
 			return (this->vec[n]);
 		}
-
+		//ok
 		reference		front()
 		{
 			return *this->vec;
@@ -221,7 +221,7 @@ namespace ft
 		{
 			return *this->vec;
 		}
-
+		//ok
 		reference		back()
 		{
 			return 	this->vec[this->vec_size - 1];
@@ -233,9 +233,8 @@ namespace ft
 		}
 
 		// MODIFIERS
-
-		template <class InputIterator>
-  		void		assign(InputIterator first, InputIterator last)
+		//ok
+  		void		assign(iterator first, iterator last)
 		{
 			int i = 0;
 
@@ -247,8 +246,8 @@ namespace ft
 				i++;
 			}
 		}
-
-		void 		assign(size_type n, const value_type& val)
+		//ok
+		void 		assign(size_type n, const value_type &val)
 		{
 			int i = 0;
 

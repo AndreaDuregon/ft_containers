@@ -12,14 +12,9 @@
 #define OFF "\033[0m"
 // END COLORS
 
-bool compareINT(int const &n1, int const &n2)
-{
-	return (n1 + 15 > n2 + 5 + n1);
-}
-
-bool predicateINT (int const &n1, int const &n2)
+static bool binaryINT (int const &n1, int const &n2)
 { 
-	return ( n1 != 1 && n2 != n1 ); 
+	return ( n1 < n2 ); 
 }
 
 template <class T>
@@ -118,10 +113,19 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 		std::cout << "SIZE " << sys_list.size() << " != " << our_list.size() << " ";
 		return false;
 	}
-
 	if (sys_list.empty() != our_list.empty())
 	{
 		std::cout << "EMPTY " << sys_list.empty() << " != " << our_list.empty() << " ";
+		return false;
+	}
+	if (sys_list.front() != our_list.front())
+	{
+		std::cout << "FRONT " << sys_list.front() << " != " << our_list.front() << " ";
+		return false;
+	}
+	if (sys_list.back() != our_list.back())
+	{
+		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
 		return false;
 	}
 	/*
@@ -153,6 +157,15 @@ static bool equalSysFt(std::vector<T> &sys_vector, ft::vector<T> &our_vector)
 		sys_it_begin++;
 		our_it_begin++;
 	}
+	for (int i = 0; i < sys_vector.size(); i++)
+	{
+		if (sys_vector[i] != our_vector[i] || sys_vector.at(i) != our_vector.at(i))
+		{
+			print_sys(sys_vector);
+			print_our(our_vector);
+			return false;
+		}	
+	}
 
 	our_it_begin = our_vector.begin();
 	sys_it_begin = sys_vector.begin();
@@ -168,6 +181,15 @@ static bool equalSysFt(std::vector<T> &sys_vector, ft::vector<T> &our_vector)
 		sys_it_begin++;
 		our_it_begin++;
 	}
+	for (int i = 0; i < our_vector.size(); i++)
+	{
+		if (our_vector[i] != sys_vector[i] || sys_vector.at(i) != our_vector.at(i))
+		{
+			print_sys(sys_vector);
+			print_our(our_vector);
+			return false;
+		}	
+	}
 
 	if (sys_vector.size() != our_vector.size())
 	{
@@ -177,6 +199,21 @@ static bool equalSysFt(std::vector<T> &sys_vector, ft::vector<T> &our_vector)
 	if (sys_vector.empty() != our_vector.empty())
 	{
 		std::cout << "EMPTY " << sys_vector.empty() << " != " << our_vector.empty() << " ";
+		return false;
+	}
+	if (sys_vector.capacity() != our_vector.capacity())
+	{
+		std::cout << "CAPACITY " << sys_vector.capacity() << " != " << our_vector.capacity() << " ";
+		return false;
+	}
+	if (sys_vector.front() != our_vector.front())
+	{
+		std::cout << "FRONT " << sys_vector.front() << " != " << our_vector.front() << " ";
+		return false;
+	}
+	if (sys_vector.back() != our_vector.back())
+	{
+		std::cout << "BACK " << sys_vector.back() << " != " << our_vector.back() << " ";
 		return false;
 	}
 	/*
@@ -632,7 +669,7 @@ static void testLIST(void)
 		sys_list.push_front(1);
 		our_list.push_front(1);
 		sys_list.unique();
-		//our_list.unique(); CRASH ON LINUX
+		//our_list.unique(); //CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "UNIQUE" <<  OFF << std::endl;
 	}
@@ -652,8 +689,8 @@ static void testLIST(void)
 		our_list.push_back(1);
 		sys_list.push_front(1);
 		our_list.push_front(1);
-		sys_list.unique(predicateINT);
-		//our_list.unique(predicateINT); CRASH ON LINUX
+		sys_list.unique(binaryINT);
+		our_list.unique(binaryINT);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "UNIQUE PREDICATE" <<  OFF << std::endl;
 	}
@@ -698,8 +735,8 @@ static void testLIST(void)
 		our_list.push_front(78);
 		sys_list.push_back(1);
 		our_list.push_back(1);
-		sys_list.sort(compareINT);
-		our_list.sort(compareINT);
+		sys_list.sort(binaryINT);
+		our_list.sort(binaryINT);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "SORT COMPARE" <<  OFF << std::endl;
 	}
@@ -720,7 +757,7 @@ static void testLIST(void)
 		sys_list.push_front(200);
 		our_list.push_front(200);
 		sys_list.remove(200);
-		//our_list.remove(200); CRASH ON LINUX
+		//our_list.remove(200); // CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "REMOVE" <<  OFF << std::endl;
 	}
@@ -860,8 +897,8 @@ static void testLIST(void)
 		our_list2.push_back(0);
 		sys_list2.push_back(56);
 		our_list2.push_back(56);
-		sys_list.merge(sys_list2, compareINT);
-		our_list.merge(our_list2, compareINT);
+		sys_list.merge(sys_list2, binaryINT);
+		our_list.merge(our_list2, binaryINT);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "MERGE (OTHER LIST, COMPARE) test 1" <<  OFF << std::endl;
 	}
@@ -883,8 +920,8 @@ static void testLIST(void)
 		our_list2.push_back(0);
 		sys_list2.push_back(56);
 		our_list2.push_back(56);
-		sys_list2.merge(sys_list, compareINT);
-		our_list2.merge(our_list, compareINT);
+		sys_list2.merge(sys_list, binaryINT);
+		our_list2.merge(our_list, binaryINT);
 		if (equalSysFt(sys_list2, our_list2))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "MERGE (OTHER LIST, COMPARE) test 2" <<  OFF << std::endl;
 	}
@@ -1246,6 +1283,142 @@ static void testVECTOR(void)
 		our_vector.pop_back();
 		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "POP BACK" << OFF << std::endl;
+	}
+	{
+		// RESERVE
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.reserve(12);
+		our_vector.reserve(12);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "RESERVE" << OFF << std::endl;
+	}
+	{
+		// RESIZE
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.resize(12);
+		our_vector.resize(12);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "RESIZE (INT)" << OFF << std::endl;
+	}
+	{
+		// RESIZE
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.resize(12, 55);
+		our_vector.resize(12, 55);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "RESIZE (INT, INT)" << OFF << std::endl;
+	}
+	{
+		// RESIZE
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "RESIZE (INT, INT)" << OFF << std::endl;
+	}
+	{
+		// ASSIGN
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector2.push_back(111);
+		our_vector2.push_back(111);
+		sys_vector2.push_back(120);
+		our_vector2.push_back(120);
+		sys_vector2.push_back(850);
+		our_vector2.push_back(850);
+		sys_vector.assign(sys_vector2.begin(), sys_vector2.end());
+		our_vector.assign(our_vector2.begin(), our_vector2.end());
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "ASSIGN (ITERATOR, ITERATOR)" << OFF << std::endl;
+	}
+	{
+		// ASSIGN
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.assign(5, 99);
+		our_vector.assign(5, 99);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "ASSIGN (INT, INT)" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.insert(sys_vector.begin(), 99);
+		our_vector.insert(our_vector.begin(), 99);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT) test 1" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.push_back(1);
+		our_vector.push_back(1);
+		sys_vector.push_back(12);
+		our_vector.push_back(12);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+		sys_vector.insert(++sys_vector.begin(), 99);
+		our_vector.insert(++our_vector.begin(), 99);
+		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT) test 2" << OFF << std::endl;
 	}
 }
 

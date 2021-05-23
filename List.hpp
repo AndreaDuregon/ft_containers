@@ -359,7 +359,7 @@ namespace ft
 			iter.operator++();
 			while(iter != this->end())
 			{
-				if(binary_pred(iter._curr->prev, iter._curr->prev->value))
+				if(binary_pred(iter._curr->prev->value, iter._curr->prev->value))
 					this->erase(iter);
 				iter.operator++();
 			} 
