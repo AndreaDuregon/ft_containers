@@ -353,11 +353,12 @@ namespace ft
 		void unique()
 		{
 			iterator iter(this->begin());
+			++iter;
 			while(iter != this->end())
 			{
-				if(iter._curr->value == iter._curr->next->value)
+				if(iter._curr->value == iter._curr->prev->value)
 					this->erase(iter);
-				iter.operator++();
+				++iter;
 			} 
 		}
 		//ok
@@ -365,12 +366,13 @@ namespace ft
   		void unique (BinaryPredicate binary_pred)
 		{
 			iterator iter(this->begin());
-			iter.operator++();
+			++iter;
+            ++iter;
 			while(iter != this->end())
 			{
-				if(binary_pred(iter._curr->prev->value, iter._curr->prev->value))
-					this->erase(iter);
-				iter.operator++();
+                if(binary_pred(iter._curr->value, iter._curr->prev->value))
+                    this->erase(iter);
+				++iter;
 			} 
 		}
 		//ok
