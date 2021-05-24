@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/21 18:56:15 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 12:22:48 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
 		typedef size_t							size_type;
 
 		//ok
-		list(/* args */) {
+		explicit list(/* args */) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
@@ -47,7 +47,7 @@ namespace ft
 			this->_size = 0;
 		};
 		//ok
-		list(size_type n, const_reference val=value_type()) {
+		explicit list(size_type n, const_reference val=value_type()) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
@@ -57,7 +57,7 @@ namespace ft
 				this->push_back(val);
 		};
 		//ok
-		list(iterator first, iterator last){
+		explicit list(iterator first, iterator last){
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
@@ -67,11 +67,21 @@ namespace ft
 				this->push_back(*first);
 		};
 		//ok
+		explicit list (const list& x)
+		{
+			this->_end = new Node<T>();
+			this->_end->value = 0;
+			this->_end->next = this->_end;
+			this->_end->prev = this->_end;
+			this->_size = 0;
+			for (iterator i = x.begin(); i != x.end(); ++i)
+				this->push_back(*i);		
+		}
+		//ok
 		virtual ~list() {
 			this->clear();
 			delete this->_end;
 		};
-
 		//ok
 		iterator begin()
 		{
@@ -222,7 +232,6 @@ namespace ft
 			Node<T> *node  = new Node<T>(val);
 			iterator prev(position._curr);
 
-			//prev._curr->prev->next = node;
 			prev.operator--();
 			prev._curr->next = node;
 			node->prev = prev._curr;
@@ -300,17 +309,17 @@ namespace ft
 			}
 			this->_size = 0;
 		}
-
+		//ok
 		void splice (iterator position, list& x)
 		{
 			
 		}
-	
+		//ok
 		void splice (iterator position, list& x, iterator i)
 		{
 			
 		}
-
+		///ok
 		void splice (iterator position, list& x, iterator first, iterator last)
 		{
 			
@@ -332,23 +341,36 @@ namespace ft
                 }
 			    it.operator++();
             }
-
 		}
-
+		//ok
 		template <class Predicate>
 		void remove_if (Predicate pred)
 		{
-			
+            iterator it(this->begin());
+            while (it != this->_end)
+            {
+                if (pred(it._curr->value , val))
+                {
+                    Node<T> *tmp;
+                    tmp = it._curr;
+                    it._curr->next->prev = it._curr->prev;
+                    it._curr->prev->next = it._curr->next;
+                    this->_size--;
+                    delete (tmp);
+                }
+                it.operator++();
+            }
 		}
 		//ok
 		void unique()
 		{
 			iterator iter(this->begin());
+			++iter;
 			while(iter != this->end())
 			{
-				if(iter._curr->value == iter._curr->next->value)
+				if(iter._curr->value == iter._curr->prev->value)
 					this->erase(iter);
-				iter.operator++();
+				++iter;
 			} 
 		}
 		//ok
@@ -356,12 +378,13 @@ namespace ft
   		void unique (BinaryPredicate binary_pred)
 		{
 			iterator iter(this->begin());
-			iter.operator++();
+			++iter;
+            ++iter;
 			while(iter != this->end())
 			{
-				if(binary_pred(iter._curr->prev->value, iter._curr->prev->value))
-					this->erase(iter);
-				iter.operator++();
+                if(binary_pred(iter._curr->value, iter._curr->prev->value))
+                    this->erase(iter);
+				++iter;
 			} 
 		}
 		//ok
@@ -412,7 +435,7 @@ namespace ft
   		    Node<T> *tmp;
             while(it != this->end())
   		    {
-                if (comp(*it, *itx))
+                if (comp(*itx, *it))
                 {
                     tmp = itx._curr;
                     itx._curr->next->prev = x._end;
