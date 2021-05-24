@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   Queue.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
+/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 19:43:09 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/23 20:06:15 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/24 14:32:29 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-#include <deque>
+#include "List.hpp"
 
 namespace ft
 {
-	template <class T, class Container = std::deque<T> > class queue
+	template <class T, class Container = ft::list<T> > class queue
 	{
 	public:
 		typedef	Container			container_type;
