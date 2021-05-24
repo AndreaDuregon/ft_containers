@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 10:58:39 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 13:23:49 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ namespace ft
 		//ok
 		vector()
 		{
-			this->vec = alloc.allocate(1);
-			this->vec_capacity = 1;
+			this->vec = alloc.allocate(0);
+			this->vec_capacity = 0;
 			this->vec_size = 0;
 		}
 		//ok
@@ -62,7 +62,9 @@ namespace ft
 		{
 			this->vec = alloc.allocate(n);
 			this->vec_capacity = n;
-			this->vec_size = 0;
+			this->vec_size = n;
+			for (size_t i = 0; i < n; i++)
+				this->vec[i] = 0;
 		}
 
 		~vector()
@@ -72,8 +74,12 @@ namespace ft
 
 		vector& operator = (const vector& x)
 		{
-			vector tmp(x);
-			return &tmp;
+			alloc.deallocate(this->vec, this->vec_capacity);
+			this->vec = alloc.allocate(x.capacity());
+			this->vec = x.vec;
+			this->vec_size = x.size();
+			this->vec_capacity = x.capacity();
+			return *this;
 		}
 		// ITERATOR
 		//ok
@@ -127,7 +133,7 @@ namespace ft
 		//ok
 		size_type	max_size() const
 		{
-			return (std::numeric_limits<value_type>::max());
+			return (std::numeric_limits<size_type>::max() / sizeof(value_type));
 		}
 		//ok
 		void reserve (size_type n)
@@ -135,8 +141,13 @@ namespace ft
 			if (n > this->vec_capacity)
 			{
 				pointer		temp = alloc.allocate(n);
-				for (int i = 0; i < this->vec_size; i++)
-					temp[i] = this->vec[i];
+				for (int i = 0; i < n; i++)
+				{
+					if (i < this->vec_size)	
+						temp[i] = this->vec[i];
+					else
+						temp[i] = 0;
+				}
 				alloc.deallocate(this->vec, this->vec_capacity);
 				this->vec = temp;
 				this->vec_capacity = n;
@@ -237,7 +248,6 @@ namespace ft
   		void		assign(iterator first, iterator last)
 		{
 			int i = 0;
-
 			this->clear();
 			while (first != last)
 			{
@@ -261,8 +271,12 @@ namespace ft
 		//ok
 		void		push_back(const value_type& val)
 		{
-			if (this->vec_size == this->vec_capacity - 1)
+			if (this->vec_capacity == 0)
+				this->vec_capacity = 1;
+			if (this->vec_size >= this->vec_capacity)
+			{
 				reserve(this->vec_capacity * 2);
+			}
 			this->vec[this->vec_size] = val;
 			this->vec_size++;
 		}
@@ -281,6 +295,8 @@ namespace ft
 				it1++;
 				pos++;
 			}
+			if (this->vec_capacity == 0)
+				this->vec_capacity = 1;
 			if (this->vec_capacity == this->vec_size)
 			{
 				this->reserve(this->vec_capacity * 2);
@@ -304,15 +320,79 @@ namespace ft
 		//ok
     	void 		insert(iterator position, size_type n, const value_type& val)
 		{
-			for (size_t i = 0; i < n; i++)
-				position = this->insert(position, val);
+			int pos = 0;
+			iterator it1(this->begin());
+			iterator it(this->end());
+			int	i = this->vec_size;
+			for (size_t j = 0; j < n; j++)
+			{
+				pos = 0;
+				it1 = this->begin();
+				while (it1 != position)
+				{
+					it1++;
+					pos++;
+				}
+				if (this->vec_capacity == 0)
+					this->vec_capacity = 1;
+				if (this->vec_capacity == this->vec_size)
+				{
+					this->reserve(this->vec_capacity + 1);
+					position = this->begin();
+					for (size_t i = 0; i < pos; i++)
+						position++;
+				}
+				it = this->end();
+				i = this->vec_size;
+	
+				while (it != position)
+				{
+					this->vec[i] = this->vec[i - 1];
+					it--;
+					i--;
+				}
+				this->vec[i] = val;
+				this->vec_size++;
+				position = it;
+			}
 		}
 		//ok
     	void 		insert(iterator position, iterator first, iterator last)
 		{
+			int pos = 0;
+			iterator it1(this->begin());
+			iterator it(this->end());
+			int	i = this->vec_size;
 			while (first != last--)
 			{
-				position = this->insert(position, *(last));
+				pos = 0;
+				it1 = this->begin();
+				while (it1 != position)
+				{
+					it1++;
+					pos++;
+				}
+				if (this->vec_capacity == 0)
+					this->vec_capacity = 1;
+				if (this->vec_capacity == this->vec_size)
+				{
+					this->reserve(this->vec_capacity + 1);
+					position = this->begin();
+					for (size_t i = 0; i < pos; i++)
+						position++;
+				}
+				it = this->end();
+				i = this->vec_size;
+	
+				while (it != position)
+				{
+					this->vec[i] = this->vec[i - 1];
+					it--;
+					i--;
+				}
+				this->vec[i] = *last;
+				this->vec_size++;
+				position = it;
 			}
 		}
 		//ok
@@ -343,42 +423,24 @@ namespace ft
 		//ok
 		void		swap(vector& x)
 		{
-			value_type	temp;
-			int			i = 0;
-			int			flag = 0;
-			size_t	oldSize;
-			if (this->vec_size <= x.size())
-			{
-				oldSize = this->vec_size;
-				this->vec_size = x.size();
-			}
-			else if (this->vec_size > x.size())
-			{
-				flag = 1;
-				oldSize = x.size();
-				
-				x.resize(this->vec_size);
-			}
-			while (i < this->vec_size)
-			{
-				//std::cout << this->vec[i] << " - " << x.vec[i] << std::endl;
-				temp = x.vec[i];
-				x.vec[i] = this->vec[i];
-				this->vec[i] = temp;
-				//std::cout << this->vec[i] << " * " << x.vec[i] << std::endl;
-				i++;
-			}
-			if (flag)
-				this->vec_size = oldSize;
-			else
-				x.resize(oldSize);
+			T	*val;
+			size_type size;
+			size_type cap;
+			val = this->vec;
+			size = this->vec_size;
+			cap = this->vec_capacity;
+			this->vec = x.vec;
+			this->vec_capacity = x.capacity();
+			this->vec_size = x.size();
+			x.vec = val;
+			x.vec_capacity = cap;
+			x.vec_size = size;
 		}
 		//ok		
 		void		clear()
 		{
-			alloc.deallocate(this->vec, this->vec_capacity);
-			this->vec = alloc.allocate(1);
-			this->vec_capacity = 1;
+			for (size_t i = 0; i < this->vec_size; i++)
+				this->vec[i] = 0;
 			this->vec_size = 0;
 		}
 	};
