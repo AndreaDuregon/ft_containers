@@ -346,13 +346,25 @@ namespace ft
                 }
 			    it.operator++();
             }
-
 		}
 		//ok
 		template <class Predicate>
 		void remove_if (Predicate pred)
 		{
-			
+            iterator it(this->begin());
+            while (it != this->_end)
+            {
+                if (pred(it._curr->value , val))
+                {
+                    Node<T> *tmp;
+                    tmp = it._curr;
+                    it._curr->next->prev = it._curr->prev;
+                    it._curr->prev->next = it._curr->next;
+                    this->_size--;
+                    delete (tmp);
+                }
+                it.operator++();
+            }
 		}
 		//ok
 		void unique()
