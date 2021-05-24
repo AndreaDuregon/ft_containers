@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 16:45:15 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 17:04:57 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ namespace ft
 		{
 			this->_end = new Node<T>;
 			this->_end->value = 0;
+			this->_size = 0;
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
 			for (iterator i = x.begin(); i != x.end(); ++i)
