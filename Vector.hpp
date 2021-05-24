@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 16:49:55 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/24 17:02:00 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,15 +442,19 @@ namespace ft
 
 		//NON MEMBER FUNCTIONS
 
-		template <class T, class Alloc>
-		friend bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		template <class value_type, class Alloc>
+		friend bool operator== (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
+			ft::VectorIterator<value_type> it1(lhs.begin());
+			ft::VectorIterator<value_type> it2(rhs.begin());
 			if (lhs.size() == rhs.size())
 			{
 				for (size_t i = 0; i < lhs.size(); i++)
 				{
-					if (lhs[i] != rhs[i])
+					if (*it1 != *it2)
 						return false;
+					it1++;
+					it2++;
 				}
 				return true;
 			}
@@ -458,15 +462,19 @@ namespace ft
 				return false;
 		}
 
-		template <class T, class Alloc>
-		friend bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		template <class value_type, class Alloc>
+		friend bool operator!= (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
+			ft::VectorIterator<value_type> it1(lhs.begin());
+			ft::VectorIterator<value_type> it2(rhs.begin());
 			if (lhs.size() == rhs.size())
 			{
 				for (size_t i = 0; i < lhs.size(); i++)
 				{
-					if (lhs[i] != rhs[i])
+					if (*it1 != *it2)
 						return true;
+					it1++;
+					it2++;
 				}
 				return false;
 			}
@@ -474,66 +482,86 @@ namespace ft
 				return true;
 		}
 
-		template <class T, class Alloc>
-		friend bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		template <class value_type, class Alloc>
+		friend bool operator<  (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
+			ft::VectorIterator<value_type> it1(lhs.begin());
+			ft::VectorIterator<value_type> it2(rhs.begin());
+			
 			for (size_t i = 0; i < lhs.size(); i++)
 			{
-				if (lhs[i] != rhs[i])
+				if (*it1 != *it2)
 				{
-					if (lhs[i] < rhs[i])
+					if (*it1 < *it2)
 						return true;
 					else
 						return false;
 				}
+				it1++;
+				it2++;
 			}
 			return false;
 		}
 
-		template <class T, class Alloc>
-  		friend bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		template <class value_type, class Alloc>
+  		friend bool operator<= (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
+			ft::VectorIterator<value_type> it1(lhs.begin());
+			ft::VectorIterator<value_type> it2(rhs.begin());
+			
 			for (size_t i = 0; i < lhs.size(); i++)
 			{
-				if (lhs[i] != rhs[i])
+				if (*it1 != *it2)
 				{
-					if (lhs[i] < rhs[i])
+					if (*it1 < *it2)
 						return true;
 					else
 						return false;
 				}
+				it1++;
+				it2++;
 			}
 			return true;
 		}
 
-		template <class T, class Alloc>
-  		friend bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		template <class value_type, class Alloc>
+  		friend bool operator>  (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
+			ft::VectorIterator<value_type> it1(lhs.begin());
+			ft::VectorIterator<value_type> it2(rhs.begin());
+			
 			for (size_t i = 0; i < lhs.size(); i++)
 			{
-				if (lhs[i] != rhs[i])
+				if (*it1 != *it2)
 				{
-					if (lhs[i] > rhs[i])
+					if (*it1 > *it2)
 						return true;
 					else
 						return false;
 				}
+				it1++;
+				it2++;
 			}
 			return false;
 		}
 
-		template <class T, class Alloc>
-  		friend bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		template <class value_type, class Alloc>
+  		friend bool operator>= (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
+			ft::VectorIterator<value_type> it1(lhs.begin());
+			ft::VectorIterator<value_type> it2(rhs.begin());
+			
 			for (size_t i = 0; i < lhs.size(); i++)
 			{
-				if (lhs[i] != rhs[i])
+				if (*it1 != *it2)
 				{
-					if (lhs[i] < rhs[i])
+					if (*it1 > *it2)
 						return true;
 					else
 						return false;
 				}
+				it1++;
+				it2++;
 			}
 			return true;
 		}
