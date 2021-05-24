@@ -1755,6 +1755,327 @@ static void testVECTOR(void)
 		if (*sys_it == *our_it)	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "END-- test 3" << OFF << std::endl;
 	}
+// ------------------OPERATORI----------------------
+	std::cout << YELLOW <<"OPERATORE == [SYS vs OUR]" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(56);
+		our_vector.push_back(56);
+
+		if ((sys_vector == sys_vector2) == (our_vector == our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE != [SYS vs OUR]" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(56);
+		our_vector.push_back(56);
+
+		if ((sys_vector != sys_vector2) == (our_vector != our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(50000);
+		our_vector.push_back(50000);
+
+		if ((sys_vector < sys_vector2) == (our_vector < our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(-50);
+		our_vector.push_back(-50);
+
+		if ((sys_vector < sys_vector2) == (our_vector < our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector.push_back(100);
+		our_vector.push_back(100);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+
+		if ((sys_vector < sys_vector2) == (our_vector < our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(50000);
+		our_vector.push_back(50000);
+
+		if ((sys_vector > sys_vector2) == (our_vector > our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(-50);
+		our_vector.push_back(-50);
+
+		if ((sys_vector > sys_vector2) == (our_vector > our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector.push_back(100);
+		our_vector.push_back(100);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+
+		if ((sys_vector > sys_vector2) == (our_vector > our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(50000);
+		our_vector.push_back(50000);
+
+		if ((sys_vector <= sys_vector2) == (our_vector <= our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(-50);
+		our_vector.push_back(-50);
+
+		if ((sys_vector <= sys_vector2) == (our_vector <= our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector.push_back(100);
+		our_vector.push_back(100);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+
+		if ((sys_vector <= sys_vector2) == (our_vector <= our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(50000);
+		our_vector.push_back(50000);
+
+		if ((sys_vector >= sys_vector2) == (our_vector >= our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector2.push_back(12);
+		our_vector2.push_back(12);
+		sys_vector2.push_back(200);
+		our_vector2.push_back(200);
+		sys_vector.push_back(0);
+		our_vector.push_back(0);
+		sys_vector.push_back(-50);
+		our_vector.push_back(-50);
+
+		if ((sys_vector >= sys_vector2) == (our_vector >= our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		std::vector<int> sys_vector2;
+		ft::vector<int> our_vector2;
+		sys_vector2.push_back(100);
+		our_vector2.push_back(100);
+		sys_vector2.push_back(85);
+		our_vector2.push_back(85);
+		sys_vector.push_back(100);
+		our_vector.push_back(100);
+		sys_vector.push_back(85);
+		our_vector.push_back(85);
+
+		if ((sys_vector >= sys_vector2) == (our_vector >= our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
 	// -------------------INIT EMPTY--------------------- 
 	std::cout << YELLOW <<"INIT VECTOR VUOTO [SYS vs OUR]" << OFF <<std::endl;   
 	{
