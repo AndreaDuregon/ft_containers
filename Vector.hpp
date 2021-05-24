@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/22 11:23:21 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/24 10:58:39 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ namespace ft
 			this->clear();
 			while (first != last)
 			{
-				this->vec[i] = *first;
+				this->push_back(*first);
 				first++;
 				i++;
 			}
@@ -254,7 +254,7 @@ namespace ft
 			this->clear();
 			while (i < n)
 			{
-				this->vec[i] = val;
+				this->push_back(val);
 				i++;
 			}
 		}

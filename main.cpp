@@ -36,7 +36,7 @@ static void print_sys(std::vector<T> &vector)
 {
 	std::vector<int>::iterator sys_it_begin = vector.begin();
 	std::vector<int>::iterator sys_it_end = vector.end();
-	std::cout << "OUR: ";
+	std::cout << "SYS: ";
 	while (sys_it_begin != sys_it_end)
 	{
 		std::cout << *sys_it_begin << " ";
@@ -1134,10 +1134,6 @@ static void testVECTOR(void)
 		our_vector.push_back(32);
 		std::vector<int>::iterator sys_it = sys_vector.begin();
 		ft::vector<int>::iterator our_it = our_vector.begin();
-		sys_it--;
-		our_it--;
-		sys_it--;
-		our_it--;
 		if (*sys_it-- == *our_it--)	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "BEGIN--" << OFF << std::endl;
 	}
@@ -1180,8 +1176,8 @@ static void testVECTOR(void)
 		our_vector.push_back(1);
 		our_vector.push_back(2);
 		our_vector.push_back(32);
-		std::vector<int>::iterator sys_it = sys_vector.begin();
-		ft::vector<int>::iterator our_it = our_vector.begin();
+		std::vector<int>::iterator sys_it = sys_vector.end();
+		ft::vector<int>::iterator our_it = our_vector.end();
 		if (*--sys_it == *--our_it)	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "--END test 1" << OFF << std::endl;
 		if (*--sys_it == *--our_it)	std::cout << GREEN;	else std::cout << RED;
@@ -1205,8 +1201,8 @@ static void testVECTOR(void)
 		our_vector.push_back(1);
 		our_vector.push_back(2);
 		our_vector.push_back(32);
-		std::vector<int>::iterator sys_it = sys_vector.begin();
-		ft::vector<int>::iterator our_it = our_vector.begin();
+		std::vector<int>::iterator sys_it = sys_vector.end();
+		ft::vector<int>::iterator our_it = our_vector.end();
 		sys_it--;
 		our_it--;
 		if (*sys_it-- == *our_it--)	std::cout << GREEN;	else std::cout << RED;
@@ -1567,7 +1563,7 @@ static void testVECTOR(void)
 		sys_vector.clear();
 		our_vector.clear();
 		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
-		std::cout << "CELAR" << OFF << std::endl;
+		std::cout << "CLEAR" << OFF << std::endl;
 	}
 }
 
