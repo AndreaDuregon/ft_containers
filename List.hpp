@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 17:54:35 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 18:38:14 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -350,7 +350,7 @@ namespace ft
 
 
 		}
-
+		//ok
 		void splice (iterator position, list& x, iterator first, iterator last)
 		{
   		    iterator prev_pos = position;
