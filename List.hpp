@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/21 18:56:15 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 12:22:48 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
 		typedef size_t							size_type;
 
 		//ok
-		list(/* args */) {
+		explicit list(/* args */) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
@@ -47,7 +47,7 @@ namespace ft
 			this->_size = 0;
 		};
 		//ok
-		list(size_type n, const_reference val=value_type()) {
+		explicit list(size_type n, const_reference val=value_type()) {
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
@@ -57,7 +57,7 @@ namespace ft
 				this->push_back(val);
 		};
 		//ok
-		list(iterator first, iterator last){
+		explicit list(iterator first, iterator last){
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
@@ -67,11 +67,21 @@ namespace ft
 				this->push_back(*first);
 		};
 		//ok
+		explicit list (const list& x)
+		{
+			this->_end = new Node<T>();
+			this->_end->value = 0;
+			this->_end->next = this->_end;
+			this->_end->prev = this->_end;
+			this->_size = 0;
+			for (iterator i = x.begin(); i != x.end(); ++i)
+				this->push_back(*i);		
+		}
+		//ok
 		virtual ~list() {
 			this->clear();
 			delete this->_end;
 		};
-
 		//ok
 		iterator begin()
 		{
@@ -222,7 +232,6 @@ namespace ft
 			Node<T> *node  = new Node<T>(val);
 			iterator prev(position._curr);
 
-			//prev._curr->prev->next = node;
 			prev.operator--();
 			prev._curr->next = node;
 			node->prev = prev._curr;
@@ -300,17 +309,17 @@ namespace ft
 			}
 			this->_size = 0;
 		}
-
+		//ok
 		void splice (iterator position, list& x)
 		{
 			
 		}
-	
+		//ok
 		void splice (iterator position, list& x, iterator i)
 		{
 			
 		}
-
+		///ok
 		void splice (iterator position, list& x, iterator first, iterator last)
 		{
 			
@@ -334,7 +343,7 @@ namespace ft
             }
 
 		}
-
+		//ok
 		template <class Predicate>
 		void remove_if (Predicate pred)
 		{
