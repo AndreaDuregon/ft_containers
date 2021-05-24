@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 12:22:48 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 12:52:18 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ namespace ft
 			this->_size = 0;
 			for (iterator i = x.begin(); i != x.end(); ++i)
 				this->push_back(*i);		
+		}
+
+		list& operator= (const list& x)
+		{
+			
 		}
 		//ok
 		virtual ~list() {
