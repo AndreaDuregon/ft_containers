@@ -14,7 +14,7 @@
 
 static bool binaryINT (int const &n1, int const &n2)
 { 
-	return ( n1 == n2 );
+	return ( n1 > n2 );
 }
 
 static bool singleINT (const int &n1)

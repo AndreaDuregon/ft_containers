@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 12:22:48 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 14:28:36 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ namespace ft
 			this->_size = 0;
 			for (iterator i = x.begin(); i != x.end(); ++i)
 				this->push_back(*i);		
+		}
+
+		list& operator= (const list& x)
+		{
+			
 		}
 		//ok
 		virtual ~list() {
@@ -331,14 +336,7 @@ namespace ft
 			while (it != this->_end)
             {
 			    if (it._curr->value == val)
-                {
-			        Node<T> *tmp;
-                    tmp = it._curr;
-			        it._curr->next->prev = it._curr->prev;
-			        it._curr->prev->next = it._curr->next;
-                    this->_size--;
-			        delete (tmp);
-                }
+					this->erase(it);
 			    it.operator++();
             }
 		}
@@ -350,14 +348,7 @@ namespace ft
             while (it != this->_end)
             {
                 if (pred(it._curr->value))
-                {
-                    Node<T> *tmp;
-                    tmp = it._curr;
-                    it._curr->next->prev = it._curr->prev;
-                    it._curr->prev->next = it._curr->next;
-                    this->_size--;
-                    delete (tmp);
-                }
+					this->erase(it);
                 it.operator++();
             }
 		}
@@ -368,7 +359,7 @@ namespace ft
 			++iter;
 			while(iter != this->end())
 			{
-				if(iter._curr->value == iter._curr->prev->value)
+				if(iter._curr->prev->value == iter._curr->value)
 					this->erase(iter);
 				++iter;
 			} 
@@ -379,13 +370,12 @@ namespace ft
 		{
 			iterator iter(this->begin());
 			++iter;
-            ++iter;
 			while(iter != this->end())
 			{
-                if(binary_pred(iter._curr->value, iter._curr->prev->value))
-                    this->erase(iter);
+				if(binary_pred(iter._curr->prev->value, iter._curr->value))
+					this->erase(iter);
 				++iter;
-			} 
+			}
 		}
 		//ok
   		void merge (list& x)
