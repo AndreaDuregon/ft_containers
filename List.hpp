@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 14:28:36 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 16:45:15 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ namespace ft
 		//ok
 		explicit list (const list& x)
 		{
-			this->_end = new Node<T>();
+			*this = x;		
+		}
+		//ok
+		list& operator = (const list& x)
+		{
+			this->_end = new Node<T>;
 			this->_end->value = 0;
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
-			this->_size = 0;
 			for (iterator i = x.begin(); i != x.end(); ++i)
-				this->push_back(*i);		
-		}
-
-		list& operator= (const list& x)
-		{
-			
+				this->push_back(*i);
+			return (*this);
 		}
 		//ok
 		virtual ~list() {
@@ -312,7 +312,6 @@ namespace ft
 			{
 				this->pop_back();
 			}
-			this->_size = 0;
 		}
 		//ok
 		void splice (iterator position, list& x)
@@ -511,5 +510,89 @@ namespace ft
 				end.operator--();
 			}
 		}
+		//ok
+		template <class value_type, class Alloc>
+		friend bool operator == (const ft::list<value_type,Alloc>& lhs, const ft::list<value_type,Alloc>& rhs)
+		{
+			if (lhs.size() != rhs.size())
+				return false;
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+					return false;
+			}
+			return true;
+		}
+		//ok
+		template <class value_type, class Alloc>
+		friend bool operator != (const ft::list<value_type,Alloc>& lhs, const ft::list<value_type,Alloc>& rhs)
+		{
+			return !(lhs == rhs);
+		}
+		//ok
+		template <class value_type, class Alloc>
+		friend bool operator <  (const ft::list<value_type,Alloc>& lhs, const ft::list<value_type,Alloc>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it < *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return false;
+		}
+		//ok
+		template <class value_type, class Alloc>
+		friend bool operator <= (const ft::list<value_type,Alloc>& lhs, const ft::list<value_type,Alloc>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it < *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return true;
+		}
+		//ok
+		template <class value_type, class Alloc>
+		friend bool operator >  (const ft::list<value_type,Alloc>& lhs, const ft::list<value_type,Alloc>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it > *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return false;
+		}
+		//ok
+		template <class value_type, class Alloc>
+		friend bool operator >= (const ft::list<value_type,Alloc>& lhs, const ft::list<value_type,Alloc>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it > *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return true;
+		}
+
 	};
 } 

@@ -1,8 +1,12 @@
 #include "List.hpp"
 #include "Vector.hpp"
+#include "Stack.hpp"
+#include "Queue.hpp"
 #include <list>
 #include <vector>
 #include <iterator>
+#include <stack>
+#include <queue>
 #include <iostream>
 #include <exception>
 // COLORS 
@@ -223,6 +227,38 @@ static bool equalSysFt(std::vector<T> &sys_vector, ft::vector<T> &our_vector)
 	{
 		std::cout << "MAX SIZE " << sys_vector.max_size() << " != " << our_vector.max_size() << " ";
 		return false;
+	}
+	return true;
+}
+
+template <class T>
+static bool equalSysFt(std::stack<T> &sys_stack, ft::stack<T> &our_stack)
+{
+	if (sys_stack.size() > 0 && sys_stack.top() != our_stack.top())
+	{
+		std::cout << "TOP " << sys_stack.top() << " != " << our_stack.top() << " ";
+		return false;		
+	}
+	if (sys_stack.size() != our_stack.size())
+	{
+		std::cout << "SIZE " << sys_stack.size() << " != " << our_stack.size() << " ";
+		return false;		
+	}
+	if (sys_stack.empty() != our_stack.empty())
+	{
+		std::cout << "EMPTY " << sys_stack.empty() << " != " << our_stack.empty() << " ";
+		return false;		
+	}
+
+	while (sys_stack.size() > 0)
+	{
+		if (sys_stack.top() != our_stack.top())
+		{
+			std::cout << "VALUE DIFFERENT INSIDE " << sys_stack.top() << " != " << our_stack.top();
+			return false;
+		}
+		sys_stack.pop();
+		our_stack.pop();
 	}
 	return true;
 }
@@ -464,6 +500,327 @@ static void testLIST(void)
 		if (*sys_it == *our_it)	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "END-- test 3" << OFF << std::endl;
 	}
+	// ------------------OPERATORI----------------------
+	std::cout << YELLOW <<"OPERATORE == [SYS vs OUR]" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+
+		if ((sys_list == sys_list2) == (our_list == our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE != [SYS vs OUR]" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+
+		if ((sys_list != sys_list2) == (our_list != our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(50000);
+		our_list.push_back(50000);
+
+		if ((sys_list < sys_list2) == (our_list < our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(-50);
+		our_list.push_back(-50);
+
+		if ((sys_list < sys_list2) == (our_list < our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list.push_back(100);
+		our_list.push_back(100);
+		sys_list.push_back(85);
+		our_list.push_back(85);
+
+		if ((sys_list < sys_list2) == (our_list < our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(50000);
+		our_list.push_back(50000);
+
+		if ((sys_list > sys_list2) == (our_list > our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(-50);
+		our_list.push_back(-50);
+
+		if ((sys_list > sys_list2) == (our_list > our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list.push_back(100);
+		our_list.push_back(100);
+		sys_list.push_back(85);
+		our_list.push_back(85);
+
+		if ((sys_list > sys_list2) == (our_list > our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(50000);
+		our_list.push_back(50000);
+
+		if ((sys_list <= sys_list2) == (our_list <= our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(-50);
+		our_list.push_back(-50);
+
+		if ((sys_list <= sys_list2) == (our_list <= our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list.push_back(100);
+		our_list.push_back(100);
+		sys_list.push_back(85);
+		our_list.push_back(85);
+
+		if ((sys_list <= sys_list2) == (our_list <= our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(50000);
+		our_list.push_back(50000);
+
+		if ((sys_list >= sys_list2) == (our_list >= our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(-50);
+		our_list.push_back(-50);
+
+		if ((sys_list >= sys_list2) == (our_list >= our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list.push_back(100);
+		our_list.push_back(100);
+		sys_list.push_back(85);
+		our_list.push_back(85);
+
+		if ((sys_list >= sys_list2) == (our_list >= our_list2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
 	// -------------------INIT EMPTY--------------------- 
 	std::cout << YELLOW <<"INIT LISTA VUOTA [SYS vs OUR]" << OFF <<std::endl;   
 	{
@@ -526,7 +883,21 @@ static void testLIST(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
+	// ----------------------INIT COPY CONSTRUCOT------------------ 
+	std::cout << YELLOW <<"LIST OPERATOR = [SYS vs OUR]" << OFF <<std::endl;
+	{
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> copy_sys_list(5,10);
+		ft::list<int> copy_our_list(5,10);
+		sys_list = copy_sys_list;
+		our_list = copy_our_list;
 
+		if (equalSysFt(sys_list, our_list))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
 	// --------------------LIST METHODS-------------------- 
 	std::cout << YELLOW <<"LIST METHODS [SYS vs OUR]" << OFF <<std::endl;
 	{
@@ -1195,6 +1566,21 @@ static void testLIST(void)
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "SWAP" <<  OFF << std::endl;
 	}
+	{
+		// SWAP 
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(34);
+		our_list.push_back(34);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.clear();
+		our_list.clear();
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "CLEAR" <<  OFF << std::endl;
+	}
 }
 
 
@@ -1724,6 +2110,380 @@ static void testVECTOR(void)
 	}
 }
 
+static void testSTACK(void)
+{
+	// -------------------INIT EMPTY--------------------- 
+	std::cout << YELLOW <<"INIT STACK VUOTO [SYS vs OUR]" << OFF <<std::endl;   
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+
+		if (equalSysFt(sys_stack, our_stack))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+
+	// --------------------INT 1 PARAMETRO-------------------- 
+	std::cout << YELLOW <<"INIT STACK COPY CONSTRUCTOR [SYS vs OUR]" << OFF <<std::endl;
+	{
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(99);
+		sys_stack2.push(50);
+		our_stack2.push(99);
+		our_stack2.push(50);
+		std::stack<int> sys_stack(sys_stack2);
+		ft::stack<int> our_stack(our_stack2);
+
+		if (equalSysFt(sys_stack, our_stack))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+
+	// ----------------------INIT 2 PARAMETRI------------------ 
+	std::cout << YELLOW <<"STACK OPERATOR = [SYS vs OUR]" << OFF <<std::endl;
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(99);
+		sys_stack2.push(50);
+		our_stack2.push(99);
+		our_stack2.push(50);
+		sys_stack = sys_stack2;
+		our_stack = our_stack2;
+
+		if (equalSysFt(sys_stack, our_stack))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	// ------------------OPERATORI----------------------
+	std::cout << YELLOW <<"OPERATORE == [SYS vs OUR]" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(56);
+		our_stack.push(56);
+
+		if ((sys_stack == sys_stack2) == (our_stack == our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE != [SYS vs OUR]" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(56);
+		our_stack.push(56);
+
+		if ((sys_stack != sys_stack2) == (our_stack != our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(50000);
+		our_stack.push(50000);
+
+		if ((sys_stack < sys_stack2) == (our_stack < our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(-50);
+		our_stack.push(-50);
+
+		if ((sys_stack < sys_stack2) == (our_stack < our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE < [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack.push(100);
+		our_stack.push(100);
+		sys_stack.push(85);
+		our_stack.push(85);
+
+		if ((sys_stack < sys_stack2) == (our_stack < our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(50000);
+		our_stack.push(50000);
+
+		if ((sys_stack > sys_stack2) == (our_stack > our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(-50);
+		our_stack.push(-50);
+
+		if ((sys_stack > sys_stack2) == (our_stack > our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE > [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack.push(100);
+		our_stack.push(100);
+		sys_stack.push(85);
+		our_stack.push(85);
+
+		if ((sys_stack > sys_stack2) == (our_stack > our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(50000);
+		our_stack.push(50000);
+
+		if ((sys_stack <= sys_stack2) == (our_stack <= our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(-50);
+		our_stack.push(-50);
+
+		if ((sys_stack <= sys_stack2) == (our_stack <= our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE <= [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack.push(100);
+		our_stack.push(100);
+		sys_stack.push(85);
+		our_stack.push(85);
+
+		if ((sys_stack <= sys_stack2) == (our_stack <= our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 1" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(50000);
+		our_stack.push(50000);
+
+		if ((sys_stack >= sys_stack2) == (our_stack >= our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 2" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack2.push(12);
+		our_stack2.push(12);
+		sys_stack2.push(200);
+		our_stack2.push(200);
+		sys_stack.push(0);
+		our_stack.push(0);
+		sys_stack.push(-50);
+		our_stack.push(-50);
+
+		if ((sys_stack >= sys_stack2) == (our_stack >= our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW <<"OPERATORE >= [SYS vs OUR] test 3" << OFF <<std::endl;  
+	{
+		std::stack<int> sys_stack;
+		ft::stack<int> our_stack;
+		std::stack<int> sys_stack2;
+		ft::stack<int> our_stack2;
+		sys_stack2.push(100);
+		our_stack2.push(100);
+		sys_stack2.push(85);
+		our_stack2.push(85);
+		sys_stack.push(100);
+		our_stack.push(100);
+		sys_stack.push(85);
+		our_stack.push(85);
+
+		if ((sys_stack >= sys_stack2) == (our_stack >= our_stack2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+}
+
 // -----------------------------MAIN------------------
 int main (int argc, char **argv)
 {
@@ -1731,6 +2491,7 @@ int main (int argc, char **argv)
 	{
 		testLIST();
 		testVECTOR();
+		testSTACK();
 		return 0;
 	}
 	std::string test = argv[1];
@@ -1739,4 +2500,6 @@ int main (int argc, char **argv)
 		testLIST();
 	if (test == "vector")
 		testVECTOR();
+	if (test == "stack")
+		testSTACK();
 }

@@ -6,7 +6,7 @@
 #    By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 11:15:19 by dmalori           #+#    #+#              #
-#    Updated: 2021/05/20 17:41:33 by dmalori          ###   ########.fr        #
+#    Updated: 2021/05/24 14:40:09 by dmalori          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,12 @@ runList		:	all
 
 runVector	:	all
 				@./$(NAME) vector
+
+runStack	:	all
+				@./$(NAME) stack
+
+runQueue	:	all
+				@./$(NAME) queue
 
 push		:	fclean
 				git add .
