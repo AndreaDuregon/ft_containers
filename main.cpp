@@ -14,7 +14,12 @@
 
 static bool binaryINT (int const &n1, int const &n2)
 { 
-	return ( n1 < n2 ); 
+	return ( n1 > n2 );
+}
+
+static bool singleINT (const int &n1)
+{ 
+	return (n1 > 100);
 }
 
 template <class T>
@@ -36,7 +41,7 @@ static void print_sys(std::vector<T> &vector)
 {
 	std::vector<int>::iterator sys_it_begin = vector.begin();
 	std::vector<int>::iterator sys_it_end = vector.end();
-	std::cout << "OUR: ";
+	std::cout << "SYS: ";
 	while (sys_it_begin != sys_it_end)
 	{
 		std::cout << *sys_it_begin << " ";
@@ -128,13 +133,11 @@ static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
 		return false;
 	}
-	/*
 	if (sys_list.max_size() != our_list.max_size())
 	{
 		std::cout << "MAX SIZE " << sys_list.max_size() << " != " << our_list.max_size() << " ";
 		return false;
 	}
-	*/
 	return true;
 }
 
@@ -206,23 +209,21 @@ static bool equalSysFt(std::vector<T> &sys_vector, ft::vector<T> &our_vector)
 		std::cout << "CAPACITY " << sys_vector.capacity() << " != " << our_vector.capacity() << " ";
 		return false;
 	}
-	if (sys_vector.front() != our_vector.front())
+	if (sys_vector.size() > 0 &&  sys_vector.front() != our_vector.front())
 	{
 		std::cout << "FRONT " << sys_vector.front() << " != " << our_vector.front() << " ";
 		return false;
 	}
-	if (sys_vector.back() != our_vector.back())
+	if (sys_vector.size() > 0 && sys_vector.back() != our_vector.back())
 	{
 		std::cout << "BACK " << sys_vector.back() << " != " << our_vector.back() << " ";
 		return false;
 	}
-	/*
 	if (sys_vector.max_size() != our_vector.max_size())
 	{
 		std::cout << "MAX SIZE " << sys_vector.max_size() << " != " << our_vector.max_size() << " ";
 		return false;
 	}
-	*/
 	return true;
 }
 
@@ -512,6 +513,19 @@ static void testLIST(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
+	// ----------------------INIT COPY CONSTRUCOT------------------ 
+	std::cout << YELLOW <<"INIT LISTA COPY CONSTRUCTOR (LIST) [SYS vs OUR]" << OFF <<std::endl;
+	{
+		std::list<int> copy_sys_list(5,10);
+		std::list<int> sys_list(copy_sys_list);
+		ft::list<int> copy_our_list(5,10);
+		ft::list<int> our_list(copy_our_list);
+
+		if (equalSysFt(sys_list, our_list))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
 
 	// --------------------LIST METHODS-------------------- 
 	std::cout << YELLOW <<"LIST METHODS [SYS vs OUR]" << OFF <<std::endl;
@@ -669,7 +683,7 @@ static void testLIST(void)
 		sys_list.push_front(1);
 		our_list.push_front(1);
 		sys_list.unique();
-		//our_list.unique(); //CRASH ON LINUX
+		our_list.unique(); //CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "UNIQUE" <<  OFF << std::endl;
 	}
@@ -757,13 +771,30 @@ static void testLIST(void)
 		sys_list.push_front(200);
 		our_list.push_front(200);
 		sys_list.remove(200);
-		//our_list.remove(200); // CRASH ON LINUX
+		our_list.remove(200); // CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "REMOVE" <<  OFF << std::endl;
 	}
 	{
 		// REMOVE IF
-		std::cout << "WIP *** REMOVE_IF" <<  OFF << std::endl;
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(100);
+		our_list.push_back(100);
+		sys_list.push_back(85);
+		our_list.push_back(85);
+		sys_list.push_back(12);
+		our_list.push_back(12);
+		sys_list.push_back(200);
+		our_list.push_back(200);
+		sys_list.push_back(200);
+		our_list.push_back(200);
+		sys_list.push_front(200);
+		our_list.push_front(200);
+		sys_list.remove_if(singleINT);
+		our_list.remove_if(singleINT);
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "REMOVE_IF" <<  OFF << std::endl;
 	}
 	{
 		// RESIZE (10) 
@@ -1003,15 +1034,141 @@ static void testLIST(void)
 	}
 	{
 		//SPLICE IT LIST
-		std::cout << "WIP *** SPLICE (ITERATOR, LIST)" <<  OFF << std::endl;
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.splice(sys_list.begin(), sys_list2);
+		our_list.splice(our_list.begin(), our_list2);
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SPLICE (ITERATOR, LIST) test 1" <<  OFF << std::endl;
+	}
+	{
+		//SPLICE IT LIST
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.splice(sys_list2.begin(), sys_list2);
+		our_list.splice(our_list2.begin(), our_list2);
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SPLICE (ITERATOR, LIST) test 2" <<  OFF << std::endl;
 	}
 	{
 		//SPLICE IT LIST IT
-		std::cout << "WIP *** SPLICE (ITERATOR, LIST, ITERATOR)" <<  OFF << std::endl;
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.splice(sys_list2.begin(), sys_list2, ++sys_list2.begin());
+		our_list.splice(our_list2.begin(), our_list2, ++our_list2.begin());
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SPLICE (ITERATOR, LIST, ITERATOR) test 1" <<  OFF << std::endl;
+	}
+	{
+		//SPLICE IT LIST IT
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.splice(sys_list.begin(), sys_list2, ++sys_list2.begin());
+		our_list.splice(our_list.begin(), our_list2, ++our_list2.begin());
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SPLICE (ITERATOR, LIST, ITERATOR) test 2" <<  OFF << std::endl;
 	}
 	{
 		//SPLICE IT LIST IT IT
-		std::cout << "WIP *** SPLICE (ITERATOR, LIST, ITERATOR, ITERATOR)" <<  OFF << std::endl;
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.splice(sys_list.begin(), sys_list2, ++sys_list2.begin(), sys_list2.end());
+		our_list.splice(our_list.begin(), our_list2, ++our_list2.begin(), our_list.end());
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SPLICE (ITERATOR, LIST, ITERATOR, ITERATOR) test 1" <<  OFF << std::endl;
+	}
+	{
+		//SPLICE IT LIST IT IT
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		std::list<int> sys_list2;
+		ft::list<int> our_list2;
+		sys_list2.push_back(100);
+		our_list2.push_back(100);
+		sys_list2.push_back(85);
+		our_list2.push_back(85);
+		sys_list2.push_back(12);
+		our_list2.push_back(12);
+		sys_list2.push_back(200);
+		our_list2.push_back(200);
+		sys_list.push_back(0);
+		our_list.push_back(0);
+		sys_list.push_back(56);
+		our_list.push_back(56);
+		sys_list.splice(sys_list2.begin(), sys_list2, sys_list2.begin(), sys_list2.end());
+		our_list.splice(our_list2.begin(), our_list2, our_list2.begin(), our_list.end());
+		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
+		std::cout << "SPLICE (ITERATOR, LIST, ITERATOR, ITERATOR) test 2" <<  OFF << std::endl;
 	}
 	{
 		// SWAP 
@@ -1134,10 +1291,6 @@ static void testVECTOR(void)
 		our_vector.push_back(32);
 		std::vector<int>::iterator sys_it = sys_vector.begin();
 		ft::vector<int>::iterator our_it = our_vector.begin();
-		sys_it--;
-		our_it--;
-		sys_it--;
-		our_it--;
 		if (*sys_it-- == *our_it--)	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "BEGIN--" << OFF << std::endl;
 	}
@@ -1180,8 +1333,8 @@ static void testVECTOR(void)
 		our_vector.push_back(1);
 		our_vector.push_back(2);
 		our_vector.push_back(32);
-		std::vector<int>::iterator sys_it = sys_vector.begin();
-		ft::vector<int>::iterator our_it = our_vector.begin();
+		std::vector<int>::iterator sys_it = sys_vector.end();
+		ft::vector<int>::iterator our_it = our_vector.end();
 		if (*--sys_it == *--our_it)	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "--END test 1" << OFF << std::endl;
 		if (*--sys_it == *--our_it)	std::cout << GREEN;	else std::cout << RED;
@@ -1205,8 +1358,8 @@ static void testVECTOR(void)
 		our_vector.push_back(1);
 		our_vector.push_back(2);
 		our_vector.push_back(32);
-		std::vector<int>::iterator sys_it = sys_vector.begin();
-		ft::vector<int>::iterator our_it = our_vector.begin();
+		std::vector<int>::iterator sys_it = sys_vector.end();
+		ft::vector<int>::iterator our_it = our_vector.end();
 		sys_it--;
 		our_it--;
 		if (*sys_it-- == *our_it--)	std::cout << GREEN;	else std::cout << RED;
@@ -1567,7 +1720,7 @@ static void testVECTOR(void)
 		sys_vector.clear();
 		our_vector.clear();
 		if (equalSysFt(sys_vector, our_vector))	std::cout << GREEN;	else std::cout << RED;
-		std::cout << "CELAR" << OFF << std::endl;
+		std::cout << "CLEAR" << OFF << std::endl;
 	}
 }
 
