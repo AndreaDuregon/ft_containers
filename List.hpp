@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 17:04:57 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/24 17:54:35 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,22 @@ namespace ft
 		//ok
 		explicit list (const list& x)
 		{
-			*this = x;		
+			this->_end = new Node<T>();
+			*this = x;
 		}
 		//ok
 		list& operator = (const list& x)
 		{
-			this->_end = new Node<T>;
 			this->_end->value = 0;
 			this->_size = 0;
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
 			for (iterator i = x.begin(); i != x.end(); ++i)
 				this->push_back(*i);
-			return (*this);
+			return *this;
 		}
 		//ok
-		virtual ~list() {
+		~list() {
 			this->clear();
 			delete this->_end;
 		};

@@ -898,6 +898,7 @@ static void testLIST(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
+
 	// --------------------LIST METHODS-------------------- 
 	std::cout << YELLOW <<"LIST METHODS [SYS vs OUR]" << OFF <<std::endl;
 	{
@@ -1373,6 +1374,7 @@ static void testLIST(void)
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "ASSIGN (ITERATOR, ITERATOR) test 2" <<  OFF << std::endl;
 	}
+
 	{
 		// ASSIGN (N, N) test 1
 		std::list<int> sys_list;
@@ -1444,8 +1446,8 @@ static void testLIST(void)
 		our_list.push_back(0);
 		sys_list.push_back(56);
 		our_list.push_back(56);
-		sys_list.splice(sys_list2.begin(), sys_list2);
-		our_list.splice(our_list2.begin(), our_list2);
+		sys_list.splice(sys_list.begin(), sys_list2);
+		our_list.splice(our_list.begin(), our_list2);
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "SPLICE (ITERATOR, LIST) test 2" <<  OFF << std::endl;
 	}
@@ -1567,7 +1569,7 @@ static void testLIST(void)
 		std::cout << "SWAP" <<  OFF << std::endl;
 	}
 	{
-		// SWAP 
+		// CLEAR 
 		std::list<int> sys_list;
 		ft::list<int> our_list;
 		sys_list.push_back(0);
