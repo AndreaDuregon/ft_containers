@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 16:49:25 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/24 16:49:55 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ namespace ft
 		//ok
 		vector(vector<T> const &copy)
 		{
-			this->vec = alloc.allocate(copy.vec_capacity);
-			for (size_type i = 0; i < copy.vec_size; i++)
-				this->vec[i] = copy.vec[i];
-			this->vec_size = copy.vec_size;
-			this->vec_capacity = copy.vec_capacity;
+			*this = copy;
 		}
 		//ok
 		vector(size_type n)
@@ -74,11 +70,11 @@ namespace ft
 
 		vector& operator = (const vector& x)
 		{
-			alloc.deallocate(this->vec, this->vec_capacity);
-			this->vec = alloc.allocate(x.capacity());
-			this->vec = x.vec;
-			this->vec_size = x.size();
-			this->vec_capacity = x.capacity();
+			this->vec = alloc.allocate(x.vec_capacity);
+			for (size_type i = 0; i < x.vec_size; i++)
+				this->vec[i] = x.vec[i];
+			this->vec_size = x.vec_size;
+			this->vec_capacity = x.vec_capacity;
 			return *this;
 		}
 		// ITERATOR

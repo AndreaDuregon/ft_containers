@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:10:36 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 14:29:37 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/24 16:46:22 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,29 @@ namespace ft
 	public:
 
 		// MEMBER FUNCTIONS
-		
-		explicit				stack(const container_type& ctnr = container_type())
-		{
-			this->c = ctnr;
-		}
-
-		stack(stack const &copy)
-		{
-			this->c = copy.c;
-		}
-
+		//ok
+		explicit				stack(const container_type& ctnr = container_type()) : c(ctnr) {}
+		//ok
+		explicit stack(stack const &copy) : c(copy.c) {}
+		//ok
 		stack&					operator = (const stack& other)
 		{
 			this->c = other.c;
 			return (*this);
 		}
-
-		virtual ~stack()	{}
-
+		//ok
+		virtual ~stack() {}
+		//ok
 		bool					empty() const
 		{
 			return (this->c.empty());
 		}
-
+		//ok
 		size_type				size() const
 		{
 			return (this->c.size());
 		}
-
+		///ok
 		value_type&				top()
 		{
 			return (this->c.back());
@@ -70,12 +64,12 @@ namespace ft
 		{
 			return (this->c.back());
 		}
-
+		//ok
 		void					push(const value_type& val)
 		{
 			this->c.push_back(val);
 		}
-
+		//ok
 		void					pop()
 		{
 			this->c.pop_back();
