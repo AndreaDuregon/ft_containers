@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 12:52:18 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 13:00:15 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,7 +361,7 @@ namespace ft
 			++iter;
 			while(iter != this->end())
 			{
-				if(iter._curr->value == iter._curr->prev->value)
+				if(iter._curr->prev->value == iter._curr->value)
 					this->erase(iter);
 				++iter;
 			} 
@@ -372,13 +372,12 @@ namespace ft
 		{
 			iterator iter(this->begin());
 			++iter;
-            ++iter;
 			while(iter != this->end())
 			{
-                if(binary_pred(iter._curr->value, iter._curr->prev->value))
-                    this->erase(iter);
+				if(binary_pred(iter._curr->prev->value, iter._curr->value))
+					this->erase(iter);
 				++iter;
-			} 
+			}
 		}
 		//ok
   		void merge (list& x)
