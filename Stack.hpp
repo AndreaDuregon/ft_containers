@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   Stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
+/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:10:36 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/23 20:08:54 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/24 14:29:37 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-#include <deque>
+#include "List.hpp"
 
 namespace ft
 {
-	template <class T, class Container = std::deque<int> > class stack
+	template <class T, class Container = ft::list<T> > class stack
 	{
 	public:
 		typedef	Container			container_type;
