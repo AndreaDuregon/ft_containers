@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 13:00:15 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 14:28:36 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,14 +336,7 @@ namespace ft
 			while (it != this->_end)
             {
 			    if (it._curr->value == val)
-                {
-			        Node<T> *tmp;
-                    tmp = it._curr;
-			        it._curr->next->prev = it._curr->prev;
-			        it._curr->prev->next = it._curr->next;
-                    this->_size--;
-			        delete (tmp);
-                }
+					this->erase(it);
 			    it.operator++();
             }
 		}
@@ -354,15 +347,8 @@ namespace ft
             iterator it(this->begin());
             while (it != this->_end)
             {
-                if (pred(it._curr->value , val))
-                {
-                    Node<T> *tmp;
-                    tmp = it._curr;
-                    it._curr->next->prev = it._curr->prev;
-                    it._curr->prev->next = it._curr->next;
-                    this->_size--;
-                    delete (tmp);
-                }
+                if (pred(it._curr->value))
+					this->erase(it);
                 it.operator++();
             }
 		}
