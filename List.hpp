@@ -316,17 +316,63 @@ namespace ft
 		//ok
 		void splice (iterator position, list& x)
 		{
-			
+			iterator ex(x.end());
+            iterator nullx(x.end());
+            iterator bx(x.begin());
+  		    iterator it(position);
+  		    --ex;
+			--it;
+
+			it._curr->next = bx._curr;
+			bx._curr->prev = it._curr;
+			ex._curr->next =position._curr;
+			position._curr->prev = ex._curr;
+            this->_size += x.size();
+            x._size = 0;
+            nullx._curr->prev = nullx._curr;
+			nullx._curr->next = nullx._curr;
 		}
 		//ok
 		void splice (iterator position, list& x, iterator i)
 		{
-			
+  		    iterator it(position._curr);
+            --it;
+  		    i._curr->prev->next = i._curr->next;
+  		    i._curr->next->prev = i._curr->prev;
+
+  		    it._curr->next = i._curr;
+  		    i._curr->prev = it._curr;
+  		    i._curr->next = position._curr;
+  		    position._curr->prev = i._curr;
+  		    this->_size++;
+  		    x._size--;
+
+
 		}
-		///ok
+
 		void splice (iterator position, list& x, iterator first, iterator last)
 		{
-			
+  		    iterator prev_pos = position;
+  		    prev_pos--;
+  		    iterator real_last = last;
+  		    real_last--;
+  		    iterator prev_first = first;
+  		    prev_first--;
+
+  		    //Collego prima lista
+  		    prev_first._curr->next = last._curr;
+  		    last._curr->prev = prev_first._curr;
+
+  		    //Connetto position con first-last
+  		    prev_pos._curr->next = first._curr;
+  		    first._curr->prev = prev_pos._curr;
+  		    position._curr->prev = real_last._curr;
+  		    real_last._curr->next = position._curr;
+  		    int i = 0;
+            while (first++ != position)
+                i++;
+            this->_size += i;
+            x._size -= i;
 		}
 		//ok
 		void remove (const value_type& val)

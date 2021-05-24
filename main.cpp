@@ -1467,8 +1467,8 @@ static void testLIST(void)
 		our_list.push_back(0);
 		sys_list.push_back(56);
 		our_list.push_back(56);
-		sys_list.splice(sys_list2.begin(), sys_list2, ++sys_list2.begin());
-		our_list.splice(our_list2.begin(), our_list2, ++our_list2.begin());
+		sys_list.splice(sys_list.begin(), sys_list2, ++sys_list2.begin());
+		our_list.splice(our_list.begin(), our_list2, ++our_list2.begin());
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "SPLICE (ITERATOR, LIST, ITERATOR) test 1" <<  OFF << std::endl;
 	}
@@ -1514,7 +1514,7 @@ static void testLIST(void)
 		sys_list.push_back(56);
 		our_list.push_back(56);
 		sys_list.splice(sys_list.begin(), sys_list2, ++sys_list2.begin(), sys_list2.end());
-		our_list.splice(our_list.begin(), our_list2, ++our_list2.begin(), our_list.end());
+		our_list.splice(our_list.begin(), our_list2, ++our_list2.begin(), our_list2.end());
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "SPLICE (ITERATOR, LIST, ITERATOR, ITERATOR) test 1" <<  OFF << std::endl;
 	}
@@ -1536,8 +1536,8 @@ static void testLIST(void)
 		our_list.push_back(0);
 		sys_list.push_back(56);
 		our_list.push_back(56);
-		sys_list.splice(sys_list2.begin(), sys_list2, sys_list2.begin(), sys_list2.end());
-		our_list.splice(our_list2.begin(), our_list2, our_list2.begin(), our_list.end());
+		sys_list.splice(sys_list.begin(), sys_list2, sys_list2.begin(), sys_list2.end());
+		our_list.splice(our_list.begin(), our_list2, our_list2.begin(), our_list2.end());
 		if (equalSysFt(sys_list, our_list))	std::cout << GREEN;	else std::cout << RED;
 		std::cout << "SPLICE (ITERATOR, LIST, ITERATOR, ITERATOR) test 2" <<  OFF << std::endl;
 	}
