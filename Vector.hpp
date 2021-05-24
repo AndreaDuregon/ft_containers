@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 13:26:33 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/24 16:49:25 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,6 +442,104 @@ namespace ft
 			for (size_t i = 0; i < this->vec_size; i++)
 				this->vec[i] = 0;
 			this->vec_size = 0;
+		}
+
+		//NON MEMBER FUNCTIONS
+
+		template <class T, class Alloc>
+		friend bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		{
+			if (lhs.size() == rhs.size())
+			{
+				for (size_t i = 0; i < lhs.size(); i++)
+				{
+					if (lhs[i] != rhs[i])
+						return false;
+				}
+				return true;
+			}
+			else
+				return false;
+		}
+
+		template <class T, class Alloc>
+		friend bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		{
+			if (lhs.size() == rhs.size())
+			{
+				for (size_t i = 0; i < lhs.size(); i++)
+				{
+					if (lhs[i] != rhs[i])
+						return true;
+				}
+				return false;
+			}
+			else
+				return true;
+		}
+
+		template <class T, class Alloc>
+		friend bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		{
+			for (size_t i = 0; i < lhs.size(); i++)
+			{
+				if (lhs[i] != rhs[i])
+				{
+					if (lhs[i] < rhs[i])
+						return true;
+					else
+						return false;
+				}
+			}
+			return false;
+		}
+
+		template <class T, class Alloc>
+  		friend bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		{
+			for (size_t i = 0; i < lhs.size(); i++)
+			{
+				if (lhs[i] != rhs[i])
+				{
+					if (lhs[i] < rhs[i])
+						return true;
+					else
+						return false;
+				}
+			}
+			return true;
+		}
+
+		template <class T, class Alloc>
+  		friend bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		{
+			for (size_t i = 0; i < lhs.size(); i++)
+			{
+				if (lhs[i] != rhs[i])
+				{
+					if (lhs[i] > rhs[i])
+						return true;
+					else
+						return false;
+				}
+			}
+			return false;
+		}
+
+		template <class T, class Alloc>
+  		friend bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		{
+			for (size_t i = 0; i < lhs.size(); i++)
+			{
+				if (lhs[i] != rhs[i])
+				{
+					if (lhs[i] < rhs[i])
+						return true;
+					else
+						return false;
+				}
+			}
+			return true;
 		}
 	};
 }
