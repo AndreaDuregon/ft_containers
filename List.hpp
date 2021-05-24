@@ -349,7 +349,7 @@ namespace ft
             iterator it(this->begin());
             while (it != this->_end)
             {
-                if (pred(it._curr->value , val))
+                if (pred(it._curr->value))
                 {
                     Node<T> *tmp;
                     tmp = it._curr;
