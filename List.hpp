@@ -421,7 +421,7 @@ namespace ft
   		    Node<T> *tmp;
             while(it != this->end())
   		    {
-                if (comp(*it, *itx))
+                if (comp(*itx, *it))
                 {
                     tmp = itx._curr;
                     itx._curr->next->prev = x._end;
