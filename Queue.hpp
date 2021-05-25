@@ -37,30 +37,30 @@ namespace ft
 		{
 			this->c = ctnr;
 		}
-
+		//ok
 		queue(queue const &copy)
 		{
 			this->c = copy.c;
 		}
-
+		//ok
 		queue&					operator = (const queue& other)
 		{
 			this->c = other.c;
 			return (*this);
 		}
-
+		//ok
 		virtual ~queue()	{}
-
+		//ok
 		bool					empty() const
 		{
 			return (this->c.empty());
 		}
-
+		//ok
 		size_type				size() const
 		{
 			return (this->c.size());
 		}
-
+		//ok
 		value_type&				front()
 		{
 			return (this->c.front());
@@ -70,7 +70,7 @@ namespace ft
 		{
 			return (this->c.front());
 		}
-
+		//ok
 		value_type&				back()
 		{
 			return (this->c.back());
@@ -80,49 +80,49 @@ namespace ft
 		{
 			return (this->c.back());
 		}
-
+		//ok
 		void					push(const value_type& val)
 		{
 			this->c.push_back(val);
 		}
-
+		//ok
 		void					pop()
 		{
 			this->c.pop_front();
 		}
 
 		// NON MEMBER FUNCTION OVERLOAD
-
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator == (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c == rhs.c);
 		}
-		
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator != (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c != rhs.c);
 		}
-
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator <  (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c < rhs.c);
 		}
-	
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator <= (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c <= rhs.c);
 		}
-	
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator >  (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
 			return (lhs.c > rhs.c);
 		}
-	
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator >= (const ft::queue<value_type,container_type>& lhs, const ft::queue<value_type,container_type>& rhs)
 		{
