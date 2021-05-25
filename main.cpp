@@ -164,7 +164,7 @@ static bool equalSysFt(std::vector<T> &sys_vector, ft::vector<T> &our_vector)
 		sys_it_begin++;
 		our_it_begin++;
 	}
-	for (int i = 0; i < sys_vector.size(); i++)
+	for (size_t i = 0; i < sys_vector.size(); i++)
 	{
 		if (sys_vector[i] != our_vector[i] || sys_vector.at(i) != our_vector.at(i))
 		{
@@ -188,7 +188,7 @@ static bool equalSysFt(std::vector<T> &sys_vector, ft::vector<T> &our_vector)
 		sys_it_begin++;
 		our_it_begin++;
 	}
-	for (int i = 0; i < our_vector.size(); i++)
+	for (size_t i = 0; i < our_vector.size(); i++)
 	{
 		if (our_vector[i] != sys_vector[i] || sys_vector.at(i) != our_vector.at(i))
 		{

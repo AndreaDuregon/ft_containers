@@ -137,7 +137,7 @@ namespace ft
 			if (n > this->vec_capacity)
 			{
 				pointer		temp = alloc.allocate(n);
-				for (int i = 0; i < n; i++)
+				for (size_type i = 0; i < n; i++)
 				{
 					if (i < this->vec_size)	
 						temp[i] = this->vec[i];
@@ -155,7 +155,7 @@ namespace ft
 			if (n < this->vec_size)
 			{
 				pointer tmp = alloc.allocate(n);
-				for (int i = 0; i < n; i++)
+				for (size_type i = 0; i < n; i++)
 					tmp[i] = this->vec[i];
 				alloc.deallocate(this->vec, this->vec_capacity);
 				this->vec = tmp;
@@ -170,7 +170,7 @@ namespace ft
 			{
 				if (val)
 				{
-					for (int i = this->vec_size; i < n; i++)
+					for (size_type i = this->vec_size; i < n; i++)
 					{
 						this->vec[i] = val;
 					}
@@ -196,7 +196,7 @@ namespace ft
 		reference operator[] (size_type n)
 		{
 			iterator it1 = this->vec;
-			for (int i = 0; i != n; i++)
+			for (size_type i = 0; i != n; i++)
 				it1++;
 			return (*it1);
 		}
@@ -204,7 +204,7 @@ namespace ft
 		const_reference operator[] (size_type n) const
 		{
 			const_iterator it1;
-			for (int i = 0; i != n; i++)
+			for (size_type i = 0; i != n; i++)
 				it1++;
 			return (it1.vec_p);
 		}
@@ -255,7 +255,7 @@ namespace ft
 		//ok
 		void 		assign(size_type n, const value_type &val)
 		{
-			int i = 0;
+			size_type i = 0;
 
 			this->clear();
 			while (i < n)
@@ -284,7 +284,7 @@ namespace ft
 		//ok
 		iterator 	insert(iterator position, const value_type& val)
 		{
-			int pos = 0;
+			size_type pos = 0;
 			iterator it1(this->begin());
 			while (it1 != position)
 			{
@@ -316,10 +316,10 @@ namespace ft
 		//ok
     	void 		insert(iterator position, size_type n, const value_type& val)
 		{
-			int pos = 0;
+			size_type pos = 0;
 			iterator it1(this->begin());
 			iterator it(this->end());
-			int	i = this->vec_size;
+			size_type	i = this->vec_size;
 			for (size_t j = 0; j < n; j++)
 			{
 				pos = 0;
@@ -374,7 +374,7 @@ namespace ft
 				{
 					this->reserve(this->vec_capacity + 1);
 					position = this->begin();
-					for (size_t i = 0; i < pos; i++)
+					for (int i = 0; i < pos; i++)
 						position++;
 				}
 				it = this->end();

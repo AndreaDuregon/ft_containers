@@ -27,8 +27,8 @@ namespace ft
 			typedef std::ptrdiff_t 	difference_type;
 			typedef value_type *	pointer;
 			typedef value_type &	reference;
-			listIterator() {};
-			listIterator(Node<T> *curr) : _curr(curr) {};
+			listIterator() {}
+			listIterator(Node<T> *curr) : _curr(curr) {}
 			listIterator(listIterator const &copy)
 			{
 				*this = copy;
@@ -107,8 +107,11 @@ namespace ft
 	{
 		public:
 			clistIterator() {};
-			clistIterator(Node<T> *curr) : listIterator<T>(curr) {};
-			clistIterator(clistIterator const &copy) {};
+			clistIterator(Node<T> *curr) : listIterator<T>(curr) {}
+			clistIterator(clistIterator const &copy)
+			{
+				*this = copy;
+			}
 			T	const		&operator * ()
 			{
 				return this->_curr->value;
@@ -147,9 +150,12 @@ namespace ft
 	template <class T> class rlistIterator : public listIterator<T>
 	{
 		public:
-			rlistIterator() {};
-			rlistIterator(Node<T> *curr) : listIterator<T>(curr) {};
-			rlistIterator(rlistIterator const &copy) {};
+			rlistIterator() {}
+			rlistIterator(Node<T> *curr) : listIterator<T>(curr) {}
+			rlistIterator(rlistIterator const &copy)
+			{
+				*this = copy;
+			}
 			rlistIterator<T>		&operator -- ()
 			{
 				this->_curr = this->_curr->next;
@@ -178,9 +184,12 @@ namespace ft
 	template <class T> class rclistIterator : public listIterator<T>
 	{
 		public:
-			rclistIterator() {};
-			rclistIterator(Node<T> *curr) : listIterator<T>(curr) {};
-			rclistIterator(rclistIterator const &copy) {};
+			rclistIterator() {}
+			rclistIterator(Node<T> *curr) : listIterator<T>(curr) {}
+			rclistIterator(rclistIterator const &copy)
+			{
+				*this = copy;
+			}
 			T	const		&operator * ()
 			{
 				return this->_curr->value;
@@ -215,4 +224,4 @@ namespace ft
 	};
 	
 
-};
+}

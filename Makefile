@@ -86,7 +86,7 @@ On_IWhite	=	'\033[0;107m'	# White
 NAME		=	ft_containers
 SRC			=	main.cpp
 CC			=	clang++
-CFLAGS		=	-g # -Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS		=	-g -Wall -Wextra -Werror -std=c++98 -pedantic
 
 all			:	$(NAME)
 
