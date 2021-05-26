@@ -60,7 +60,21 @@ template <class Key, class Value> class  RBTree
 	//Lo zio del nodo è rosso - ROLE2
 	void role2(value_type node)
 	{
-
+		if (node.father && node.father->father)
+		{
+			if (node.father->father->left && node.father == node.father->father->left &&
+				node.father->father->right && node.father->father->right->color == ft::RED)
+			{
+				node.father->father->color = ft::RED;
+				node.father->father->right->color = ft::BLACK;
+			}
+			else if (node.father->father->right && node.father == node.father->father->right &&
+				node.father->father->left && node.father->father->left->color == ft::RED)
+			{
+				node.father->father->color = ft::RED;
+				node.father->father->left->color = ft::BLACK;
+			}
+		}
 	}
 
 	//Lo zio è nero (TRIANGOLO) - ROLE3
