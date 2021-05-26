@@ -133,17 +133,59 @@ template <class Key, class Value> class  RBTree
 
 	bool isValid(void)
 	{
-
+        if (!x->right)
+            return ;
+        if (x == _root)
+        {
+            _root->father = x->right;
+            _root = x->right;
+            _root->father->right = _root->left;
+            _root->left->father = _root->father;
+            _root->left = _root->father;
+            _root->father = 0;
+            return ;
+        }
+        if (x == x->father->left)
+            x->father->left = x->right;
+        else
+            x->father->right = x->right;
+        value_type *temp = x->father;
+        x->father = x->right;
+        x->right = x->father->left;
+        x->father->left = x;
+        x->father->father = temp;
+        x->right->father = x;
 	}
 
-	void leftRotation(void)
+	void leftRotation(value_type *x)
 	{
 
 	}
 
-	void rigthRotation(void)
+	void rightRotation(value_type *x)
 	{
-
+        if (!x->left)
+            return ;
+        if (x == _root)
+        {
+            _root->father = x->left;
+            _root = x->left;
+            _root->father->left = _root->right;
+            _root->right->father = _root->father;
+            _root->right = _root->father;
+            _root->father = 0;
+            return ;
+        }
+        if (x == x->father->right)
+            x->father->right = x->left;
+        else
+            x->father->left = x->left;
+        value_type *temp = x->father;
+        x->father = x->left;
+        x->left = x->father->right;
+        x->father->right = x;
+        x->father->father = temp;
+        x->left->father = x;
 	}
 
 	void fixTree(value_type &node)
