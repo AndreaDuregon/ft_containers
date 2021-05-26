@@ -6,7 +6,7 @@
 #    By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 11:15:19 by dmalori           #+#    #+#              #
-#    Updated: 2021/05/26 12:12:53 by dmalori          ###   ########.fr        #
+#    Updated: 2021/05/26 15:50:28 by dmalori          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ On_IWhite	=	'\033[0;107m'	# White
 NAME		=	ft_containers
 SRC			=	main.cpp
 CC			=	clang++
-CFLAGS		=	-g -Wall -Wextra -Werror -std=c++11 -pedantic
+CFLAGS		=	-g -Wall -Wextra -Werror -std=c++98 -pedantic
 
 all			:	$(NAME)
 
@@ -116,6 +116,9 @@ runStack	:	all
 
 runQueue	:	all
 				@./$(NAME) queue
+
+runMap	:	
+				@clang++ -std=c++98 mainTree.cpp && ./a.out
 
 push		:	fclean
 				git add .
