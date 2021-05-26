@@ -10,6 +10,7 @@ namespace ft
 		Node	*prev;
 		Node() {};
 		Node(T val) : value(val) {};
+		~Node() {};
 
 		Node &operator=(Node const &other) {
 			this->prev = other.prev;

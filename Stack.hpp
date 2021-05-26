@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:10:36 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 16:48:37 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/24 18:37:14 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ namespace ft
 			return (*this);
 		}
 		//ok
-		virtual ~stack() {}
+		~stack() {}
 		//ok
 		bool					empty() const
 		{
@@ -76,37 +76,37 @@ namespace ft
 		}
 
 		// NON MEMBER FUNCTION OVERLOAD
-
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator == (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c == rhs.c);
 		}
-		
+		//ok	
 		template <class value_type, class container_type>
 		friend bool operator != (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c != rhs.c);
 		}
-
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator <  (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c < rhs.c);
 		}
-	
+		//ok	
 		template <class value_type, class container_type>
 		friend bool operator <= (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c <= rhs.c);
 		}
-	
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator >  (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{
 			return (lhs.c > rhs.c);
 		}
-	
+		//ok
 		template <class value_type, class container_type>
 		friend bool operator >= (const ft::stack<value_type,container_type>& lhs, const ft::stack<value_type,container_type>& rhs)
 		{

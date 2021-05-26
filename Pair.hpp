@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pair.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:40:22 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 09:53:16 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:03:38 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ namespace ft
 	public:
 		typedef	T1	first_type;
 		typedef	T2	second_type;
-	
-	protected:
+		typedef ft::pair<first_type, second_type> value_type;
+
 		first_type	first;
 		second_type	second;
-
-	public:
 
 		// MEMBER FUNCTIONS
 
@@ -36,14 +34,13 @@ namespace ft
 			this->second = 0;
 		}
 
-		pair(const T1& x, const T2& y)
+		pair(const first_type& x, const second_type& y)
 		{
 			this->first = x;
 			this->second = y;
 		}
 
-		template< class U1, class U2 >
-		pair(const pair<U1, U2>& p)
+		pair(const value_type& p)
 		{
 			this->first = p.first;
 			this->second = p.second;
@@ -58,44 +55,37 @@ namespace ft
 
 		// NON MEMBER FUNCTIONS
 
-		template< class T1, class T2 >
-		friend ft::pair<T1,T2>	make_pair(T1 t, T2 u)
+		friend value_type	make_pair(first_type t, second_type u)
 		{
-			return ft::pair(t, u);
+			return value_type(t, u);
 		}
 
-		template< class T1, class T2 >
-		friend bool operator == (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+		friend bool operator == (const value_type& lhs, const value_type& rhs)
 		{
 			return (lhs.second == rhs.second);
 		}
 
-		template< class T1, class T2 >
-		friend bool operator != (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+		friend bool operator != (const value_type& lhs, const value_type& rhs)
 		{
 			return (lhs.second != rhs.second);
 		}
 
-		template< class T1, class T2 >
-		friend bool operator < (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+		friend bool operator < (const value_type& lhs, const value_type& rhs)
 		{
 			return (lhs.second < rhs.second);
 		}
 
-		template< class T1, class T2 >
-		friend bool operator <= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+		friend bool operator <= (const value_type& lhs, const value_type& rhs)
 		{
 			return (lhs.second <= rhs.second);
 		}
 
-		template< class T1, class T2 >
-		friend bool operator > (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+		friend bool operator > (const value_type& lhs, const value_type& rhs)
 		{
 			return (lhs.second > rhs.second);
 		}
 
-		template< class T1, class T2 >
-		friend bool operator >= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+		friend bool operator >= (const value_type& lhs, const value_type& rhs)
 		{
 			return (lhs.second >= rhs.second);
 		}

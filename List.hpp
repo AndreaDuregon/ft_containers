@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 17:24:00 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/26 15:33:46 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,22 @@ namespace ft
 		//ok
 		explicit list (const list& x)
 		{
-			*this = x;		
+			this->_end = new Node<T>();
+			*this = x;
 		}
 		//ok
 		list& operator = (const list& x)
 		{
-			this->_end = new Node<T>;
 			this->_end->value = 0;
 			this->_size = 0;
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
 			for (iterator i = x.begin(); i != x.end(); ++i)
 				this->push_back(*i);
-			return (*this);
+			return *this;
 		}
 		//ok
-		virtual ~list() {
+		~list() {
 			this->clear();
 			delete this->_end;
 		};
@@ -352,7 +352,7 @@ namespace ft
 
 
 		}
-
+		//ok
 		void splice (iterator position, list& x, iterator first, iterator last)
 		{
   		    iterator prev_pos = position;

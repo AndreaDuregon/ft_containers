@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/24 17:02:00 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/24 18:36:16 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,33 +49,33 @@ namespace ft
 			this->vec_size = 0;
 		}
 		//ok
-		vector(vector<T> const &copy)
-		{
-			*this = copy;
-		}
-		//ok
-		vector(size_type n)
+		vector(size_type n, const value_type& val = value_type())
 		{
 			this->vec = alloc.allocate(n);
 			this->vec_capacity = n;
 			this->vec_size = n;
 			for (size_t i = 0; i < n; i++)
-				this->vec[i] = 0;
+				this->vec[i] = val;
 		}
-
-		~vector()
+		//ok
+		vector(vector<T> const &copy)
 		{
-			alloc.deallocate(this->vec, this->vec_capacity); 
+			this->vec = alloc.allocate(copy.vec_capacity);
+			*this = copy;
 		}
-
+		//ok
 		vector& operator = (const vector& x)
 		{
-			this->vec = alloc.allocate(x.vec_capacity);
 			for (size_type i = 0; i < x.vec_size; i++)
 				this->vec[i] = x.vec[i];
 			this->vec_size = x.vec_size;
 			this->vec_capacity = x.vec_capacity;
 			return *this;
+		}
+		//ok
+		~vector()
+		{
+			alloc.deallocate(this->vec, this->vec_capacity); 
 		}
 		// ITERATOR
 		//ok
@@ -137,7 +137,7 @@ namespace ft
 			if (n > this->vec_capacity)
 			{
 				pointer		temp = alloc.allocate(n);
-				for (int i = 0; i < n; i++)
+				for (size_type i = 0; i < n; i++)
 				{
 					if (i < this->vec_size)	
 						temp[i] = this->vec[i];
@@ -155,7 +155,7 @@ namespace ft
 			if (n < this->vec_size)
 			{
 				pointer tmp = alloc.allocate(n);
-				for (int i = 0; i < n; i++)
+				for (size_type i = 0; i < n; i++)
 					tmp[i] = this->vec[i];
 				alloc.deallocate(this->vec, this->vec_capacity);
 				this->vec = tmp;
@@ -170,7 +170,7 @@ namespace ft
 			{
 				if (val)
 				{
-					for (int i = this->vec_size; i < n; i++)
+					for (size_type i = this->vec_size; i < n; i++)
 					{
 						this->vec[i] = val;
 					}
@@ -192,19 +192,19 @@ namespace ft
 		}
 
 		// ELEMENT ACCESS
-
+		//ok
 		reference operator[] (size_type n)
 		{
 			iterator it1 = this->vec;
-			for (int i = 0; i != n; i++)
+			for (size_type i = 0; i != n; i++)
 				it1++;
 			return (*it1);
 		}
-		//ok
+
 		const_reference operator[] (size_type n) const
 		{
 			const_iterator it1;
-			for (int i = 0; i != n; i++)
+			for (size_type i = 0; i != n; i++)
 				it1++;
 			return (it1.vec_p);
 		}
@@ -255,7 +255,7 @@ namespace ft
 		//ok
 		void 		assign(size_type n, const value_type &val)
 		{
-			int i = 0;
+			size_type i = 0;
 
 			this->clear();
 			while (i < n)
@@ -284,7 +284,7 @@ namespace ft
 		//ok
 		iterator 	insert(iterator position, const value_type& val)
 		{
-			int pos = 0;
+			size_type pos = 0;
 			iterator it1(this->begin());
 			while (it1 != position)
 			{
@@ -316,10 +316,10 @@ namespace ft
 		//ok
     	void 		insert(iterator position, size_type n, const value_type& val)
 		{
-			int pos = 0;
+			size_type pos = 0;
 			iterator it1(this->begin());
 			iterator it(this->end());
-			int	i = this->vec_size;
+			size_type	i = this->vec_size;
 			for (size_t j = 0; j < n; j++)
 			{
 				pos = 0;
@@ -374,7 +374,7 @@ namespace ft
 				{
 					this->reserve(this->vec_capacity + 1);
 					position = this->begin();
-					for (size_t i = 0; i < pos; i++)
+					for (int i = 0; i < pos; i++)
 						position++;
 				}
 				it = this->end();
@@ -441,7 +441,7 @@ namespace ft
 		}
 
 		//NON MEMBER FUNCTIONS
-
+		//ok
 		template <class value_type, class Alloc>
 		friend bool operator== (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
@@ -461,7 +461,7 @@ namespace ft
 			else
 				return false;
 		}
-
+		//ok
 		template <class value_type, class Alloc>
 		friend bool operator!= (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
@@ -481,7 +481,7 @@ namespace ft
 			else
 				return true;
 		}
-
+		//ok
 		template <class value_type, class Alloc>
 		friend bool operator<  (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
@@ -502,7 +502,7 @@ namespace ft
 			}
 			return false;
 		}
-
+		//ok
 		template <class value_type, class Alloc>
   		friend bool operator<= (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
@@ -523,7 +523,7 @@ namespace ft
 			}
 			return true;
 		}
-
+		//ok
 		template <class value_type, class Alloc>
   		friend bool operator>  (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
@@ -544,7 +544,7 @@ namespace ft
 			}
 			return false;
 		}
-
+		//ok
 		template <class value_type, class Alloc>
   		friend bool operator>= (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
