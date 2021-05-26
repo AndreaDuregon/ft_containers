@@ -35,7 +35,7 @@ int main (void)
     //std::cout << tree._deep << std::endl;
     //std::cout << tree._deep << std::endl;
     std::string in = "";
-    tree.printD2435(*tree._root);
+    tree.printd2435init();
 
     return (0);
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TreeNode.hpp"
+#include "Vector.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -111,7 +112,7 @@ template <class Key, class Value> class  RBTree
 			}
 			else if (node.father->left == node && !node.right)
 			{
-				if (node.father->father->left = node.father && node.father->father->right->color == ft::BLACK)
+				if (node.father->father->left == node.father && node.father->father->right->color == ft::BLACK)
 				{
 					node.left = node.father;
 					node.right = node.father->left;
@@ -210,14 +211,61 @@ template <class Key, class Value> class  RBTree
 		}
 	}
 
-	void printD2435(value_type root) {
-		if (root.left || root.right) {
-			if (root.left)
-				printD2435(*root.left);
-			if (root.right)
-				printD2435(*root.right);
+	void printd2435init(void)
+	{
+		int x = ((this->_deep - 1) * (this->_deep - 1)) + 1;
+		int y = this->_deep;
+		int *matrix = new int[x];
+		for (int i = 0; i < x; i++)
+		{
+			for (int j = 0; j < y; j++)
+				matrix[x][y] = -1;
 		}
-		std::cout<< root.value->first;
+		printD2435(x, y,  matrix, this->_root, ft::vector<int>());
+
+		for (int i = 0; i < x; i++)
+		{
+			for (int j = 0; j < y; j++)
+				std::cout << matrix[x][y];
+		}
+	}
+
+	void printD2435(int x,int y,  int **matrix, value_type *root, ft::vector<int> info) {
+		if (root->left)
+		{
+			ft::vector<int> newInfo(info);
+			newInfo.push_back(0);
+			printD2435(x,y,  matrix, root->left, newInfo);
+		}
+		if (root->right)
+		{
+			ft::vector<int> newInfo(info);
+			newInfo.push_back(1);
+			printD2435(x, y, matrix, root->right, newInfo);
+		}
+		std::cout<< root->value->first << " -> ";
+		for (int i = 0; i < info.size(); i++)
+		{
+			int _x = x / (i + 1 * 2);
+			int _y = info.size();
+			if (info[i] == 0)
+			{
+				std::cout << "LEFT, ";
+				_x -= _x;
+			}
+			else
+			{
+				std::cout << "RIGHT, ";
+				_x += _x;
+			}
+			//std::stringstream ss;  
+			//ss << root->value->first;  
+			//std::string s;  
+			//ss >> s;  
+			//std::cout << _x << ", " << _y << std::endl;
+			matrix[_x][_y] = root->value->first;
+		}
+		std::cout << std::endl;
 	}
 
 };
