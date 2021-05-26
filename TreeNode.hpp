@@ -15,7 +15,7 @@ namespace ft
 	template < class Key, class Value>
 	struct TreeNode
 	{
-		typedef ft::pair<Key, Value>			value_type;
+		typedef ft::pair<const Key, Value>		value_type;
 		typedef ft::TreeNode<Key, Value>		node_type;
 
 		ft::Color								color;

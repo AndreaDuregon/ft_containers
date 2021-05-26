@@ -17,14 +17,16 @@ template <class Key, class Value> class  RBTree
 
 	RBTree() : _root(0), _size(0) {}
 
-	void insert (value_type &newNode)
+	value_type &insert (value_type &newNode)
 	{
 		if (this->_root)
 		{
 			value_type *tmp = this->_root;
 			while(true)
 			{
-				if (newNode.value->first > tmp->value->first && tmp->right)
+				if (newNode.value->first == tmp->value->first)
+					return *tmp;
+				else if (newNode.value->first > tmp->value->first && tmp->right)
 					tmp = tmp->right;
 				else if (newNode.value->first < tmp->value->first && tmp->left)
 					tmp = tmp->left;
@@ -41,10 +43,12 @@ template <class Key, class Value> class  RBTree
 		}
 		else
 		{
+			// NODO DI ROOT
 			this->_size++;
 			this->_root = &newNode;
 			newNode.color = ft::BLACK;
 		}
+		return newNode;
 	}
 
 	//Il nodo inserito è la root - ROLE1

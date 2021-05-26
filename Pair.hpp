@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:40:22 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/26 15:03:38 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/26 15:47:49 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,13 @@ namespace ft
 
 		// MEMBER FUNCTIONS
 
-		pair()
-		{
-			this->first = 0;
-			this->second = 0;
-		}
+		pair() : first(0), second(0) {}
 
-		pair(const first_type& x, const second_type& y)
-		{
-			this->first = x;
-			this->second = y;
-		}
+		pair(const first_type& x, const second_type& y) : first(x), second(y) {}
 
-		pair(const value_type& p)
-		{
-			this->first = p.first;
-			this->second = p.second;
-		}
+		pair(const value_type& p) : first(p.first), second(p.second) {}
 
-		pair 					&operator = (const pair& other)
+		pair &operator = (const pair& other)
 		{
 			this->first = other.first;
 			this->second = other.second;
