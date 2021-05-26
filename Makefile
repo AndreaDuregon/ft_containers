@@ -117,8 +117,8 @@ runStack	:	all
 runQueue	:	all
 				@./$(NAME) queue
 
-runMap	:	
-				@clang++ -std=c++98 mainTree.cpp && ./a.out
+runMap	:		all
+				@clang++ mainTree.cpp && ./a.out
 
 push		:	fclean
 				git add .

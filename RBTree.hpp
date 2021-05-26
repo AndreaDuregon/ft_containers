@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TreeNode.hpp"
-#include "Vector.hpp"
+#include <vector>
 #include <iostream>
 #include <sstream>
 
@@ -134,6 +134,7 @@ template <class Key, class Value> class  RBTree
 
 	bool isValid(void)
 	{
+		/*
         if (!x->right)
             return ;
         if (x == _root)
@@ -156,6 +157,7 @@ template <class Key, class Value> class  RBTree
         x->father->left = x;
         x->father->father = temp;
         x->right->father = x;
+		*/
 	}
 
 	void leftRotation(value_type *x)
@@ -210,104 +212,78 @@ template <class Key, class Value> class  RBTree
 		return *tmp;
 	}
 
-	void print(void)
+	void printTree(void)
 	{
-		int x = ((this->_deep - 1) * (this->_deep - 1)) + 1;
-		int y = this->_deep;
-		std::string matrix [x][y];
-		for (int i = 0; i < y; i++)
+		std::vector< std::vector<std::string> > matrix;
+		int row = this->_deep;
+		int col = 1;
+		for (int i = 0; i < this->_deep; i++)
+			col *= 2;
+		col -= 1;
+		matrix.resize(row);
+		for(int i = 0 ; i < row ; ++i)
 		{
-			for (int j = 0; j < x; j++)
-			{
+			matrix[i].resize(col);
+		}
+		for (int i = 0; i < row; i++)
+		{
+			for (int j = 0; j < col; j++)
+				matrix[i][j] = std::string(".\t");
+		}
+		
+		printD2435(col, matrix, this->_root, std::vector<int>());
 
-				matrix[x][y] = std::string(".");
-			}
-		}
-		matrix[1][1] = std::string(std::to_string(this->_root->value->first));
-		for (int i = 0; i < y; i++)
+		for (int i = 0; i < row; i++)
 		{
-			for (int j = 0; j < x; j++)
-				std::cout << matrix[x][y];
-			std::cout<< std::endl;
-		}
-	}
-	void printHelper(value_type root, std::string &indent, bool last) {
-		if (root.left || root.right) {
-			//if (root) {
-			//	return;
-			//}
-			std::cout<<indent;
-			if (last) {
-				std::cout<<"R----";
-				indent += "     ";
-			} else {
-				std::cout<<"L----";
-				indent += "|    ";
-			}
-			std::string sColor = root.color == ft::RED ? "RED":"BLACK";
-			std::cout<<root.value->first<<"("<<sColor<<")"<<std::endl;
-			if (root.left)
-				printHelper(*root.left,  indent, false);
-			if (root.right)
-				printHelper(*root.right, indent, true);
+			for (int j = 0; j < col; j++)
+				std::cout << matrix[i][j] << "\t";
+			std::cout << std::endl;
 		}
 	}
 
-	void printd2435init(void)
-	{
-		int x = ((this->_deep - 1) * (this->_deep - 1)) + 1;
-		int y = this->_deep;
-		int *matrix = new int[x];
-		for (int i = 0; i < x; i++)
-		{
-			for (int j = 0; j < y; j++)
-				matrix[x][y] = -1;
-		}
-		printD2435(x, y,  matrix, this->_root, ft::vector<int>());
-
-		for (int i = 0; i < x; i++)
-		{
-			for (int j = 0; j < y; j++)
-				std::cout << matrix[x][y];
-		}
-	}
-
-	void printD2435(int x,int y,  int **matrix, value_type *root, ft::vector<int> info) {
+	void printD2435(int x, std::vector< std::vector<std::string> > &matrix, value_type *root, std::vector<int> info) {
 		if (root->left)
 		{
-			ft::vector<int> newInfo(info);
+			std::vector<int> newInfo(info);
 			newInfo.push_back(0);
-			printD2435(x,y,  matrix, root->left, newInfo);
+			printD2435(x, matrix, root->left, newInfo);
 		}
 		if (root->right)
 		{
-			ft::vector<int> newInfo(info);
+			std::vector<int> newInfo(info);
 			newInfo.push_back(1);
-			printD2435(x, y, matrix, root->right, newInfo);
+			printD2435(x, matrix, root->right, newInfo);
 		}
-		std::cout<< root->value->first << " -> ";
-		for (int i = 0; i < info.size(); i++)
+		//std::cout<< root->value->first << " -> ";
+		int _col = (x  - 1) / 2;
+		int _row = info.size();
+		for (int i = 1; i < info.size() + 1; i++)
 		{
-			int _x = x / (i + 1 * 2);
-			int _y = info.size();
-			if (info[i] == 0)
+			int _dif = this->_deep - i;
+			if (info[i - 1] == 0)
 			{
-				std::cout << "LEFT, ";
-				_x -= _x;
+				//std::cout << "LEFT, ";
+				_col -= _dif;
 			}
 			else
 			{
-				std::cout << "RIGHT, ";
-				_x += _x;
+				//std::cout << "RIGHT, ";
+				_col += _dif;
 			}
-			//std::stringstream ss;  
-			//ss << root->value->first;  
-			//std::string s;  
-			//ss >> s;  
-			//std::cout << _x << ", " << _y << std::endl;
-			matrix[_x][_y] = root->value->first;
 		}
-		std::cout << std::endl;
+
+		//std::cout << "[" << _row << ", " << _col << "]";
+		std::stringstream ss;  
+		ss << root->value->first; 
+		ss << "__(";
+		if (root->color == ft::RED)
+			ss << "RED)";
+		else
+			ss << "BLACK)"; 
+		std::string s;  
+		ss >> s;  
+		matrix[_row][_col] = s;
+		//std::cout << std::endl;
 	}
 
 };

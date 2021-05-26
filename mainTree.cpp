@@ -12,19 +12,13 @@ int main (void)
     ft::TreeNode<int, int> v3 = ft::TreeNode<int,int>(100,100);
     ft::TreeNode<int, int> v4 = ft::TreeNode<int,int>(91,91);
     ft::TreeNode<int, int> v5 = ft::TreeNode<int,int>(500,500);
-    ft::TreeNode<int, int> v6 = ft::TreeNode<int,int>(480,480);
-
-    ft::TreeNode<int, int> v7 = ft::TreeNode<int,int>(360,360);
-
-    ft::TreeNode<int, int> v8 = ft::TreeNode<int,int>(2,2);
+    ft::TreeNode<int, int> v6 = ft::TreeNode<int,int>(2,2);
     tree.insert(v);
     tree.insert(v2);
     tree.insert(v3);
     tree.insert(v4);
     tree.insert(v5);
     tree.insert(v6);
-    tree.insert(v7);
-    tree.insert(v8);
     x = tree._size;
 
     //std::cout << "SIZE: " << x << std::endl;
@@ -34,8 +28,7 @@ int main (void)
     //std::cout<< tree.end().value->first << std::endl;
     //std::cout << tree._deep << std::endl;
     //std::cout << tree._deep << std::endl;
-    std::string in = "";
-    tree.printd2435init();
+    tree.printTree();
 
     return (0);
 }
