@@ -48,23 +48,24 @@ template <class Key, class Value> class  RBTree
 	}
 
 	//Il nodo inserito è la root - ROLE1
-	void role1(value_type node)
+	void role1(value_type &node)
 	{
-
+		if (!node.father)
+			node.color = ft::BLACK;
 	}
 
 	//Lo zio del nodo è rosso - ROLE2
-	void role2(value_type node)
+	void role2(value_type &node)
 	{
 		if (node.father && node.father->father)
 		{
-			if (node.father->father->left && node.father == node.father->father->left &&
+			if (node.father == node.father->father->left &&
 				node.father->father->right && node.father->father->right->color == ft::RED)
 			{
 				node.father->father->color = ft::RED;
 				node.father->father->right->color = ft::BLACK;
 			}
-			else if (node.father->father->right && node.father == node.father->father->right &&
+			else if (node.father == node.father->father->right &&
 				node.father->father->left && node.father->father->left->color == ft::RED)
 			{
 				node.father->father->color = ft::RED;
@@ -74,15 +75,43 @@ template <class Key, class Value> class  RBTree
 	}
 
 	//Lo zio è nero (TRIANGOLO) - ROLE3
-	void role3(value_type node)
+	void role3(value_type &node)
 	{
-
+		if (node.father && node.father->father)
+		{
+			if (node.father->left == node && !node.right)
+			{
+				if (node.father->father->right == node.father && node.father->father->left->color == ft::BLACK)
+				{
+					node.right = node.father;
+					node.left = node.father->right;
+					node.father->right = 0;
+					node.father->left = 0;
+					node.father->father->right = node;
+					node.father = node.father->father;
+					node.right->father = node;
+				}
+			}
+			else if (node.father->left == node && !node.right)
+			{
+				if (node.father->father->left = node.father && node.father->father->right->color == ft::BLACK)
+				{
+					node.left = node.father;
+					node.right = node.father->left;
+					node.father->right = 0;
+					node.father->left = 0;
+					node.father->father->left = node;
+					node.father = node.father->father;
+					node.left->father = node;
+				}
+			}
+		}
 	}
 
 	//Lo zio è nero (LINEA) - ROLE4
-	void role4 (value_type node)
+	void role4 (value_type &node)
 	{
-
+		
 	}
 
 	bool isValid(void)
