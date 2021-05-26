@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/24 17:04:57 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/24 17:24:00 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ namespace ft
 		};
 		//ok
 		explicit list(iterator first, iterator last){
+			if (this->_end)
+				this->clear();
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
