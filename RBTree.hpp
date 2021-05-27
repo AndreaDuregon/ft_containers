@@ -154,7 +154,7 @@ template <class T> class  RBTree
 		{
 			if (it._curr->color == ft::RED && it._curr->father->color == ft::RED)
 				return false;
-			if (!it._curr->left && !it._curr->right &&  blackNodes(it) != blackNodesStart)
+			if (!it._curr->left && !it._curr->right && blackNodes(it) != blackNodesStart)
 				return false;
 			++it;
 		}
@@ -209,7 +209,7 @@ template <class T> class  RBTree
 
 	void leftRotation(value_type *x)
 	{
-		if (!x->right)
+		if (!x->right || !x->left)
 			return ;
 		if (x == _root)
 		{
@@ -250,6 +250,7 @@ template <class T> class  RBTree
 		value_type *tmp = this->_root;
 		while(tmp->left)
 			tmp = tmp->left;
+		this->_begin = tmp;
 		return binaryTreeIterator<T>(tmp);
 	}
 
