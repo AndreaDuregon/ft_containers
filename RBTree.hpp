@@ -288,6 +288,43 @@ template <class Key, class Value> class  RBTree
 		//std::cout << std::endl;
 	}
 
+	void	iterate()
+	{
+		value_type curr = this->begin();
+		value_type end = this->end();
+		value_type prev = this->begin();
+		std::cout << curr.value->first<< " ";
+		while (1)
+		{
+			if (curr.right && prev.value->first != curr.right->value->first)
+			{
+				prev = curr;
+				curr = *curr.right;
+				while (curr.left)
+				{
+					prev = curr;
+					curr = *curr.left;
+				}
+				std::cout << curr.value->first<< " ";
+			}
+			else
+			{
+				if (curr.value->first == this->_root->value->first && prev.value->first == this->_root->right->value->first)
+					break;
+				if (curr.father->left && curr.father->left->value->first == curr.value->first)
+				{
+					prev = curr;
+					curr = *curr.father;
+					std::cout << curr.value->first<< " ";
+				}
+				else if (curr.father->right && curr.father->right->value->first == curr.value->first)
+				{
+					prev = curr;
+					curr = *curr.father;
+				}
+			}
+		}
+	}
 };
 
 }

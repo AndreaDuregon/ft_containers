@@ -35,7 +35,8 @@ int main (void)
     //std::cout << tree._deep << std::endl;
     //std::cout << tree._deep << std::endl;
     //tree.printTree();
-    std::cout << tree.isValid() << std::endl;
+	tree.iterate();
+    //std::cout << tree.isValid() << std::endl;
 
     return (0);
 }
