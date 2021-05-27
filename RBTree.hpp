@@ -194,8 +194,11 @@ template <class T> class  RBTree
 
 	binaryTreeIterator<T> end(void)
 	{
-		this->_end->father->right = 0;
-		this->_end->father = 0;
+		if (this->_end->father)
+		{
+			this->_end->father->right = 0;
+			this->_end->father = 0;
+		}
 		value_type *tmp = this->_root;
 		while(tmp->right)
 			tmp = tmp->right;
@@ -241,6 +244,9 @@ template <class T> class  RBTree
 	}
 
 	void printD2435(int x, std::vector< std::vector<std::string> > &matrix, value_type *root, std::vector<int> info) {
+		if (root == this->_end)
+			return;
+
 		if (root->left)
 		{
 			std::vector<int> newInfo(info);
