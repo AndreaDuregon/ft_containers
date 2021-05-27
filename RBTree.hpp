@@ -27,8 +27,8 @@ template <class T> class  RBTree
 	size_type _deep;
 
 	RBTree() : _root(0), _size(0), _deep(0) {
-		*this->_end = value_type();
-		*this->_begin = value_type();
+		this->_end = new value_type();
+		this->_begin = new value_type();
 	}
 
 	value_type &insert (value_type &newNode)
@@ -171,12 +171,14 @@ template <class T> class  RBTree
 			x->father->right = x->left;
 		else
 			x->father->left = x->left;
+		
 		value_type *temp = x->father;
 		x->father = x->left;
 		x->left = x->father->right;
 		x->father->right = x;
 		x->father->father = temp;
 		x->left->father = x;
+		std::cout << "ooo" << std::endl;
 	}
 
 	void fixTree(value_type &node)

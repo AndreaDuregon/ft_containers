@@ -6,7 +6,6 @@ int main (void)
 {
     ft::RBTree<ft::pair<int, int> > tree;
     int x = tree._size;
-    //std::cout << "SIZE: " << x << std::endl;
     ft::TreeNode<ft::pair<int, int> > v(ft::pair<int, int>(90,90));
     ft::TreeNode<ft::pair<int, int> > v2(ft::pair<int, int>(1,1));
     ft::TreeNode<ft::pair<int, int> > v3(ft::pair<int, int>(100,100));
@@ -18,27 +17,27 @@ int main (void)
     ft::TreeNode<ft::pair<int, int> > v9(ft::pair<int, int>(4,4));
     tree.insert(v);
     tree.insert(v2);
+    tree.insert(v6);
+    tree.insert(v5);
     tree.insert(v3);
     tree.insert(v4);
-    tree.insert(v5);
-    tree.insert(v6);
-    //tree.insert(v7);
+    tree.insert(v7);
     //tree.insert(v8);
     //tree.insert(v9);
     x = tree._size;
 
-    ft::binaryTreeIterator<ft::pair<int, int> > it = tree.begin();
-    it++;
-    it++;
-    std::cout << "SIZE: " << x << std::endl;
+    ft::binaryTreeIterator<ft::pair<int, int> > it = tree._root->right;
+    std::cout << "SIZE: " << *it << std::endl;
     ////std::cout << tree._root->right->left->value->second << std::endl;
 
     //std::cout<< tree.begin().value->first << std::endl;
     //std::cout<< tree.end().value->first << std::endl;
     //std::cout << tree._deep << std::endl;
     //std::cout << tree._deep << std::endl;
+    //tree.printTree();
+    tree.rightRotation(it._curr);
     tree.printTree();
-	tree.iterate();
+	//tree.iterate();
     //std::cout << tree.isValid() << std::endl;
 
     return (0);
