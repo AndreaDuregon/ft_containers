@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TreeNode.hpp"
+#include "IteratorBinaryTree.hpp"
 #include <vector>
 #include <iostream>
 #include <sstream>
@@ -20,10 +21,15 @@ template <class T> class  RBTree
 	typedef ft::TreeNode<T>    value_type;
 
 	value_type *_root;
+	value_type *_end;
+	value_type *_begin;
 	size_type _size;
 	size_type _deep;
 
-	RBTree() : _root(0), _size(0), _deep(0) {}
+	RBTree() : _root(0), _size(0), _deep(0) {
+		*this->_end = value_type();
+		*this->_begin = value_type();
+	}
 
 	value_type &insert (value_type &newNode)
 	{
@@ -178,20 +184,24 @@ template <class T> class  RBTree
 
 	}
 
-	value_type &begin(void)
+	binaryTreeIterator<T> begin(void)
 	{
 		value_type *tmp = this->_root;
 		while(tmp->left)
 			tmp = tmp->left;
-		return *tmp;
+		return binaryTreeIterator<T>(tmp);
 	}
 
-	value_type &end(void)
+	binaryTreeIterator<T> end(void)
 	{
+		this->_end->father->right = 0;
+		this->_end->father = 0;
 		value_type *tmp = this->_root;
 		while(tmp->right)
 			tmp = tmp->right;
-		return *tmp;
+		tmp->right = this->_end;
+		this->_end->father = tmp;
+		return binaryTreeIterator<T>(this->_end);
 	}
 
 	void printTree(void)
@@ -290,6 +300,7 @@ template <class T> class  RBTree
 
 	void	iterate()
 	{
+		/*
 		value_type curr = this->begin();
 		value_type end = this->end();
 		value_type prev = this->begin();
@@ -324,6 +335,7 @@ template <class T> class  RBTree
 				}
 			}
 		}
+		*/
 	}
 };
 

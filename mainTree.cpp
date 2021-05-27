@@ -26,7 +26,12 @@ int main (void)
     //tree.insert(v8);
     //tree.insert(v9);
     x = tree._size;
-
+    ft::binaryTreeIterator<ft::pair<int, int> > it = tree.begin();
+    while(it != tree.end())
+    {
+        std::cout << *it << std::endl;
+        ++it;
+    }
     std::cout << "SIZE: " << x << std::endl;
     ////std::cout << tree._root->right->left->value->second << std::endl;
 
