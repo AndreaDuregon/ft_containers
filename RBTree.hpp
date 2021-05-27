@@ -174,11 +174,6 @@ template <class T> class  RBTree
 		return n;
 	}
 
-	void leftRotation(value_type *x)
-	{
-
-	}
-
 	void rightRotation(value_type *x)
 	{
 		if (!x->left)
@@ -193,16 +188,56 @@ template <class T> class  RBTree
 			_root->father = 0;
 			return ;
 		}
+		if (x == x->father->left)
+			x->father->left = x->right;
+		else
+			x->father->right = x->right;
+		
+		value_type *temp = x->father;
+		x->father = x->right;
+		//
+		if (x->right->left)
+			x->right = x->father->left;
+		else
+			x->right = 0;
+		x->father->left = x;
+		x->father->father = temp;
+		//std::cout << "ooo" << std::endl;
+		if (x->right)
+			x->right->father = x;
+	}
+
+	void leftRotation(value_type *x)
+	{
+		if (!x->right)
+			return ;
+		if (x == _root)
+		{
+			_root->father = x->right;
+			_root = x->right;
+			_root->father->right = _root->left;
+			_root->left->father = _root->father;
+			_root->left = _root->father;
+			_root->father = 0;
+			return ;
+		}
 		if (x == x->father->right)
 			x->father->right = x->left;
 		else
 			x->father->left = x->left;
+		
 		value_type *temp = x->father;
 		x->father = x->left;
-		x->left = x->father->right;
+		//
+		if (x->left->right)
+			x->left = x->father->right;
+		else
+			x->left = 0;
 		x->father->right = x;
 		x->father->father = temp;
-		x->left->father = x;
+		//std::cout << "ooo" << std::endl;
+		if (x->left)
+			x->left->father = x;
 	}
 
 	void fixTree(value_type &node)
@@ -270,7 +305,7 @@ template <class T> class  RBTree
 		for (int i = 0; i < row; i++)
 		{
 			for (int j = 0; j < col; j++)
-				matrix[i][j] = std::string(".   ");
+				matrix[i][j] = std::string("    ");
 		}
 		
 		printD2435(col, matrix, this->_root, std::vector<int>());
