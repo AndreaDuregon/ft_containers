@@ -12,12 +12,12 @@
 namespace ft
 {
 
-template <class Key, class Value> class  RBTree
+template <class T> class  RBTree
 {
 	public:
 
-	typedef std::size_t                 size_type;
-	typedef ft::TreeNode<Key, Value>    value_type;
+	typedef std::size_t        size_type;
+	typedef ft::TreeNode<T>    value_type;
 
 	value_type *_root;
 	size_type _size;
@@ -33,14 +33,14 @@ template <class Key, class Value> class  RBTree
 			value_type *tmp = this->_root;
 			while(true)
 			{
-				if (newNode.value->first == tmp->value->first)
+				if (*newNode.value == *tmp->value)
 					return *tmp;
-				else if (newNode.value->first > tmp->value->first && tmp->right)
+				else if (*newNode.value > *tmp->value && tmp->right)
 				{
 					newDeep++;
 					tmp = tmp->right;
 				}
-				else if (newNode.value->first < tmp->value->first && tmp->left)
+				else if (*newNode.value < *tmp->value && tmp->left)
 				{
 					newDeep++;
 					tmp = tmp->left;
@@ -48,7 +48,7 @@ template <class Key, class Value> class  RBTree
 				else
 					break;
 			}
-			if (newNode.value->first > tmp->value->first)
+			if (*newNode.value > *tmp->value)
 				tmp->right = &newNode;
 			else
 				tmp->left = &newNode;
@@ -243,7 +243,7 @@ template <class Key, class Value> class  RBTree
 			newInfo.push_back(1);
 			printD2435(x, matrix, root->right, newInfo);
 		}
-		//std::cout<< root->value->first << " -> ";
+		//std::cout<< root->value << " -> ";
 		int _col = (x  - 1) / 2;
 		int _row = info.size();
 		for (int i = 1; i < info.size() + 1; i++)
@@ -280,7 +280,7 @@ template <class Key, class Value> class  RBTree
 			ss << BG_RED;
 		else
 			ss << BG_BLACK;
-		ss << root->value->first;
+		ss << root->value->getKey();
 		ss << OFF;
 		std::string s;  
 		ss >> s;
@@ -293,10 +293,10 @@ template <class Key, class Value> class  RBTree
 		value_type curr = this->begin();
 		value_type end = this->end();
 		value_type prev = this->begin();
-		std::cout << curr.value->first<< " ";
+		std::cout << *curr.value<< " ";
 		while (1)
 		{
-			if (curr.right && prev.value->first != curr.right->value->first)
+			if (curr.right && prev.value != curr.right->value)
 			{
 				prev = curr;
 				curr = *curr.right;
@@ -305,19 +305,19 @@ template <class Key, class Value> class  RBTree
 					prev = curr;
 					curr = *curr.left;
 				}
-				std::cout << curr.value->first<< " ";
+				std::cout << *curr.value<< " ";
 			}
 			else
 			{
-				if (curr.value->first == this->_root->value->first && prev.value->first == this->_root->right->value->first)
+				if (curr.value == this->_root->value && prev.value == this->_root->right->value)
 					break;
-				if (curr.father->left && curr.father->left->value->first == curr.value->first)
+				if (curr.father->left && curr.father->left->value == curr.value)
 				{
 					prev = curr;
 					curr = *curr.father;
-					std::cout << curr.value->first<< " ";
+					std::cout << *curr.value<< " ";
 				}
-				else if (curr.father->right && curr.father->right->value->first == curr.value->first)
+				else if (curr.father->right && curr.father->right->value == curr.value)
 				{
 					prev = curr;
 					curr = *curr.father;

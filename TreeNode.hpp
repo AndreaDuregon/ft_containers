@@ -12,11 +12,11 @@ namespace ft
 		BLACK
 	};
 
-	template < class Key, class Value>
+	template < class T>
 	struct TreeNode
 	{
-		typedef ft::pair<const Key, Value>		value_type;
-		typedef ft::TreeNode<Key, Value>		node_type;
+		typedef T								value_type;
+		typedef ft::TreeNode<T>					node_type;
 
 		ft::Color								color;
 		value_type								*value;
@@ -27,14 +27,7 @@ namespace ft
 
 		TreeNode () : color(ft::RED), value(new value_type()), father(0), left(0), right(0) {}
 
-		TreeNode (Key key, Value value) : color(ft::RED), value(new value_type(key, value)), father(0), left(0), right(0) {}
-
-		//TreeNode (const TreeNode &other) : color(other.color), value(other.value), father(other.father), left(other.left), right(other.right) {}
-
-		void setValue(Value val)
-		{
-			this->value->second = val;
-		}
+		TreeNode (T node) : color(ft::RED), value(new value_type(node)), father(0), left(0), right(0) {}
 
 		TreeNode &operator = (const TreeNode &other)
 		{
@@ -44,6 +37,28 @@ namespace ft
 			this->right = other.right;
 			this->value = other.value;
 			return (*this);
+		}
+
+		bool operator > (const TreeNode &other)
+		{
+			return (this->value > other.value);
+		} 
+
+		bool operator < (const TreeNode &other)
+		{
+			return (this->value < other.value);
+		} 
+
+		bool operator == (const TreeNode &other)
+		{
+			return (this->value == other.value);
 		} 
 	};
+
+	template <class T>
+	std::ostream& operator<<(std::ostream &output, const TreeNode<T> &obj)
+	{
+		output << obj.value;
+		return (output);
+	}
 }

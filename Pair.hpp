@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:40:22 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/26 15:48:18 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/27 14:36:48 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,44 @@ namespace ft
 
 		friend bool operator == (const value_type& lhs, const value_type& rhs)
 		{
-			return (lhs.second == rhs.second);
+			return (lhs.first == rhs.first);
 		}
 
 		friend bool operator != (const value_type& lhs, const value_type& rhs)
 		{
-			return (lhs.second != rhs.second);
+			return (lhs.first != rhs.first);
 		}
 
 		friend bool operator < (const value_type& lhs, const value_type& rhs)
 		{
-			return (lhs.second < rhs.second);
+			return (lhs.first < rhs.first);
 		}
 
 		friend bool operator <= (const value_type& lhs, const value_type& rhs)
 		{
-			return (lhs.second <= rhs.second);
+			return (lhs.first <= rhs.first);
 		}
 
 		friend bool operator > (const value_type& lhs, const value_type& rhs)
 		{
-			return (lhs.second > rhs.second);
+			return (lhs.first > rhs.first);
 		}
 
 		friend bool operator >= (const value_type& lhs, const value_type& rhs)
 		{
-			return (lhs.second >= rhs.second);
+			return (lhs.first >= rhs.first);
+		}
+	
+		first_type getKey(void)
+		{
+			return this->first;
 		}
 	};
+
+	template <class T1, class T2>
+	std::ostream& operator<<(std::ostream &output, const pair<T1, T2> &obj)
+	{
+		output << "['" << obj.first << "':" << obj.second << "]";
+		return (output);
+	}
 }
