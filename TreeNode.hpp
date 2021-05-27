@@ -52,6 +52,11 @@ namespace ft
 		bool operator == (const TreeNode &other)
 		{
 			return (this->value == other.value);
+		}
+
+		bool operator != (const TreeNode &other)
+		{
+			return (this->value != other.value);
 		} 
 	};
 

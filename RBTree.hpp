@@ -144,8 +144,34 @@ template <class T> class  RBTree
 
 	bool isValid(void)
 	{
-		
-		return false;
+		if (this->_size == 0)
+			return true;
+		ft::binaryTreeIterator<T> it = this->begin();
+		int blackNodesStart = blackNodes(it);
+		if (this->_root->color == ft::RED)
+			return false;
+		while (it != this->end())
+		{
+			if (it._curr->color == ft::RED && it._curr->father->color == ft::RED)
+				return false;
+			if (!it._curr->left && !it._curr->right &&  blackNodes(it) != blackNodesStart)
+				return false;
+			++it;
+		}
+		return true;
+	}
+
+	int	blackNodes(ft::binaryTreeIterator<T> it)
+	{
+		ft::binaryTreeIterator<T> tmp = it;
+		int n = 0;
+		while (*tmp._curr->value != *this->_root->value)
+		{
+			if (tmp._curr->color == ft::BLACK)
+				n++;
+			tmp = tmp._curr->father;
+		}
+		return n;
 	}
 
 	void leftRotation(value_type *x)
@@ -192,6 +218,14 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(tmp);
 	}
 
+	binaryTreeIterator<T> rbegin(void)
+	{
+		value_type *tmp = this->_root;
+		while(tmp->right)
+			tmp = tmp->right;
+		return binaryTreeIterator<T>(tmp);
+	}
+
 	binaryTreeIterator<T> end(void)
 	{
 		if (this->_end->father)
@@ -205,6 +239,21 @@ template <class T> class  RBTree
 		tmp->right = this->_end;
 		this->_end->father = tmp;
 		return binaryTreeIterator<T>(this->_end);
+	}
+
+	binaryTreeIterator<T> rend(void)
+	{
+		if (this->_begin->father)
+		{
+			this->_begin->father->left = 0;
+			this->_begin->father = 0;
+		}
+		value_type *tmp = this->_root;
+		while(tmp->left)
+			tmp = tmp->left;
+		tmp->left = this->_begin;
+		this->_begin->father = tmp;
+		return binaryTreeIterator<T>(this->_begin);
 	}
 
 	void printTree(void)
@@ -306,42 +355,7 @@ template <class T> class  RBTree
 
 	void	iterate()
 	{
-		/*
-		value_type curr = this->begin();
-		value_type end = this->end();
-		value_type prev = this->begin();
-		std::cout << *curr.value<< " ";
-		while (1)
-		{
-			if (curr.right && prev.value != curr.right->value)
-			{
-				prev = curr;
-				curr = *curr.right;
-				while (curr.left)
-				{
-					prev = curr;
-					curr = *curr.left;
-				}
-				std::cout << *curr.value<< " ";
-			}
-			else
-			{
-				if (curr.value == this->_root->value && prev.value == this->_root->right->value)
-					break;
-				if (curr.father->left && curr.father->left->value == curr.value)
-				{
-					prev = curr;
-					curr = *curr.father;
-					std::cout << *curr.value<< " ";
-				}
-				else if (curr.father->right && curr.father->right->value == curr.value)
-				{
-					prev = curr;
-					curr = *curr.father;
-				}
-			}
-		}
-		*/
+
 	}
 };
 
