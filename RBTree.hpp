@@ -33,6 +33,11 @@ template <class T> class  RBTree
 
 	value_type &insert (value_type &newNode)
 	{
+		if (this->_end->father)
+		{
+			this->_end->father->right = 0;
+			this->_end->father = 0;
+		}
 		if (this->_root)
 		{
 			size_type newDeep = 1;
@@ -62,7 +67,7 @@ template <class T> class  RBTree
 				this->_deep = newDeep;
 			newNode.father = tmp;
 			this->_size++;
-			fixTree(newNode);
+			this->fixTree(newNode);
 		}
 		else
 		{
@@ -142,19 +147,34 @@ template <class T> class  RBTree
 		
 	}
 
+	void fixTree(value_type &node)
+	{
+		/*
+		while(!this->isValid())
+		{
+			std::cout << "INVALIDO";
+			role1(node);
+			role2(node);
+			role3(node);
+		}
+		std::cout << "OK";
+		*/
+	}
+
 	bool isValid(void)
 	{
-		if (this->_size == 0)
+		if (this->_size <= 1)
 			return true;
 		ft::binaryTreeIterator<T> it = this->begin();
-		int blackNodesStart = blackNodes(it);
+		int blackNodesStart = this->blackNodes(it);
 		if (this->_root->color == ft::RED)
 			return false;
+
 		while (it != this->end())
 		{
-			if (it._curr->color == ft::RED && it._curr->father->color == ft::RED)
+			if (it._curr->color == ft::RED && it._curr->father && it._curr->father->color == ft::RED)
 				return false;
-			if (!it._curr->left && !it._curr->right && blackNodes(it) != blackNodesStart)
+			if (!it._curr->left && !it._curr->right && this->blackNodes(it) != blackNodesStart)
 				return false;
 			++it;
 		}
@@ -165,7 +185,7 @@ template <class T> class  RBTree
 	{
 		ft::binaryTreeIterator<T> tmp = it;
 		int n = 0;
-		while (*tmp._curr->value != *this->_root->value)
+		while (tmp._curr->father != this->_root)
 		{
 			if (tmp._curr->color == ft::BLACK)
 				n++;
@@ -240,10 +260,6 @@ template <class T> class  RBTree
 			x->left->father = x;
 	}
 
-	void fixTree(value_type &node)
-	{
-
-	}
 
 	binaryTreeIterator<T> begin(void)
 	{
@@ -274,7 +290,7 @@ template <class T> class  RBTree
 			tmp = tmp->right;
 		tmp->right = this->_end;
 		this->_end->father = tmp;
-		return binaryTreeIterator<T>(this->_end);
+		return binaryTreeIterator<T>(tmp);
 	}
 
 	binaryTreeIterator<T> rend(void)
