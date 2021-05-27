@@ -80,15 +80,15 @@ template <class T> class  RBTree
 		return newNode;
 	}
 
-	//Il nodo inserito è la root - ROLE1
-	void role1(value_type &node)
+	//Il nodo inserito è la root - rule1
+	void rule1(value_type &node)
 	{
 		if (!node.father)
 			node.color = ft::BLACK;
 	}
 
-	//Lo zio del nodo è rosso - ROLE2
-	void role2(value_type &node)
+	//Lo zio del nodo è rosso - rule2
+	void rule2(value_type &node)
 	{
 		if (node.father && node.father->father)
 		{
@@ -107,8 +107,8 @@ template <class T> class  RBTree
 		}
 	}
 
-	//Lo zio è nero (TRIANGOLO) - ROLE3
-	void role3(value_type &node)
+	//Lo zio è nero (TRIANGOLO) - rule3
+	void rule3(value_type &node)
 	{
 		if (node.father && node.father->father)
 		{
@@ -141,8 +141,8 @@ template <class T> class  RBTree
 		}
 	}
 
-	//Lo zio è nero (LINEA) - ROLE4
-	void role4 (value_type &node)
+	//Lo zio è nero (LINEA) - rule4
+	void rule4 (value_type &node)
 	{
 		
 	}
@@ -194,20 +194,20 @@ template <class T> class  RBTree
 		return n;
 	}
 
-	void rightRotation(value_type *x)
+	void leftRotation(value_type *x)
 	{
-		if (!x->left)
+		if (!x->right)
 			return ;
-		if (x == _root)
-		{
-			_root->father = x->left;
-			_root = x->left;
-			_root->father->left = _root->right;
-			_root->right->father = _root->father;
-			_root->right = _root->father;
-			_root->father = 0;
-			return ;
-		}
+        if (x == _root)
+        {
+            _root->father = x->right;
+            _root = x->right;
+            _root->father->right = _root->left;
+            _root->left->father = _root->father;
+            _root->left = _root->father;
+            _root->father = 0;
+            return ;
+        }
 		if (x == x->father->left)
 			x->father->left = x->right;
 		else
@@ -227,20 +227,20 @@ template <class T> class  RBTree
 			x->right->father = x;
 	}
 
-	void leftRotation(value_type *x)
+	void rightRotation(value_type *x)
 	{
-		if (!x->right || !x->left)
+		if (!x->left)
 			return ;
-		if (x == _root)
-		{
-			_root->father = x->right;
-			_root = x->right;
-			_root->father->right = _root->left;
-			_root->left->father = _root->father;
-			_root->left = _root->father;
-			_root->father = 0;
-			return ;
-		}
+        if (x == _root)
+        {
+            _root->father = x->left;
+            _root = x->left;
+            _root->father->left = _root->right;
+            _root->right->father = _root->father;
+            _root->right = _root->father;
+            _root->father = 0;
+            return ;
+        }
 		if (x == x->father->right)
 			x->father->right = x->left;
 		else

@@ -16,12 +16,12 @@ int main (void)
     tree.insert(v2);
     tree.insert(v3);
     tree.insert(v6);
-    tree.insert(v4);
+    //tree.insert(v4);
     tree.insert(v5);
     tree.insert(v7);
 
     tree.printTree();
-    tree.isValid();
+    //tree.isValid();
     //std::cout << tree.isValid() << std::endl;
 
     //x = tree._size;
@@ -36,8 +36,8 @@ int main (void)
     //std::cout << tree._deep << std::endl;
     //tree.printTree();
     //tree.printTree();
-    //tree.leftRotation(tree._root);
-    //tree.printTree();
+    tree.leftRotation(tree._root->left);
+    tree.printTree();
     //tree.rightRotation(tree._root);
 
 	//tree.iterate();
