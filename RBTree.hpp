@@ -27,8 +27,8 @@ template <class T> class  RBTree
 	size_type _deep;
 
 	RBTree() : _root(0), _size(0), _deep(0) {
-		*this->_end = value_type();
-		*this->_begin = value_type();
+		this->_end = new value_type();
+		this->_begin = new value_type();
 	}
 
 	value_type &insert (value_type &newNode)
