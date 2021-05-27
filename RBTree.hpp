@@ -4,6 +4,10 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <cmath>
+#define BG_BLACK "\033[0;100m"
+#define BG_RED "\033[0;101m"
+#define OFF "\033[0m"
 
 namespace ft
 {
@@ -134,30 +138,8 @@ template <class Key, class Value> class  RBTree
 
 	bool isValid(void)
 	{
-		/*
-        if (!x->right)
-            return ;
-        if (x == _root)
-        {
-            _root->father = x->right;
-            _root = x->right;
-            _root->father->right = _root->left;
-            _root->left->father = _root->father;
-            _root->left = _root->father;
-            _root->father = 0;
-            return ;
-        }
-        if (x == x->father->left)
-            x->father->left = x->right;
-        else
-            x->father->right = x->right;
-        value_type *temp = x->father;
-        x->father = x->right;
-        x->right = x->father->left;
-        x->father->left = x;
-        x->father->father = temp;
-        x->right->father = x;
-		*/
+		
+		return false;
 	}
 
 	void leftRotation(value_type *x)
@@ -167,28 +149,28 @@ template <class Key, class Value> class  RBTree
 
 	void rightRotation(value_type *x)
 	{
-        if (!x->left)
-            return ;
-        if (x == _root)
-        {
-            _root->father = x->left;
-            _root = x->left;
-            _root->father->left = _root->right;
-            _root->right->father = _root->father;
-            _root->right = _root->father;
-            _root->father = 0;
-            return ;
-        }
-        if (x == x->father->right)
-            x->father->right = x->left;
-        else
-            x->father->left = x->left;
-        value_type *temp = x->father;
-        x->father = x->left;
-        x->left = x->father->right;
-        x->father->right = x;
-        x->father->father = temp;
-        x->left->father = x;
+		if (!x->left)
+			return ;
+		if (x == _root)
+		{
+			_root->father = x->left;
+			_root = x->left;
+			_root->father->left = _root->right;
+			_root->right->father = _root->father;
+			_root->right = _root->father;
+			_root->father = 0;
+			return ;
+		}
+		if (x == x->father->right)
+			x->father->right = x->left;
+		else
+			x->father->left = x->left;
+		value_type *temp = x->father;
+		x->father = x->left;
+		x->left = x->father->right;
+		x->father->right = x;
+		x->father->father = temp;
+		x->left->father = x;
 	}
 
 	void fixTree(value_type &node)
@@ -215,11 +197,9 @@ template <class Key, class Value> class  RBTree
 	void printTree(void)
 	{
 		std::vector< std::vector<std::string> > matrix;
-		int row = this->_deep;
-		int col = 1;
-		for (int i = 0; i < this->_deep; i++)
-			col *= 2;
-		col -= 1;
+		int row = this->_deep + 1;
+		int col = std::pow(2, this->_deep + 1) - 1;
+
 		matrix.resize(row);
 		for(int i = 0 ; i < row ; ++i)
 		{
@@ -228,7 +208,7 @@ template <class Key, class Value> class  RBTree
 		for (int i = 0; i < row; i++)
 		{
 			for (int j = 0; j < col; j++)
-				matrix[i][j] = std::string(".\t");
+				matrix[i][j] = std::string(".   ");
 		}
 		
 		printD2435(col, matrix, this->_root, std::vector<int>());
@@ -236,7 +216,16 @@ template <class Key, class Value> class  RBTree
 		for (int i = 0; i < row; i++)
 		{
 			for (int j = 0; j < col; j++)
-				std::cout << matrix[i][j] << "\t";
+			{
+					if (matrix[i][j].length() < 13)
+						std::cout << matrix[i][j];
+					else
+					{
+						std::cout << matrix[i][j];				
+						for (size_t ii = matrix[i][j].length(); ii <= 15; ii++)
+							std::cout << " ";
+					}
+			}
 			std::cout << std::endl;
 		}
 	}
@@ -263,25 +252,38 @@ template <class Key, class Value> class  RBTree
 			if (info[i - 1] == 0)
 			{
 				//std::cout << "LEFT, ";
-				_col -= _dif;
+				//if (_col < x / 2)
+				if (_col > (x  - 1) / 2)
+					_col -= _dif;
+				else if (_col < (x  - 1) / 2)
+					_col -= _dif + 1;
+				else
+					_col -= _dif + 1;
 			}
 			else
 			{
 				//std::cout << "RIGHT, ";
-				_col += _dif;
+				//_col += _dif;
+				if (_col > (x  - 1) / 2)
+					_col += _dif ;
+				else if (_col < (x  - 1) / 2)
+					_col += _dif;
+				else
+					_col += _dif + 1;
 			}
 		}
 
 		//std::cout << "[" << _row << ", " << _col << "]";
-		std::stringstream ss;  
-		ss << root->value->first; 
-		ss << "__(";
+		std::stringstream ss;
+
 		if (root->color == ft::RED)
-			ss << "RED)";
+			ss << BG_RED;
 		else
-			ss << "BLACK)"; 
+			ss << BG_BLACK;
+		ss << root->value->first;
+		ss << OFF;
 		std::string s;  
-		ss >> s;  
+		ss >> s;
 		matrix[_row][_col] = s;
 		//std::cout << std::endl;
 	}
