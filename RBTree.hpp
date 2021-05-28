@@ -28,16 +28,15 @@ template <class T> class  RBTree
 
 	RBTree() : _root(0), _size(0), _deep(0) {
 		this->_end = new value_type();
+		this->_end->father = 0;
 		this->_begin = new value_type();
+		this->_begin->father = 0;
 	}
 
 	value_type &insert (value_type &newNode)
 	{
-		if (this->_end->father)
-		{
-			this->_end->father->right = 0;
-			this->_end->father = 0;
-		}
+
+		this->removeGhostNodes();
 		if (this->_root)
 		{
 			size_type newDeep = 1;
@@ -67,7 +66,7 @@ template <class T> class  RBTree
 				this->_deep = newDeep;
 			newNode.father = tmp;
 			this->_size++;
-			this->fixTree(newNode);
+			this->fixTree(&newNode);
 		}
 		else
 		{
@@ -81,121 +80,184 @@ template <class T> class  RBTree
 	}
 
 	//Il nodo inserito è la root - rule1
-	void rule1(value_type &node)
+	value_type *rule1(value_type *node)
 	{
-		if (!node.father)
-			node.color = ft::BLACK;
+		node->color = ft::BLACK;
+		return node;
 	}
 
-	//Lo zio del nodo è rosso - rule2
-	void rule2(value_type &node)
+	//Lo zio del nodo è rosso - rule2 LEFT
+	value_type *rule2_left(value_type *node)
 	{
-		if (node.father && node.father->father)
-		{
-			if (node.father == node.father->father->left &&
-				node.father->father->right && node.father->father->right->color == ft::RED)
-			{
-				node.father->father->color = ft::RED;
-				node.father->father->right->color = ft::BLACK;
-			}
-			else if (node.father == node.father->father->right &&
-				node.father->father->left && node.father->father->left->color == ft::RED)
-			{
-				node.father->father->color = ft::RED;
-				node.father->father->left->color = ft::BLACK;
-			}
-		}
+		node->father->father->color = ft::RED;
+		node->father->father->left->color = ft::BLACK;
+		node->father->color = ft::BLACK;
+		return node->father->father;
 	}
 
-	//Lo zio è nero (TRIANGOLO) - rule3
-	void rule3(value_type &node)
+	//Lo zio del nodo è rosso - rule2 RIGHT
+	value_type *rule2_right (value_type *node)
 	{
-		if (node.father && node.father->father)
+		node->father->father->color = ft::RED;
+		node->father->father->right->color = ft::BLACK;
+		node->father->color = ft::BLACK;
+		return node->father->father;
+	}
+
+	//Lo zio è nero (TRIANGOLO) - rule3 DESTRA
+	value_type *rule3_right(value_type *node)
+	{
+		this->leftRotation(node->father);
+		return node->left;
+	}
+
+	//Lo zio è nero (TRIANGOLO) - rule3 SINISTRA
+	value_type *rule3_left(value_type *node)
+	{
+		this->rightRotation(node->father);
+		return node->right;
+	}
+
+	//Lo zio è nero (LINEA) - rule4 SINISTRA
+	value_type *rule4_left (value_type *node)
+	{
+		if (node->color == ft::RED && node->father->color == ft::RED)
+			node->color = ft::BLACK;
+		this->leftRotation(node->father->father);	
+		return node->father;
+	}
+
+	//Lo zio è nero (LINEA) - rule4 DESTRA
+	value_type *rule4_right (value_type *node)
+	{
+		if (node->color == ft::RED && node->father->color == ft::RED)
+			node->color = ft::BLACK;
+		this->rightRotation(node->father->father);
+		return node->father;
+	}
+
+	void fixTree(value_type *node)
+	{
+
+		//this->printTree();
+		int err = 1;
+		//char test;
+		while((err = this->isValid()) != 1)
 		{
-			if (node.father->left == node && !node.right)
+			//std::cout << err << std::endl;
+			this->removeGhostNodes();
+			// ROOT COLORE NERO
+			if (!node->father && node->color == ft::RED)
 			{
-				if (node.father->father->right == node.father && node.father->father->left->color == ft::BLACK)
+				//std::cout << "ROOT ROSSA: " << *node->value << std::endl;
+				rule1(node);
+			}
+			//ZIO ROSSO
+			else if (node->father && node->father->father && ((node->father->father->right && node->father->father->right != node->father && node->father->father->right->color == ft::RED) || (node->father->father->left && node->father->father->left != node->father && node->father->father->left->color == ft::RED)) )
+			{
+				//DI SINISTRA
+				if (node->father == node->father->father->right && node->father->father->left && node->father->father->left->color == ft::RED)
 				{
-					node.right = node.father;
-					node.left = node.father->right;
-					node.father->right = 0;
-					node.father->left = 0;
-					node.father->father->right = node;
-					node.father = node.father->father;
-					node.right->father = node;
+					//std::cout << "ZIO ROSSO SINISTRA: " << *node->value << std::endl;
+					node = rule2_left(node);
 				}
-			}
-			else if (node.father->left == node && !node.right)
-			{
-				if (node.father->father->left == node.father && node.father->father->right->color == ft::BLACK)
+				//DI DESTRA
+				else if (node->father == node->father->father->left && node->father->father->right && node->father->father->right->color == ft::RED)
 				{
-					node.left = node.father;
-					node.right = node.father->left;
-					node.father->right = 0;
-					node.father->left = 0;
-					node.father->father->left = node;
-					node.father = node.father->father;
-					node.left->father = node;
-				}
+					//std::cout << "ZIO ROSSO DESTRA: " << *node->value << std::endl;
+					node = rule2_right(node);
+				}	
 			}
+			//ZIO NERO
+			else if (node->father && node->father->father)
+			{
+				// ZIO DESTRA
+				if (!node->father->father->right || (node->father->father->right->color == ft::BLACK && node->father->father->right != node->father))
+				{
+					//LINEA
+					if (node->father->left && node == node->father->left)
+					{
+						//std::cout << "ZIO DESTRA LINEA NERO: " << *node->value << std::endl;
+						node = rule4_right(node);
+					}
+					//TRIANGOLO
+					else
+					{
+						//std::cout << "ZIO DESTRA TRIANGOLO NERO: " << *node->value << std::endl;
+						node = rule3_right(node);
+					}
+				}
+				//ZIO SINISTRA
+				else if (!node->father->father->left || (node->father->father->left->color == ft::BLACK && node->father->father->left != node->father))
+				{
+					//LINEA
+					if (node->father->right && node == node->father->right)
+					{
+						//std::cout << "ZIO SINISTRA LINEA NERO: " << *node->value << std::endl;
+						node = rule4_left(node);
+					}
+					//TRIANGOLO
+					else
+					{
+						//std::cout << "ZIO SINISTRA TRIANGOLO NERO: " << *node->value << std::endl;
+						node = rule3_left(node);
+					}
+				}	
+			}
+			else if (err == -3 && node == this->_root)
+			{
+
+				//std::cout << "FIGLI ROOT ROSSI: " << *node->value << std::endl;
+				node->color = ft::BLACK;
+				if (node->left && node->left->color == ft::BLACK)
+					node->left->color = ft::RED;
+				if (node->right && node->right->color == ft::BLACK)
+					node->right->color = ft::RED;				
+			}
+			//std::cout<< "****************\n";
+			//this->printTree();
+			//std::cout<< "****************\n";
+			//std::cin >> test;
 		}
 	}
 
-	//Lo zio è nero (LINEA) - rule4
-	void rule4 (value_type &node)
-	{
-		
-	}
-
-	void fixTree(value_type &node)
-	{
-		/*
-		while(!this->isValid())
-		{
-			std::cout << "INVALIDO";
-			role1(node);
-			role2(node);
-			role3(node);
-		}
-		std::cout << "OK";
-		*/
-	}
-
-	bool isValid(void)
+	int isValid(void)
 	{
 		if (this->_size <= 1)
-			return true;
+			return 1;
 		ft::binaryTreeIterator<T> it = this->begin();
-		int blackNodesStart = this->blackNodes(it);
+		int blackNodesStart = this->blackNodes(it._curr);
 		if (this->_root->color == ft::RED)
-			return false;
+			return -1;
 
 		while (it != this->end())
 		{
 			if (it._curr->color == ft::RED && it._curr->father && it._curr->father->color == ft::RED)
-				return false;
-			if (!it._curr->left && !it._curr->right && this->blackNodes(it) != blackNodesStart)
-				return false;
+				return -2;
+			if (!it._curr->left && (!it._curr->right || it._curr->right == this->_end) && this->blackNodes(it._curr) != blackNodesStart)
+				return -3;
 			++it;
 		}
-		return true;
+		return 1;
 	}
 
-	int	blackNodes(ft::binaryTreeIterator<T> it)
+	int	blackNodes(value_type *node)
 	{
-		ft::binaryTreeIterator<T> tmp = it;
+		value_type *tmp = node;
 		int n = 0;
-		while (tmp._curr->father != this->_root)
+		while (tmp->value != this->_root->value)
 		{
-			if (tmp._curr->color == ft::BLACK)
+			if (tmp->color == ft::BLACK)
 				n++;
-			tmp = tmp._curr->father;
+			tmp = tmp->father;
 		}
 		return n;
 	}
 
 	void leftRotation(value_type *x)
 	{
+
+		this->removeGhostNodes();
 		if (!x->right)
 			return ;
         if (x == _root)
@@ -203,7 +265,8 @@ template <class T> class  RBTree
             _root->father = x->right;
             _root = x->right;
             _root->father->right = _root->left;
-            _root->left->father = _root->father;
+			if (_root->left &&  _root->left->father)
+            	_root->left->father = _root->father;
             _root->left = _root->father;
             _root->father = 0;
             return ;
@@ -229,6 +292,8 @@ template <class T> class  RBTree
 
 	void rightRotation(value_type *x)
 	{
+
+		this->removeGhostNodes();
 		if (!x->left)
 			return ;
         if (x == _root)
@@ -236,7 +301,8 @@ template <class T> class  RBTree
             _root->father = x->left;
             _root = x->left;
             _root->father->left = _root->right;
-            _root->right->father = _root->father;
+			if (_root->right &&  _root->right->father)
+            	_root->right->father = _root->father;
             _root->right = _root->father;
             _root->father = 0;
             return ;
@@ -280,26 +346,18 @@ template <class T> class  RBTree
 
 	binaryTreeIterator<T> end(void)
 	{
-		if (this->_end->father)
-		{
-			this->_end->father->right = 0;
-			this->_end->father = 0;
-		}
+		this->removeGhostNodes();
 		value_type *tmp = this->_root;
 		while(tmp->right)
 			tmp = tmp->right;
 		tmp->right = this->_end;
 		this->_end->father = tmp;
-		return binaryTreeIterator<T>(tmp);
+		return binaryTreeIterator<T>(this->_end);
 	}
 
 	binaryTreeIterator<T> rend(void)
 	{
-		if (this->_begin->father)
-		{
-			this->_begin->father->left = 0;
-			this->_begin->father = 0;
-		}
+		this->removeGhostNodes();
 		value_type *tmp = this->_root;
 		while(tmp->left)
 			tmp = tmp->left;
@@ -311,7 +369,7 @@ template <class T> class  RBTree
 	void printTree(void)
 	{
 		std::vector< std::vector<std::string> > matrix;
-		int row = this->_deep + 1;
+		int row = this->_deep + 2;
 		int col = std::pow(2, this->_deep + 1) - 1;
 
 		matrix.resize(row);
@@ -322,7 +380,7 @@ template <class T> class  RBTree
 		for (int i = 0; i < row; i++)
 		{
 			for (int j = 0; j < col; j++)
-				matrix[i][j] = std::string("    ");
+				matrix[i][j] = std::string(".   ");
 		}
 		
 		printD2435(col, matrix, this->_root, std::vector<int>());
@@ -360,12 +418,12 @@ template <class T> class  RBTree
 			newInfo.push_back(1);
 			printD2435(x, matrix, root->right, newInfo);
 		}
-		//std::cout<< root->value << " -> ";
-		int _col = (x  - 1) / 2;
+		//std::cout<< *root->value << " -> ";
+		int _col = std::round(x / 2);
 		int _row = info.size();
 		for (int i = 1; i < info.size() + 1; i++)
 		{
-			int _dif = this->_deep - i;
+			int _dif = this->_deep - i ;
 			if (info[i - 1] == 0)
 			{
 				//std::cout << "LEFT, ";
@@ -408,6 +466,20 @@ template <class T> class  RBTree
 	void	iterate()
 	{
 
+	}
+
+	void removeGhostNodes(void)
+	{
+		if (this->_end->father)
+		{
+			this->_end->father->right = 0;
+			this->_end->father = 0;
+		}
+		//if (this->_begin->father)
+		//{
+		//	this->_begin->father->left = 0;
+		//	this->_begin->father = 0;
+		//}
 	}
 };
 

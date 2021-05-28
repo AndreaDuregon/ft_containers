@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:18:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/27 15:58:17 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/28 17:12:44 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ namespace ft
 		{
 			while (1)
 			{
-				if (this->_curr->right && this->_prev->value != this->_curr->right->value)
+				if (this->_curr->right && this->_prev != this->_curr->right)
 				{
 					this->_prev = this->_curr;
 					this->_curr = this->_curr->right;
@@ -62,21 +62,19 @@ namespace ft
 					}
 					return this;
 				}
-				else
+				else if (this->_curr->father->left && this->_curr->father->left == this->_curr)
 				{
-					if (this->_curr->father->left && this->_curr->father->left->value == this->_curr->value)
-					{
-						this->_prev = this->_curr;
-						this->_curr = this->_curr->father;;
-						return this;
-					}
-					else if (this->_curr->father->right && this->_curr->father->right->value == this->_curr->value)
-					{
-						this->_prev = this->_curr;
-						this->_curr = this->_curr->father;
-					}
+					this->_prev = this->_curr;
+					this->_curr = this->_curr->father;;
+					return this;
 				}
+				else if (this->_curr->father->right && this->_curr->father->right == this->_curr)
+				{
+					this->_prev = this->_curr;
+					this->_curr = this->_curr->father;
+				}			
 			}
+
 			return 0;
 		}
 
@@ -101,9 +99,9 @@ namespace ft
 			return temp;
 		}
 
-		T				*operator -> ()
+		TreeNode<T>	*operator -> ()
 		{
-			return &this->_curr->value;
+			return this->_curr;
 		}
 
 		bool operator==(binaryTreeIterator<T> const &other) const {
