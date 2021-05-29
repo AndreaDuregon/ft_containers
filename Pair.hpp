@@ -77,17 +77,12 @@ namespace ft
 		{
 			return (lhs.first >= rhs.first);
 		}
-	
-		first_type getKey(void)
-		{
-			return this->first;
-		}
 	};
 
 	template <class T1, class T2>
 	std::ostream& operator<<(std::ostream &output, const pair<T1, T2> &obj)
 	{
-		output << "['" << obj.first << "':" << obj.second << "]";
+		output << obj.first;
 		return (output);
 	}
 }

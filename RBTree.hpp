@@ -366,106 +366,68 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(this->_begin);
 	}
 
+	/* NEW STAMPA */
 	void printTree(void)
 	{
-		std::vector< std::vector<std::string> > matrix;
-		int row = this->_deep + 2;
-		int col = std::pow(2, this->_deep + 1) - 1;
-
-		matrix.resize(row);
-		for(int i = 0 ; i < row ; ++i)
-		{
-			matrix[i].resize(col);
-		}
-		for (int i = 0; i < row; i++)
-		{
-			for (int j = 0; j < col; j++)
-				matrix[i][j] = std::string(".   ");
-		}
-		
-		printD2435(col, matrix, this->_root, std::vector<int>());
-
-		for (int i = 0; i < row; i++)
-		{
-			for (int j = 0; j < col; j++)
-			{
-					if (matrix[i][j].length() < 13)
-						std::cout << matrix[i][j];
-					else
-					{
-						std::cout << matrix[i][j];				
-						for (size_t ii = matrix[i][j].length(); ii <= 15; ii++)
-							std::cout << " ";
-					}
-			}
-			std::cout << std::endl;
-		}
+    	printTreeRec(this->_root, nullptr, false);
 	}
 
-	void printD2435(int x, std::vector< std::vector<std::string> > &matrix, value_type *root, std::vector<int> info) {
-		if (root == this->_end)
-			return;
-
-		if (root->left)
-		{
-			std::vector<int> newInfo(info);
-			newInfo.push_back(0);
-			printD2435(x, matrix, root->left, newInfo);
-		}
-		if (root->right)
-		{
-			std::vector<int> newInfo(info);
-			newInfo.push_back(1);
-			printD2435(x, matrix, root->right, newInfo);
-		}
-		//std::cout<< *root->value << " -> ";
-		int _col = std::round(x / 2);
-		int _row = info.size();
-		for (int i = 1; i < info.size() + 1; i++)
-		{
-			int _dif = this->_deep - i ;
-			if (info[i - 1] == 0)
-			{
-				//std::cout << "LEFT, ";
-				//if (_col < x / 2)
-				if (_col > (x  - 1) / 2)
-					_col -= _dif;
-				else if (_col < (x  - 1) / 2)
-					_col -= _dif + 1;
-				else
-					_col -= _dif + 1;
-			}
-			else
-			{
-				//std::cout << "RIGHT, ";
-				//_col += _dif;
-				if (_col > (x  - 1) / 2)
-					_col += _dif ;
-				else if (_col < (x  - 1) / 2)
-					_col += _dif;
-				else
-					_col += _dif + 1;
-			}
-		}
-
-		//std::cout << "[" << _row << ", " << _col << "]";
-		std::stringstream ss;
-
-		if (root->color == ft::RED)
-			ss << BG_RED;
-		else
-			ss << BG_BLACK;
-		ss << root->value->getKey();
-		ss << OFF;
-		std::string s;  
-		ss >> s;
-		matrix[_row][_col] = s;
-		//std::cout << std::endl;
-	}
-
-	void	iterate()
+	struct Trunk
 	{
+		Trunk *prev;
+		std::string str;
+	
+		Trunk(Trunk *prev, std::string str)
+		{
+			this->prev = prev;
+			this->str = str;
+		}
+	};
 
+	void showTrunks(Trunk *p)
+	{
+		if (p == nullptr) {
+			return;
+		}
+		showTrunks(p->prev);
+		std::cout << p->str;
+	}
+	
+	void printTreeRec(value_type* root, Trunk *prev, bool isLeft)
+	{
+		if (root == 0)
+		{ 
+			return;
+		}
+		this->removeGhostNodes();
+		std::string prev_str = "    ";
+		Trunk *trunk = new Trunk(prev, prev_str);
+		printTreeRec(root->right, trunk, true);
+		if (!prev)
+		{
+			trunk->str = "———";
+		}
+		else if (isLeft)
+		{
+			trunk->str = ".———";
+			prev_str = "   |";
+		}
+		else
+		{
+			trunk->str = "`———";
+			prev->str = prev_str;
+		}
+		showTrunks(trunk);
+		if (root->color == ft::RED)
+			std::cout << BG_RED;
+		else
+			std::cout << BG_BLACK;
+		std::cout << *root->value << OFF << std::endl;
+		if (prev) {
+			prev->str = prev_str;
+		}
+		trunk->str = "   |";
+		printTreeRec(root->left, trunk, false);
 	}
 
 	void removeGhostNodes(void)
