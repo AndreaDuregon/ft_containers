@@ -88,7 +88,6 @@ namespace ft
 
 		binaryTreeIterator<T>	operator-- ()
 		{
-			this->_curr = this->_curr->prev;
 			return *this;
 		}
 

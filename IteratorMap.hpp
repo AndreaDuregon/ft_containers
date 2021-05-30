@@ -13,93 +13,96 @@
 #pragma once
 
 #include "TreeNode.hpp"
+#include "IteratorBinaryTree.hpp"
 
 namespace ft
 {
-    template <class Tp>
+    template <class T>
     class mapIterator
     {
     protected:
     public:
-        TreeNode<Tp>	*_curr;
+        ft::binaryTreeIterator<T> it;
         /* MEMBER */
         //typedef ???			iterator_category;
-        typedef Tp				value_type;
+        typedef T				value_type;
         typedef std::ptrdiff_t 	difference_type;
         typedef value_type *	pointer;
         typedef value_type &	reference;
         mapIterator() {};
-        mapIterator(TreeNode<Tp> *curr) : _curr(curr) {};
+        mapIterator(TreeNode<T> *curr)
+        {
+            it = ft::binaryTreeIterator<T>(curr);
+        };
         mapIterator(mapIterator const &copy)
         {
             *this = copy;
         }
 
-        mapIterator<Tp> &operator = (mapIterator const &copy)
+        mapIterator<T> &operator = (mapIterator const &copy)
         {
-            this->_curr = copy._curr;
+            this->it = copy.it;
             return *this;
         }
 
-        Tp			&operator * ()
+        T			&operator * ()
         {
-            return this->_curr->value;
+            return *this->it._curr->value;
         }
 
-        mapIterator<Tp>	operator++()
+        mapIterator<T>	operator++()
         {
             //std::cout << "PREEEE" << std::endl;
-            this->_curr = this->_curr->next;
+            this->it.operator++();
             return *this;
         }
 
-        mapIterator<Tp>	operator++ (int)
+        mapIterator<T>	operator++ (int)
         {
             //std::cout << "POST" << std::endl;
-            mapIterator<Tp> it(this->_curr);
-            this->operator++();
-            return it;
-        }
-
-        mapIterator<Tp>	operator-- ()
-        {
-            this->_curr = this->_curr->prev;
+            this->it.operator++(0);
             return *this;
         }
 
-        mapIterator<Tp>	operator-- (int)
+        mapIterator<T>	operator-- ()
         {
-            mapIterator<Tp> temp(this->_curr);
-            this->operator--();
-            return temp;
+            this->it.operator--();
+            return *this;
         }
 
-        Tp				*operator -> ()
+        mapIterator<T>	operator-- (int)
         {
-            return &this->_curr->value;
+            this->it.operator--(0);
+            return *this;
         }
 
-        bool operator==(mapIterator<Tp> const &other) const {
-            return (this->_curr == other._curr);
+        T				*operator -> ()
+        {
+            return &this->it._curr->value;
         }
 
-        bool operator!=(mapIterator<Tp> const &other) const {
-            return (this->_curr != other._curr);
+        bool operator==(mapIterator<T> const &other) const {
+            return (this->it == other.it);
         }
 
-        bool operator<(mapIterator<Tp> const &other) const {
-            return (this->_curr < other._curr);
+        bool operator!=(mapIterator<T> const &other) const {
+            return (this->it != other.it);
         }
 
-        bool operator<=(mapIterator<Tp> const &other) const {
-            return (this->_curr <= other._curr);
+        bool operator<(mapIterator<T> const &other) const {
+            return (this->it < other.it);
         }
 
-        bool operator>(mapIterator<Tp> const &other) const {
-            return (this->_curr > other._curr);
+        bool operator<=(mapIterator<T> const &other) const {
+            return (this->it <= other.it);
         }
 
-        bool operator>=(mapIterator<Tp> const &other) const {
-            return (this->_curr >= other._curr);
+        bool operator>(mapIterator<T> const &other) const {
+            return (this->it > other.it);
         }
+
+        bool operator>=(mapIterator<T> const &other) const {
+            return (this->it >= other.it);
+        }
+};
 }
