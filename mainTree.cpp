@@ -21,7 +21,7 @@ int main (void)
     for (int i = 0; i < 25; i++)
     {
         int val = std::rand() % 100;
-        mappa.insert(ft::pair<const int, int>(val,val));
+        mappa.insert(ft::pair<int, int>(val,val));
     }
     mappa._tree.printTree();
     std::cout << "BEGIN: " << *mappa.begin() << std::endl;

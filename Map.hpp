@@ -23,11 +23,11 @@ namespace ft
 	template <class Key, class T, class Compare = ft::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > > class map
 	{
 	public:
-		ft::RBTree<ft::pair<const Key, T> > _tree;
+		ft::RBTree<ft::pair<Key, T> > _tree;
 	public:
 		typedef Key										key_type;
 		typedef T										mapped_type;
-		typedef ft::pair<const Key, T>					value_type;
+		typedef ft::pair<Key, T>					value_type;
 		typedef std::size_t								size_type;
 		typedef std::ptrdiff_t							difference_type;
 		typedef Compare									key_compare;
