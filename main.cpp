@@ -4229,7 +4229,7 @@ static void testMAP(void)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "ERASE test 1" << OFF << std::endl;
+		std::cout << "ERASE test 1 (node 0 child)" << OFF << std::endl;
 	}
 	{
 		// ERASE (LAST NODE)
@@ -4255,7 +4255,7 @@ static void testMAP(void)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "ERASE test 2" << OFF << std::endl;
+		std::cout << "ERASE test 2 (node 1 child)" << OFF << std::endl;
 	}
 	{
 		// ERASE (LAST NODE)
@@ -4281,7 +4281,7 @@ static void testMAP(void)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "ERASE test 3" << OFF << std::endl;
+		std::cout << "ERASE test 3 (node 2 child)" << OFF << std::endl;
 	}
 }
 
