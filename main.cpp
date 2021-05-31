@@ -4361,7 +4361,7 @@ static void testMAP(void)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "ERASE test 1 (node 0 child)" << OFF << std::endl;
+		std::cout << "ERASE (iterator) test 1 (node 0 child)" << OFF << std::endl;
 	}
 	{
 		// ERASE (LAST NODE)
@@ -4387,7 +4387,7 @@ static void testMAP(void)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "ERASE test 2 (node 1 child)" << OFF << std::endl;
+		std::cout << "ERASE (iterator) test 2 (node 1 child)" << OFF << std::endl;
 	}
 	{
 		// ERASE (LAST NODE)
@@ -4413,7 +4413,25 @@ static void testMAP(void)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "ERASE test 3 (node 2 child)" << OFF << std::endl;
+		std::cout << "ERASE (iterator) test 3 (node 2 child)" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+
+		sys_map.erase(100);
+		our_map.erase(100);
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (key) test 1 (node 0 child)" << OFF << std::endl;
 	}
 	{
 		// OPERATOR []

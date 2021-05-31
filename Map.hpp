@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 18:29:58 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 19:05:54 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ namespace ft
 
 		~map (void)
 		{
-			//if (this->_tree._size > 0)
-			//	this->clear();
+			this->_tree.~RBTree();
+			this->clear();
 		}
 
      	iterator begin()
@@ -160,14 +160,14 @@ namespace ft
 		    iterator it(this->begin());
             while (1)
             {
-             it = this->find(k);
-             if(it != this->end())
-             {
-                this->_tree.deleteNode(it.it._curr);
-                i++;
-             }
-             else
-                 return i;
+            	it = this->find(k);
+				if(it != this->end())
+				{
+					this->_tree.deleteNode(it.it._curr);
+					i++;
+				}
+				else
+					return i;
             }
 		}
 
@@ -210,7 +210,14 @@ namespace ft
 
 		void clear()
 		{
-
+			if (this->empty())
+				return;
+			iterator it = this->begin();
+			while (it != this->end())
+			{
+				//delete it.it._curr;
+				++it;
+			}
 		}
 
 

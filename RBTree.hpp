@@ -32,6 +32,26 @@ template <class T> class  RBTree
 		this->_begin->father = 0;
 	}
 
+	RBTree(RBTree const &other) : _root(0), _size(0)
+	{
+		*this = other;
+	}
+
+	RBTree& operator = (const RBTree& other)
+	{
+		this->_end = other._end;
+		this->_begin = other._begin;
+		this->_root = other._root;
+		this->_size = other._size;
+		return *this;
+	}
+
+	~RBTree()
+	{
+		
+	}
+
+
 	value_type &insert (value_type &newNode)
 	{
 
@@ -406,6 +426,7 @@ template <class T> class  RBTree
 
     void deleteNode(TreeNode<T> *v)
     {
+		this->removeGhostNodes();
         TreeNode<T> *u = replace(v);
         bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
         TreeNode<T> *parent = v->father;
