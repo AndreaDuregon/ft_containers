@@ -4186,15 +4186,147 @@ static void testMAP(void)
 		std::map<int, int> sys_map;
 		ft::map<int, int> our_map;
 		sys_map.insert(std::pair<int, int>(100, 100));
-		sys_map.insert(std::pair<int, int>(10, 10));
+		std::pair<std::map<int, int>::iterator, bool> res_sys = sys_map.insert(std::pair<int, int>(10, 10));
 		our_map.insert(ft::pair<int, int>(100, 100));
-		our_map.insert(ft::pair<int, int>(10, 10));
+		ft::pair<ft::map<int, int>::iterator, bool> res_our = our_map.insert(ft::pair<int, int>(10, 10));
+
+		if (res_sys.second == res_our.second && res_sys.first->first == res_our.first->first)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 1" << OFF << std::endl;
 
 		if (equalSysFt(sys_map, our_map))
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "INSERT" << OFF << std::endl;
+		std::cout << "INSERT (value) test 1" << OFF << std::endl;
+	}
+	{
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(100, 100));
+		std::pair<std::map<int, int>::iterator, bool> res_sys =  sys_map.insert(std::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		ft::pair<ft::map<int, int>::iterator, bool> res_our =  our_map.insert(ft::pair<int, int>(10, 10));
+
+		if (res_sys.second == res_our.second && res_sys.first->first == res_our.first->first)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 2" << OFF << std::endl;			
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (value) test 2" << OFF << std::endl;
+	}
+	{
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(1001, 1001));
+		sys_map.insert(std::pair<int, int>(101, 101));
+		our_map.insert(ft::pair<int, int>(1001, 1001));
+		our_map.insert(ft::pair<int, int>(101, 101));
+
+		std::map<int, int> sys_map2;
+		ft::map<int, int> our_map2;
+
+		sys_map2.insert(sys_map.begin(), sys_map.end());
+		our_map2.insert(our_map.begin(), our_map.end());
+
+		if (equalSysFt(sys_map2, our_map2))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, iterator) test 1" << OFF << std::endl;
+	}
+	{
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(1001, 1001));
+		sys_map.insert(std::pair<int, int>(101, 101));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(1001, 1001));
+		our_map.insert(ft::pair<int, int>(101, 101));
+
+		std::map<int, int> sys_map2;
+		ft::map<int, int> our_map2;
+
+		sys_map2.insert(++sys_map.begin(), sys_map.end());
+		our_map2.insert(++our_map.begin(), our_map.end());
+
+		if (equalSysFt(sys_map2, our_map2))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, iterator) test 2" << OFF << std::endl;
+	}
+	{
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(1001, 1001));
+		sys_map.insert(std::pair<int, int>(101, 101));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(1001, 1001));
+		our_map.insert(ft::pair<int, int>(101, 101));
+
+		std::map<int, int>::iterator sys_it =  sys_map.insert(++sys_map.begin(), std::pair<int, int>(85, 85));
+		ft::map<int, int>::iterator our_it =  our_map.insert(++our_map.begin(), ft::pair<int, int>(85, 85));
+
+		if (sys_it->first == our_it->first && sys_it->second == our_it->second)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 1" << OFF << std::endl;
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, value) test 1" << OFF << std::endl;
+	}
+	{
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(1001, 1001));
+		sys_map.insert(std::pair<int, int>(101, 101));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(1001, 1001));
+		our_map.insert(ft::pair<int, int>(101, 101));
+
+		std::map<int, int>::iterator sys_it =  sys_map.insert(sys_map.end(), std::pair<int, int>(-100, -100));
+		ft::map<int, int>::iterator our_it =  our_map.insert(our_map.end(), ft::pair<int, int>(-100, -100));
+
+		if (sys_it->first == our_it->first && sys_it->second == our_it->second)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 2" << OFF << std::endl;
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, value) test 2" << OFF << std::endl;
 	}
 	{
 		std::map<int, int> sys_map;
@@ -4282,6 +4414,58 @@ static void testMAP(void)
 		else
 			std::cout << RED;
 		std::cout << "ERASE test 3 (node 2 child)" << OFF << std::endl;
+	}
+	{
+		// OPERATOR []
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(15, 15));
+		sys_map.insert(std::pair<int, int>(110, 110));
+		sys_map.insert(std::pair<int, int>(99, 99));
+		sys_map.insert(std::pair<int, int>(98, 98));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(15, 15));
+		our_map.insert(ft::pair<int, int>(110, 110));
+		our_map.insert(ft::pair<int, int>(99, 99));
+		our_map.insert(ft::pair<int, int>(98, 98));
+
+		sys_map[99] = -1;
+		our_map[99] = -1;
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "OPERATOR [] test 1" << OFF << std::endl;
+	}
+	{
+		// OPERATOR []
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(15, 15));
+		sys_map.insert(std::pair<int, int>(110, 110));
+		sys_map.insert(std::pair<int, int>(99, 99));
+		sys_map.insert(std::pair<int, int>(98, 98));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(15, 15));
+		our_map.insert(ft::pair<int, int>(110, 110));
+		our_map.insert(ft::pair<int, int>(99, 99));
+		our_map.insert(ft::pair<int, int>(98, 98));
+
+		sys_map[999] = -1;
+		our_map[999] = -1;
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "OPERATOR [] test 2" << OFF << std::endl;
 	}
 }
 

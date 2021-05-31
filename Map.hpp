@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 14:59:58 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 16:50:52 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,20 +126,29 @@ namespace ft
 
 		ft::pair<iterator, bool> insert (const value_type& val)
 		{
+			if (this->size() != 0 && this->find(val.first) != this->end())
+				return ft::pair<iterator, bool>(this->find(val.first), false);
 			ft::TreeNode<value_type> *v = new ft::TreeNode<value_type>(val);
 			this->_tree.insert(*v);
-			return ft::pair<iterator, bool>(iterator(), true);
+			return ft::pair<iterator, bool>(this->find(val.first), true);
 		}
 
-		//iterator insert (iterator position, const value_type& val)
-		//{
-		//	return iterator();
-		//}
+		iterator insert (iterator position, const value_type& val)
+		{
+			//DELETE NODE
+			(void) position;
+			this->insert(val);
+			return this->find(val.first);
+		}
 
-  		//void insert (iterator first, iterator last)
-		//{
-		//
-		//}
+  		void insert (iterator first, iterator last)
+		{
+			while(first != last)
+			{
+				this->insert(*first.it._curr->value);
+				++first;
+			}
+		}
 
 		void erase (iterator position)
 		{
@@ -198,10 +207,13 @@ namespace ft
 			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
 		}
 
-		//mapped_type& operator[] (const key_type& k)
-		//{
-		//	return 0;
-		//}
+		mapped_type& operator[] (const key_type& k)
+		{
+			if (this->size() != 0 && this->find(k) != this->end())
+				return this->find(k).it._curr->value->second;
+			this->insert(ft::pair<Key, T>(k, T()));
+			return this->find(k).it._curr->value->second;
+		}
 
 		//void swap (map& x)
 		//{
@@ -210,12 +222,12 @@ namespace ft
 
 		void clear()
 		{
-
+			
 		}
 
 		key_compare key_comp() const
 		{
-			return 0;
+			return this->_comp;
 		}
 
 		//value_compare value_comp() const
