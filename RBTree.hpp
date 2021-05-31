@@ -237,50 +237,6 @@ template <class T> class  RBTree
 		return 1;
 	}
 
-    void erase (iterator position)
-    {
-	    ft::Color originalColor = position._curr->color;
-        ft::TreeNode<T> *childToBeDeleted = position._curr;
-	    if (!position._curr->left)
-	        childToBeDeleted = position._curr->right;
-
-
-	    /*if(!position.it->left && !position.it->right)
-        {
-            if(position.it->father->right == position.it._curr)
-                position.it->father->right = 0;
-            else
-                position.it->father->left = 0;
-            this->_tree._size--;
-            if(position.it->color == "BLACK")
-            {
-
-            }
-        }
-        else if (position.it->right && !position.it->left)
-        {
-            if(position.it->father->right == position.it._curr)
-                position.it->father->right = position.it->right;
-            else
-                position.it->father->left = position.it->right;
-
-            position.it->right->father = position.it->father;
-            delete(position.it._curr);
-            this->_tree._size--;
-        }
-        else if (position.it->left && !position.it->right)
-        {
-            if(position.it->father->right == position.it._curr)
-                position.it->father->right = position.it->left;
-            else
-                position.it->father->left = position.it->left;
-
-            position.it->left->father = position.it->father;
-            delete(position.it._curr);
-            this->_tree._size--;
-        }*/
-    }
-
     int	blackNodes(value_type *node)
 	{
 		value_type *tmp = node;
@@ -376,10 +332,10 @@ template <class T> class  RBTree
 
     void swapValues(TreeNode<T> *u, TreeNode<T> *v)
     {
-        int temp;
-        temp = u->value;
+        TreeNode<T> temp;
+        temp.value = u->value;
         u->value = v->value;
-        v->value = temp;
+        v->value = temp.value;
     }
 
     void fixRedRed(TreeNode<T> *x)
@@ -430,6 +386,144 @@ template <class T> class  RBTree
         }
     }
 
+    TreeNode<T> *successor(TreeNode<T> *x) {
+        TreeNode<T> *temp = x;
+        while (temp->left != NULL)
+            temp = temp->left;
+        return temp;
+    }
+
+    TreeNode<T> *replace(TreeNode<T> *x) {
+        if (x->left != NULL and x->right != NULL)
+            return successor(x->right);
+        if (x->left == NULL and x->right == NULL)
+            return NULL;
+        if (x->left != NULL)
+            return x->left;
+        else
+            return x->right;
+    }
+
+    void deleteNode(TreeNode<T> *v)
+    {
+        TreeNode<T> *u = replace(v);
+        bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
+        TreeNode<T> *parent = v->father;
+        if (u == NULL)
+        {
+            if (v == _root)
+                _root = NULL;
+            else
+            {
+                if (uvBlack)
+                    fixDoubleBlack(v);
+                else
+                    if (v->sibling() != NULL)
+                        v->sibling()->color = RED;
+                if (v->isOnLeft())
+                    parent->left = NULL;
+                else
+                    parent->right = NULL;
+            }
+            delete v;
+            this->_size--;
+            return;
+        }
+        if (v->left == NULL or v->right == NULL)
+        {
+            if (v == _root)
+            {
+                v->value = u->value;
+                v->left = v->right = NULL;
+                this->_size--;
+                delete u;
+            }
+            else
+            {
+                if (v->isOnLeft())
+                    parent->left = u;
+                else
+                    parent->right = u;
+                this->_size--;
+                delete v;
+                u->father = parent;
+                if (uvBlack)
+                    fixDoubleBlack(u);
+                else
+                    u->color = BLACK;
+            }
+            return;
+        }
+        swapValues(u, v);
+        deleteNode(u);
+    }
+
+    void fixDoubleBlack(TreeNode<T> *x)
+    {
+        if (x == _root)
+            return;
+        TreeNode<T> *sibling = x->sibling(), *parent = x->father;
+        if (sibling == NULL)
+        {
+            fixDoubleBlack(parent);
+        }
+        else
+        {
+            if (sibling->color == RED)
+            {
+                parent->color = RED;
+                sibling->color = BLACK;
+                if (sibling->isOnLeft())
+                    this->rightRotation(parent);
+                else
+                    this->leftRotation(parent);
+                fixDoubleBlack(x);
+            }
+            else
+            {
+                if (sibling->hasRedChild()) {
+                    if (sibling->left != NULL and sibling->left->color == RED) {
+                        if (sibling->isOnLeft()) {
+                            sibling->left->color = sibling->color;
+                            sibling->color = parent->color;
+                            this->rightRotation(parent);
+                        }
+                        else
+                        {
+                            sibling->left->color = parent->color;
+                            this->rightRotation(sibling);
+                            this->leftRotation(parent);
+                        }
+                    }
+                    else
+                    {
+                        if (sibling->isOnLeft()) {
+                            sibling->right->color = parent->color;
+                            this->leftRotation(sibling);
+                            this->rightRotation(parent);
+                        }
+                        else
+                        {
+                            sibling->right->color = sibling->color;
+                            sibling->color = parent->color;
+                            this->leftRotation(parent);
+                        }
+                    }
+                    parent->color = BLACK;
+                }
+                else
+                {
+                    sibling->color = RED;
+                    if (parent->color == BLACK)
+                        fixDoubleBlack(parent);
+                    else
+                        parent->color = BLACK;
+                }
+            }
+        }
+    }
+
+
     binaryTreeIterator<T> begin(void)
 	{
 		value_type *tmp = this->_root;
@@ -479,7 +573,6 @@ template <class T> class  RBTree
 	{
 		Trunk *prev;
 		std::string str;
-	
 		Trunk(Trunk *prev, std::string str)
 		{
 			this->prev = prev;

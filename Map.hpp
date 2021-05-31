@@ -152,7 +152,7 @@ namespace ft
 
 		void erase (iterator position)
 		{
-		   this->_tree.erase(position.it);
+		   this->_tree.deleteNode(position.it._curr);
 		}
 
 		//size_type erase (const key_type& k)

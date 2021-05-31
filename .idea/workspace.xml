@@ -28,8 +28,8 @@
   <component name="ChangeListManager">
     <list default="true" id="559b27ad-014d-45a8-9486-ae059d06c577" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Map.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RBTree.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/RBTree.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TreeNode.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/TreeNode.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +205,7 @@
       <workItem from="1622384173932" duration="181000" />
       <workItem from="1622388675886" duration="7973000" />
       <workItem from="1622462574042" duration="6176000" />
-      <workItem from="1622474074365" duration="1168000" />
+      <workItem from="1622474074365" duration="2762000" />
     </task>
     <task id="LOCAL-00001" summary="Ho provato clion, muy cariño! segfaulta sul remove o dopo?">
       <created>1621555807539</created>
@@ -242,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622474220247</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="RBTree =&gt; smart 🧠">
+      <created>1622475365026</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1622475365026</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +273,7 @@
     <MESSAGE value="♻️rotation fixed♻️" />
     <MESSAGE value="Erase iniziati" />
     <MESSAGE value="TreeNode =&gt; smart " />
-    <option name="LAST_COMMIT_MESSAGE" value="TreeNode =&gt; smart " />
+    <MESSAGE value="RBTree =&gt; smart " />
+    <option name="LAST_COMMIT_MESSAGE" value="RBTree =&gt; smart " />
   </component>
 </project>
