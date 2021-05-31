@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 12:25:25 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 19:05:54 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ namespace ft
 		typedef typename Allocator::const_reference		const_reference;
 		typedef typename Allocator::pointer				pointer;
 		typedef typename Allocator::const_pointer		const_pointer;
-		typedef typename ft::mapIterator<ft::pair<Key, T> >	iterator;
-		//typedef typename ft::constMapIterator<T>		const_iterator;
+		typedef typename ft::mapIterator<Key, T >		iterator;
+		typedef typename ft::mapIterator<Key, T >		const_iterator;
 		//typedef typename ft::reverseMapIterator<T>		reverse_iterator;
 		//typedef typename ft::constReverseMapIterator<T>	const_reverse_iterator;
 	
@@ -55,14 +55,25 @@ namespace ft
 		//
 		///}
 
-		//map (const map& x)
-		//{
-		//
-		//}
+		map (map& x)
+		{
+			*this = x;
+		}
+
+		map& operator = (map& x)
+		{
+			_tree = ft::RBTree<value_type>();
+			_comp = x._comp;
+			_alloc = x._alloc;
+			_tree = x._tree;
+		
+			return *this;
+		}
 
 		~map (void)
 		{
-
+			this->_tree.~RBTree();
+			this->clear();
 		}
 
      	iterator begin()
@@ -70,20 +81,20 @@ namespace ft
 			return iterator (this->_tree.begin()._curr);
 		}
 
-		//const_iterator begin() const
-		//{
-		//	
-		//}
+		const_iterator begin() const
+		{
+			return const_iterator (this->_tree.begin()._curr);
+		}
 
 		iterator end()
 		{
 			return iterator (this->_tree.end()._curr);
 		}
 
-		//const_iterator end() const
-		//{
-		//	
-		//}
+		const_iterator end() const
+		{
+			return const_iterator (this->_tree.end()._curr);	
+		}
 
 		//reverse_iterator rbegin()
 		//{
@@ -100,12 +111,11 @@ namespace ft
 			iterator it(this->begin());
 			while(it != this->end())
 			{
-				ft::pair<Key, T> &obj = *it.it._curr->value;
-				if (obj.first == k)
+				if (it->first == k)
 					return it;
 				++it;
 			}
-			return 0;
+			return it;
 		}
 
 		//const_iterator find (const key_type& k) const
@@ -115,35 +125,60 @@ namespace ft
 
 		ft::pair<iterator, bool> insert (const value_type& val)
 		{
+			if (this->size() != 0 && this->find(val.first) != this->end())
+				return ft::pair<iterator, bool>(this->find(val.first), false);
 			ft::TreeNode<value_type> *v = new ft::TreeNode<value_type>(val);
 			this->_tree.insert(*v);
-			return ft::pair<iterator, bool>(iterator(), true);
+			return ft::pair<iterator, bool>(this->find(val.first), true);
 		}
 
-		//iterator insert (iterator position, const value_type& val)
-		//{
-		//	return iterator();
-		//}
+		iterator insert (iterator position, const value_type& val)
+		{
+			//DELETE NODE
+			(void) position;
+			this->insert(val);
+			return this->find(val.first);
+		}
 
-  		//void insert (iterator first, iterator last)
-		//{
-		//
-		//}
+  		void insert (iterator first, iterator last)
+		{
+			while(first != last)
+			{
+				this->insert(*first.it._curr->value);
+				++first;
+			}
+		}
 
-		//void erase (iterator position)
-		//{
-		//
-		//}
+		void erase (iterator position)
+		{
+		    this->_tree.deleteNode(position.it._curr);
+		}
 
-		//size_type erase (const key_type& k)
-		//{
-		//	return 0;
-		//}
+		size_type erase (const key_type& k)
+		{
+		    size_type i = 0;
+		    iterator it(this->begin());
+            while (1)
+            {
+            	it = this->find(k);
+				if(it != this->end())
+				{
+					this->_tree.deleteNode(it.it._curr);
+					i++;
+				}
+				else
+					return i;
+            }
+		}
 
-		//void erase (iterator first, iterator last)
-		//{
-		//
-		//}
+		void erase (iterator first, iterator last)
+		{
+            while(first != last)
+            {
+                this->_tree.deleteNode(first.it._curr);
+                ++first;
+            }
+		}
 
 		bool empty() const
 		{
@@ -157,13 +192,16 @@ namespace ft
 
 		size_type max_size() const
 		{
-			return 0;
+			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
 		}
 
-		//mapped_type& operator[] (const key_type& k)
-		//{
-		//	return 0;
-		//}
+		mapped_type& operator[] (const key_type& k)
+		{
+			if (this->size() != 0 && this->find(k) != this->end())
+				return this->find(k).it._curr->value->second;
+			this->insert(ft::pair<Key, T>(k, T()));
+			return this->find(k).it._curr->value->second;
+		}
 
 		//void swap (map& x)
 		//{
@@ -172,18 +210,16 @@ namespace ft
 
 		void clear()
 		{
-
+			if (this->empty())
+				return;
+			iterator it = this->begin();
+			while (it != this->end())
+			{
+				//delete it.it._curr;
+				++it;
+			}
 		}
 
-		key_compare key_comp() const
-		{
-			return 0;
-		}
-
-		//value_compare value_comp() const
-		//{
-		//
-		//}
 
 		//size_type count (const key_type& k) const
 		//{
@@ -218,6 +254,16 @@ namespace ft
 		//ft::pair<iterator,iterator>             equal_range (const key_type& k)
 		//{
 		//	return ft::pair<iterator,iterator>( iterator(), iterator() );
+		//}
+		
+		key_compare key_comp() const
+		{
+			return this->_comp;
+		}
+
+		//value_compare value_comp() const
+		//{
+		//
 		//}
 		
 		allocator_type get_allocator() const

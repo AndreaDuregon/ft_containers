@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:40:22 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 11:20:29 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 12:53:08 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ namespace ft
 
 		// MEMBER FUNCTIONS
 
-		pair() : first(0), second(0) {}
+		pair() : first(T1()), second(T2()) {}
 
 		pair(const first_type& x, const second_type& y) : first(x), second(y) {}
 
