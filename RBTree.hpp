@@ -24,9 +24,8 @@ template <class T> class  RBTree
 	value_type *_end;
 	value_type *_begin;
 	size_type _size;
-	size_type _deep;
 
-	RBTree() : _root(0), _size(0), _deep(0) {
+	RBTree() : _root(0), _size(0) {
 		this->_end = new value_type();
 		this->_end->father = 0;
 		this->_begin = new value_type();
@@ -62,8 +61,6 @@ template <class T> class  RBTree
 				tmp->right = &newNode;
 			else
 				tmp->left = &newNode;
-			if (++newDeep > this->_deep)
-				this->_deep = newDeep;
 			newNode.father = tmp;
 			this->_size++;
 			this->fixTree(&newNode);
@@ -74,7 +71,6 @@ template <class T> class  RBTree
 			this->_size++;
 			this->_root = &newNode;
 			newNode.color = ft::BLACK;
-			this->_deep = 1;
 		}
 		return newNode;
 	}

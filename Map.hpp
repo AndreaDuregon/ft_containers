@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 12:25:25 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 14:20:04 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ namespace ft
 		typedef typename Allocator::const_reference		const_reference;
 		typedef typename Allocator::pointer				pointer;
 		typedef typename Allocator::const_pointer		const_pointer;
-		typedef typename ft::mapIterator<ft::pair<Key, T> >	iterator;
+		typedef typename ft::mapIterator<Key, T >		iterator;
 		//typedef typename ft::constMapIterator<T>		const_iterator;
 		//typedef typename ft::reverseMapIterator<T>		reverse_iterator;
 		//typedef typename ft::constReverseMapIterator<T>	const_reverse_iterator;
@@ -55,10 +55,22 @@ namespace ft
 		//
 		///}
 
-		//map (const map& x)
-		//{
-		//
-		//}
+		map (const map& x)
+		{
+			*this = x;
+		}
+
+		map& operator = (const map& x)
+		{
+			_tree = ft::RBTree<value_type>();
+			_tree._begin = x._tree._begin;
+			_tree._end = x._tree._end;
+			_tree._root = x._tree._root;;
+			_tree._size = x._tree._size;
+			_comp = x._comp;
+			_alloc = x._alloc;
+			return *this;
+		}
 
 		~map (void)
 		{
@@ -100,12 +112,11 @@ namespace ft
 			iterator it(this->begin());
 			while(it != this->end())
 			{
-				ft::pair<Key, T> &obj = *it.it._curr->value;
-				if (obj.first == k)
+				if (it->first == k)
 					return it;
 				++it;
 			}
-			return 0;
+			return it;
 		}
 
 		//const_iterator find (const key_type& k) const
@@ -157,7 +168,7 @@ namespace ft
 
 		size_type max_size() const
 		{
-			return 0;
+			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
 		}
 
 		//mapped_type& operator[] (const key_type& k)

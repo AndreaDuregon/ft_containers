@@ -25,7 +25,7 @@ namespace ft
 		node_type								*right;
 
 
-		TreeNode () : color(ft::RED), value(0), father(0), left(0), right(0) {}
+		TreeNode () : color(ft::RED), value(new value_type()), father(0), left(0), right(0) {}
 
 		TreeNode (T node) : color(ft::RED), value(new value_type(node)), father(0), left(0), right(0) {}
 

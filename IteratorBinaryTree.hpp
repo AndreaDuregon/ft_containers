@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:18:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/30 16:18:56 by                  ###   ########.fr       */
+/*   Updated: 2021/05/31 14:13:40 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ namespace ft
 				else if (this->_curr->father->left && this->_curr->father->left == this->_curr)
 				{
 					this->_prev = this->_curr;
-					this->_curr = this->_curr->father;;
+					this->_curr = this->_curr->father;
 					return this;
 				}
 				else if (this->_curr->father->right && this->_curr->father->right == this->_curr)
