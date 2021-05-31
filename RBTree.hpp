@@ -19,7 +19,7 @@ template <class T> class  RBTree
 
 	typedef std::size_t        size_type;
 	typedef ft::TreeNode<T>    value_type;
-
+    typedef ft::binaryTreeIterator<T> iterator;
 	value_type *_root;
 	value_type *_end;
 	value_type *_begin;
@@ -237,7 +237,51 @@ template <class T> class  RBTree
 		return 1;
 	}
 
-	int	blackNodes(value_type *node)
+    void erase (iterator position)
+    {
+	    ft::Color originalColor = position._curr->color;
+        ft::TreeNode<T> *childToBeDeleted = position._curr;
+	    if (!position._curr->left)
+	        childToBeDeleted = position._curr->right;
+
+
+	    /*if(!position.it->left && !position.it->right)
+        {
+            if(position.it->father->right == position.it._curr)
+                position.it->father->right = 0;
+            else
+                position.it->father->left = 0;
+            this->_tree._size--;
+            if(position.it->color == "BLACK")
+            {
+
+            }
+        }
+        else if (position.it->right && !position.it->left)
+        {
+            if(position.it->father->right == position.it._curr)
+                position.it->father->right = position.it->right;
+            else
+                position.it->father->left = position.it->right;
+
+            position.it->right->father = position.it->father;
+            delete(position.it._curr);
+            this->_tree._size--;
+        }
+        else if (position.it->left && !position.it->right)
+        {
+            if(position.it->father->right == position.it._curr)
+                position.it->father->right = position.it->left;
+            else
+                position.it->father->left = position.it->left;
+
+            position.it->left->father = position.it->father;
+            delete(position.it._curr);
+            this->_tree._size--;
+        }*/
+    }
+
+    int	blackNodes(value_type *node)
 	{
 		value_type *tmp = node;
 		int n = 0;
@@ -321,7 +365,6 @@ template <class T> class  RBTree
 		if (x->left)
 			x->left->father = x;
 	}
-
 
 	binaryTreeIterator<T> begin(void)
 	{

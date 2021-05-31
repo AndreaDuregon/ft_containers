@@ -143,34 +143,7 @@ namespace ft
 
 		void erase (iterator position)
 		{
-		    if(!position.it->left && !position.it->right)
-            {
-		        if(position.it->father->right == position.it._curr)
-		            position.it->father->right = 0;
-		        else
-		            position.it->father->left = 0;
-				this->_tree._size--;
-            }
-		    else if (position.it->right && !position.it->left)
-		    {
-                if(position.it->father->right == position.it._curr)
-                    position.it->father->right = position.it->right;
-                else
-                    position.it->father->left = position.it->right;
-                position.it->right->father = position.it->father;
-                delete(position.it._curr);
-				this->_tree._size--;
-		    }
-		    else if (position.it->left && !position.it->right)
-            {
-                if(position.it->father->right == position.it._curr)
-                    position.it->father->right = position.it->left;
-                else
-                    position.it->father->left = position.it->left;
-                position.it->left->father = position.it->father;
-                delete(position.it._curr);
-				this->_tree._size--;
-            }
+		   this->_tree.erase(position.it);
 		}
 
 		//size_type erase (const key_type& k)
