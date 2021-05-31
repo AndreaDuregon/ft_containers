@@ -85,6 +85,7 @@ static void print_our(ft::vector<T> &vector)
 	std::cout << std::endl;
 }
 
+/*
 static void print_our(ft::map<int, int> &map)
 {
 	ft::map<int, int>::iterator our_it_begin = map.begin();
@@ -97,6 +98,7 @@ static void print_our(ft::map<int, int> &map)
 	}
 	std::cout << std::endl;
 }
+*/
 
 template <class T>
 static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
@@ -4218,8 +4220,8 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(15, 15));
 		our_map.insert(ft::pair<int, int>(110, 110));
 
-		sys_map.erase(--sys_map.end());
-		our_map.erase(--our_map.end());
+		sys_map.erase(sys_map.find(100));
+		our_map.erase(our_map.find(100));
 
 		if (equalSysFt(sys_map, our_map))
 			std::cout << GREEN;

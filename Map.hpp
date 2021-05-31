@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 14:20:04 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 14:59:58 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,30 +143,33 @@ namespace ft
 
 		void erase (iterator position)
 		{
-		    if(position.it->left && !position.it->right)
+		    if(!position.it->left && !position.it->right)
             {
-		        if(position.it->father->right = position)
+		        if(position.it->father->right == position.it._curr)
 		            position.it->father->right = 0;
 		        else
 		            position.it->father->left = 0;
+				this->_tree._size--;
             }
 		    else if (position.it->right && !position.it->left)
 		    {
-                if(position.it->father->right = position)
+                if(position.it->father->right == position.it._curr)
                     position.it->father->right = position.it->right;
                 else
                     position.it->father->left = position.it->right;
                 position.it->right->father = position.it->father;
                 delete(position.it._curr);
+				this->_tree._size--;
 		    }
 		    else if (position.it->left && !position.it->right)
             {
-                if(position.it->father->right = position)
+                if(position.it->father->right == position.it._curr)
                     position.it->father->right = position.it->left;
                 else
                     position.it->father->left = position.it->left;
                 position.it->left->father = position.it->father;
                 delete(position.it._curr);
+				this->_tree._size--;
             }
 		}
 
