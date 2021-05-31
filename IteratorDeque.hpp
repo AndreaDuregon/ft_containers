@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IteratorDeque.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:54:35 by forsili           #+#    #+#             */
-/*   Updated: 2021/05/31 19:09:32 by forsili          ###   ########.fr       */
+/*   Updated: 2021/06/01 00:23:10 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,15 @@ namespace ft
 		
 		DequeIterator	operator -- ()
 		{
-
-            if (_vector_iterator != _list_iterator._curr->value.begin())
+			ft::VectorIterator<T>	end;
+            if (_vector_iterator > _list_iterator._curr->value.begin())
 				_vector_iterator--;
 			else
 			{
 				_list_iterator--;
-				_vector_iterator = _list_iterator._curr->value.end();
+				end = _list_iterator._curr->value.end();
+				end--;
+				_vector_iterator = end;
 			}
 			return *this;
 		}
@@ -87,35 +89,35 @@ namespace ft
 			this->operator--();
 			return temp;
 		}
-/*
+
 		pointer			operator -> ()
 		{
-			return &(*this->_vector_iterator);
+			return &(*this);
 		}
 
 		bool			operator == (DequeIterator const &other) const {
-			return (*this->_vector_iterator == *other._vector_iterator);
+			return (this->_vector_iterator.vec_p == other._vector_iterator.vec_p);
 		}
 
 		bool			operator != (DequeIterator const &other) const {
-			return (*this->_vector_iterator != *other._vector_iterator);
+			return (this->_vector_iterator.vec_p != other._vector_iterator.vec_p);
 		}
 
 		bool			operator < (DequeIterator const &other) const {
-			return (*this->_vector_iterator < *other._vector_iterator);
+			return (this->_vector_iterator.vec_p < other._vector_iterator.vec_p);
 		}
 
 		bool			operator <= (DequeIterator const &other) const {
-			return (*this->_vector_iterator <= *other._vector_iterator);
+			return (this->_vector_iterator.vec_p <= other._vector_iterator.vec_p);
 		}
 
 		bool			operator > (DequeIterator const &other) const {
-			return (*this->_vector_iterator > *other._vector_iterator);
+			return (this->_vector_iterator.vec_p > other._vector_iterator.vec_p);
 		}
 
 		bool			operator >= (DequeIterator const &other) const {
-			return (*this->_vector_iterator >= *other._vector_iterator);
-		} */
+			return (this->_vector_iterator.vec_p >= other._vector_iterator.vec_p);
+		} 
 	};
 
 /* 	template <class T> class constVectorIterator : public VectorIterator<T>

@@ -48,48 +48,26 @@ namespace ft {
                     this->list->push_back(ft::vector<T>(8, val));
                     n -= 8;
                 }
-
-                /* ft::listIterator<ft::vector<T> > it(this->list->begin());
-                for (size_t k = 0; k < 2; k++)
-                {
-                    for (size_t i = 0; i < 8; i++)
-                    {
-                        std::cout << it._curr->value[i];
-                    }
-                    it++;
-                } */
-                iterator    it(this->begin());
-                for (size_t i = 0; i < 16; i++)
-                {
-                    std::cout << *it << std::endl;
-                    it++;
-                }
-                --it;
-                for (size_t i = 0; i < 16; i++)
-                {
-                    std::cout << *it << std::endl;
-                    --it;
-                }
                 this->_end = this->size;
                 this->_start = 0;
             }
 
-            /* deque (iterator first, iterator last, 
+            deque (iterator first, iterator last, 
                     const allocator_type& alloc = allocator_type())
             {
-                this->list = new ft::list<T*>;
-                subIterator    it(this->list->begin());
+                this->list = new ft::list<ft::vector<T> >;
                 size_t  len = 0;
+
                 while (first != last)
-                {
-                    this->list->push_front(new T(8));
-                    for (size_t i = 0; i < 8 && first != last; i++)
+                {   
+                    ft::vector<T>  tmp;
+                    for (size_t k = 0; k < 8 && first != last ; k++)
                     {
-                        it._curr->value[i] = *first;
-                        len++;
+                        tmp.push_back(*first);
                         first++;
-                    }    
-                    it++;
+                        len++;
+                    }
+                    this->list->push_back(ft::vector<T>(tmp));
                 }
                 this->_start = 0;
                 this->_end = len;
@@ -99,7 +77,7 @@ namespace ft {
             ~deque() {
                 //delete this->list;
             }
-*/
+
             iterator    begin(void)
             {
                 iterator    it;
@@ -108,20 +86,27 @@ namespace ft {
 			    it._list = *this->list;
 			    it._list_iterator = this->list->begin();
 			    it._vector_iterator = this->list->begin()._curr->value.begin();
+                //std::cout << it._vector_iterator.vec_p <<std::endl;
+                for (size_t i = 0; i < it._start; i++)
+                    it._vector_iterator++;
                 return it;
             }
-/*
+
             iterator    end(void)
             {
                 iterator    it;
-                it._list = *this->list;
-                it._index_v = (_end % 8);
-                it._list_iterator = it._list.end();
-                it._vector = it._list_iterator._curr->value;
-                it._start = this->_start;
+                ft::listIterator<ft::vector<T> >    end(this->list->end());
+                end--;
                 it._end = this->_end;
+			    it._start = this->_start;
+			    it._list = *this->list;
+			    it._list_iterator = end;
+			    it._vector_iterator = end._curr->value.end();
+                it._vector_iterator--;
+                for (size_t i = 0; i < (8 - (it._end % 8)); i++)
+                    it._vector_iterator--;
                 return it;
-            } */ 
+            } 
     };
 }
 
