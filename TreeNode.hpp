@@ -9,7 +9,8 @@ namespace ft
 {
 	enum Color {
 		RED,
-		BLACK
+		BLACK,
+		DBLACK
 	};
 
 	template < class T>
@@ -29,6 +30,37 @@ namespace ft
 
 		TreeNode (T node) : color(ft::RED), value(new value_type(node)), father(0), left(0), right(0) {}
 
+		TreeNode * uncle()
+        {
+            if (father == NULL or father->father == NULL)
+                return NULL;
+            if (father->isOnLeft())
+                return father->father->right;
+            else
+                return father->father->left;
+        }
+
+        TreeNode *sibling() {
+            if (father == NULL)
+                return NULL;
+            if (this->isOnLeft())
+                return father->right;
+            return father->left;
+        }
+
+        void moveDown(TreeNode<T> *nfather) {
+            if (father != NULL) {
+                if (isOnLeft()) {
+                    father->left = nfather;
+                } else {
+                    father->right = nfather;
+                }
+            }
+            nfather->father = father;
+            father = nfather;
+        }
+
+        bool isOnLeft() { return this == father->left; }
 		TreeNode &operator = (const TreeNode &other)
 		{
 			this->color = other.color;
@@ -38,6 +70,11 @@ namespace ft
 			this->value = other.value;
 			return (*this);
 		}
+
+        bool hasRedChild() {
+            return (left != NULL and left->color == RED) or
+                   (right != NULL and right->color == RED);
+        }
 
 		bool operator > (const TreeNode &other)
 		{
