@@ -155,15 +155,31 @@ namespace ft
 		   this->_tree.deleteNode(position.it._curr);
 		}
 
-		//size_type erase (const key_type& k)
-		//{
-		//	return 0;
-		//}
+		size_type erase (const key_type& k)
+		{
+		    size_type i = 0;
+		    iterator it(this->begin());
+            while (1)
+            {
+             it = this->find(k);
+             if(it != this->end())
+             {
+                this->_tree.deleteNode(it.it._curr);
+                i++;
+             }
+             else
+                 return i;
+            }
+		}
 
-		//void erase (iterator first, iterator last)
-		//{
-		//
-		//}
+		void erase (iterator first, iterator last)
+		{
+            while(first != last)
+            {
+                this->_tree.deleteNode(first.it._curr);
+                ++first;
+            }
+		}
 
 		bool empty() const
 		{
