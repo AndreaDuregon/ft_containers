@@ -6,7 +6,7 @@
 #    By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 11:15:19 by dmalori           #+#    #+#              #
-#   Updated: 2021/05/28 01:14:20 by                  ###   ########.fr       # #
+#    Updated: 2021/05/31 11:10:59 by dmalori          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,7 +117,10 @@ runStack	:	all
 runQueue	:	all
 				@./$(NAME) queue
 
-runMap	:		all
+runMap		:	all
+				@./$(NAME) map
+
+runMap2	:		all
 				@clang++ mainTree.cpp && ./a.out
 
 push		:	fclean

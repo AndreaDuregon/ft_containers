@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/28 01:14:20 by                  ###   ########.fr       */
+/*   Updated: 2021/05/31 10:43:21 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ namespace ft
 		};
 		//ok
 		explicit list(iterator first, iterator last){
-			if (this->_end)
-				this->clear();
 			this->_end = new Node<T>();
 			this->_end->value = 0;
 			this->_end->next = this->_end;
@@ -311,10 +309,8 @@ namespace ft
 		//ok
 		void clear()
 		{
-			while(this->begin() != this->end())
-			{
+			while(this->_size != 0)
 				this->pop_back();
-			}
 		}
 		//ok
 		void splice (iterator position, list& x)

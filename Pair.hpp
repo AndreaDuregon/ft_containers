@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:40:22 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/30 16:18:56 by                  ###   ########.fr       */
+/*   Updated: 2021/05/31 11:20:29 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ namespace ft
 
 		// NON MEMBER FUNCTIONS
 
-		friend value_type	make_pair(first_type t, second_type u)
+		value_type	make_pair(first_type t, second_type u)
 		{
 			return value_type(t, u);
 		}
