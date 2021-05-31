@@ -4467,6 +4467,32 @@ static void testMAP(void)
 			std::cout << RED;
 		std::cout << "OPERATOR [] test 2" << OFF << std::endl;
 	}
+	{
+		// OPERATOR []
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(15, 15));
+		sys_map.insert(std::pair<int, int>(110, 110));
+		sys_map.insert(std::pair<int, int>(99, 99));
+		sys_map.insert(std::pair<int, int>(98, 98));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(15, 15));
+		our_map.insert(ft::pair<int, int>(110, 110));
+		our_map.insert(ft::pair<int, int>(99, 99));
+		our_map.insert(ft::pair<int, int>(98, 98));
+
+		sys_map.clear();
+		our_map.clear();
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "CLEAR" << OFF << std::endl;
+	}
 }
 
 // -----------------------------MAIN------------------

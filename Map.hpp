@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 16:50:52 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 17:53:33 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
 		typedef typename Allocator::pointer				pointer;
 		typedef typename Allocator::const_pointer		const_pointer;
 		typedef typename ft::mapIterator<Key, T >		iterator;
-		//typedef typename ft::constMapIterator<T>		const_iterator;
+		typedef typename ft::mapIterator<Key, T >		const_iterator;
 		//typedef typename ft::reverseMapIterator<T>		reverse_iterator;
 		//typedef typename ft::constReverseMapIterator<T>	const_reverse_iterator;
 	
@@ -55,26 +55,26 @@ namespace ft
 		//
 		///}
 
-		map (const map& x)
+		map (map& x)
 		{
 			*this = x;
 		}
 
-		map& operator = (const map& x)
+		map& operator = (map& x)
 		{
 			_tree = ft::RBTree<value_type>();
-			_tree._begin = x._tree._begin;
-			_tree._end = x._tree._end;
-			_tree._root = x._tree._root;;
-			_tree._size = x._tree._size;
 			_comp = x._comp;
 			_alloc = x._alloc;
+			for (iterator i = x.begin(); i != x.end(); ++i)
+				this->insert(value_type(*i.it.first, i->it.second));
+
 			return *this;
 		}
 
 		~map (void)
 		{
-
+			if (this->_tree._size > 0)
+				this->clear();
 		}
 
      	iterator begin()
@@ -82,20 +82,20 @@ namespace ft
 			return iterator (this->_tree.begin()._curr);
 		}
 
-		//const_iterator begin() const
-		//{
-		//	
-		//}
+		const_iterator begin() const
+		{
+			return const_iterator (this->_tree.begin()._curr);
+		}
 
 		iterator end()
 		{
 			return iterator (this->_tree.end()._curr);
 		}
 
-		//const_iterator end() const
-		//{
-		//	
-		//}
+		const_iterator end() const
+		{
+			return const_iterator (this->_tree.end()._curr);	
+		}
 
 		//reverse_iterator rbegin()
 		//{
@@ -222,7 +222,13 @@ namespace ft
 
 		void clear()
 		{
-			
+			iterator it = this->begin();
+			while(it != this->end())
+			{
+				delete it.it._curr;
+				this->_tree._size--;
+				++it;
+			}
 		}
 
 		key_compare key_comp() const
