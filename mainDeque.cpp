@@ -6,12 +6,11 @@
 
 int main(){
     
-    ft::deque<int> d(10, 3);
+    ft::deque<int> d(10, 2);
     exit(0);
-    ft::listIterator<int*>    it(d.list->begin());
+    /* ft::listIterator<int*>    it(d.list->begin());
     size_t  k = 0;
     ft::DequeIterator<int> it2(d.begin());
-
     while (it != d.list->end())
     {
         for (size_t i = 0; i < 8 && k < 10; i++)
@@ -34,6 +33,6 @@ int main(){
     std::cout << std::endl;
 
     ft::DequeIterator<int> it3(d.end());
-    ft::deque<int> d2(it2, it3);
+    ft::deque<int> d2(it2, it3); */
         
 };

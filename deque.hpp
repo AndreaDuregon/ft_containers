@@ -13,7 +13,7 @@ namespace ft {
     template < class T, class Allocator = std::allocator<T> > class deque {
         private:
         public:
-            ft::list<T* >                   *list;
+            ft::list<ft::vector<T> >                   *list;
             size_t                          size;
             size_t                          _start;
             size_t                          _end;
@@ -33,37 +33,48 @@ namespace ft {
             typedef size_t							size_type;
 
             deque() {
-                this->list = new ft::list<T*>;
-                T   *val = new T(8);
+                this->list = new ft::list<ft::vector<T> >;
                 this->_start = 0;
                 this->_end = 0;
                 this->size = 0;
-                this->list->push_front(val);
+                this->list->push_front(ft::vector<T>(8, 0));
             }
 
             deque(size_type n, value_type val) {
-                this->list = new ft::list<T*>((n / 8) + 1);
-                for (size_t i = 0; i < ((n / 8) + 1); i++)
-                    this->list->push_back(new T(8));
-                iterator    it(this->begin());
-                size_t  len = 0;
-
-                for (size_t i = 0; i < (n / 8) + 1; i++)
-                {
-                    for (size_t k = 0; k < 8; k++)
-                    {
-                        it._vector[k] = 0;
-                        len++;
-                    }
-                    ++it;
-                }
-                    std::cout << "lolo\n";
-                this->_start = 0;
-                this->_end = n;
+                this->list = new ft::list<ft::vector<T> >;
                 this->size = n;
+                for (size_t i = 0; i < ((this->size / 8) + 1); i++)
+                {
+                    this->list->push_back(ft::vector<T>(8, val));
+                    n -= 8;
+                }
+
+                /* ft::listIterator<ft::vector<T> > it(this->list->begin());
+                for (size_t k = 0; k < 2; k++)
+                {
+                    for (size_t i = 0; i < 8; i++)
+                    {
+                        std::cout << it._curr->value[i];
+                    }
+                    it++;
+                } */
+                iterator    it(this->begin());
+                for (size_t i = 0; i < 16; i++)
+                {
+                    std::cout << *it << std::endl;
+                    it++;
+                }
+                --it;
+                for (size_t i = 0; i < 16; i++)
+                {
+                    std::cout << *it << std::endl;
+                    --it;
+                }
+                this->_end = this->size;
+                this->_start = 0;
             }
 
-            deque (iterator first, iterator last, 
+            /* deque (iterator first, iterator last, 
                     const allocator_type& alloc = allocator_type())
             {
                 this->list = new ft::list<T*>;
@@ -88,19 +99,18 @@ namespace ft {
             ~deque() {
                 //delete this->list;
             }
-
+*/
             iterator    begin(void)
             {
                 iterator    it;
-                it._list = *this->list;
-                it._index_v = 0;
-                it._list_iterator = it._list.begin();
-                it._vector = it._list_iterator._curr->value;
-                it._start = this->_start;
                 it._end = this->_end;
+			    it._start = this->_start;
+			    it._list = *this->list;
+			    it._list_iterator = this->list->begin();
+			    it._vector_iterator = this->list->begin()._curr->value.begin();
                 return it;
             }
-
+/*
             iterator    end(void)
             {
                 iterator    it;
@@ -111,7 +121,7 @@ namespace ft {
                 it._start = this->_start;
                 it._end = this->_end;
                 return it;
-            }
+            } */ 
     };
 }
 

@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:54:35 by forsili           #+#    #+#             */
-/*   Updated: 2021/05/31 17:51:00 by forsili          ###   ########.fr       */
+/*   Updated: 2021/05/31 19:09:32 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@ namespace ft
 	{
 	public:
 		typedef T					value_type;
-        typedef ft::list<T*>        pointer;
+        typedef ft::list<ft::vector<T> >        pointer;
 		typedef std::ptrdiff_t 		difference_type;
 		typedef value_type const *	const_pointer;
 		typedef value_type &		reference;
 		typedef value_type const &	const_reference;
 
-		ft::list<T*>		        _list;
-		T*          		        _vector;
-        ft::listIterator<T*>        _list_iterator;
-        size_t                      _index_v;
+		pointer		        _list;
+        ft::listIterator<ft::vector<T> >    _list_iterator;
+        ft::VectorIterator<T>               _vector_iterator;
         size_t                      _start;
         size_t                      _end;
 	public:
@@ -36,31 +35,29 @@ namespace ft
 
 		DequeIterator(DequeIterator const &copy)
 		{
-            this->_list = copy._list;
-			this->_vector = copy._vector;
-            this->_list_iterator = copy._list_iterator;
-            this->_index_v = copy._index_v;
-            this->_start = copy._start;
-            this->_end = copy._end; 
+            this->_end = copy._end;
+			this->_start = copy._start;
+			this->_list = copy._list;
+			this->_list_iterator = copy._list_iterator;
+			this->_vector_iterator = copy._vector_iterator;
 		}
 
 		reference	operator * ()
 		{
-			return (this->_vector[this->_index_v]);
+			return (*this->_vector_iterator);
 		}
 
-		DequeIterator	operator ++ ()
+ 		DequeIterator	operator ++ ()
 		{
-            ft::listIterator<T*>    it(this->_list.end());
-            it--;
-			if (_index_v < 7 /* || (_list_iterator == it && _index_v == (_end % 8))*/)
-                _index_v++;
-            else /* if (!(_list_iterator == it && _index_v == (_end % 8))) */
-            {
-                _list_iterator++;
-                _index_v = 0;
-                _vector = this->_list_iterator._curr->value;
-            }
+			ft::VectorIterator<T> it(_list_iterator._curr->value.end());
+			it--;
+            if (_vector_iterator != it)
+				_vector_iterator++;
+			else
+			{
+				_list_iterator++;
+				_vector_iterator = _list_iterator._curr->value.begin();
+			}
 			return *this;
 		}
 	
@@ -73,15 +70,14 @@ namespace ft
 		
 		DequeIterator	operator -- ()
 		{
-            
-			if (_index_v > 0 /* || (_list_iterator == this->_list.begin() && _index_v == _start) */)
-                _index_v--;
-            else /* if (!(_list_iterator == this->_list.begin() && _index_v == _start)) */
-            {
-                _list_iterator--;
-                _index_v = 7;
-                _vector = this->_list_iterator._curr->value;
-            }
+
+            if (_vector_iterator != _list_iterator._curr->value.begin())
+				_vector_iterator--;
+			else
+			{
+				_list_iterator--;
+				_vector_iterator = _list_iterator._curr->value.end();
+			}
 			return *this;
 		}
 
@@ -91,35 +87,35 @@ namespace ft
 			this->operator--();
 			return temp;
 		}
-
+/*
 		pointer			operator -> ()
 		{
-			return &(*this->_vector[_index_v]);
+			return &(*this->_vector_iterator);
 		}
 
 		bool			operator == (DequeIterator const &other) const {
-			return (this->_vector[_index_v] == other._vector[other._index_v]);
+			return (*this->_vector_iterator == *other._vector_iterator);
 		}
 
 		bool			operator != (DequeIterator const &other) const {
-			return (this->_vector[_index_v] != other._vector[other._index_v]);
+			return (*this->_vector_iterator != *other._vector_iterator);
 		}
 
 		bool			operator < (DequeIterator const &other) const {
-			return (this->_vector[_index_v] < other._vector[other._index_v]);
+			return (*this->_vector_iterator < *other._vector_iterator);
 		}
 
 		bool			operator <= (DequeIterator const &other) const {
-			return (this->_vector[_index_v] <= other._vector[other._index_v]);
+			return (*this->_vector_iterator <= *other._vector_iterator);
 		}
 
 		bool			operator > (DequeIterator const &other) const {
-			return (this->_vector[_index_v] > other._vector[other._index_v]);
+			return (*this->_vector_iterator > *other._vector_iterator);
 		}
 
 		bool			operator >= (DequeIterator const &other) const {
-			return (this->_vector[_index_v] >= other._vector[other._index_v]);
-		}
+			return (*this->_vector_iterator >= *other._vector_iterator);
+		} */
 	};
 
 /* 	template <class T> class constVectorIterator : public VectorIterator<T>
