@@ -4468,7 +4468,7 @@ static void testMAP(void)
 		std::cout << "OPERATOR [] test 2" << OFF << std::endl;
 	}
 	{
-		// OPERATOR []
+		// CLEAR
 		std::map<int, int> sys_map;
 		ft::map<int, int> our_map;
 		sys_map.insert(std::pair<int, int>(100, 100));

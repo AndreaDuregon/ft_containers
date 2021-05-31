@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 17:53:33 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/05/31 18:29:58 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,15 @@ namespace ft
 			_tree = ft::RBTree<value_type>();
 			_comp = x._comp;
 			_alloc = x._alloc;
-			for (iterator i = x.begin(); i != x.end(); ++i)
-				this->insert(value_type(*i.it.first, i->it.second));
-
+			_tree = x._tree;
+		
 			return *this;
 		}
 
 		~map (void)
 		{
-			if (this->_tree._size > 0)
-				this->clear();
+			//if (this->_tree._size > 0)
+			//	this->clear();
 		}
 
      	iterator begin()
@@ -152,7 +151,7 @@ namespace ft
 
 		void erase (iterator position)
 		{
-		   this->_tree.deleteNode(position.it._curr);
+		    this->_tree.deleteNode(position.it._curr);
 		}
 
 		//size_type erase (const key_type& k)
@@ -195,24 +194,9 @@ namespace ft
 
 		void clear()
 		{
-			iterator it = this->begin();
-			while(it != this->end())
-			{
-				delete it.it._curr;
-				this->_tree._size--;
-				++it;
-			}
+
 		}
 
-		key_compare key_comp() const
-		{
-			return this->_comp;
-		}
-
-		//value_compare value_comp() const
-		//{
-		//
-		//}
 
 		//size_type count (const key_type& k) const
 		//{
@@ -247,6 +231,16 @@ namespace ft
 		//ft::pair<iterator,iterator>             equal_range (const key_type& k)
 		//{
 		//	return ft::pair<iterator,iterator>( iterator(), iterator() );
+		//}
+		
+		key_compare key_comp() const
+		{
+			return this->_comp;
+		}
+
+		//value_compare value_comp() const
+		//{
+		//
 		//}
 		
 		allocator_type get_allocator() const
