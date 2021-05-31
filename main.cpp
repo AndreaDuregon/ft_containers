@@ -85,6 +85,19 @@ static void print_our(ft::vector<T> &vector)
 	std::cout << std::endl;
 }
 
+static void print_our(ft::map<int, int> &map)
+{
+	ft::map<int, int>::iterator our_it_begin = map.begin();
+	ft::map<int, int>::iterator our_it_end = map.end();
+	std::cout << "OUR: ";
+	while (our_it_begin != our_it_end)
+	{
+		std::cout << *our_it_begin << " ";
+		++our_it_begin;
+	}
+	std::cout << std::endl;
+}
+
 template <class T>
 static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
 {
@@ -4173,6 +4186,46 @@ static void testMAP(void)
 		else
 			std::cout << RED;
 		std::cout << "FIND" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+
+		sys_map.erase(sys_map.begin());
+		our_map.erase(our_map.begin());
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE test 1" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(15, 15));
+		sys_map.insert(std::pair<int, int>(110, 110));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(15, 15));
+		our_map.insert(ft::pair<int, int>(110, 110));
+
+		sys_map.erase(--sys_map.end());
+		our_map.erase(--our_map.end());
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE test 2" << OFF << std::endl;
 	}
 }
 
