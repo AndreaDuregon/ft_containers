@@ -141,10 +141,34 @@ namespace ft
 		//
 		//}
 
-		//void erase (iterator position)
-		//{
-		//
-		//}
+		void erase (iterator position)
+		{
+		    if(position.it->left && !position.it->right)
+            {
+		        if(position.it->father->right = position)
+		            position.it->father->right = 0;
+		        else
+		            position.it->father->left = 0;
+            }
+		    else if (position.it->right && !position.it->left)
+		    {
+                if(position.it->father->right = position)
+                    position.it->father->right = position.it->right;
+                else
+                    position.it->father->left = position.it->right;
+                position.it->right->father = position.it->father;
+                delete(position.it._curr);
+		    }
+		    else if (position.it->left && !position.it->right)
+            {
+                if(position.it->father->right = position)
+                    position.it->father->right = position.it->left;
+                else
+                    position.it->father->left = position.it->left;
+                position.it->left->father = position.it->father;
+                delete(position.it._curr);
+            }
+		}
 
 		//size_type erase (const key_type& k)
 		//{
