@@ -57,6 +57,19 @@ static void print_sys(std::vector<T> &vector)
 	std::cout << std::endl;
 }
 
+static void print_sys(std::map<int, int> &map)
+{
+	std::map<int, int>::iterator sys_it_begin = map.begin();
+	std::map<int, int>::iterator sys_it_end = map.end();
+	std::cout << "SYS: ";
+	while (sys_it_begin != sys_it_end)
+	{
+		std::cout << sys_it_begin->first << " ";
+		++sys_it_begin;
+	}
+	std::cout << std::endl;
+}
+
 template <class T>
 static void print_our(ft::list<T> &list)
 {
@@ -85,7 +98,6 @@ static void print_our(ft::vector<T> &vector)
 	std::cout << std::endl;
 }
 
-/*
 static void print_our(ft::map<int, int> &map)
 {
 	ft::map<int, int>::iterator our_it_begin = map.begin();
@@ -93,12 +105,11 @@ static void print_our(ft::map<int, int> &map)
 	std::cout << "OUR: ";
 	while (our_it_begin != our_it_end)
 	{
-		std::cout << *our_it_begin << " ";
+		std::cout << our_it_begin->first << " ";
 		++our_it_begin;
 	}
 	std::cout << std::endl;
 }
-*/
 
 template <class T>
 static bool equalSysFt(std::list<T> &sys_list, ft::list<T> &our_list)
@@ -331,9 +342,13 @@ static bool equalSysFt(std::map<T1, T2> &sys_map, ft::map<T1, T2> &our_map)
 		while (sys_it_begin != sys_it_end)
 		{
 			if (sys_it_begin->first != our_it_begin->first || sys_it_begin->second != our_it_begin->second)
+			{
+				print_our(our_map);
+				print_sys(sys_map);
 				return false;
-			sys_it_begin++;
-			our_it_begin++;
+			}
+			++sys_it_begin;
+			++our_it_begin;
 		}
 
 		our_it_begin = our_map.begin();
@@ -342,9 +357,13 @@ static bool equalSysFt(std::map<T1, T2> &sys_map, ft::map<T1, T2> &our_map)
 		while (our_it_begin != our_it_end)
 		{
 			if (sys_it_begin->first != our_it_begin->first || sys_it_begin->second != our_it_begin->second)
+			{
+				print_our(our_map);
+				print_sys(sys_map);
 				return false;
-			sys_it_begin++;
-			our_it_begin++;
+			}
+			++sys_it_begin;
+			++our_it_begin;
 		}
 	}
 
@@ -356,6 +375,11 @@ static bool equalSysFt(std::map<T1, T2> &sys_map, ft::map<T1, T2> &our_map)
 	if (sys_map.empty() != our_map.empty())
 	{
 		std::cout << "EMPTY " << sys_map.empty() << " != " << our_map.empty() << " ";
+		return false;
+	}
+	if (our_map._tree.isValid() != 1)
+	{
+		our_map._tree.printTree();
 		return false;
 	}
 	return true;
@@ -4215,10 +4239,40 @@ static void testMAP(void)
 		sys_map.insert(std::pair<int, int>(10, 10));
 		sys_map.insert(std::pair<int, int>(15, 15));
 		sys_map.insert(std::pair<int, int>(110, 110));
+		sys_map.insert(std::pair<int, int>(99, 99));
+		sys_map.insert(std::pair<int, int>(98, 98));
 		our_map.insert(ft::pair<int, int>(100, 100));
 		our_map.insert(ft::pair<int, int>(10, 10));
 		our_map.insert(ft::pair<int, int>(15, 15));
 		our_map.insert(ft::pair<int, int>(110, 110));
+		our_map.insert(ft::pair<int, int>(99, 99));
+		our_map.insert(ft::pair<int, int>(98, 98));
+
+		sys_map.erase(sys_map.find(99));
+		our_map.erase(our_map.find(99));
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE test 2" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::map<int, int> sys_map;
+		ft::map<int, int> our_map;
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(15, 15));
+		sys_map.insert(std::pair<int, int>(110, 110));
+		sys_map.insert(std::pair<int, int>(99, 99));
+		sys_map.insert(std::pair<int, int>(98, 98));
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(15, 15));
+		our_map.insert(ft::pair<int, int>(110, 110));
+		our_map.insert(ft::pair<int, int>(99, 99));
+		our_map.insert(ft::pair<int, int>(98, 98));
 
 		sys_map.erase(sys_map.find(100));
 		our_map.erase(our_map.find(100));
@@ -4227,7 +4281,7 @@ static void testMAP(void)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "ERASE test 2" << OFF << std::endl;
+		std::cout << "ERASE test 3" << OFF << std::endl;
 	}
 }
 
