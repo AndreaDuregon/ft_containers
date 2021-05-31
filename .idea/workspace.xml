@@ -5,16 +5,18 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="ft_containers" targetName="runVector" />
       <config projectName="ft_containers" targetName="run" />
       <config projectName="ft_containers" targetName="ft_containers" />
+      <config projectName="ft_containers" targetName="push" />
+      <config projectName="ft_containers" targetName="runQueue" />
+      <config projectName="ft_containers" targetName="runList" />
+      <config projectName="ft_containers" targetName="runVector" />
       <config projectName="ft_containers" targetName="all" />
       <config projectName="ft_containers" targetName="backup" />
-      <config projectName="ft_containers" targetName="push" />
+      <config projectName="ft_containers" targetName="runMap2" />
+      <config projectName="ft_containers" targetName="runMap" />
       <config projectName="ft_containers" targetName="re" />
-      <config projectName="ft_containers" targetName="runQueue" />
       <config projectName="ft_containers" targetName="fclean" />
-      <config projectName="ft_containers" targetName="runList" />
       <config projectName="ft_containers" targetName="runStack" />
     </generated>
   </component>
@@ -25,18 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="559b27ad-014d-45a8-9486-ae059d06c577" name="Default Changelist" comment="♻️rotation fixed♻️">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2021,_00_30_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2021__00_30__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021,_01_13_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021__01_13__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deque.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDeque.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IteratorBinaryTree.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/IteratorBinaryTree.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pair.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Pair.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Map.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +142,16 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <configuration name="runMap" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ft_containers" TARGET_NAME="runMap" CONFIG_NAME="runMap" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="runMap2" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ft_containers" TARGET_NAME="runMap2" CONFIG_NAME="runMap2" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="runQueue" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ft_containers" TARGET_NAME="runQueue" CONFIG_NAME="runQueue" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -165,9 +167,9 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
@@ -179,6 +181,8 @@
       <item itemvalue="Makefile Application.re" />
       <item itemvalue="Makefile Application.run" />
       <item itemvalue="Makefile Application.runList" />
+      <item itemvalue="Makefile Application.runMap" />
+      <item itemvalue="Makefile Application.runMap2" />
       <item itemvalue="Makefile Application.runQueue" />
       <item itemvalue="Makefile Application.runStack" />
       <item itemvalue="Makefile Application.runVector" />
@@ -199,6 +203,7 @@
       <workItem from="1622158528071" duration="159000" />
       <workItem from="1622384173932" duration="181000" />
       <workItem from="1622388675886" duration="7973000" />
+      <workItem from="1622462574042" duration="2879000" />
     </task>
     <task id="LOCAL-00001" summary="Ho provato clion, muy cariño! segfaulta sul remove o dopo?">
       <created>1621555807539</created>
