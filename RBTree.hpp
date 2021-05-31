@@ -366,7 +366,71 @@ template <class T> class  RBTree
 			x->left->father = x;
 	}
 
-	binaryTreeIterator<T> begin(void)
+    void swapColors(TreeNode<T> *x1, TreeNode<T> *x2)
+    {
+        ft::Color temp;
+        temp = x1->color;
+        x1->color = x2->color;
+        x2->color = temp;
+    }
+
+    void swapValues(TreeNode<T> *u, TreeNode<T> *v)
+    {
+        int temp;
+        temp = u->value;
+        u->value = v->value;
+        v->value = temp;
+    }
+
+    void fixRedRed(TreeNode<T> *x)
+    {
+        if (x == _root) {
+            x->color = BLACK;
+            return;
+        }
+        TreeNode<T> *parent = x->father, *grandparent = x->father->father,
+                *uncle = x->uncle();
+
+        if (parent->color != BLACK)
+        {
+            if (uncle != NULL && uncle->color == RED)
+            {
+                parent->color = BLACK;
+                uncle->color = BLACK;
+                grandparent->color = RED;
+                fixRedRed(grandparent);
+            } else {
+                if (parent->isOnLeft())
+                {
+                    if (x->isOnLeft())
+                    {
+                        swapColors(parent, grandparent);
+                    }
+                    else
+                    {
+                        leftRotate(parent);
+                        swapColors(x, grandparent);
+                    }
+                    rightRotate(grandparent);
+                }
+                else
+                {
+                    if (x->isOnLeft())
+                    {
+                        rightRotate(parent);
+                        swapColors(x, grandparent);
+                    }
+                    else
+                    {
+                        swapColors(parent, grandparent);
+                    }
+                    leftRotate(grandparent);
+                }
+            }
+        }
+    }
+
+    binaryTreeIterator<T> begin(void)
 	{
 		value_type *tmp = this->_root;
 		while(tmp->left)

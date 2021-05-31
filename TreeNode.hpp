@@ -71,6 +71,11 @@ namespace ft
 			return (*this);
 		}
 
+        bool hasRedChild() {
+            return (left != NULL and left->color == RED) or
+                   (right != NULL and right->color == RED);
+        }
+
 		bool operator > (const TreeNode &other)
 		{
 			return (this->value > other.value);
