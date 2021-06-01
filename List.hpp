@@ -39,42 +39,36 @@ namespace ft
 		typedef size_t							size_type;
 
 		//ok
-		explicit list(/* args */) {
-			this->_end = new Node<T>();
-			this->_end->value = 0;
+		explicit list(/* args */) : _end(new Node<T>(0)), _size(0)
+		{
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
-			this->_size = 0;
 		};
 		//ok
-		explicit list(size_type n, const_reference val=value_type()) {
-			this->_end = new Node<T>();
-			this->_end->value = 0;
+		explicit list(size_type n, const_reference val=value_type()) : _end(new Node<T>(0)), _size(0)
+		{
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
-			this->_size = 0;
 			for (size_type i = 0; i < n; i++)
 				this->push_back(val);
 		};
 		//ok
-		explicit list(iterator first, iterator last){
-			this->_end = new Node<T>();
-			this->_end->value = 0;
+		explicit list(iterator first, iterator last): _end(new Node<T>(0)), _size(0)
+		{
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
-			this->_size = 0;
 			for (; first != last; ++first)
 				this->push_back(*first);
 		};
 		//ok
-		explicit list (const list& x)
+		explicit list (const list& x) : _end(new Node<T>(0)), _size(0)
 		{
-			this->_end = new Node<T>();
 			*this = x;
 		}
 		//ok
 		list& operator = (const list& x)
 		{
+			this->clear();
 			this->_end->value = 0;
 			this->_size = 0;
 			this->_end->next = this->_end;

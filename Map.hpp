@@ -13,6 +13,7 @@
 #pragma once
 
 #include <iostream>
+#include <limits>
 #include "Pair.hpp"
 #include "Less.hpp"
 #include "IteratorMap.hpp"
@@ -64,36 +65,28 @@ namespace ft
 		};
 
 	
-		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-		{
-			_tree = ft::RBTree<value_type>();
-			_comp = comp;
-			_alloc = alloc;
-		}
+		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
 
 		//map (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		//{
 		//
-		///}
+		///} 
 
-		map (map& x)
+		map (const map& x)
 		{
 			*this = x;
 		}
 
-		map& operator = (map& x)
+		map& operator = (const map& x)
 		{
-			_tree = ft::RBTree<value_type>();
-			_comp = x._comp;
-			_alloc = x._alloc;
-			_tree = x._tree;
-		
+			this->_tree = ft::RBTree<value_type>(x._tree);
+			this->_comp = x._comp;
+			this->_alloc = x._alloc;
 			return *this;
 		}
 
 		~map (void)
 		{
-			this->_tree.~RBTree();
 			this->clear();
 		}
 
