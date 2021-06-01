@@ -587,7 +587,7 @@ template <class T> class  RBTree
 	/* NEW STAMPA */
 	void printTree(void)
 	{
-    	printTreeRec(this->_root, nullptr, false);
+    	printTreeRec(this->_root, 0, false);
 	}
 
 	struct Trunk
@@ -603,7 +603,7 @@ template <class T> class  RBTree
 
 	void showTrunks(Trunk *p)
 	{
-		if (p == nullptr) {
+		if (p == 0) {
 			return;
 		}
 		showTrunks(p->prev);
