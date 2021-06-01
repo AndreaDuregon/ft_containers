@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IteratorBinaryTree.hpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:18:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 14:13:40 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/01 10:45:18 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,34 @@ namespace ft
 			return it;
 		}
 
-		binaryTreeIterator<T>	operator-- ()
+		binaryTreeIterator<T>	*operator-- ()
 		{
-			return *this;
+			while (1)
+			{
+				if (this->_curr->left && this->_prev != this->_curr->left)
+				{
+					this->_prev = this->_curr;
+					this->_curr = this->_curr->left;
+					while (this->_curr->right)
+					{
+						this->_prev = this->_curr;
+						this->_curr = this->_curr->right;
+					}
+					return this;
+				}
+				else if (this->_curr->father->right && this->_curr->father->right == this->_curr)
+				{
+					this->_prev = this->_curr;
+					this->_curr = this->_curr->father;
+					return this;
+				}
+				else if (this->_curr->father->left && this->_curr->father->right == this->_curr)
+				{
+					this->_prev = this->_curr;
+					this->_curr = this->_curr->father;
+				}			
+			}
+			return this;
 		}
 
 		binaryTreeIterator<T>	operator-- (int)
