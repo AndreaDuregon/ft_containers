@@ -14,5 +14,8 @@ int main (void)
 
     //ft::mapIterator<int, int> it = our_map.end();
     ft::reverseMapIterator<int, int> it2 = our_map.rend();
-    //std::cout << *it2 << std::endl;
+    it2--;
+    it2--;
+    it2--;
+    std::cout << *it2 << std::endl;
 }
