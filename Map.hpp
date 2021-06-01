@@ -321,11 +321,11 @@ namespace ft
 		template <class k, class v, class c, class a>
 		friend bool operator <= (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
 		{
-			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
-				if (*it != *it2)
+				if (it->first != it2->first || it->second != it2->second)
 				{
-					if (*it < *it2)
+					if (it->first < it2->first)
 						return true;
 					else
 						return false;
@@ -337,11 +337,11 @@ namespace ft
 		template <class k, class v, class c, class a>
 		friend bool operator > (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
 		{
-			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
-				if (*it != *it2)
+				if (it->first != it2->first || it->second != it2->second)
 				{
-					if (*it > *it2)
+					if (it->first > it2->first)
 						return true;
 					else
 						return false;
@@ -353,11 +353,11 @@ namespace ft
 		template <class k, class v, class c, class a>
 		friend bool operator >= (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
 		{
-			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
-				if (*it != *it2)
+				if (it->first != it2->first || it->second != it2->second)
 				{
-					if (*it > *it2)
+					if (it->first > it2->first)
 						return true;
 					else
 						return false;

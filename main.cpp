@@ -3887,10 +3887,10 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(10, 10));
 		our_map2.insert(ft::pair<int, int>(12, 12));
 
-		//if ((sys_map != sys_map2) == (our_map != our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map != sys_map2) == (our_map != our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE < [SYS vs OUR] test 1" << OFF << std::endl;
 	{
@@ -3907,10 +3907,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(12, 12));
 
-		//if ((sys_map < sys_map2) == (our_map < our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map < sys_map2) == (our_map < our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE < [SYS vs OUR] test 2" << OFF << std::endl;
 	{
@@ -3927,10 +3927,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(-12, -12));
 
-		//if ((sys_map < sys_map2) == (our_map < our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map < sys_map2) == (our_map < our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE < [SYS vs OUR] test 3" << OFF << std::endl;
 	{
@@ -3947,10 +3947,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(10, 10));
 
-		//if ((sys_map < sys_map2) == (our_map < our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map < sys_map2) == (our_map < our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE > [SYS vs OUR] test 1" << OFF << std::endl;
 	{
@@ -3967,10 +3967,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(12, 12));
 
-		//if ((sys_map > sys_map2) == (our_map > our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map > sys_map2) == (our_map > our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE > [SYS vs OUR] test 2" << OFF << std::endl;
 	{
@@ -3987,10 +3987,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(-12, -12));
 
-		//if ((sys_map > sys_map2) == (our_map > our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map > sys_map2) == (our_map > our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE > [SYS vs OUR] test 3" << OFF << std::endl;
 	{
@@ -4007,10 +4007,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(10, 10));
 
-		//if ((sys_map > sys_map2) == (our_map > our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map > sys_map2) == (our_map > our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE <= [SYS vs OUR] test 1" << OFF << std::endl;
 	{
@@ -4027,10 +4027,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(12, 12));
 
-		//if ((sys_map <= sys_map2) == (our_map <= our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map <= sys_map2) == (our_map <= our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE <= [SYS vs OUR] test 2" << OFF << std::endl;
 	{
@@ -4047,10 +4047,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(-12, -12));
 
-		//if ((sys_map <= sys_map2) == (our_map <= our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map <= sys_map2) == (our_map <= our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE <= [SYS vs OUR] test 3" << OFF << std::endl;
 	{
@@ -4067,10 +4067,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(10, 10));
 
-		//if ((sys_map <= sys_map2) == (our_map <= our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map <= sys_map2) == (our_map <= our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE >= [SYS vs OUR] test 1" << OFF << std::endl;
 	{
@@ -4087,10 +4087,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(12, 12));
 
-		//if ((sys_map >= sys_map2) == (our_map >= our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map >= sys_map2) == (our_map >= our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE >= [SYS vs OUR] test 2" << OFF << std::endl;
 	{
@@ -4107,10 +4107,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(-12, -12));
 
-		//if ((sys_map >= sys_map2) == (our_map >= our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map >= sys_map2) == (our_map >= our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	std::cout << YELLOW << "MAP OPERATORE >= [SYS vs OUR] test 3" << OFF << std::endl;
 	{
@@ -4127,10 +4127,10 @@ static void testMAP(void)
 		our_map2.insert(ft::pair<int, int>(100, 100));
 		our_map2.insert(ft::pair<int, int>(10, 10));
 
-		//if ((sys_map >= sys_map2) == (our_map >= our_map2))
-		//	std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		//else
-		//	std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+		if ((sys_map >= sys_map2) == (our_map >= our_map2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	// -------------------INIT EMPTY---------------------
 	std::cout << YELLOW << "INIT MAP VUOTO [SYS vs OUR]" << OFF << std::endl;
