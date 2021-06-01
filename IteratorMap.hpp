@@ -105,4 +105,29 @@ namespace ft
             return (this->it >= other.it);
         }
 };
+
+    template <class Key, class Value>
+    class cmapIterator : public mapIterator<Key, Value>
+    {
+    protected:
+    public:
+        typedef ft::pair<Key, Value>	value_type;
+        cmapIterator() {};
+        cmapIterator(TreeNode<value_type> *curr) : mapIterator<Key, Value>(curr) {}
+        cmapIterator(cmapIterator const &copy)
+        {
+            *this = copy;
+        }
+
+        value_type const    &operator * ()
+        {
+            return *this->it._curr->value;
+        }
+
+        value_type const    *operator -> ()
+        {
+            return this->it._curr->value;
+        }
+
+};
 }

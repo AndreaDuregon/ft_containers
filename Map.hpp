@@ -39,7 +39,7 @@ namespace ft
 		typedef typename Allocator::pointer				pointer;
 		typedef typename Allocator::const_pointer		const_pointer;
 		typedef typename ft::mapIterator<Key, T >		iterator;
-		typedef typename ft::constMapIterator<Key, T >	const_iterator;
+		typedef typename ft::cmapIterator<Key, T >		const_iterator;
 		//typedef typename ft::reverseMapIterator<T>		reverse_iterator;
 		//typedef typename ft::constReverseMapIterator<T>	const_reverse_iterator;
 	
@@ -93,7 +93,7 @@ namespace ft
 
 		const_iterator end() const
 		{
-			return const_iterator (this->_tree.end()._curr);	
+			return const_iterator(this->_tree.end()._curr);	
 		}
 
 		//reverse_iterator rbegin()

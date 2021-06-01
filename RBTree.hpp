@@ -20,10 +20,10 @@ template <class T> class  RBTree
 	typedef std::size_t        size_type;
 	typedef ft::TreeNode<T>    value_type;
     typedef ft::binaryTreeIterator<T> iterator;
-	value_type *_root;
-	value_type *_end;
-	value_type *_begin;
-	size_type _size;
+	mutable value_type *_root;
+	mutable value_type *_end;
+	mutable value_type *_begin;
+	mutable size_type _size;
 
 	RBTree() : _root(0), _size(0) {
 		this->_end = new value_type();
@@ -554,6 +554,15 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(tmp);
 	}
 
+    binaryTreeIterator<T> begin(void) const
+	{
+		value_type *tmp = this->_root;
+		while(tmp->left)
+			tmp = tmp->left;
+		this->_begin = tmp;
+		return binaryTreeIterator<T>(tmp);
+	}
+
 	binaryTreeIterator<T> rbegin(void)
 	{
 		value_type *tmp = this->_root;
@@ -563,6 +572,16 @@ template <class T> class  RBTree
 	}
 
 	binaryTreeIterator<T> end(void)
+	{
+		this->removeGhostNodes();
+		value_type *tmp = this->_root;
+		while(tmp->right)
+			tmp = tmp->right;
+		tmp->right = this->_end;
+		this->_end->father = tmp;
+		return binaryTreeIterator<T>(this->_end);
+	}
+	binaryTreeIterator<T> end(void) const
 	{
 		this->removeGhostNodes();
 		value_type *tmp = this->_root;
@@ -648,6 +667,19 @@ template <class T> class  RBTree
 	}
 
 	void removeGhostNodes(void)
+	{
+		if (this->_end->father != 0)
+		{
+			this->_end->father->right = 0;
+			this->_end->father = 0;
+		}
+		//if (this->_begin->father != 0)
+		//{
+		//	this->_begin->father->left = 0;
+		//	this->_begin->father = 0;
+		//}
+	}
+	void removeGhostNodes(void) const
 	{
 		if (this->_end->father)
 		{

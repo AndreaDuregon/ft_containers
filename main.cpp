@@ -11,6 +11,7 @@
 #include <queue>
 #include <iostream>
 #include <exception>
+
 // COLORS
 #define BLUE "\033[44m"
 #define RED "\033[0;31m"
