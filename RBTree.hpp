@@ -594,10 +594,13 @@ template <class T> class  RBTree
 
 	binaryTreeIterator<T> rend(void)
 	{
-		this->removeGhostNodes();
+		//this->removeGhostNodes();
 		value_type *tmp = this->_root;
 		while(tmp->left)
+		{
+		std::cout << *tmp->value << std::endl;
 			tmp = tmp->left;
+		}
 		tmp->left = this->_begin;
 		this->_begin->father = tmp;
 		return binaryTreeIterator<T>(this->_begin);
