@@ -25,28 +25,64 @@ template <class T> class  RBTree
 	mutable value_type *_end;
 	mutable value_type *_begin;
 
-	RBTree() : _root(0), _size(0), _end(new value_type())
+	RBTree() : _root(0), _size(0), _end(new value_type()), _begin(0)
 	{
 		this->_end->father = 0;
-		//this->_begin = new value_type();
-		//this->_begin->father = 0;
+	}
+
+	RBTree(RBTree const &other) : _root(0), _size(0), _end(new value_type()), _begin(0)
+	{
+		this->_end->father = 0;
+		*this = other;
+	}
+
+	RBTree &operator = (const RBTree &other)
+	{
+		this->clear();
+		other.removeGhostNodes();
+		this->copyTree(this->_root, 0, other._root);
+		this->_size = other._size;
+		return *this;
+	}
+
+	void copyTree (value_type*& copiedTreeRoot, value_type* newParent, value_type* otherTreeRoot)
+	{
+		if (otherTreeRoot == 0)
+			copiedTreeRoot = 0;
+		else {
+			copiedTreeRoot = new value_type;
+			copiedTreeRoot->value = otherTreeRoot->value;
+			copiedTreeRoot->color = otherTreeRoot->color;
+			copiedTreeRoot->father = newParent;
+
+			copyTree(copiedTreeRoot->left, copiedTreeRoot, otherTreeRoot->left);
+			copyTree(copiedTreeRoot->right, copiedTreeRoot, otherTreeRoot->right);
+		}
 	}
 
 	~RBTree()
 	{
-		//this->clear();
-		//delete this->_end;
+		this->clear();
+		delete this->_end;
 	}
 
 	void clear(void)
 	{
-
+		if (this->_size == 0)
+			return;
+		iterator it = this->begin();
+		iterator it2 = this->end();
+		while (it != it2)
+		{
+			delete it._curr;
+			this->_size--;
+			it++;
+		}
 	}
 
 
 	value_type &insert (value_type &newNode)
 	{
-
 		this->removeGhostNodes();
 		if (this->_root)
 		{

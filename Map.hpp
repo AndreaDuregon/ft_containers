@@ -64,47 +64,48 @@ namespace ft
 			}
 		};
 
-	
+		//ok
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
 
 		//map (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		//{
 		//
-		///} 
-
-		map (const map& x)
+		///}
+	
+		//ok
+		map (const map& x) : _tree(ft::RBTree<value_type>()), _comp(x._comp), _alloc(x._alloc)
 		{
 			*this = x;
 		}
-
+		//ok
 		map& operator = (const map& x)
 		{
-			this->_tree = ft::RBTree<value_type>(x._tree);
+			this->_tree = x._tree;
 			this->_comp = x._comp;
 			this->_alloc = x._alloc;
 			return *this;
 		}
-
+		//ok
 		~map (void)
 		{
 			this->clear();
 		}
-
+		//ok
      	iterator begin()
 		{
 			return iterator (this->_tree.begin()._curr);
 		}
-
+		//ok
 		const_iterator begin() const
 		{
 			return const_iterator (this->_tree.begin()._curr);
 		}
-
+		//ok
 		iterator end()
 		{
 			return iterator (this->_tree.end()._curr);
 		}
-
+		//ok
 		const_iterator end() const
 		{
 			return const_iterator(this->_tree.end()._curr);	
@@ -129,7 +130,7 @@ namespace ft
 		{
 			return reverse_iterator (this->_tree.rend()._curr);
 		}
-
+		//ok
 		iterator find (const key_type& k)
 		{
 			iterator it(this->begin());
@@ -141,7 +142,7 @@ namespace ft
 			}
 			return it;
 		}
-
+		//ok
 		const_iterator find (const key_type& k) const
 		{
 			const_iterator it(this->begin());
@@ -153,7 +154,7 @@ namespace ft
 			}
 			return it;		
 		}
-
+		//ok
 		ft::pair<iterator, bool> insert (const value_type& val)
 		{
 			if (this->size() != 0 && this->find(val.first) != this->end())
@@ -162,7 +163,7 @@ namespace ft
 			this->_tree.insert(*v);
 			return ft::pair<iterator, bool>(this->find(val.first), true);
 		}
-
+		//ok
 		iterator insert (iterator position, const value_type& val)
 		{
 			//DELETE NODE ?
@@ -170,7 +171,7 @@ namespace ft
 			this->insert(val);
 			return this->find(val.first);
 		}
-
+		//ok
   		void insert (iterator first, iterator last)
 		{
 			while(first != last)
@@ -179,12 +180,12 @@ namespace ft
 				++first;
 			}
 		}
-
+		//ok
 		void erase (iterator position)
 		{
 		    this->_tree.deleteNode(position.it._curr);
 		}
-
+		//ok
 		size_type erase (const key_type& k)
 		{
 		    size_type i = 0;
@@ -201,31 +202,30 @@ namespace ft
 					return i;
             }
 		}
-
+		//ok
 		void erase (iterator first, iterator last)
 		{
-            while(first != last)
-            {
-                this->_tree.deleteNode(first.it._curr);
-                ++first;
-            }
+			for (; first != last; ++first)
+			{
+				this->_tree.deleteNode(first.it._curr);
+			}
 		}
-
+		//ok
 		bool empty() const
 		{
 			return this->_tree._size == 0;
 		}
-
+		//ok
 		size_type size() const
 		{
 			return this->_tree._size;
 		}
-
+		//ok
 		size_type max_size() const
 		{
 			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
 		}
-
+		//ok
 		mapped_type& operator[] (const key_type& k)
 		{
 			if (this->size() != 0 && this->find(k) != this->end())
@@ -233,49 +233,52 @@ namespace ft
 			this->insert(ft::pair<Key, T>(k, T()));
 			return this->find(k).it._curr->value->second;
 		}
-
+		//ok
 		void swap (map& x)
 		{
-			TreeNode<value_type> *temp = this->_tree._root;
-			this->_tree._root = x._tree._root;
-			x._tree._root = temp;
+			ft::RBTree<ft::pair<Key, T> > tmp = this->_tree;
+			this->_tree = x._tree;
+			x._tree = tmp;
+			Compare tmp_c = this->_comp;
+			this->_comp = x._comp;
+			x._comp = tmp_c;
+			Allocator tmp_a = this->_alloc;
+			this->_alloc = x._alloc;
+			x._alloc = tmp_a;
 		}
-
+		//ok
 		void clear()
 		{
-			if (this->empty())
+			if (this->size() == 0)
 				return;
-			iterator it = this->begin();
-			while (it != this->end())
+			binaryTreeIterator<value_type> it = this->_tree.begin();
+			binaryTreeIterator<value_type> it2 = this->_tree.end();
+			while (it != it2)
 			{
-				//delete it.it._curr;
-				++it;
+				delete it._curr;
+				this->_tree._size--;
+				it++;
 			}
 		}
-
-
+		//ok
 		size_type count (const key_type& k) const
 		{
 			iterator it = this->begin();
-			pair<Key,T> j;
 			while (it != this->end())
 			{
-				j = *it;
-				if (j.first == k)
+				if (it->first == k)
 					return 1;
 				++it;
 			}
 			return 0;
 		}
-
+		//ok
       	iterator lower_bound (const key_type& k)
 	  	{
 			iterator it = this->begin();
-			pair<Key,T> j;
 			while (it != this->end())
 			{
-				j = *it;
-				if (j.first >= k)
+				if (it->first >= k)
 					return it;
 				++it;
 			}
@@ -285,25 +288,21 @@ namespace ft
 		const_iterator lower_bound (const key_type& k) const
 		{
 			const_iterator it = this->begin();
-			pair<Key,T> j;
 			while (it != this->end())
 			{
-				j = *it;
-				if (j.first >= k)
+				if (it->first >= k)
 					return it;
 				++it;
 			}
 			return it;
 		}
-
+		//ok
       	iterator upper_bound (const key_type& k)
 		{
 			iterator it = this->begin();
-			pair<Key,T> j;
 			while (it != this->end())
 			{
-				j = *it;
-				if (j.first > k)
+				if (it->first > k)
 					return it;
 				++it;
 			}
@@ -313,18 +312,16 @@ namespace ft
 		const_iterator upper_bound (const key_type& k) const
 		{
 			const_iterator it = this->begin();
-			pair<Key,T> j;
 			while (it != this->end())
 			{
-				j = *it;
-				if (j.first > k)
+				if (it->first > k)
 					return it;
 				++it;
 			}
 			return it;
 		}
 
-		pair<const_iterator,const_iterator>	equal_range (const key_type& k) const
+		ft::pair<const_iterator,const_iterator>	equal_range (const key_type& k) const
 		{
 			const_iterator it1 = this->lower_bound(k);
 			const_iterator it2 = this->upper_bound(k);
@@ -333,7 +330,7 @@ namespace ft
 			ret.second = it2;
 			return ret;
 		}
-
+		//ok
 		ft::pair<iterator,iterator>			equal_range (const key_type& k)
 		{
 			iterator it1 = this->lower_bound(k);
@@ -343,18 +340,18 @@ namespace ft
 			ret.second = it2;
 			return ret;
 		}
-		
+		//ok
 		key_compare key_comp() const
 		{
 			Compare cmp(this->_comp);
 			return cmp;
 		}
-
+		//ok
 		value_compare value_comp() const
 		{
 			return value_compare(this->key_comp());
 		}
-		
+		//ok
 		allocator_type get_allocator() const
 		{
 			return this->_alloc;
