@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Less.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:04:49 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 10:53:34 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/01 14:13:36 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ namespace ft
 		typedef	T		second_argument_type;
 
 		// MEMBER FUNCTIONS
+		less()	{}
+
+		less(less const & copy)
+		{
+			*this = copy;
+		}
+
 
 		bool	operator () (const T& lhs, const T& rhs) const
 		{

@@ -6,7 +6,7 @@
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/01 12:07:44 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/01 14:43:42 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ namespace ft
 		ft::RBTree<ft::pair<Key, T> > _tree;
 		Compare _comp;
 		Allocator _alloc;
+
 	public:
 		typedef Key												key_type;
 		typedef T												mapped_type;
@@ -42,6 +43,26 @@ namespace ft
 		typedef typename ft::reverseMapIterator<Key, T>			reverse_iterator;
 		typedef typename ft::cmapIterator<Key, T >				const_iterator;
 		typedef typename ft::constReverseMapIterator<Key, T>	const_reverse_iterator;
+
+		// CLASSE PER LA RESTITUZIONE DI UN COMPARATORE SPECIFICO PER value_comp()
+		class value_compare : public ft::pair<Key, T>
+		{   
+			friend class map;
+			protected:
+			Compare comp;
+			value_compare (Compare c) : comp(c) {}
+			public:
+			typedef ft::pair<Key, T>	value_type;
+			typedef bool 				result_type;
+			typedef value_type			first_argument_type;
+			typedef value_type			second_argument_type;
+
+			bool operator() (const value_type& x, const value_type& y) const
+			{
+				return comp(x.first, y.first);
+			}
+		};
+
 	
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
@@ -220,10 +241,12 @@ namespace ft
 			return this->find(k).it._curr->value->second;
 		}
 
-		//void swap (map& x)
-		//{
-		//
-		//}
+		void swap (map& x)
+		{
+			TreeNode<value_type> *temp = this->_tree._root;
+			this->_tree._root = x._tree._root;
+			x._tree._root = temp;
+		}
 
 		void clear()
 		{
@@ -238,50 +261,106 @@ namespace ft
 		}
 
 
-		//size_type count (const key_type& k) const
-		//{
-		//	return 0;
-		//}
+		size_type count (const key_type& k) const
+		{
+			iterator it = this->begin();
+			pair<Key,T> j;
+			while (it != this->end())
+			{
+				j = *it;
+				if (j.first == k)
+					return 1;
+				++it;
+			}
+			return 0;
+		}
 
-      	//iterator lower_bound (const key_type& k)
-	  	//{
-		//	  return iterator();
-		//}
+      	iterator lower_bound (const key_type& k)
+	  	{
+			iterator it = this->begin();
+			pair<Key,T> j;
+			while (it != this->end())
+			{
+				j = *it;
+				if (j.first >= k)
+					return it;
+				++it;
+			}
+			return it;
+		}
 
-		//const_iterator lower_bound (const key_type& k) const
-		//{
-		//	
-		//}
+		const_iterator lower_bound (const key_type& k) const
+		{
+			const_iterator it = this->begin();
+			pair<Key,T> j;
+			while (it != this->end())
+			{
+				j = *it;
+				if (j.first >= k)
+					return it;
+				++it;
+			}
+			return it;
+		}
 
-      	//iterator upper_bound (const key_type& k)
-		//{
-		//	return iterator();
-		//}
+      	iterator upper_bound (const key_type& k)
+		{
+			iterator it = this->begin();
+			pair<Key,T> j;
+			while (it != this->end())
+			{
+				j = *it;
+				if (j.first > k)
+					return it;
+				++it;
+			}
+			return it;
+		}
 
-		//const_iterator upper_bound (const key_type& k) const
-		//{
-		//	
-		//}
+		const_iterator upper_bound (const key_type& k) const
+		{
+			const_iterator it = this->begin();
+			pair<Key,T> j;
+			while (it != this->end())
+			{
+				j = *it;
+				if (j.first > k)
+					return it;
+				++it;
+			}
+			return it;
+		}
 
-		//pair<const_iterator,const_iterator> equal_range (const key_type& k) const
-		//{
-		//
-		//}
+		pair<const_iterator,const_iterator>	equal_range (const key_type& k) const
+		{
+			const_iterator it1 = this->lower_bound(k);
+			const_iterator it2 = this->upper_bound(k);
+			pair<const_iterator,const_iterator> ret;
+			ret.first = it1;
+			ret.second = it2;
+			return ret;
+		}
 
-		//ft::pair<iterator,iterator>             equal_range (const key_type& k)
-		//{
-		//	return ft::pair<iterator,iterator>( iterator(), iterator() );
-		//}
+		ft::pair<iterator,iterator>			equal_range (const key_type& k)
+		{
+			iterator it1 = this->lower_bound(k);
+			iterator it2 = this->upper_bound(k);
+			pair<iterator,iterator> ret;
+			ret.first = it1;
+			ret.second = it2;
+			return ret;
+		}
 		
 		key_compare key_comp() const
 		{
-			return this->_comp;
+			Compare cmp(this->_comp);
+			return cmp;
 		}
 
-		//value_compare value_comp() const
-		//{
-		//
-		//}
+		value_compare value_comp() const
+		{
+			return value_compare(this->key_comp());
+		}
 		
 		allocator_type get_allocator() const
 		{
