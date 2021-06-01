@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IteratorMap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:18:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 19:12:10 by forsili          ###   ########.fr       */
+/*   Updated: 2021/06/01 11:21:03 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 namespace ft
 {
-    template <class Key, class Value>
-    class mapIterator
+    template <class Key, class Value> class mapIterator
     {
     protected:
     public:
@@ -104,5 +103,107 @@ namespace ft
         bool operator>=(mapIterator const &other) const {
             return (this->it >= other.it);
         }
-};
+    };
+
+    template <class Key, class Value> class reverseMapIterator : public mapIterator<Key, Value>
+    {
+    public:
+        typedef ft::pair<Key, Value>	value_type;
+        typedef std::ptrdiff_t 	        difference_type;
+        typedef value_type *	        pointer;
+        typedef value_type &	        reference;
+
+        reverseMapIterator() {};
+        reverseMapIterator(TreeNode<value_type> *curr)
+        {
+            this->it = ft::binaryTreeIterator<value_type>(curr);
+        };
+
+        reverseMapIterator(reverseMapIterator const &copy)
+        {
+            *this = copy;
+        }
+
+        reverseMapIterator operator++()
+        {
+            //std::cout << "PREEEE" << std::endl;
+            this->it.operator--();
+            return *this;
+        }
+
+        reverseMapIterator	operator++ (int)
+        {
+            //std::cout << "POST" << std::endl;
+            this->it.operator--(0);
+            return *this;
+        }
+
+        reverseMapIterator	operator-- ()
+        {
+            this->it.operator++();
+            return *this;
+        }
+
+        reverseMapIterator operator-- (int)
+        {
+            this->it.operator++(0);
+            return *this;
+        }
+    };
+
+    template <class Key, class Value> class constReverseMapIterator : public mapIterator<Key, Value>
+    {
+    public:
+        typedef ft::pair<Key, Value>	value_type;
+        typedef std::ptrdiff_t 	        difference_type;
+        typedef value_type *	        pointer;
+        typedef value_type &	        reference;
+
+        constReverseMapIterator() {};
+        constReverseMapIterator(TreeNode<value_type> *curr)
+        {
+            this->it = ft::binaryTreeIterator<value_type>(curr);
+        };
+
+        constReverseMapIterator(constReverseMapIterator const &copy)
+        {
+            *this = copy;
+        }
+
+        value_type const		&operator * ()
+        {
+            return *this->it._curr->value;
+        }
+
+        value_type const		*operator -> ()
+        {
+            return this->it._curr->value;
+        }
+
+        constReverseMapIterator operator++()
+        {
+            //std::cout << "PREEEE" << std::endl;
+            this->it.operator--();
+            return *this;
+        }
+
+        constReverseMapIterator	operator++ (int)
+        {
+            //std::cout << "POST" << std::endl;
+            this->it.operator--(0);
+            return *this;
+        }
+
+        constReverseMapIterator	operator-- ()
+        {
+            this->it.operator++();
+            return *this;
+        }
+
+        constReverseMapIterator operator-- (int)
+        {
+            this->it.operator++(0);
+            return *this;
+        }
+    };
 }

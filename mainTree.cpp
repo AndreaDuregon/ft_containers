@@ -6,25 +6,13 @@
 
 int main (void)
 {
-    std::srand(time(0));
-    
-    //ft::RBTree<ft::pair<int, int> > tree;
-    //for (int i = 0; i < 25; i++)
-    //{
-    //    int val = std::rand() % 100;
-    //    ft::TreeNode<ft::pair<int, int> > *v = new ft::TreeNode<ft::pair<int, int> >(ft::pair<int, int>(val,val));
-    //    tree.insert(*v);
-    //}
-    //tree.printTree();
+    ft::map<int, int> our_map;
+	our_map.insert(ft::pair<int, int>(100, 100));
+	our_map.insert(ft::pair<int, int>(10, 10));
+	our_map.insert(ft::pair<int, int>(1, 1));
+	our_map.insert(ft::pair<int, int>(123, 123));
 
-    ft::map<int, int> mappa;
-    for (int i = 0; i < 25; i++)
-    {
-        int val = std::rand() % 100;
-        mappa.insert(ft::pair<int, int>(val,val));
-    }
-    mappa._tree.printTree();
-    std::cout << "BEGIN: " << *mappa.begin() << std::endl;
-    std::cout << "++BEGIN: " << *++mappa.begin() << std::endl;
-    return (0);
+    //ft::mapIterator<int, int> it = our_map.end();
+    ft::reverseMapIterator<int, int> it2 = our_map.rend();
+    //std::cout << *it2 << std::endl;
 }

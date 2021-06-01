@@ -557,7 +557,7 @@ template <class T> class  RBTree
 	binaryTreeIterator<T> rbegin(void)
 	{
 		value_type *tmp = this->_root;
-		while(tmp->right)
+		while(tmp->right->right)
 			tmp = tmp->right;
 		return binaryTreeIterator<T>(tmp);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/31 19:05:54 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/01 11:24:42 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft
 		typedef typename Allocator::const_pointer		const_pointer;
 		typedef typename ft::mapIterator<Key, T >		iterator;
 		typedef typename ft::mapIterator<Key, T >		const_iterator;
-		//typedef typename ft::reverseMapIterator<T>		reverse_iterator;
+		typedef typename ft::reverseMapIterator<Key, T>	reverse_iterator;
 		//typedef typename ft::constReverseMapIterator<T>	const_reverse_iterator;
 	
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
@@ -96,10 +96,15 @@ namespace ft
 			return const_iterator (this->_tree.end()._curr);	
 		}
 
-		//reverse_iterator rbegin()
-		//{
-		//
-		//}
+		reverse_iterator rbegin()
+		{
+			return reverse_iterator (this->_tree.rbegin()._curr);
+		}
+
+		reverse_iterator rend()
+		{
+			return reverse_iterator (this->_tree.rend()._curr);
+		}
 
 		//const_reverse_iterator rbegin() const
 		//{
