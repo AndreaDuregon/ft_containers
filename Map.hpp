@@ -118,10 +118,17 @@ namespace ft
 			return it;
 		}
 
-		//const_iterator find (const key_type& k) const
-		//{
-		//	
-		//}
+		const_iterator find (const key_type& k) const
+		{
+			const_iterator it(this->begin());
+			while(it != this->end())
+			{
+				if (it->first == k)
+					return it;
+				++it;
+			}
+			return it;		
+		}
 
 		ft::pair<iterator, bool> insert (const value_type& val)
 		{
@@ -134,7 +141,7 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
-			//DELETE NODE
+			//DELETE NODE ?
 			(void) position;
 			this->insert(val);
 			return this->find(val.first);
@@ -282,7 +289,6 @@ namespace ft
 					return false;
 			return true;
 		}
-		/*
 		//ok
 		template <class k, class v, class c, class a>
 		friend bool operator != (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
@@ -293,11 +299,11 @@ namespace ft
 		template <class k, class v, class c, class a>
 		friend bool operator < (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
 		{
-			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
-				if (*it != *it2)
+				if (it->first != it2->first || it->second != it2->second)
 				{
-					if (*it < *it2)
+					if (it->first < it2->first)
 						return true;
 					else
 						return false;
@@ -353,6 +359,5 @@ namespace ft
 			}
 			return true;
 		}
-		*/
 	};
 }
