@@ -13,7 +13,7 @@ int main (void)
 	our_map.insert(ft::pair<int, int>(123, 123));
 
     //ft::mapIterator<int, int> it = our_map.end();
-    ft::reverseMapIterator<int, int> it2 = our_map.rend();
+    ft::constReverseMapIterator<int, int> it2 = our_map.rend();
     it2--;
     it2--;
     it2--;

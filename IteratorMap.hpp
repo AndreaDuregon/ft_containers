@@ -6,7 +6,7 @@
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:18:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/01 11:34:14 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/01 12:03:36 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ namespace ft
         }
     };
 
-    template <class Key, class Value> class constReverseMapIterator : public mapIterator<Key, Value>
+    template <class Key, class Value> class constReverseMapIterator : public reverseMapIterator<Key, Value>
     {
     public:
         typedef ft::pair<Key, Value>	value_type;
