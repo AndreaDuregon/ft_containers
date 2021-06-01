@@ -6,7 +6,7 @@
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/01 11:35:18 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/01 12:07:44 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,21 @@ namespace ft
 		Compare _comp;
 		Allocator _alloc;
 	public:
-		typedef Key										key_type;
-		typedef T										mapped_type;
-		typedef ft::pair<Key, T>						value_type;
-		typedef std::size_t								size_type;
-		typedef std::ptrdiff_t							difference_type;
-		typedef Compare									key_compare;
-		typedef Allocator								allocator_type;
-		typedef typename Allocator::reference			reference;
-		typedef typename Allocator::const_reference		const_reference;
-		typedef typename Allocator::pointer				pointer;
-		typedef typename Allocator::const_pointer		const_pointer;
-		typedef typename ft::mapIterator<Key, T >		iterator;
-		typedef typename ft::reverseMapIterator<Key, T>	reverse_iterator;
-		typedef typename ft::cmapIterator<Key, T >		const_iterator;
-		//typedef typename ft::reverseMapIterator<T>		reverse_iterator;
-		//typedef typename ft::constReverseMapIterator<T>	const_reverse_iterator;
+		typedef Key												key_type;
+		typedef T												mapped_type;
+		typedef ft::pair<Key, T>								value_type;
+		typedef std::size_t										size_type;
+		typedef std::ptrdiff_t									difference_type;
+		typedef Compare											key_compare;
+		typedef Allocator										allocator_type;
+		typedef typename Allocator::reference					reference;
+		typedef typename Allocator::const_reference				const_reference;
+		typedef typename Allocator::pointer						pointer;
+		typedef typename Allocator::const_pointer				const_pointer;
+		typedef typename ft::mapIterator<Key, T >				iterator;
+		typedef typename ft::reverseMapIterator<Key, T>			reverse_iterator;
+		typedef typename ft::cmapIterator<Key, T >				const_iterator;
+		typedef typename ft::constReverseMapIterator<Key, T>	const_reverse_iterator;
 	
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
@@ -107,10 +106,15 @@ namespace ft
 			return reverse_iterator (this->_tree.rend()._curr);
 		}
 
-		//const_reverse_iterator rbegin() const
-		//{
-		//	
-		//}
+		const_reverse_iterator rbegin() const
+		{
+			return reverse_iterator (this->_tree.rbegin()._curr);
+		}
+
+		const_reverse_iterator rend() const
+		{
+			return reverse_iterator (this->_tree.rend()._curr);
+		}
 
 		iterator find (const key_type& k)
 		{
