@@ -6,7 +6,7 @@
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/01 11:24:42 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/01 11:35:18 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ namespace ft
 		typedef typename Allocator::pointer				pointer;
 		typedef typename Allocator::const_pointer		const_pointer;
 		typedef typename ft::mapIterator<Key, T >		iterator;
-		typedef typename ft::mapIterator<Key, T >		const_iterator;
 		typedef typename ft::reverseMapIterator<Key, T>	reverse_iterator;
+		typedef typename ft::cmapIterator<Key, T >		const_iterator;
+		//typedef typename ft::reverseMapIterator<T>		reverse_iterator;
 		//typedef typename ft::constReverseMapIterator<T>	const_reverse_iterator;
 	
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
@@ -93,7 +94,7 @@ namespace ft
 
 		const_iterator end() const
 		{
-			return const_iterator (this->_tree.end()._curr);	
+			return const_iterator(this->_tree.end()._curr);	
 		}
 
 		reverse_iterator rbegin()
@@ -276,5 +277,88 @@ namespace ft
 			return this->_alloc;
 		}
 
+		//ok
+		template <class k, class v, class c, class a>
+		friend bool operator == (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		{
+			if (lhs.size() != rhs.size())
+				return false;
+			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
+				if (it->first != it2->first || it->second != it2->second)
+					return false;
+			return true;
+		}
+		/*
+		//ok
+		template <class k, class v, class c, class a>
+		friend bool operator != (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		{
+			return !(lhs == rhs);
+		}
+		//ok
+		template <class k, class v, class c, class a>
+		friend bool operator < (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it < *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return false;
+		}
+		//ok
+		template <class k, class v, class c, class a>
+		friend bool operator <= (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it < *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return true;
+		}
+		//ok
+		template <class k, class v, class c, class a>
+		friend bool operator > (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it > *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return false;
+		}
+		//ok
+		template <class k, class v, class c, class a>
+		friend bool operator >= (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		{
+			for(ft::listIterator<value_type> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end() && it2 != rhs.end(); ++it, ++it2)
+			{
+				if (*it != *it2)
+				{
+					if (*it > *it2)
+						return true;
+					else
+						return false;
+				}
+			}
+			return true;
+		}
+		*/
 	};
 }

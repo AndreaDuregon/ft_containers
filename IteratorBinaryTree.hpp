@@ -113,7 +113,7 @@ namespace ft
 					this->_curr = this->_curr->father;
 				}			
 			}
-			return this;
+			return 0;
 		}
 
 		binaryTreeIterator<T>	operator-- (int)

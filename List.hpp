@@ -107,7 +107,6 @@ namespace ft
 		const_iterator end() const
 		{
 			return const_iterator(this->_end);
-			
 		};
 		
 		reverse_iterator rbegin()

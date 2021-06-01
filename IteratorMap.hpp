@@ -6,7 +6,7 @@
 /*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:18:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/01 11:21:03 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/01 11:34:14 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,31 @@ namespace ft
         }
     };
 
+    template <class Key, class Value>
+    class cmapIterator : public mapIterator<Key, Value>
+    {
+    protected:
+    public:
+        typedef ft::pair<Key, Value>	value_type;
+        cmapIterator() {};
+        cmapIterator(TreeNode<value_type> *curr) : mapIterator<Key, Value>(curr) {}
+        cmapIterator(cmapIterator const &copy)
+        {
+            *this = copy;
+        }
+
+        value_type const    &operator * ()
+        {
+            return *this->it._curr->value;
+        }
+
+        value_type const    *operator -> ()
+        {
+            return this->it._curr->value;
+        }
+
+    };
+
     template <class Key, class Value> class reverseMapIterator : public mapIterator<Key, Value>
     {
     public:
@@ -180,30 +205,5 @@ namespace ft
             return this->it._curr->value;
         }
 
-        constReverseMapIterator operator++()
-        {
-            //std::cout << "PREEEE" << std::endl;
-            this->it.operator--();
-            return *this;
-        }
-
-        constReverseMapIterator	operator++ (int)
-        {
-            //std::cout << "POST" << std::endl;
-            this->it.operator--(0);
-            return *this;
-        }
-
-        constReverseMapIterator	operator-- ()
-        {
-            this->it.operator++();
-            return *this;
-        }
-
-        constReverseMapIterator operator-- (int)
-        {
-            this->it.operator++(0);
-            return *this;
-        }
     };
 }
