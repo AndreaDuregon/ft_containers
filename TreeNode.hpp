@@ -30,8 +30,19 @@ namespace ft
 
 		TreeNode (T node) : color(ft::RED), value(new value_type(node)), father(0), left(0), right(0) {}
 
+		TreeNode<T> &operator = (TreeNode<T> const &other)
+        {
+		    this->color = other.color;
+		    this->value = other.value;
+		    this->father = other.father;
+		    this->left = other.left;
+		    this->right = other.right;
+            return (this);
+        }
+
 		~TreeNode()
         {
+		    //std::cout << *this->value << std::endl;
 		    delete this->value;
         }
 
@@ -65,16 +76,10 @@ namespace ft
             father = nfather;
         }
 
-        bool isOnLeft() { return this == father->left; }
-		TreeNode &operator = (const TreeNode &other)
-		{
-			this->color = other.color;
-			this->father = other.father;
-			this->left = other.left;
-			this->right = other.right;
-			this->value = other.value;
-			return (*this);
-		}
+        bool isOnLeft()
+        {
+		    return this == father->left;
+        }
 
         bool hasRedChild() {
             return (left != NULL and left->color == RED) or

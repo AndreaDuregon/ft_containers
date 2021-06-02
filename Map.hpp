@@ -88,8 +88,8 @@ namespace ft
 		//ok
 		~map (void)
 		{
-		    /*if (this->_tree._size)
-		        this->clear();*/
+		    if (this->_tree._size)
+		        this->clear();
 		}
 		//ok
      	iterator begin()
