@@ -73,9 +73,10 @@ template <class T> class  RBTree
 		iterator it = this->begin();
 		iterator it2 = this->end();
 		while (it != it2)
-		{
+        {
 			delete it._curr;
 			this->_size--;
+		    puts("ppp");
 			it++;
 		}
 	}

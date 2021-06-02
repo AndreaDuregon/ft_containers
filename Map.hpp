@@ -249,16 +249,7 @@ namespace ft
 		//ok
 		void clear()
 		{
-			if (this->size() == 0)
-				return;
-			binaryTreeIterator<value_type> it = this->_tree.begin();
-			binaryTreeIterator<value_type> it2 = this->_tree.end();
-			while (it != it2)
-			{
-				delete it._curr;
-				this->_tree._size--;
-				it++;
-			}
+			this->_tree.clear();
 		}
 		//ok
 		size_type count (const key_type& k) const
