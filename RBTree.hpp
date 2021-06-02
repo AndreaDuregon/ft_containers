@@ -51,7 +51,7 @@ template <class T> class  RBTree
 			copiedTreeRoot = 0;
 		else {
 			copiedTreeRoot = new value_type;
-			copiedTreeRoot->value = otherTreeRoot->value;
+			*copiedTreeRoot->value = *otherTreeRoot->value;
 			copiedTreeRoot->color = otherTreeRoot->color;
 			copiedTreeRoot->father = newParent;
 

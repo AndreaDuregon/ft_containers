@@ -28,10 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="559b27ad-014d-45a8-9486-ae059d06c577" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Map.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RBTree.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/RBTree.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TreeNode.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/TreeNode.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mainTree.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -178,7 +175,7 @@
       <workItem from="1622462574042" duration="6176000" />
       <workItem from="1622474074365" duration="4416000" />
       <workItem from="1622633819398" duration="1651000" />
-      <workItem from="1622638696902" duration="5618000" />
+      <workItem from="1622638696902" duration="6147000" />
     </task>
     <task id="LOCAL-00001" summary="Ho provato clion, muy cariño! segfaulta sul remove o dopo?">
       <created>1621555807539</created>
@@ -236,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622635467362</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="leaks">
+      <created>1622644370031</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1622644370031</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +267,8 @@
     <MESSAGE value="RBTree =&gt; smart " />
     <MESSAGE value="CAZZO DI ERASE FATTI GODO AAAAHAAHAHAHAAAHAAHAAHAHAHAHAAHAHAHAHAHAHAH" />
     <MESSAGE value="Clear has to be done recursively" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clear has to be done recursively" />
+    <MESSAGE value="leaks" />
+    <option name="LAST_COMMIT_MESSAGE" value="leaks" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
