@@ -38,7 +38,7 @@ template <class T> class  RBTree
 
 	RBTree &operator = (const RBTree &other)
 	{
-		this->clear();
+		this->clear(this->_root);
 		other.removeGhostNodes();
 		this->copyTree(this->_root, 0, other._root);
 		this->_size = other._size;
@@ -61,24 +61,29 @@ template <class T> class  RBTree
 	}
 
 	~RBTree()
-	{
-		this->clear();
+    {
+	    if (this->_size)
+	        this->clear(this->_root);
 		delete this->_end;
 	}
 
-	void clear(void)
+	void clear(TreeNode<T> *curr)
 	{
-		if (this->_size == 0)
-			return;
-		iterator it = this->begin();
-		iterator it2 = this->end();
-		while (it != it2)
+	    this->removeGhostNodes();
+	    if (!curr)
+	        return ;
+	    if (curr->left || curr->right)
+	    {
+	        if (curr->left)
+	            clear(curr->left);
+	        if (curr->right)
+	            clear(curr->right);
+	    }
+	    if (curr)
         {
-			delete it._curr;
-			this->_size--;
-		    puts("ppp");
-			it++;
-		}
+	        this->_size--;
+	        delete curr;
+        }
 	}
 
 
@@ -475,6 +480,7 @@ template <class T> class  RBTree
                 else
                     parent->right = NULL;
             }
+            //delete v->value;
             delete v;
             this->_size--;
             return;
@@ -486,6 +492,7 @@ template <class T> class  RBTree
                 v->value = u->value;
                 v->left = v->right = NULL;
                 this->_size--;
+                //delete u->value;
                 delete u;
             }
             else
@@ -495,6 +502,7 @@ template <class T> class  RBTree
                 else
                     parent->right = u;
                 this->_size--;
+                //delete v->value;
                 delete v;
                 u->father = parent;
                 if (uvBlack)

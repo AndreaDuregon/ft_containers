@@ -30,6 +30,11 @@ namespace ft
 
 		TreeNode (T node) : color(ft::RED), value(new value_type(node)), father(0), left(0), right(0) {}
 
+		~TreeNode()
+        {
+		    delete this->value;
+        }
+
 		TreeNode * uncle()
         {
             if (father == NULL or father->father == NULL)

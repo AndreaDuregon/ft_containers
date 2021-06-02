@@ -88,7 +88,8 @@ namespace ft
 		//ok
 		~map (void)
 		{
-			this->clear();
+		    /*if (this->_tree._size)
+		        this->clear();*/
 		}
 		//ok
      	iterator begin()
@@ -249,7 +250,7 @@ namespace ft
 		//ok
 		void clear()
 		{
-			this->_tree.clear();
+			this->_tree.clear(this->_tree._root);
 		}
 		//ok
 		size_type count (const key_type& k) const

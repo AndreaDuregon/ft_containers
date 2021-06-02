@@ -4143,7 +4143,6 @@ static void testMAP(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-
 	// --------------------INT 1 PARAMETRO--------------------
 	std::cout << YELLOW << "INIT MAP COPY CONSTRUCTOR [SYS vs OUR]" << OFF << std::endl;
 	{
@@ -4160,8 +4159,8 @@ static void testMAP(void)
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+    puts("rrrr");
 	}
-
 	// ----------------------INIT 2 PARAMETRI------------------
 	std::cout << YELLOW << "INIT MAP OPERATORE = [SYS vs OUR]" << OFF << std::endl;
 	{
