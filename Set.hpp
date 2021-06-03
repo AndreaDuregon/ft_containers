@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 12:59:08 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/03 14:17:56 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,26 @@ namespace ft
 		typedef typename ft::reverseSetIterator<T>		       	reverse_iterator;
 		typedef typename ft::csetIterator<T >			       	const_iterator;
 		typedef typename ft::constReverseSetIterator<T>	        const_reverse_iterator;
+
+		// CLASSE PER LA RESTITUZIONE DI UN COMPARATORE SPECIFICO PER value_comp()
+		template <class TC>
+		class value_compare
+		{   
+			friend class set;
+			protected:
+			Compare comp;
+			value_compare (Compare c) : comp(c) {}
+			public:
+			typedef TC					value_type;
+			typedef bool 				result_type;
+			typedef value_type			first_argument_type;
+			typedef value_type			second_argument_type;
+
+			bool operator() (const value_type& x, const value_type& y) const
+			{
+				return comp(x, y);
+			}
+		};
 
     	//ok
 		explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
@@ -317,7 +337,11 @@ namespace ft
 		{
 			return this->_alloc;
 		}
-
+		//ok
+		value_compare<T> value_comp() const
+		{
+			return value_compare<T>(this->key_comp());
+		}
 		//ok
 		template <class v, class c, class a>
 		friend bool operator == (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)

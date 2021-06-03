@@ -6,7 +6,7 @@
 #    By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 11:15:19 by dmalori           #+#    #+#              #
-#    Updated: 2021/05/31 11:10:59 by dmalori          ###   ########.fr        #
+#    Updated: 2021/06/03 13:47:44 by dmalori          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,9 @@ runQueue	:	all
 
 runMap		:	all
 				@./$(NAME) map
+
+runSet		:	all
+				@./$(NAME) set
 
 runMap2	:		all
 				@clang++ mainTree.cpp && ./a.out

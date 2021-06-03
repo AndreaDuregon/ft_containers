@@ -5108,7 +5108,6 @@ static void testMAP(void)
 			std::cout << RED;
 		std::cout << "KEY_COMP test 2" << OFF << std::endl;
 	}
-
 	{
 		ft::map<int, int> our_map;
 		std::map<int, int> sys_map;
@@ -5177,48 +5176,47 @@ static void testSET(void)
 		our_set.insert(100);
 		our_set.insert(10);
 
-		std::set<int, int>::iterator sys_it = sys_set.begin();
-		ft::set<int, int>::iterator our_it = our_set.begin();
+		std::set<int>::iterator sys_it = sys_set.begin();
+		ft::set<int>::iterator our_it = our_set.begin();
 		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "BEGIN" << OFF << std::endl;
 	}
-/*
 	{
 		// ++BEGIN
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1, 1));
-		sys_set.insert(std::pair<int, int>(123, 123));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1, 1));
-		our_set.insert(ft::pair<int, int>(123, 123));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
 
-		std::set<int, int>::iterator sys_it = sys_set.begin();
-		ft::set<int, int>::iterator our_it = our_set.begin();
+		std::set<int>::iterator sys_it = sys_set.begin();
+		ft::set<int>::iterator our_it = our_set.begin();
 
 		++sys_it;
 		++our_it;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "++BEGIN test 1" << OFF << std::endl;
 		++sys_it;
 		++our_it;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "++BEGIN test 2" << OFF << std::endl;
 		++sys_it;
 		++our_it;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5226,37 +5224,37 @@ static void testSET(void)
 	}
 	{
 		// BEGIN++
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1, 1));
-		sys_set.insert(std::pair<int, int>(123, 123));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1, 1));
-		our_set.insert(ft::pair<int, int>(123, 123));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
 
-		std::set<int, int>::iterator sys_it = sys_set.begin();
-		ft::set<int, int>::iterator our_it = our_set.begin();
+		std::set<int>::iterator sys_it = sys_set.begin();
+		ft::set<int>::iterator our_it = our_set.begin();
 
 		sys_it++;
 		our_it++;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "BEGIN++ test 1" << OFF << std::endl;
 		sys_it++;
 		our_it++;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "BEGIN++ test 2" << OFF << std::endl;
 		sys_it++;
 		our_it++;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5264,37 +5262,37 @@ static void testSET(void)
 	}
 	{
 		// --END
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1, 1));
-		sys_set.insert(std::pair<int, int>(123, 123));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1, 1));
-		our_set.insert(ft::pair<int, int>(123, 123));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
 
-		std::set<int, int>::iterator sys_it = sys_set.end();
-		ft::set<int, int>::iterator our_it = our_set.end();
+		std::set<int>::iterator sys_it = sys_set.end();
+		ft::set<int>::iterator our_it = our_set.end();
 
 		--sys_it;
 		--our_it;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "--END test 1" << OFF << std::endl;
 		--sys_it;
 		--our_it;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "--END test 2" << OFF << std::endl;
 		--sys_it;
 		--our_it;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5302,37 +5300,37 @@ static void testSET(void)
 	}
 	{
 		// END--
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1, 1));
-		sys_set.insert(std::pair<int, int>(123, 123));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1, 1));
-		our_set.insert(ft::pair<int, int>(123, 123));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
 
-		std::set<int, int>::iterator sys_it = sys_set.end();
-		ft::set<int, int>::iterator our_it = our_set.end();
+		std::set<int>::iterator sys_it = sys_set.end();
+		ft::set<int>::iterator our_it = our_set.end();
 
 		sys_it--;
 		our_it--;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "END-- test 1" << OFF << std::endl;
 		sys_it--;
 		our_it--;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "END-- test 2" << OFF << std::endl;
 		sys_it--;
 		our_it--;
-		if (sys_it->first == our_it->first)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5340,18 +5338,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE == [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set2.insert(100);
+		our_set.insert(100);
+		our_set2.insert(100);
+		sys_set.insert(10);
+		sys_set2.insert(10);
+		our_set.insert(10);
+		our_set2.insert(10);
 
 
 		if ((sys_set == sys_set2) == (our_set == our_set2))
@@ -5362,18 +5360,18 @@ static void testSET(void)
 
 	std::cout << YELLOW << "SET OPERATORE != [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(12, 12));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(12, 12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set2.insert(100);
+		our_set.insert(100);
+		our_set2.insert(100);
+		sys_set.insert(10);
+		sys_set2.insert(12);
+		our_set.insert(10);
+		our_set2.insert(12);
 
 		if ((sys_set != sys_set2) == (our_set != our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5382,18 +5380,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE < [SYS vs OUR] test 1" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(12, 12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(12, 12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(12);
+		our_set2.insert(100);
+		our_set2.insert(12);
 
 		if ((sys_set < sys_set2) == (our_set < our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5402,18 +5400,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE < [SYS vs OUR] test 2" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(-12, -12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(-12, -12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(-12);
+		our_set2.insert(100);
+		our_set2.insert(-12);
 
 		if ((sys_set < sys_set2) == (our_set < our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5422,18 +5420,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE < [SYS vs OUR] test 3" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		our_set2.insert(100);
+		our_set2.insert(10);
 
 		if ((sys_set < sys_set2) == (our_set < our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5442,18 +5440,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE > [SYS vs OUR] test 1" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(12, 12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(12, 12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(12);
+		our_set2.insert(100);
+		our_set2.insert(12);
 
 		if ((sys_set > sys_set2) == (our_set > our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5462,18 +5460,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE > [SYS vs OUR] test 2" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(-12, -12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(-12, -12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(-12);
+		our_set2.insert(100);
+		our_set2.insert(-12);
 
 		if ((sys_set > sys_set2) == (our_set > our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5482,18 +5480,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE > [SYS vs OUR] test 3" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		our_set2.insert(100);
+		our_set2.insert(10);
 
 		if ((sys_set > sys_set2) == (our_set > our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5502,18 +5500,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE <= [SYS vs OUR] test 1" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(12, 12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(12, 12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(12);
+		our_set2.insert(100);
+		our_set2.insert(12);
 
 		if ((sys_set <= sys_set2) == (our_set <= our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5522,18 +5520,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE <= [SYS vs OUR] test 2" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(-12, -12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(-12, -12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(-12);
+		our_set2.insert(100);
+		our_set2.insert(-12);
 
 		if ((sys_set <= sys_set2) == (our_set <= our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5542,18 +5540,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE <= [SYS vs OUR] test 3" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		our_set2.insert(100);
+		our_set2.insert(10);
 
 		if ((sys_set <= sys_set2) == (our_set <= our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5562,18 +5560,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE >= [SYS vs OUR] test 1" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(12, 12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(12, 12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(12);
+		our_set2.insert(100);
+		our_set2.insert(12);
 
 		if ((sys_set >= sys_set2) == (our_set >= our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5582,18 +5580,18 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE >= [SYS vs OUR] test 2" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(-12, -12));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(-12, -12));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(-12);
+		our_set2.insert(100);
+		our_set2.insert(-12);
 
 		if ((sys_set >= sys_set2) == (our_set >= our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5602,25 +5600,24 @@ static void testSET(void)
 	}
 	std::cout << YELLOW << "SET OPERATORE >= [SYS vs OUR] test 3" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		our_set2.insert(100);
+		our_set2.insert(10);
 
 		if ((sys_set >= sys_set2) == (our_set >= our_set2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-*/
 	// -------------------INIT EMPTY---------------------
 	std::cout << YELLOW << "INIT SET VUOTO [SYS vs OUR]" << OFF << std::endl;
 	{
@@ -5632,18 +5629,18 @@ static void testSET(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-/*
+
 	// --------------------INT 1 PARAMETRO--------------------
 	std::cout << YELLOW << "INIT SET COPY CONSTRUCTOR [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(10, 10));
-		std::set<int, int> sys_set(sys_set2);
-		ft::set<int, int> our_set(our_set2);
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		our_set2.insert(100);
+		our_set2.insert(10);
+		std::set<int> sys_set(sys_set2);
+		ft::set<int> our_set(our_set2);
 
 		if (equalSysFt(sys_set, our_set))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5653,18 +5650,18 @@ static void testSET(void)
 	// --------------------INT 2 PARAMETRI--------------------
 	std::cout << YELLOW << "INIT SET 2 PARAMETRI [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(1001, 1001));
-		sys_set2.insert(std::pair<int, int>(101, 101));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(1001, 1001));
-		our_set2.insert(ft::pair<int, int>(101, 101));
-		std::set<int, int> sys_set(sys_set2.begin(), sys_set2.end());
-		ft::set<int, int> our_set(our_set2.begin(), our_set2.end());
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		sys_set2.insert(1001);
+		sys_set2.insert(101);
+		our_set2.insert(100);
+		our_set2.insert(10);
+		our_set2.insert(1001);
+		our_set2.insert(101);
+		std::set<int> sys_set(sys_set2.begin(), sys_set2.end());
+		ft::set<int> our_set(our_set2.begin(), our_set2.end());
 
 		if (equalSysFt(sys_set, our_set))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
@@ -5674,18 +5671,18 @@ static void testSET(void)
 	// ----------------------INIT SET = ------------------
 	std::cout << YELLOW << "INIT SET OPERATORE = [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set2.insert(std::pair<int, int>(100, 100));
-		sys_set2.insert(std::pair<int, int>(10, 10));
-		our_set2.insert(ft::pair<int, int>(100, 100));
-		our_set2.insert(ft::pair<int, int>(10, 10));
-		sys_set2.insert(std::pair<int, int>(5, 5));
-		sys_set2.insert(std::pair<int, int>(99, 99));
-		our_set2.insert(ft::pair<int, int>(5, 5));
-		our_set2.insert(ft::pair<int, int>(99, 99));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		our_set2.insert(100);
+		our_set2.insert(10);
+		sys_set2.insert(5);
+		sys_set2.insert(99);
+		our_set2.insert(5);
+		our_set2.insert(99);
 
 		sys_set = sys_set2;
 		our_set = our_set2;
@@ -5698,14 +5695,14 @@ static void testSET(void)
 	// ----------------------SET METHODS------------------
 	std::cout << YELLOW << "SET METHODS [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		std::pair<std::set<int, int>::iterator, bool> res_sys = sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		ft::pair<ft::set<int, int>::iterator, bool> res_our = our_set.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		std::pair<std::set<int>::iterator, bool> res_sys = sys_set.insert(10);
+		our_set.insert(100);
+		ft::pair<ft::set<int>::iterator, bool> res_our = our_set.insert(10);
 
-		if (res_sys.second == res_our.second && res_sys.first->first == res_our.first->first)
+		if (res_sys.second == res_our.second && *res_sys.first == *res_our.first)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5718,18 +5715,18 @@ static void testSET(void)
 		std::cout << "INSERT (value) test 1" << OFF << std::endl;
 	}
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(100, 100));
-		std::pair<std::set<int, int>::iterator, bool> res_sys =  sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		ft::pair<ft::set<int, int>::iterator, bool> res_our =  our_set.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set.insert(100);
+		std::pair<std::set<int>::iterator, bool> res_sys =  sys_set.insert(10);
+		our_set.insert(100);
+		ft::pair<ft::set<int>::iterator, bool> res_our =  our_set.insert(10);
 
-		if (res_sys.second == res_our.second && res_sys.first->first == res_our.first->first)
+		if (res_sys.second == res_our.second && *res_sys.first == *res_our.first)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5742,19 +5739,19 @@ static void testSET(void)
 		std::cout << "INSERT (value) test 2" << OFF << std::endl;
 	}
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1001, 1001));
-		sys_set.insert(std::pair<int, int>(101, 101));
-		our_set.insert(ft::pair<int, int>(1001, 1001));
-		our_set.insert(ft::pair<int, int>(101, 101));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+		sys_set.insert(1001);
+		sys_set.insert(101);
+		our_set.insert(1001);
+		our_set.insert(101);
 
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
 
 		sys_set2.insert(sys_set.begin(), sys_set.end());
 		our_set2.insert(our_set.begin(), our_set.end());
@@ -5766,19 +5763,19 @@ static void testSET(void)
 		std::cout << "INSERT (iterator, iterator) test 1" << OFF << std::endl;
 	}
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1001, 1001));
-		sys_set.insert(std::pair<int, int>(101, 101));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1001, 1001));
-		our_set.insert(ft::pair<int, int>(101, 101));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1001);
+		sys_set.insert(101);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1001);
+		our_set.insert(101);
 
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
 
 		sys_set2.insert(++sys_set.begin(), sys_set.end());
 		our_set2.insert(++our_set.begin(), our_set.end());
@@ -5790,21 +5787,21 @@ static void testSET(void)
 		std::cout << "INSERT (iterator, iterator) test 2" << OFF << std::endl;
 	}
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1001, 1001));
-		sys_set.insert(std::pair<int, int>(101, 101));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1001, 1001));
-		our_set.insert(ft::pair<int, int>(101, 101));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1001);
+		sys_set.insert(101);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1001);
+		our_set.insert(101);
 
-		std::set<int, int>::iterator sys_it =  sys_set.insert(++sys_set.begin(), std::pair<int, int>(85, 85));
-		ft::set<int, int>::iterator our_it =  our_set.insert(++our_set.begin(), ft::pair<int, int>(85, 85));
+		std::set<int>::iterator sys_it =  sys_set.insert(++sys_set.begin(), 85);
+		ft::set<int>::iterator our_it =  our_set.insert(++our_set.begin(), 85);
 
-		if (sys_it->first == our_it->first && sys_it->second == our_it->second)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5816,23 +5813,22 @@ static void testSET(void)
 			std::cout << RED;
 		std::cout << "INSERT (iterator, value) test 1" << OFF << std::endl;
 	}
-
     {
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1001, 1001));
-		sys_set.insert(std::pair<int, int>(101, 101));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1001, 1001));
-		our_set.insert(ft::pair<int, int>(101, 101));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1001);
+		sys_set.insert(101);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1001);
+		our_set.insert(101);
 
-		std::set<int, int>::iterator sys_it =  sys_set.insert(sys_set.end(), std::pair<int, int>(-100, -100));
-		ft::set<int, int>::iterator our_it =  our_set.insert(our_set.end(), ft::pair<int, int>(-100, -100));
+		std::set<int>::iterator sys_it =  sys_set.insert(sys_set.end(), -100);
+		ft::set<int>::iterator our_it =  our_set.insert(our_set.end(), -100);
 
-		if (sys_it->first == our_it->first && sys_it->second == our_it->second)
+		if (*sys_it == *our_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -5845,32 +5841,32 @@ static void testSET(void)
 		std::cout << "INSERT (iterator, value) test 2" << OFF << std::endl;
 	}
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
 
-		std::set<int, int>::iterator sys_f = sys_set.find(10);
-		ft::set<int, int>::iterator our_f = our_set.find(10);
+		std::set<int>::iterator sys_f = sys_set.find(10);
+		ft::set<int>::iterator our_f = our_set.find(10);
 
-		if (sys_f->first == our_f->first && sys_f->second == our_f->second)
+		if (*sys_f == *our_f)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "FIND test 1" << OFF << std::endl;
 	}
 	{
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
 
-		std::set<int, int>::iterator sys_f = sys_set.find(56);
-		ft::set<int, int>::iterator our_f = our_set.find(56);
+		std::set<int>::iterator sys_f = sys_set.find(56);
+		ft::set<int>::iterator our_f = our_set.find(56);
 
 		if (sys_f == sys_set.end() && our_f == our_set.end())
 			std::cout << GREEN;
@@ -5880,12 +5876,12 @@ static void testSET(void)
 	}
 	{
 		// ERASE (LAST NODE)
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
 
 		sys_set.erase(sys_set.begin());
 		our_set.erase(our_set.begin());
@@ -5898,20 +5894,20 @@ static void testSET(void)
 	}
 	{
 		// ERASE (LAST NODE)
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		sys_set.erase(sys_set.find(99));
 		our_set.erase(our_set.find(99));
@@ -5924,20 +5920,20 @@ static void testSET(void)
 	}
 	{
 		// ERASE (LAST NODE)
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		sys_set.erase(sys_set.find(100));
 		//our_set.erase(our_set.find(100)); //CRASH
@@ -5950,20 +5946,20 @@ static void testSET(void)
 	}
 	{
 		// ERASE (LAST NODE)
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 
 		size_t res_sys = sys_set.erase(98);
@@ -5984,20 +5980,20 @@ static void testSET(void)
 	}
 	{
 		// ERASE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		size_t res_sys = sys_set.erase(99);
 		size_t res_our = our_set.erase(99);
@@ -6017,20 +6013,20 @@ static void testSET(void)
 	}
 	{
 		// ERASE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		size_t res_sys = sys_set.erase(100);
 		//size_t res_our = our_set.erase(100); //CRASH
@@ -6051,20 +6047,20 @@ static void testSET(void)
 	}
 	{
 		// ERASE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		sys_set.erase(sys_set.begin(), sys_set.end());
 		//our_set.erase(our_set.begin(), our_set.end()); //LOOP
@@ -6076,73 +6072,21 @@ static void testSET(void)
 		std::cout << "ERASE (iterator, itarator)" << OFF << std::endl;
 	}
 	{
-		// OPERATOR []
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
-
-		sys_set[99] = -1;
-		our_set[99] = -1;
-
-		if (equalSysFt(sys_set, our_set))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "OPERATOR [] test 1" << OFF << std::endl;
-	}
-	{
-		// OPERATOR []
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
-
-		sys_set[999] = -1;
-		our_set[999] = -1;
-
-		if (equalSysFt(sys_set, our_set))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "OPERATOR [] test 2" << OFF << std::endl;
-	}
-	{
 		// CLEAR
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		sys_set.clear();
 		our_set.clear();
@@ -6155,24 +6099,24 @@ static void testSET(void)
 	}
 	{
 		// CLEAR
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
-		std::set<int, int> sys_set2;
-		ft::set<int, int> our_set2;
-		sys_set2.insert(std::pair<int, int>(123, 123));
-		our_set2.insert(ft::pair<int, int>(123, 123));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
+		std::set<int> sys_set2;
+		ft::set<int> our_set2;
+		sys_set2.insert(123);
+		our_set2.insert(123);
 
 		sys_set.swap(sys_set2);
 		our_set.swap(our_set2);
@@ -6185,20 +6129,20 @@ static void testSET(void)
 	}
 	{
 		// COUNT
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		if (sys_set.count(100) == our_set.count(100))
 			std::cout << GREEN;
@@ -6208,20 +6152,20 @@ static void testSET(void)
 	}
 	{
 		// COUNT
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		if (sys_set.count(789) == our_set.count(789))
 			std::cout << GREEN;
@@ -6231,25 +6175,25 @@ static void testSET(void)
 	}
 	{
 		// LOWER_BOUND
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::set<int, int>::iterator our_it = our_set.lower_bound(-100);
-		std::set<int, int>::iterator sys_it = sys_set.lower_bound(-100);
+		ft::set<int>::iterator our_it = our_set.lower_bound(-100);
+		std::set<int>::iterator sys_it = sys_set.lower_bound(-100);
 
-		if (our_it->first == sys_it->first && our_it->second == sys_it->second)
+		if (*our_it == *sys_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -6257,23 +6201,23 @@ static void testSET(void)
 	}
 	{
 		// LOWER_BOUND
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::set<int, int>::iterator our_it = our_set.lower_bound(1000);
-		std::set<int, int>::iterator sys_it = sys_set.lower_bound(1000);
+		ft::set<int>::iterator our_it = our_set.lower_bound(1000);
+		std::set<int>::iterator sys_it = sys_set.lower_bound(1000);
 
 		if (our_it == our_set.end() && sys_it == sys_set.end())
 			std::cout << GREEN;
@@ -6283,25 +6227,25 @@ static void testSET(void)
 	}
 	{
 		// LOWER_BOUND
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::set<int, int>::iterator our_it = our_set.lower_bound(15);
-		std::set<int, int>::iterator sys_it = sys_set.lower_bound(15);
+		ft::set<int>::iterator our_it = our_set.lower_bound(15);
+		std::set<int>::iterator sys_it = sys_set.lower_bound(15);
 
-		if (our_it->first == sys_it->first && our_it->second == sys_it->second)
+		if (*our_it == *sys_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -6310,25 +6254,25 @@ static void testSET(void)
 
 	{
 		// LOWER_BOUND
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::set<int, int>::iterator our_it = our_set.upper_bound(-100);
-		std::set<int, int>::iterator sys_it = sys_set.upper_bound(-100);
+		ft::set<int>::iterator our_it = our_set.upper_bound(-100);
+		std::set<int>::iterator sys_it = sys_set.upper_bound(-100);
 
-		if (our_it->first == sys_it->first && our_it->second == sys_it->second)
+		if (*our_it == *sys_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -6336,23 +6280,23 @@ static void testSET(void)
 	}
 	{
 		// LOWER_BOUND
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::set<int, int>::iterator our_it = our_set.upper_bound(1000);
-		std::set<int, int>::iterator sys_it = sys_set.upper_bound(1000);
+		ft::set<int>::iterator our_it = our_set.upper_bound(1000);
+		std::set<int>::iterator sys_it = sys_set.upper_bound(1000);
 
 		if (our_it == our_set.end() && sys_it == sys_set.end())
 			std::cout << GREEN;
@@ -6362,25 +6306,25 @@ static void testSET(void)
 	}
 	{
 		// LOWER_BOUND
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::set<int, int>::iterator our_it = our_set.upper_bound(15);
-		std::set<int, int>::iterator sys_it = sys_set.upper_bound(15);
+		ft::set<int>::iterator our_it = our_set.upper_bound(15);
+		std::set<int>::iterator sys_it = sys_set.upper_bound(15);
 
-		if (our_it->first == sys_it->first && our_it->second == sys_it->second)
+		if (*our_it == *sys_it)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -6388,26 +6332,25 @@ static void testSET(void)
 	}
 	{
 		// EQUAL RANGE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::pair<ft::set<int, int>::iterator, ft::set<int, int>::iterator> our_ret = our_set.equal_range(-1000);
-		std::pair<std::set<int, int>::iterator, std::set<int, int>::iterator> sys_ret = sys_set.equal_range(-1000);
+		ft::pair<ft::set<int>::iterator, ft::set<int>::iterator> our_ret = our_set.equal_range(-1000);
+		std::pair<std::set<int>::iterator, std::set<int>::iterator> sys_ret = sys_set.equal_range(-1000);
 
-		if (our_ret.first->first == sys_ret.first->first && our_ret.first->second == sys_ret.first->second &&
-			our_ret.second->first == sys_ret.second->first && our_ret.second->second == sys_ret.second->second)
+		if (*our_ret.first == *sys_ret.first && *our_ret.second == *sys_ret.second)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -6415,26 +6358,25 @@ static void testSET(void)
 	}
 	{
 		// EQUAL RANGE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::pair<ft::set<int, int>::iterator, ft::set<int, int>::iterator> our_ret = our_set.equal_range(11);
-		std::pair<std::set<int, int>::iterator, std::set<int, int>::iterator> sys_ret = sys_set.equal_range(11);
+		ft::pair<ft::set<int>::iterator, ft::set<int>::iterator> our_ret = our_set.equal_range(11);
+		std::pair<std::set<int>::iterator, std::set<int>::iterator> sys_ret = sys_set.equal_range(11);
 
-		if (our_ret.first->first == sys_ret.first->first && our_ret.first->second == sys_ret.first->second &&
-			our_ret.second->first == sys_ret.second->first && our_ret.second->second == sys_ret.second->second)
+		if (*our_ret.first == *sys_ret.first && *our_ret.second == *sys_ret.second)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -6442,23 +6384,23 @@ static void testSET(void)
 	}
 	{
 		// EQUAL RANGE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
-		ft::pair<ft::set<int, int>::iterator, ft::set<int, int>::iterator> our_ret = our_set.equal_range(9999);
-		std::pair<std::set<int, int>::iterator, std::set<int, int>::iterator> sys_ret = sys_set.equal_range(9999);
+		ft::pair<ft::set<int>::iterator, ft::set<int>::iterator> our_ret = our_set.equal_range(9999);
+		std::pair<std::set<int>::iterator, std::set<int>::iterator> sys_ret = sys_set.equal_range(9999);
 
 		if (our_ret.first == our_set.end() && sys_ret.first == sys_set.end() && our_ret.second == our_set.end() && sys_ret.second == sys_set.end())
 			std::cout << GREEN;
@@ -6468,20 +6410,20 @@ static void testSET(void)
 	}
 	{
 		// EQUAL RANGE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		if (sys_set.key_comp()(123,456) == our_set.key_comp()(123, 456) )
 			std::cout << GREEN;
@@ -6491,20 +6433,20 @@ static void testSET(void)
 	}
 	{
 		// EQUAL RANGE
-		std::set<int, int> sys_set;
-		ft::set<int, int> our_set;
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(15, 15));
-		sys_set.insert(std::pair<int, int>(110, 110));
-		sys_set.insert(std::pair<int, int>(99, 99));
-		sys_set.insert(std::pair<int, int>(98, 98));
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(15, 15));
-		our_set.insert(ft::pair<int, int>(110, 110));
-		our_set.insert(ft::pair<int, int>(99, 99));
-		our_set.insert(ft::pair<int, int>(98, 98));
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(15);
+		sys_set.insert(110);
+		sys_set.insert(99);
+		sys_set.insert(98);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(15);
+		our_set.insert(110);
+		our_set.insert(99);
+		our_set.insert(98);
 
 		if (sys_set.key_comp()(-10,-10) == our_set.key_comp()(-10, -10) )
 			std::cout << GREEN;
@@ -6512,24 +6454,23 @@ static void testSET(void)
 			std::cout << RED;
 		std::cout << "KEY_COMP test 2" << OFF << std::endl;
 	}
-
 	{
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set;
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1, 1));
-		our_set.insert(ft::pair<int, int>(123, 123));
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1, 1));
-		sys_set.insert(std::pair<int, int>(123, 123));
+		ft::set<int> our_set;
+		std::set<int> sys_set;
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
 		
 		
-		ft::pair<int,int> highest_o = *our_set.rbegin();
-		ft::set<int,int>::iterator it_o = our_set.begin();
-		std::pair<int,int> highest_s = *sys_set.rbegin();
-		std::set<int,int>::iterator it_s = sys_set.begin();
+		int highest_o = *our_set.rbegin();
+		ft::set<int>::iterator it_o = our_set.begin();
+		int highest_s = *sys_set.rbegin();
+		std::set<int>::iterator it_s = sys_set.begin();
 
 
 		if (our_set.value_comp()(*it_o++, highest_o) == sys_set.value_comp()(*it_s++, highest_s))
@@ -6539,33 +6480,31 @@ static void testSET(void)
 		std::cout << "VALUE_COMP test 1" << OFF << std::endl;
 	}
 	{
-		ft::set<int, int> our_set;
-		std::set<int, int> sys_set;
-		our_set.insert(ft::pair<int, int>(100, 100));
-		our_set.insert(ft::pair<int, int>(10, 10));
-		our_set.insert(ft::pair<int, int>(1, 1));
-		our_set.insert(ft::pair<int, int>(123, 123));
-		sys_set.insert(std::pair<int, int>(100, 100));
-		sys_set.insert(std::pair<int, int>(10, 10));
-		sys_set.insert(std::pair<int, int>(1, 1));
-		sys_set.insert(std::pair<int, int>(123, 123));
+		ft::map<int, int> our_map;
+		std::map<int, int> sys_map;
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(1, 1));
+		our_map.insert(ft::pair<int, int>(123, 123));
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(1, 1));
+		sys_map.insert(std::pair<int, int>(123, 123));
 		
 		
-		ft::pair<int,int> highest_o = *our_set.rbegin();
-		ft::set<int,int>::iterator it_o = ++our_set.begin();
-		std::pair<int,int> highest_s = *sys_set.rbegin();
-		std::set<int,int>::iterator it_s = ++sys_set.begin();
+		ft::pair<int,int> highest_o = *our_map.rbegin();
+		ft::map<int,int>::iterator it_o = ++our_map.begin();
+		std::pair<int,int> highest_s = *sys_map.rbegin();
+		std::map<int,int>::iterator it_s = ++sys_map.begin();
 
 
-		if (our_set.value_comp()(*it_o++, highest_o) == sys_set.value_comp()(*it_s++, highest_s))
+		if (our_map.value_comp()(*it_o++, highest_o) == sys_map.value_comp()(*it_s++, highest_s))
 			std::cout << GREEN;
 		else
 			std::cout << RED;
 		std::cout << "VALUE_COMP test 2" << OFF << std::endl;
 	}
-*/
 }
-
 
 /*
 static void testDEQUE(void)
