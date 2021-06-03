@@ -464,26 +464,44 @@ template <class T> class  RBTree
 
     void    delOne(TreeNode<T> *v)
     {
-        (void) v;
-	    std::cout << "Ciao!!"  << std::endl;
-
+        this->_size--;
+        delete v;
+        this->_root = NULL;
     }
     void    delTwo(TreeNode<T> *v)
     {
         (void) v;
-        std::cout << "Ciao!!" <<  std::endl;
+        //std::cout << "Ciao!!" <<  std::endl;
         if (v == this->_root)
         {
             if (v->left)
             {
-
                 this->_root = v->left;
                 v->left->father = NULL;
-
+                this->_size--;
+                delete v;
             }
             else
             {
-                
+                this->_root = v->right;
+                v->right->father = NULL;
+                this->_size--;
+                delete v;
+            }
+        }
+        else
+        {
+            if(v->isOnLeft())
+            {
+                this->_root->left = NULL;
+                this->_size--;
+                delete v;
+            }
+            else
+            {
+                this->_root->right = NULL;
+                this->_size--;
+                delete v;
             }
         }
     }

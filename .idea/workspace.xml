@@ -26,7 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="559b27ad-014d-45a8-9486-ae059d06c577" name="Default Changelist" comment="">
+    <list default="true" id="559b27ad-014d-45a8-9486-ae059d06c577" name="Default Changelist" comment="del one e two">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RBTree.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/RBTree.hpp" afterDir="false" />
     </list>
@@ -176,7 +176,7 @@
       <workItem from="1622633819398" duration="1651000" />
       <workItem from="1622638696902" duration="11735000" />
       <workItem from="1622722323839" duration="6116000" />
-      <workItem from="1622753350578" duration="1089000" />
+      <workItem from="1622753350578" duration="1547000" />
     </task>
     <task id="LOCAL-00001" summary="Ho provato clion, muy cariño! segfaulta sul remove o dopo?">
       <created>1621555807539</created>
@@ -255,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622650448297</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="del one e two">
+      <created>1622754552064</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622754552064</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +292,8 @@
     <MESSAGE value="leaks" />
     <MESSAGE value="no leaks" />
     <MESSAGE value="erase to fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="erase to fix" />
+    <MESSAGE value="del one e two" />
+    <option name="LAST_COMMIT_MESSAGE" value="del one e two" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
