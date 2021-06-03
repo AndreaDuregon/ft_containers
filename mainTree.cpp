@@ -15,8 +15,8 @@ int main (void)
 {
     srand(0);
     ft::map<int, int> our_map;
-    our_map.insert(ft::pair<int, int>(10, 10));
     our_map.insert(ft::pair<int, int>(100, 100));
+    our_map.insert(ft::pair<int, int>(10, 10));
     our_map.insert(ft::pair<int, int>(15, 15));
     our_map.insert(ft::pair<int, int>(110, 110));
     our_map.insert(ft::pair<int, int>(99, 99));
@@ -29,8 +29,5 @@ int main (void)
     our_map.insert(ft::pair<int, int>(98, 98));
 
 
-    //our_map._tree.printTree();
-    //our_map.erase(our_map.find(100));
-    our_map._tree.printTree();
-
+    our_map.erase(our_map.begin(), our_map.end());
 }

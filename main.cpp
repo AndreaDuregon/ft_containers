@@ -4619,7 +4619,7 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		sys_map.erase(sys_map.find(100));
-		//our_map.erase(our_map.find(100)); //CRASH
+		our_map.erase(our_map.find(100)); //CRASH
 
 		if (equalSysFt(sys_map, our_map))
 			std::cout << GREEN;
@@ -4712,8 +4712,7 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		size_t res_sys = sys_map.erase(100);
-		//size_t res_our = our_map.erase(100); //CRASH
-		size_t res_our = 0;
+		size_t res_our = our_map.erase(100); //CRASH
 
 		if (res_sys == res_our)
 			std::cout << GREEN;
@@ -4746,7 +4745,8 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		sys_map.erase(sys_map.begin(), sys_map.end());
-		//our_map.erase(our_map.begin(), our_map.end()); //LOOP
+		our_map.erase(our_map.begin(), our_map.end()); //LOOP
+		puts("ffff");
 
 		if (equalSysFt(sys_map, our_map))
 			std::cout << GREEN;

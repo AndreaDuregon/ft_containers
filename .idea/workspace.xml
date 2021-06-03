@@ -31,6 +31,7 @@
       <change beforePath="$PROJECT_DIR$/Map.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Map.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RBTree.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/RBTree.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TreeNode.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/TreeNode.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mainTree.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +76,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager" selected="Makefile Application.runList">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ft_containers" TARGET_NAME="all" CONFIG_NAME="all" version="1">
@@ -177,7 +178,8 @@
       <workItem from="1622462574042" duration="6176000" />
       <workItem from="1622474074365" duration="4416000" />
       <workItem from="1622633819398" duration="1651000" />
-      <workItem from="1622638696902" duration="11631000" />
+      <workItem from="1622638696902" duration="11735000" />
+      <workItem from="1622722323839" duration="6116000" />
     </task>
     <task id="LOCAL-00001" summary="Ho provato clion, muy cariño! segfaulta sul remove o dopo?">
       <created>1621555807539</created>
@@ -249,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622644871577</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="erase to fix">
+      <created>1622650448297</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1622650448297</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,7 +287,8 @@
     <MESSAGE value="Clear has to be done recursively" />
     <MESSAGE value="leaks" />
     <MESSAGE value="no leaks" />
-    <option name="LAST_COMMIT_MESSAGE" value="no leaks" />
+    <MESSAGE value="erase to fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="erase to fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

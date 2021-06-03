@@ -386,10 +386,11 @@ template <class T> class  RBTree
 
     void swapValues(TreeNode<T> *u, TreeNode<T> *v)
     {
-        TreeNode<T> temp;
-        temp.value = u->value;
-        u->value = v->value;
-        v->value = temp.value;
+	    T *tmp;
+	    tmp = u->value;
+	    u->value = v->value;
+	    v->value = tmp;
+
     }
 
     void fixRedRed(TreeNode<T> *x)
@@ -482,7 +483,7 @@ template <class T> class  RBTree
                     parent->right = NULL;
             }
             //delete v->value;
-            //delete v;
+            delete v;
             this->_size--;
             return;
         }
@@ -494,7 +495,7 @@ template <class T> class  RBTree
                 v->left = v->right = NULL;
                 this->_size--;
                 //delete u->value;
-                //delete u;
+                delete u;
             }
             else
             {
@@ -504,7 +505,7 @@ template <class T> class  RBTree
                     parent->right = u;
                 this->_size--;
                 //delete v->value;
-                //delete v;
+                delete v;
                 u->father = parent;
                 if (uvBlack)
                     fixDoubleBlack(u);
@@ -513,6 +514,7 @@ template <class T> class  RBTree
             }
             return;
         }
+        puts("tttt");
         swapValues(u, v);
         deleteNode(u);
     }
