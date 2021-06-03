@@ -62,8 +62,10 @@ template <class T> class  RBTree
 
 	~RBTree()
     {
-	    if (this->_size)
-	        this->clear(this->_root);
+		if (this->_size)
+		{
+	    	this->clear(this->_root);
+		}
 		delete this->_end;
 	}
 
@@ -462,6 +464,8 @@ template <class T> class  RBTree
 
     void deleteNode(TreeNode<T> *v)
     {
+		if (this->_size < 3)
+			return;
 		this->removeGhostNodes();
         TreeNode<T> *u = replace(v);
         bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));

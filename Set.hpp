@@ -208,9 +208,15 @@ namespace ft
 		//ok
 		void erase (iterator first, iterator last)
 		{
-			for (; first != last; ++first)
+			ft::vector<T> vals;
+			while(first != last)
 			{
-				this->_tree.deleteNode(first.it._curr);
+				vals.push_back(*first.it._curr->value);
+				first++;
+			}
+			for (size_t i = 0; i < vals.size(); i++)
+			{
+				this->erase(this->find(vals[i]));
 			}
 		}
 		//ok

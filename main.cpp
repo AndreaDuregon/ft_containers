@@ -243,11 +243,11 @@ static bool equalSysFt(std::list<int> &sys_list, ft::list<int> &our_list)
 		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
 		return false;
 	}
-	if (sys_list.max_size() != our_list.max_size())
-	{
-		std::cout << "MAX SIZE " << sys_list.max_size() << " != " << our_list.max_size() << " ";
-		return false;
-	}
+	//if (sys_list.max_size() != our_list.max_size())
+	//{
+	//	std::cout << "MAX SIZE " << sys_list.max_size() << " != " << our_list.max_size() << " ";
+	//	return false;
+	//}
 	return true;
 }
 
@@ -328,11 +328,11 @@ static bool equalSysFt(std::vector<int> &sys_vector, ft::vector<int> &our_vector
 		std::cout << "BACK " << sys_vector.back() << " != " << our_vector.back() << " ";
 		return false;
 	}
-	if (sys_vector.max_size() != our_vector.max_size())
-	{
-		std::cout << "MAX SIZE " << sys_vector.max_size() << " != " << our_vector.max_size() << " ";
-		return false;
-	}
+	//if (sys_vector.max_size() != our_vector.max_size())
+	//{
+	//	std::cout << "MAX SIZE " << sys_vector.max_size() << " != " << our_vector.max_size() << " ";
+	//	return false;
+	//}
 	return true;
 }
 
@@ -4796,8 +4796,7 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		size_t res_sys = sys_map.erase(100);
-		//size_t res_our = our_map.erase(100); //CRASH
-		size_t res_our = 0;
+		size_t res_our = our_map.erase(100); //CRASH
 
 		if (res_sys == res_our)
 			std::cout << GREEN;
@@ -4830,7 +4829,7 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		sys_map.erase(sys_map.begin(), sys_map.end());
-		//our_map.erase(our_map.begin(), our_map.end()); //LOOP
+		our_map.erase(our_map.begin(), our_map.end()); //LOOP
 
 		if (equalSysFt(sys_map, our_map))
 			std::cout << GREEN;
@@ -6196,8 +6195,7 @@ static void testMULTIMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		size_t res_sys = sys_map.erase(100);
-		//size_t res_our = our_map.erase(100); //CRASH
-		size_t res_our = 0;
+		size_t res_our = our_map.erase(100); //CRASH
 
 		if (res_sys == res_our)
 			std::cout << GREEN;
@@ -6230,7 +6228,7 @@ static void testMULTIMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		sys_map.erase(sys_map.begin(), sys_map.end());
-		//our_map.erase(our_map.begin(), our_map.end()); //LOOP
+		our_map.erase(our_map.begin(), our_map.end()); //LOOP
 
 		if (equalSysFt(sys_map, our_map))
 			std::cout << GREEN;
@@ -7459,7 +7457,7 @@ static void testSET(void)
 		our_set.insert(98);
 
 		sys_set.erase(sys_set.find(100));
-		//our_set.erase(our_set.find(100)); //CRASH
+		our_set.erase(our_set.find(100)); //CRASH
 
 		if (equalSysFt(sys_set, our_set))
 			std::cout << GREEN;
@@ -8821,7 +8819,7 @@ static void testMULTISET(void)
 		our_multiset.insert(98);
 
 		sys_multiset.erase(sys_multiset.find(100));
-		//our_multiset.erase(our_multiset.find(100)); //CRASH
+		our_multiset.erase(our_multiset.find(100)); //CRASH
 
 		if (equalSysFt(sys_multiset, our_multiset))
 			std::cout << GREEN;
@@ -8914,8 +8912,7 @@ static void testMULTISET(void)
 		our_multiset.insert(98);
 
 		size_t res_sys = sys_multiset.erase(100);
-		//size_t res_our = our_multiset.erase(100); //CRASH
-		size_t res_our = 0;
+		size_t res_our = our_multiset.erase(100); //CRASH
 
 		if (res_sys == res_our)
 			std::cout << GREEN;
@@ -8948,7 +8945,7 @@ static void testMULTISET(void)
 		our_multiset.insert(98);
 
 		sys_multiset.erase(sys_multiset.begin(), sys_multiset.end());
-		//our_multiset.erase(our_multiset.begin(), our_multiset.end()); //LOOP
+		our_multiset.erase(our_multiset.begin(), our_multiset.end()); //LOOP
 
 		if (equalSysFt(sys_multiset, our_multiset))
 			std::cout << GREEN;
@@ -10286,7 +10283,7 @@ static void testDEQUE(void)
 		sys_deque.push_front(1);
 		our_deque.push_front(1);
 		sys_deque.unique();
-		our_deque.unique(); //CRASH ON LINUX
+		our_deque.unique();
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
@@ -10310,7 +10307,7 @@ static void testDEQUE(void)
 		sys_deque.push_front(1);
 		our_deque.push_front(1);
 		sys_deque.unique(binaryINT);
-		our_deque.unique(binaryINT); //CRASH ON LINUX
+		our_deque.unique(binaryINT);
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
@@ -10386,7 +10383,7 @@ static void testDEQUE(void)
 		sys_deque.push_front(200);
 		our_deque.push_front(200);
 		sys_deque.remove(200);
-		our_deque.remove(200); // CRASH ON LINUX
+		our_deque.remove(200);
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
@@ -10410,7 +10407,7 @@ static void testDEQUE(void)
 		sys_deque.push_front(200);
 		our_deque.push_front(200);
 		sys_deque.remove_if(singleINT);
-		our_deque.remove_if(singleINT); //CRASH ON LINUX
+		our_deque.remove_if(singleINT);
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else

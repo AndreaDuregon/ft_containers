@@ -126,6 +126,9 @@ runSet		:	all
 runMultiset		:	all
 				@./$(NAME) multiset
 
+runMultimap		:	all
+				@./$(NAME) multimap
+
 runMap2	:		all
 				@clang++ mainTree.cpp && ./a.out
 
