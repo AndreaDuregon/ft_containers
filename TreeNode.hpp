@@ -37,7 +37,7 @@ namespace ft
 		    this->father = other.father;
 		    this->left = other.left;
 		    this->right = other.right;
-            return (this);
+            return (*this);
         }
 
 		~TreeNode()
