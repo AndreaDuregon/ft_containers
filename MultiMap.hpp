@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Map.hpp                                            :+:      :+:    :+:   */
+/*   Multimap.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,7 @@
 
 namespace ft
 {
-	template <class Key, class T, class Compare = ft::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > > class map
+	template <class Key, class T, class Compare = ft::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > > class multimap
 	{
 	public:
 		ft::RBTree<ft::pair<Key, T> > _tree;
@@ -48,7 +48,7 @@ namespace ft
 		// CLASSE PER LA RESTITUZIONE DI UN COMPARATORE SPECIFICO PER value_comp()
 		class value_compare : public ft::pair<Key, T>
 		{   
-			friend class map;
+			friend class multimap;
 			protected:
 			Compare comp;
 			value_compare (Compare c) : comp(c) {}
@@ -65,21 +65,21 @@ namespace ft
 		};
 
 		//ok
-		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
+		explicit multimap (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
 
 		//ok
-		map (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc)
+		multimap (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc)
 		{
 			this->insert(first,last);
 		}
 	
 		//ok
-		map (const map& x) : _tree(ft::RBTree<value_type>()), _comp(x._comp), _alloc(x._alloc)
+		multimap (const multimap& x) : _tree(ft::RBTree<value_type>()), _comp(x._comp), _alloc(x._alloc)
 		{
 			*this = x;
 		}
 		//ok
-		map& operator = (const map& x)
+		multimap& operator = (const multimap& x)
 		{
 			this->_tree = x._tree;
 			this->_comp = x._comp;
@@ -87,7 +87,7 @@ namespace ft
 			return *this;
 		}
 		//ok
-		~map (void)
+		~multimap (void)
 		{
 		    if (this->_tree._size)
 		        this->clear();
@@ -157,13 +157,11 @@ namespace ft
 			return it;		
 		}
 		//ok
-		ft::pair<iterator, bool> insert (const value_type& val)
+		iterator insert (const value_type& val)
 		{
-			if (this->size() != 0 && this->find(val.first) != this->end())
-				return ft::pair<iterator, bool>(this->find(val.first), false);
 			ft::TreeNode<value_type> *v = new ft::TreeNode<value_type>(val);
 			this->_tree.insert(*v);
-			return ft::pair<iterator, bool>(this->find(val.first), true);
+			return this->find(val.first);
 		}
 		//ok
 		iterator insert (iterator position, const value_type& val)
@@ -228,15 +226,7 @@ namespace ft
 			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
 		}
 		//ok
-		mapped_type& operator[] (const key_type& k)
-		{
-			if (this->size() != 0 && this->find(k) != this->end())
-				return this->find(k).it._curr->value->second;
-			this->insert(ft::pair<Key, T>(k, T()));
-			return this->find(k).it._curr->value->second;
-		}
-		//ok
-		void swap (map& x)
+		void swap (multimap& x)
 		{
 			ft::RBTree<ft::pair<Key, T> > tmp = this->_tree;
 			this->_tree = x._tree;
@@ -352,7 +342,7 @@ namespace ft
 
 		//ok
 		template <class k, class v, class c, class a>
-		friend bool operator == (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		friend bool operator == (const ft::multimap<k,v,c,a>& lhs, const ft::multimap<k,v,c,a>& rhs)
 		{
 			if (lhs.size() != rhs.size())
 				return false;
@@ -363,13 +353,13 @@ namespace ft
 		}
 		//ok
 		template <class k, class v, class c, class a>
-		friend bool operator != (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		friend bool operator != (const ft::multimap<k,v,c,a>& lhs, const ft::multimap<k,v,c,a>& rhs)
 		{
 			return !(lhs == rhs);
 		}
 		//ok
 		template <class k, class v, class c, class a>
-		friend bool operator < (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		friend bool operator < (const ft::multimap<k,v,c,a>& lhs, const ft::multimap<k,v,c,a>& rhs)
 		{
 			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
@@ -385,7 +375,7 @@ namespace ft
 		}
 		//ok
 		template <class k, class v, class c, class a>
-		friend bool operator <= (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		friend bool operator <= (const ft::multimap<k,v,c,a>& lhs, const ft::multimap<k,v,c,a>& rhs)
 		{
 			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
@@ -401,7 +391,7 @@ namespace ft
 		}
 		//ok
 		template <class k, class v, class c, class a>
-		friend bool operator > (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		friend bool operator > (const ft::multimap<k,v,c,a>& lhs, const ft::multimap<k,v,c,a>& rhs)
 		{
 			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
@@ -417,7 +407,7 @@ namespace ft
 		}
 		//ok
 		template <class k, class v, class c, class a>
-		friend bool operator >= (const ft::map<k,v,c,a>& lhs, const ft::map<k,v,c,a>& rhs)
+		friend bool operator >= (const ft::multimap<k,v,c,a>& lhs, const ft::multimap<k,v,c,a>& rhs)
 		{
 			for (ft::mapIterator<Key, T> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{

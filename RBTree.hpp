@@ -514,7 +514,6 @@ template <class T> class  RBTree
             }
             return;
         }
-        puts("tttt");
         swapValues(u, v);
         deleteNode(u);
     }
