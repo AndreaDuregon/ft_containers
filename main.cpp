@@ -1279,7 +1279,7 @@ static void testLIST(void)
 		sys_list.push_front(1);
 		our_list.push_front(1);
 		sys_list.unique();
-		//our_list.unique(); //CRASH ON LINUX
+		our_list.unique(); //CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))
 			std::cout << GREEN;
 		else
@@ -1303,7 +1303,7 @@ static void testLIST(void)
 		sys_list.push_front(1);
 		our_list.push_front(1);
 		sys_list.unique(binaryINT);
-		//our_list.unique(binaryINT); //CRASH ON LINUX
+		our_list.unique(binaryINT); //CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))
 			std::cout << GREEN;
 		else
@@ -1379,7 +1379,7 @@ static void testLIST(void)
 		sys_list.push_front(200);
 		our_list.push_front(200);
 		sys_list.remove(200);
-		//our_list.remove(200); // CRASH ON LINUX
+		our_list.remove(200); // CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))
 			std::cout << GREEN;
 		else
@@ -1403,7 +1403,7 @@ static void testLIST(void)
 		sys_list.push_front(200);
 		our_list.push_front(200);
 		sys_list.remove_if(singleINT);
-		//our_list.remove_if(singleINT); //CRASH ON LINUX
+		our_list.remove_if(singleINT); //CRASH ON LINUX
 		if (equalSysFt(sys_list, our_list))
 			std::cout << GREEN;
 		else
@@ -4159,7 +4159,6 @@ static void testMAP(void)
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
-    puts("rrrr");
 	}
 	// ----------------------INIT 2 PARAMETRI------------------
 	std::cout << YELLOW << "INIT MAP OPERATORE = [SYS vs OUR]" << OFF << std::endl;
@@ -4345,7 +4344,7 @@ static void testMAP(void)
 		std::map<int, int>::iterator sys_f = sys_map.find(10);
 		ft::map<int, int>::iterator our_f = our_map.find(10);
 
-		if (sys_f->second == our_f->second)
+		if (sys_f->first == our_f->first && sys_f->second == our_f->second)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -4362,7 +4361,7 @@ static void testMAP(void)
 		std::map<int, int>::iterator sys_f = sys_map.find(56);
 		ft::map<int, int>::iterator our_f = our_map.find(56);
 
-		if (sys_f->second == our_f->second)
+		if (sys_f == sys_map.end() && our_f == our_map.end())
 			std::cout << GREEN;
 		else
 			std::cout << RED;
