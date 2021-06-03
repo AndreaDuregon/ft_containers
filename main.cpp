@@ -7583,7 +7583,7 @@ static void testSET(void)
 		our_set.insert(98);
 
 		sys_set.erase(sys_set.begin(), sys_set.end());
-		//our_set.erase(our_set.begin(), our_set.end()); //LOOP
+		our_set.erase(our_set.begin(), our_set.end()); //LOOP
 
 		if (equalSysFt(sys_set, our_set))
 			std::cout << GREEN;
