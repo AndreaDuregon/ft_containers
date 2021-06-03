@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 11:43:04 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/03 11:51:38 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,6 +450,11 @@ namespace ft
 			for (size_t i = 0; i < this->vec_size; i++)
 				this->vec[i] = 0;
 			this->vec_size = 0;
+		}
+		
+		allocator_type get_allocator() const
+		{
+			return this->alloc;
 		}
 
 		//NON MEMBER FUNCTIONS
