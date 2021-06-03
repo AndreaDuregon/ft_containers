@@ -28,11 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="559b27ad-014d-45a8-9486-ae059d06c577" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Map.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RBTree.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/RBTree.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TreeNode.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/TreeNode.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mainTree.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +176,7 @@
       <workItem from="1622633819398" duration="1651000" />
       <workItem from="1622638696902" duration="11735000" />
       <workItem from="1622722323839" duration="6116000" />
+      <workItem from="1622753350578" duration="1089000" />
     </task>
     <task id="LOCAL-00001" summary="Ho provato clion, muy cariño! segfaulta sul remove o dopo?">
       <created>1621555807539</created>

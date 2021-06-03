@@ -462,10 +462,46 @@ template <class T> class  RBTree
             return x->right;
     }
 
+    void    delOne(TreeNode<T> *v)
+    {
+        (void) v;
+	    std::cout << "Ciao!!"  << std::endl;
+
+    }
+    void    delTwo(TreeNode<T> *v)
+    {
+        (void) v;
+        std::cout << "Ciao!!" <<  std::endl;
+        if (v == this->_root)
+        {
+            if (v->left)
+            {
+
+                this->_root = v->left;
+                v->left->father = NULL;
+
+            }
+            else
+            {
+                
+            }
+        }
+    }
+
     void deleteNode(TreeNode<T> *v)
     {
-		if (this->_size < 3)
-			return;
+		if (this->_size == 2)
+		{
+		    delTwo(v);
+		    return;
+		}
+		if(this->_size == 1)
+        {
+            delOne(v);
+            return;
+        }
+		if(!this->_size)
+		    return;
 		this->removeGhostNodes();
         TreeNode<T> *u = replace(v);
         bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
