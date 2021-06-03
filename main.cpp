@@ -2461,6 +2461,19 @@ static void testVECTOR(void)
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	// ----------------------INIT 2 PARAMETRI------------------
+	std::cout << YELLOW << "INIT VECTOR 2 PARAMETRI (iteratore, iteratore) [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::vector<int> sys_vector(5, 100);
+		ft::vector<int> our_vector(5, 100);
+		std::vector<int> sys_vector2(++sys_vector.begin(), --sys_vector.end());
+		ft::vector<int> our_vector2(++our_vector.begin(), --our_vector.end());
+
+		if (equalSysFt(sys_vector2, our_vector2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	// ----------------------INIT COPY CONSTRUCTOR------------------
 	std::cout << YELLOW << "INIT VECTOR COPY CONSTRUCTOR [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::vector<int> sys_vector(100);

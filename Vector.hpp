@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/28 01:14:20 by                  ###   ########.fr       */
+/*   Updated: 2021/06/03 11:43:04 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,37 @@ namespace ft
 
 		// MEMBER FUNCTIONS
 		//ok
-		vector()
+		explicit vector(const allocator_type& alloc = allocator_type())
 		{
-			this->vec = alloc.allocate(0);
+			this->alloc = alloc;
+			this->vec = this->alloc.allocate(0);
 			this->vec_capacity = 0;
 			this->vec_size = 0;
 		}
 		//ok
-		vector(size_type n, const value_type& val = value_type())
+		explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 		{
-			this->vec = alloc.allocate(n);
+			this->alloc = alloc;
+			this->vec = this->alloc.allocate(n);
 			this->vec_capacity = n;
 			this->vec_size = n;
 			for (size_t i = 0; i < n; i++)
 				this->vec[i] = val;
 		}
 		//ok
-		vector(vector<T> const &copy)
+		vector(vector const &copy)
 		{
 			this->vec = alloc.allocate(copy.vec_capacity);
 			*this = copy;
+		}
+		//ok
+		vector (iterator first, iterator last, const allocator_type& alloc = allocator_type())
+		{
+			this->alloc = alloc;
+			this->vec = this->alloc.allocate(0);
+			this->vec_capacity = 0;
+			this->vec_size = 0;
+			this->insert(this->begin(), first, last);
 		}
 		//ok
 		vector& operator = (const vector& x)
