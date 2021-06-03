@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Set.hpp                                            :+:      :+:    :+:   */
+/*   MultiSet.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 14:25:00 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/03 16:09:59 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 namespace ft
 {
-	template <class T, class Compare = ft::less<T>, class Allocator = std::allocator<T> > class set
+	template <class T, class Compare = ft::less<T>, class Allocator = std::allocator<T> > class multiset
 	{
 	public:
 		ft::RBTree<T> _tree;
@@ -49,7 +49,7 @@ namespace ft
 		template <class TC>
 		class value_compare
 		{   
-			friend class set;
+			friend class multiset;
 			protected:
 			Compare comp;
 			value_compare (Compare c) : comp(c) {}
@@ -66,21 +66,21 @@ namespace ft
 		};
 
     	//ok
-		explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
+		explicit multiset (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
 
 		//ok
-		set (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc)
+		multiset (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc)
 		{
 			this->insert(first,last);
 		}
 	
 		//ok
-		set (const set& x) : _tree(ft::RBTree<value_type>()), _comp(x._comp), _alloc(x._alloc)
+		multiset (const multiset& x) : _tree(ft::RBTree<value_type>()), _comp(x._comp), _alloc(x._alloc)
 		{
 			*this = x;
 		}
 		//ok
-		set& operator = (const set& x)
+		multiset& operator = (const multiset& x)
 		{
 			this->_tree = x._tree;
 			this->_comp = x._comp;
@@ -88,7 +88,7 @@ namespace ft
 			return *this;
 		}
 		//ok
-		~set (void)
+		~multiset (void)
 		{
 		    if (this->_tree._size)
 		        this->clear();
@@ -158,13 +158,11 @@ namespace ft
 			return it;		
 		}
 		//ok
-		ft::pair<iterator, bool> insert (const value_type& val)
+		iterator insert (const value_type& val)
 		{
-			if (this->size() != 0 && this->find(val) != this->end())
-				return ft::pair<iterator, bool>(this->find(val), false);
 			ft::TreeNode<value_type> *v = new ft::TreeNode<value_type>(val);
 			this->_tree.insert(*v);
-			return ft::pair<iterator, bool>(this->find(val), true);
+			return this->find(val);
 		}
 		//ok
 		iterator insert (iterator position, const value_type& val)
@@ -229,7 +227,7 @@ namespace ft
 			return std::numeric_limits<size_type>::max() / (sizeof(value_type));
 		}
 		//ok
-		void swap (set& x)
+		void swap (multiset& x)
 		{
 			ft::RBTree<T> tmp = this->_tree;
 			this->_tree = x._tree;
@@ -344,7 +342,7 @@ namespace ft
 		}
 		//ok
 		template <class v, class c, class a>
-		friend bool operator == (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)
+		friend bool operator == (const ft::multiset<v,c,a>& lhs, const ft::multiset<v,c,a>& rhs)
 		{
 			if (lhs.size() != rhs.size())
 				return false;
@@ -355,13 +353,13 @@ namespace ft
 		}
 		//ok
 		template <class v, class c, class a>
-		friend bool operator != (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)
+		friend bool operator != (const ft::multiset<v,c,a>& lhs, const ft::multiset<v,c,a>& rhs)
 		{
 			return !(lhs == rhs);
 		}
 		//ok
 		template <class v, class c, class a>
-		friend bool operator < (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)
+		friend bool operator < (const ft::multiset<v,c,a>& lhs, const ft::multiset<v,c,a>& rhs)
 		{
 			for (iterator it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
@@ -377,7 +375,7 @@ namespace ft
 		}
 		//ok
 		template <class v, class c, class a>
-		friend bool operator <= (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)
+		friend bool operator <= (const ft::multiset<v,c,a>& lhs, const ft::multiset<v,c,a>& rhs)
 		{
 			for (iterator it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
@@ -393,7 +391,7 @@ namespace ft
 		}
 		//ok
 		template <class v, class c, class a>
-		friend bool operator > (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)
+		friend bool operator > (const ft::multiset<v,c,a>& lhs, const ft::multiset<v,c,a>& rhs)
 		{
 			for (iterator it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
@@ -409,7 +407,7 @@ namespace ft
 		}
 		//ok
 		template <class v, class c, class a>
-		friend bool operator >= (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)
+		friend bool operator >= (const ft::multiset<v,c,a>& lhs, const ft::multiset<v,c,a>& rhs)
 		{
 			for (iterator it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{

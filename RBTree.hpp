@@ -96,9 +96,9 @@ template <class T> class  RBTree
 			value_type *tmp = this->_root;
 			while(true)
 			{
-				if (*newNode.value == *tmp->value)
-					return *tmp;
-				else if (*newNode.value > *tmp->value && tmp->right)
+				//if (*newNode.value == *tmp->value)
+				//	return *tmp;
+				if (*newNode.value >= *tmp->value && tmp->right)
 				{
 					newDeep++;
 					tmp = tmp->right;
@@ -111,7 +111,7 @@ template <class T> class  RBTree
 				else
 					break;
 			}
-			if (*newNode.value > *tmp->value)
+			if (*newNode.value >= *tmp->value)
 				tmp->right = &newNode;
 			else
 				tmp->left = &newNode;
@@ -692,7 +692,7 @@ template <class T> class  RBTree
 	void printTreeRec(value_type* root, Trunk *prev, bool isLeft)
 	{
 		if (root == 0)
-		{ 
+		{
 			return;
 		}
 		this->removeGhostNodes();
@@ -724,6 +724,7 @@ template <class T> class  RBTree
 		}
 		trunk->str = "   |";
 		printTreeRec(root->left, trunk, false);
+		delete trunk;
 	}
 
 	void removeGhostNodes(void)

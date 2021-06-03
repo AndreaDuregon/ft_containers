@@ -4,6 +4,7 @@
 #include "Queue.hpp"
 #include "Map.hpp"
 #include "Set.hpp"
+#include "MultiSet.hpp"
 #include <list>
 #include <map>
 #include <set>
@@ -83,6 +84,19 @@ static void print_sys(std::set<int> &set)
 	std::cout << std::endl;
 }
 
+static void print_sys(std::multiset<int> &set)
+{
+	std::multiset<int>::iterator sys_it_begin = set.begin();
+	std::multiset<int>::iterator sys_it_end = set.end();
+	std::cout << "SYS: ";
+	while (sys_it_begin != sys_it_end)
+	{
+		std::cout << *sys_it_begin << " ";
+		++sys_it_begin;
+	}
+	std::cout << std::endl;
+}
+
 static void print_our(ft::list<int> &list)
 {
 	ft::list<int>::iterator our_it_begin = list.begin();
@@ -126,6 +140,19 @@ static void print_our(ft::set<int> &set)
 {
 	ft::set<int>::iterator our_it_begin = set.begin();
 	ft::set<int>::iterator our_it_end = set.end();
+	std::cout << "OUR: ";
+	while (our_it_begin != our_it_end)
+	{
+		std::cout << *our_it_begin << " ";
+		++our_it_begin;
+	}
+	std::cout << std::endl;
+}
+
+static void print_our(ft::multiset<int> &set)
+{
+	ft::multiset<int>::iterator our_it_begin = set.begin();
+	ft::multiset<int>::iterator our_it_end = set.end();
 	std::cout << "OUR: ";
 	while (our_it_begin != our_it_end)
 	{
@@ -412,6 +439,62 @@ static bool equalSysFt(std::set<int> &sys_set, ft::set<int> &our_set)
 		std::set<int>::iterator sys_it_begin = sys_set.begin();
 		ft::set<int>::iterator our_it_end = our_set.end();
 		std::set<int>::iterator sys_it_end = sys_set.end();
+
+		while (sys_it_begin != sys_it_end)
+		{
+			if (*sys_it_begin != *our_it_begin)
+			{
+				print_our(our_set);
+				print_sys(sys_set);
+				return false;
+			}
+			++sys_it_begin;
+			++our_it_begin;
+		}
+
+		our_it_begin = our_set.begin();
+		sys_it_begin = sys_set.begin();
+
+		while (our_it_begin != our_it_end)
+		{
+			if (*sys_it_begin != *our_it_begin)
+			{
+				print_our(our_set);
+				print_sys(sys_set);
+				return false;
+			}
+			++sys_it_begin;
+			++our_it_begin;
+		}
+	}
+
+	if (sys_set.size() != our_set.size())
+	{
+		std::cout << "SIZE " << sys_set.size() << " != " << our_set.size() << " ";
+		return false;
+	}
+	if (sys_set.empty() != our_set.empty())
+	{
+		std::cout << "EMPTY " << sys_set.empty() << " != " << our_set.empty() << " ";
+		return false;
+	}
+	if (our_set._tree.isValid() != 1)
+	{
+		our_set._tree.printTree();
+		return false;
+	}
+	return true;
+}
+
+
+static bool equalSysFt(std::multiset<int> &sys_set, ft::multiset<int> &our_set)
+{
+	if (sys_set.size() > 0)
+	{
+		ft::multiset<int>::iterator our_it_begin = our_set.begin();
+		std::multiset<int>::iterator sys_it_begin = sys_set.begin();
+		ft::multiset<int>::iterator our_it_end = our_set.end();
+		std::multiset<int>::iterator sys_it_end = sys_set.end();
 
 		while (sys_it_begin != sys_it_end)
 		{
@@ -5683,6 +5766,14 @@ static void testSET(void)
 		sys_set2.insert(99);
 		our_set2.insert(5);
 		our_set2.insert(99);
+		sys_set2.insert(100);
+		sys_set2.insert(10);
+		our_set2.insert(100);
+		our_set2.insert(10);
+		sys_set2.insert(5);
+		sys_set2.insert(99);
+		our_set2.insert(5);
+		our_set2.insert(99);
 
 		sys_set = sys_set2;
 		our_set = our_set2;
@@ -6505,6 +6596,1370 @@ static void testSET(void)
 		std::cout << "VALUE_COMP test 2" << OFF << std::endl;
 	}
 }
+
+static void testMULTISET(void)
+{
+
+	std::cout << BLUE << "**** TEST MULTISET ****" << OFF << std::endl;
+
+// ------------------ITERATOR METHODS----------------------
+	std::cout << YELLOW << "MULTISET ITERATOR OPERATOR [SYS vs OUR]" << OFF << std::endl;
+	{
+		// BEGIN
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+
+
+		std::multiset<int>::iterator sys_it = sys_multiset.begin();
+		ft::multiset<int>::iterator our_it = our_multiset.begin();
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "BEGIN" << OFF << std::endl;
+	}
+	{
+		// ++BEGIN
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1);
+		sys_multiset.insert(123);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1);
+		our_multiset.insert(123);
+
+		std::multiset<int>::iterator sys_it = sys_multiset.begin();
+		ft::multiset<int>::iterator our_it = our_multiset.begin();
+
+		++sys_it;
+		++our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++BEGIN test 1" << OFF << std::endl;
+		++sys_it;
+		++our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++BEGIN test 2" << OFF << std::endl;
+		++sys_it;
+		++our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++BEGIN test 3" << OFF << std::endl;
+	}
+	{
+		// BEGIN++
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1);
+		sys_multiset.insert(123);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1);
+		our_multiset.insert(123);
+
+		std::multiset<int>::iterator sys_it = sys_multiset.begin();
+		ft::multiset<int>::iterator our_it = our_multiset.begin();
+
+		sys_it++;
+		our_it++;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "BEGIN++ test 1" << OFF << std::endl;
+		sys_it++;
+		our_it++;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "BEGIN++ test 2" << OFF << std::endl;
+		sys_it++;
+		our_it++;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "BEGIN++ test 3" << OFF << std::endl;
+	}
+	{
+		// --END
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1);
+		sys_multiset.insert(123);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1);
+		our_multiset.insert(123);
+
+		std::multiset<int>::iterator sys_it = sys_multiset.end();
+		ft::multiset<int>::iterator our_it = our_multiset.end();
+
+		--sys_it;
+		--our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--END test 1" << OFF << std::endl;
+		--sys_it;
+		--our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--END test 2" << OFF << std::endl;
+		--sys_it;
+		--our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--END test 3" << OFF << std::endl;
+	}
+	{
+		// END--
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1);
+		sys_multiset.insert(123);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1);
+		our_multiset.insert(123);
+
+		std::multiset<int>::iterator sys_it = sys_multiset.end();
+		ft::multiset<int>::iterator our_it = our_multiset.end();
+
+		sys_it--;
+		our_it--;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "END-- test 1" << OFF << std::endl;
+		sys_it--;
+		our_it--;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "END-- test 2" << OFF << std::endl;
+		sys_it--;
+		our_it--;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "END-- test 3" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE == [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset2.insert(100);
+		our_multiset.insert(100);
+		our_multiset2.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset2.insert(10);
+		our_multiset.insert(10);
+		our_multiset2.insert(10);
+
+
+		if ((sys_multiset == sys_multiset2) == (our_multiset == our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+
+	std::cout << YELLOW << "MULTISET OPERATORE != [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset2.insert(100);
+		our_multiset.insert(100);
+		our_multiset2.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset2.insert(12);
+		our_multiset.insert(10);
+		our_multiset2.insert(12);
+
+		if ((sys_multiset != sys_multiset2) == (our_multiset != our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE < [SYS vs OUR] test 1" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(12);
+
+		if ((sys_multiset < sys_multiset2) == (our_multiset < our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE < [SYS vs OUR] test 2" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(-12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(-12);
+
+		if ((sys_multiset < sys_multiset2) == (our_multiset < our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE < [SYS vs OUR] test 3" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(10);
+		our_multiset2.insert(100);
+		our_multiset2.insert(10);
+
+		if ((sys_multiset < sys_multiset2) == (our_multiset < our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE > [SYS vs OUR] test 1" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(12);
+
+		if ((sys_multiset > sys_multiset2) == (our_multiset > our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE > [SYS vs OUR] test 2" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(-12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(-12);
+
+		if ((sys_multiset > sys_multiset2) == (our_multiset > our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE > [SYS vs OUR] test 3" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(10);
+		our_multiset2.insert(100);
+		our_multiset2.insert(10);
+
+		if ((sys_multiset > sys_multiset2) == (our_multiset > our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE <= [SYS vs OUR] test 1" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(12);
+
+		if ((sys_multiset <= sys_multiset2) == (our_multiset <= our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE <= [SYS vs OUR] test 2" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(-12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(-12);
+
+		if ((sys_multiset <= sys_multiset2) == (our_multiset <= our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE <= [SYS vs OUR] test 3" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(10);
+		our_multiset2.insert(100);
+		our_multiset2.insert(10);
+
+		if ((sys_multiset <= sys_multiset2) == (our_multiset <= our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE >= [SYS vs OUR] test 1" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(12);
+
+		if ((sys_multiset >= sys_multiset2) == (our_multiset >= our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE >= [SYS vs OUR] test 2" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(-12);
+		our_multiset2.insert(100);
+		our_multiset2.insert(-12);
+
+		if ((sys_multiset >= sys_multiset2) == (our_multiset >= our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	std::cout << YELLOW << "MULTISET OPERATORE >= [SYS vs OUR] test 3" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(10);
+		our_multiset2.insert(100);
+		our_multiset2.insert(10);
+
+		if ((sys_multiset >= sys_multiset2) == (our_multiset >= our_multiset2))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	// -------------------INIT EMPTY---------------------
+	std::cout << YELLOW << "INIT MULTISET VUOTO [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+
+	// --------------------INT 1 PARAMETRO--------------------
+	std::cout << YELLOW << "INIT MULTISET COPY CONSTRUCTOR [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(10);
+		our_multiset2.insert(100);
+		our_multiset2.insert(10);
+		std::multiset<int> sys_multiset(sys_multiset2);
+		ft::multiset<int> our_multiset(our_multiset2);
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	// --------------------INT 2 PARAMETRI--------------------
+	std::cout << YELLOW << "INIT MULTISET 2 PARAMETRI [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(10);
+		sys_multiset2.insert(1001);
+		sys_multiset2.insert(101);
+		our_multiset2.insert(100);
+		our_multiset2.insert(10);
+		our_multiset2.insert(1001);
+		our_multiset2.insert(101);
+		std::multiset<int> sys_multiset(sys_multiset2.begin(), sys_multiset2.end());
+		ft::multiset<int> our_multiset(our_multiset2.begin(), our_multiset2.end());
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	// ----------------------INIT MULTISET = ------------------
+	std::cout << YELLOW << "INIT MULTISET OPERATORE = [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset2.insert(100);
+		sys_multiset2.insert(10);
+		our_multiset2.insert(100);
+		our_multiset2.insert(10);
+		sys_multiset2.insert(5);
+		sys_multiset2.insert(99);
+		our_multiset2.insert(5);
+		our_multiset2.insert(99);
+
+		sys_multiset = sys_multiset2;
+		our_multiset = our_multiset2;
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	/*
+	// ----------------------MULTISET METHODS------------------
+	std::cout << YELLOW << "MULTISET METHODS [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		std::pair<std::multiset<int>::iterator, bool> res_sys = sys_multiset.insert(10);
+		our_multiset.insert(100);
+		ft::pair<ft::multiset<int>::iterator, bool> res_our = our_multiset.insert(10);
+
+		if (res_sys.second == res_our.second && *res_sys.first == *res_our.first)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 1" << OFF << std::endl;
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (value) test 1" << OFF << std::endl;
+	}
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		sys_multiset.insert(100);
+		std::pair<std::multiset<int>::iterator, bool> res_sys =  sys_multiset.insert(10);
+		our_multiset.insert(100);
+		ft::pair<ft::multiset<int>::iterator, bool> res_our =  our_multiset.insert(10);
+
+		if (res_sys.second == res_our.second && *res_sys.first == *res_our.first)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 2" << OFF << std::endl;			
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (value) test 2" << OFF << std::endl;
+	}
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1001);
+		sys_multiset.insert(101);
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1001);
+		sys_multiset.insert(101);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1001);
+		our_multiset.insert(101);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1001);
+		our_multiset.insert(101);
+
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+
+
+		sys_multiset2.insert(sys_multiset.begin(), sys_multiset.end());
+		our_multiset2.insert(our_multiset.begin(), our_multiset.end());
+
+		if (equalSysFt(sys_multiset2, our_multiset2))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, iterator) test 1" << OFF << std::endl;
+	}
+	*/
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1001);
+		sys_multiset.insert(101);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1001);
+		our_multiset.insert(101);
+
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+
+		sys_multiset2.insert(++sys_multiset.begin(), sys_multiset.end());
+		our_multiset2.insert(++our_multiset.begin(), our_multiset.end());
+
+		if (equalSysFt(sys_multiset2, our_multiset2))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, iterator) test 2" << OFF << std::endl;
+	}
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1001);
+		sys_multiset.insert(101);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1001);
+		our_multiset.insert(101);
+
+		std::multiset<int>::iterator sys_it =  sys_multiset.insert(++sys_multiset.begin(), 85);
+		ft::multiset<int>::iterator our_it =  our_multiset.insert(++our_multiset.begin(), 85);
+
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 1" << OFF << std::endl;
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, value) test 1" << OFF << std::endl;
+	}
+    {
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1001);
+		sys_multiset.insert(101);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1001);
+		our_multiset.insert(101);
+
+		std::multiset<int>::iterator sys_it =  sys_multiset.insert(sys_multiset.end(), -100);
+		ft::multiset<int>::iterator our_it =  our_multiset.insert(our_multiset.end(), -100);
+
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN INSERT test 2" << OFF << std::endl;
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (iterator, value) test 2" << OFF << std::endl;
+	}
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+
+		std::multiset<int>::iterator sys_f = sys_multiset.find(10);
+		ft::multiset<int>::iterator our_f = our_multiset.find(10);
+
+		if (*sys_f == *our_f)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "FIND test 1" << OFF << std::endl;
+	}
+	{
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+
+		std::multiset<int>::iterator sys_f = sys_multiset.find(56);
+		ft::multiset<int>::iterator our_f = our_multiset.find(56);
+
+		if (sys_f == sys_multiset.end() && our_f == our_multiset.end())
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "FIND test 2" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+
+		sys_multiset.erase(sys_multiset.begin());
+		our_multiset.erase(our_multiset.begin());
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (iterator) test 1 (node 0 child)" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		sys_multiset.erase(sys_multiset.find(99));
+		our_multiset.erase(our_multiset.find(99));
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (iterator) test 2 (node 1 child)" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		sys_multiset.erase(sys_multiset.find(100));
+		//our_multiset.erase(our_multiset.find(100)); //CRASH
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (iterator) test 3 (node 2 child)" << OFF << std::endl;
+	}
+	{
+		// ERASE (LAST NODE)
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+
+		size_t res_sys = sys_multiset.erase(98);
+		size_t res_our = our_multiset.erase(98);
+
+		if (res_sys == res_our)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN ERASE (key) test 0" << OFF << std::endl;
+
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (key) test 0 (node 0 child)" << OFF << std::endl;
+	}
+	{
+		// ERASE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		size_t res_sys = sys_multiset.erase(99);
+		size_t res_our = our_multiset.erase(99);
+
+		if (res_sys == res_our)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN ERASE (key) test 2" << OFF << std::endl;
+
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (key) test 2 (node 1 child)" << OFF << std::endl;
+	}
+	{
+		// ERASE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		size_t res_sys = sys_multiset.erase(100);
+		//size_t res_our = our_multiset.erase(100); //CRASH
+		size_t res_our = 0;
+
+		if (res_sys == res_our)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RETURN ERASE (key) test 3" << OFF << std::endl;
+
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (key) test 3 (node 2 child)" << OFF << std::endl;
+	}
+	{
+		// ERASE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		sys_multiset.erase(sys_multiset.begin(), sys_multiset.end());
+		//our_multiset.erase(our_multiset.begin(), our_multiset.end()); //LOOP
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ERASE (iterator, itarator)" << OFF << std::endl;
+	}
+	{
+		// CLEAR
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		sys_multiset.clear();
+		our_multiset.clear();
+
+		if (equalSysFt(sys_multiset, our_multiset))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "CLEAR" << OFF << std::endl;
+	}
+	{
+		// CLEAR
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+		std::multiset<int> sys_multiset2;
+		ft::multiset<int> our_multiset2;
+		sys_multiset2.insert(123);
+		our_multiset2.insert(123);
+
+		sys_multiset.swap(sys_multiset2);
+		our_multiset.swap(our_multiset2);
+
+		if (equalSysFt(sys_multiset, our_multiset) && equalSysFt(sys_multiset2, our_multiset2))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "SWAP" << OFF << std::endl;
+	}
+	{
+		// COUNT
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		if (sys_multiset.count(100) == our_multiset.count(100))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "COUNT test 1" << OFF << std::endl;
+	}
+	{
+		// COUNT
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		if (sys_multiset.count(789) == our_multiset.count(789))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "COUNT test 2" << OFF << std::endl;
+	}
+	{
+		// LOWER_BOUND
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::multiset<int>::iterator our_it = our_multiset.lower_bound(-100);
+		std::multiset<int>::iterator sys_it = sys_multiset.lower_bound(-100);
+
+		if (*our_it == *sys_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "LOWER BOUND test 1" << OFF << std::endl;
+	}
+	{
+		// LOWER_BOUND
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::multiset<int>::iterator our_it = our_multiset.lower_bound(1000);
+		std::multiset<int>::iterator sys_it = sys_multiset.lower_bound(1000);
+
+		if (our_it == our_multiset.end() && sys_it == sys_multiset.end())
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "LOWER BOUND test 2" << OFF << std::endl;
+	}
+	{
+		// LOWER_BOUND
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::multiset<int>::iterator our_it = our_multiset.lower_bound(15);
+		std::multiset<int>::iterator sys_it = sys_multiset.lower_bound(15);
+
+		if (*our_it == *sys_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "LOWER BOUND test 3" << OFF << std::endl;
+	}
+
+	{
+		// LOWER_BOUND
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::multiset<int>::iterator our_it = our_multiset.upper_bound(-100);
+		std::multiset<int>::iterator sys_it = sys_multiset.upper_bound(-100);
+
+		if (*our_it == *sys_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "UPPER BOUND test 1" << OFF << std::endl;
+	}
+	{
+		// LOWER_BOUND
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::multiset<int>::iterator our_it = our_multiset.upper_bound(1000);
+		std::multiset<int>::iterator sys_it = sys_multiset.upper_bound(1000);
+
+		if (our_it == our_multiset.end() && sys_it == sys_multiset.end())
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "UPPER BOUND test 2" << OFF << std::endl;
+	}
+	{
+		// LOWER_BOUND
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::multiset<int>::iterator our_it = our_multiset.upper_bound(15);
+		std::multiset<int>::iterator sys_it = sys_multiset.upper_bound(15);
+
+		if (*our_it == *sys_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "UPPER BOUND test 3" << OFF << std::endl;
+	}
+	{
+		// EQUAL RANGE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::pair<ft::multiset<int>::iterator, ft::multiset<int>::iterator> our_ret = our_multiset.equal_range(-1000);
+		std::pair<std::multiset<int>::iterator, std::multiset<int>::iterator> sys_ret = sys_multiset.equal_range(-1000);
+
+		if (*our_ret.first == *sys_ret.first && *our_ret.second == *sys_ret.second)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "EQUAL RANGE test 1" << OFF << std::endl;
+	}
+	{
+		// EQUAL RANGE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::pair<ft::multiset<int>::iterator, ft::multiset<int>::iterator> our_ret = our_multiset.equal_range(11);
+		std::pair<std::multiset<int>::iterator, std::multiset<int>::iterator> sys_ret = sys_multiset.equal_range(11);
+
+		if (*our_ret.first == *sys_ret.first && *our_ret.second == *sys_ret.second)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "EQUAL RANGE test 2" << OFF << std::endl;
+	}
+	{
+		// EQUAL RANGE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		ft::pair<ft::multiset<int>::iterator, ft::multiset<int>::iterator> our_ret = our_multiset.equal_range(9999);
+		std::pair<std::multiset<int>::iterator, std::multiset<int>::iterator> sys_ret = sys_multiset.equal_range(9999);
+
+		if (our_ret.first == our_multiset.end() && sys_ret.first == sys_multiset.end() && our_ret.second == our_multiset.end() && sys_ret.second == sys_multiset.end())
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "EQUAL RANGE test 3" << OFF << std::endl;
+	}
+	{
+		// EQUAL RANGE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		if (sys_multiset.key_comp()(123,456) == our_multiset.key_comp()(123, 456) )
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "KEY_COMP test 1" << OFF << std::endl;
+	}
+	{
+		// EQUAL RANGE
+		std::multiset<int> sys_multiset;
+		ft::multiset<int> our_multiset;
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(15);
+		sys_multiset.insert(110);
+		sys_multiset.insert(99);
+		sys_multiset.insert(98);
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(15);
+		our_multiset.insert(110);
+		our_multiset.insert(99);
+		our_multiset.insert(98);
+
+		if (sys_multiset.key_comp()(-10,-10) == our_multiset.key_comp()(-10, -10) )
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "KEY_COMP test 2" << OFF << std::endl;
+	}
+	{
+		ft::multiset<int> our_multiset;
+		std::multiset<int> sys_multiset;
+		our_multiset.insert(100);
+		our_multiset.insert(10);
+		our_multiset.insert(1);
+		our_multiset.insert(123);
+		sys_multiset.insert(100);
+		sys_multiset.insert(10);
+		sys_multiset.insert(1);
+		sys_multiset.insert(123);
+		
+		
+		int highest_o = *our_multiset.rbegin();
+		ft::multiset<int>::iterator it_o = our_multiset.begin();
+		int highest_s = *sys_multiset.rbegin();
+		std::multiset<int>::iterator it_s = sys_multiset.begin();
+
+
+		if (our_multiset.value_comp()(*it_o++, highest_o) == sys_multiset.value_comp()(*it_s++, highest_s))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "VALUE_COMP test 1" << OFF << std::endl;
+	}
+	{
+		ft::map<int, int> our_map;
+		std::map<int, int> sys_map;
+		our_map.insert(ft::pair<int, int>(100, 100));
+		our_map.insert(ft::pair<int, int>(10, 10));
+		our_map.insert(ft::pair<int, int>(1, 1));
+		our_map.insert(ft::pair<int, int>(123, 123));
+		sys_map.insert(std::pair<int, int>(100, 100));
+		sys_map.insert(std::pair<int, int>(10, 10));
+		sys_map.insert(std::pair<int, int>(1, 1));
+		sys_map.insert(std::pair<int, int>(123, 123));
+		
+		
+		ft::pair<int,int> highest_o = *our_map.rbegin();
+		ft::map<int,int>::iterator it_o = ++our_map.begin();
+		std::pair<int,int> highest_s = *sys_map.rbegin();
+		std::map<int,int>::iterator it_s = ++sys_map.begin();
+
+
+		if (our_map.value_comp()(*it_o++, highest_o) == sys_map.value_comp()(*it_s++, highest_s))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "VALUE_COMP test 2" << OFF << std::endl;
+	}
+}
+
 
 /*
 static void testDEQUE(void)
@@ -8021,6 +9476,7 @@ int main(int argc, char **argv)
 		testQUEUE();
 		testMAP();
 		testSET();
+		testMULTISET();
 		//testDEQUE();
 		return 0;
 	}
@@ -8038,7 +9494,10 @@ int main(int argc, char **argv)
 		testMAP();
 	if (test == "set")
 		testSET();
+	if (test == "multiset")
+		testMULTISET();
 	if (test == "deque")
 		return 0;
+
 		//testDeque();
 }
