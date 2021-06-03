@@ -69,7 +69,7 @@ template <class T> class  RBTree
 		delete this->_end;
 	}
 
-	void clear(TreeNode<T> *curr)
+	void                    clear(TreeNode<T> *curr)
 	{
 	    this->removeGhostNodes();
 	    if (!curr)
@@ -89,7 +89,7 @@ template <class T> class  RBTree
 	}
 
 
-	value_type &insert (value_type &newNode)
+	value_type              &insert (value_type &newNode)
 	{
 		this->removeGhostNodes();
 		if (this->_root)
@@ -132,14 +132,14 @@ template <class T> class  RBTree
 	}
 
 	//Il nodo inserito è la root - rule1
-	value_type *rule1(value_type *node)
+	value_type              *rule1(value_type *node)
 	{
 		node->color = ft::BLACK;
 		return node;
 	}
 
 	//Lo zio del nodo è rosso - rule2 LEFT
-	value_type *rule2_left(value_type *node)
+	value_type              *rule2_left(value_type *node)
 	{
 		node->father->father->color = ft::RED;
 		node->father->father->left->color = ft::BLACK;
@@ -148,7 +148,7 @@ template <class T> class  RBTree
 	}
 
 	//Lo zio del nodo è rosso - rule2 RIGHT
-	value_type *rule2_right (value_type *node)
+	value_type              *rule2_right (value_type *node)
 	{
 		node->father->father->color = ft::RED;
 		node->father->father->right->color = ft::BLACK;
@@ -157,21 +157,21 @@ template <class T> class  RBTree
 	}
 
 	//Lo zio è nero (TRIANGOLO) - rule3 DESTRA
-	value_type *rule3_right(value_type *node)
+	value_type              *rule3_right(value_type *node)
 	{
 		this->leftRotation(node->father);
 		return node->left;
 	}
 
 	//Lo zio è nero (TRIANGOLO) - rule3 SINISTRA
-	value_type *rule3_left(value_type *node)
+	value_type              *rule3_left(value_type *node)
 	{
 		this->rightRotation(node->father);
 		return node->right;
 	}
 
 	//Lo zio è nero (LINEA) - rule4 SINISTRA
-	value_type *rule4_left (value_type *node)
+	value_type              *rule4_left (value_type *node)
 	{
 		if (node->color == ft::RED && node->father->color == ft::RED)
 			node->color = ft::BLACK;
@@ -180,7 +180,7 @@ template <class T> class  RBTree
 	}
 
 	//Lo zio è nero (LINEA) - rule4 DESTRA
-	value_type *rule4_right (value_type *node)
+	value_type              *rule4_right (value_type *node)
 	{
 		if (node->color == ft::RED && node->father->color == ft::RED)
 			node->color = ft::BLACK;
@@ -188,7 +188,7 @@ template <class T> class  RBTree
 		return node->father;
 	}
 
-	void fixTree(value_type *node)
+	void                    fixTree(value_type *node)
 	{
 
 		//this->printTree();
@@ -273,7 +273,7 @@ template <class T> class  RBTree
 		}
 	}
 
-	int isValid(void)
+	int                     isValid(void)
 	{
 		if (this->_size <= 1)
 			return 1;
@@ -293,7 +293,7 @@ template <class T> class  RBTree
 		return 1;
 	}
 
-    int	blackNodes(value_type *node)
+    int	                    blackNodes(value_type *node)
 	{
 		value_type *tmp = node;
 		int n = 0;
@@ -306,7 +306,7 @@ template <class T> class  RBTree
 		return n;
 	}
 
-	void leftRotation(value_type *x)
+	void                    leftRotation(value_type *x)
 	{
 
 		this->removeGhostNodes();
@@ -342,7 +342,7 @@ template <class T> class  RBTree
 			x->right->father = x;
 	}
 
-	void rightRotation(value_type *x)
+	void                    rightRotation(value_type *x)
 	{
 
 		this->removeGhostNodes();
@@ -378,7 +378,7 @@ template <class T> class  RBTree
 			x->left->father = x;
 	}
 
-    void swapColors(TreeNode<T> *x1, TreeNode<T> *x2)
+    void                    swapColors(TreeNode<T> *x1, TreeNode<T> *x2)
     {
         ft::Color temp;
         temp = x1->color;
@@ -386,7 +386,7 @@ template <class T> class  RBTree
         x2->color = temp;
     }
 
-    void swapValues(TreeNode<T> *u, TreeNode<T> *v)
+    void                    swapValues(TreeNode<T> *u, TreeNode<T> *v)
     {
 	    T *tmp;
 	    tmp = u->value;
@@ -395,7 +395,7 @@ template <class T> class  RBTree
 
     }
 
-    void fixRedRed(TreeNode<T> *x)
+    void                    fixRedRed(TreeNode<T> *x)
     {
         if (x == _root) {
             x->color = BLACK;
@@ -443,7 +443,7 @@ template <class T> class  RBTree
         }
     }
 
-    TreeNode<T> *successor(TreeNode<T> *x) {
+    TreeNode<T>             *successor(TreeNode<T> *x) {
         TreeNode<T> *temp = x;
 
         while (temp->left != NULL)
@@ -451,7 +451,7 @@ template <class T> class  RBTree
         return temp;
     }
 
-    TreeNode<T> *replace(TreeNode<T> *x) {
+    TreeNode<T>             *replace(TreeNode<T> *x) {
         if (x->left != NULL and x->right != NULL)
             return successor(x->right);
         if (x->left == NULL and x->right == NULL)
@@ -462,16 +462,15 @@ template <class T> class  RBTree
             return x->right;
     }
 
-    void    delOne(TreeNode<T> *v)
+    void                    delOne(TreeNode<T> *v)
     {
         this->_size--;
         delete v;
         this->_root = NULL;
     }
-    void    delTwo(TreeNode<T> *v)
+    void                    delTwo(TreeNode<T> *v)
     {
         (void) v;
-        //std::cout << "Ciao!!" <<  std::endl;
         if (v == this->_root)
         {
             if (v->left)
@@ -506,7 +505,7 @@ template <class T> class  RBTree
         }
     }
 
-    void deleteNode(TreeNode<T> *v)
+    void                    deleteNode(TreeNode<T> *v)
     {
 		if (this->_size == 2)
 		{
@@ -576,7 +575,7 @@ template <class T> class  RBTree
         deleteNode(u);
     }
 
-    void fixDoubleBlack(TreeNode<T> *x)
+    void                    fixDoubleBlack(TreeNode<T> *x)
     {
         if (x == _root)
             return;
@@ -642,7 +641,7 @@ template <class T> class  RBTree
     }
 
 
-    binaryTreeIterator<T> begin(void)
+    binaryTreeIterator<T>   begin(void)
 	{
 		value_type *tmp = this->_root;
 		while(tmp->left)
@@ -651,7 +650,7 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(tmp);
 	}
 
-    binaryTreeIterator<T> begin(void) const
+    binaryTreeIterator<T>   begin(void) const
 	{
 		value_type *tmp = this->_root;
 		while(tmp->left)
@@ -660,7 +659,7 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(tmp);
 	}
 
-	binaryTreeIterator<T> rbegin(void)
+	binaryTreeIterator<T>   rbegin(void)
 	{
 		value_type *tmp = this->_root;
 		while(tmp->right->right)
@@ -668,7 +667,7 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(tmp);
 	}
 
-	binaryTreeIterator<T> rbegin(void) const
+	binaryTreeIterator<T>   rbegin(void) const
 	{
 		value_type *tmp = this->_root;
 		while(tmp->right->right)
@@ -676,7 +675,7 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(tmp);
 	}
 
-	binaryTreeIterator<T> end(void)
+	binaryTreeIterator<T>   end(void)
 	{
 		this->removeGhostNodes();
 		value_type *tmp = this->_root;
@@ -687,7 +686,7 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(this->_end);
 	}
 
-	binaryTreeIterator<T> end(void) const
+	binaryTreeIterator<T>   end(void) const
 	{
 		this->removeGhostNodes();
 		value_type *tmp = this->_root;
@@ -698,7 +697,7 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(this->_end);
 	}
 
-	binaryTreeIterator<T> rend(void)
+	binaryTreeIterator<T>   rend(void)
 	{
 		this->removeGhostNodes();
 		value_type *tmp = this->_root;
@@ -710,7 +709,7 @@ template <class T> class  RBTree
 		return binaryTreeIterator<T>(this->_end);
 	}
 
-	binaryTreeIterator<T> rend(void) const
+	binaryTreeIterator<T>   rend(void) const
 	{
 		this->removeGhostNodes();
 		value_type *tmp = this->_root;
@@ -723,7 +722,7 @@ template <class T> class  RBTree
 	}
 
 	/* NEW STAMPA */
-	void printTree(void)
+	void                    printTree(void)
 	{
     	printTreeRec(this->_root, 0, false);
 	}
@@ -739,7 +738,7 @@ template <class T> class  RBTree
 		}
 	};
 
-	void showTrunks(Trunk *p)
+	void                    showTrunks(Trunk *p)
 	{
 		if (p == 0) {
 			return;
@@ -748,7 +747,7 @@ template <class T> class  RBTree
 		std::cout << p->str;
 	}
 	
-	void printTreeRec(value_type* root, Trunk *prev, bool isLeft)
+	void                    printTreeRec(value_type* root, Trunk *prev, bool isLeft)
 	{
 		if (root == 0)
 		{
@@ -786,7 +785,7 @@ template <class T> class  RBTree
 		delete trunk;
 	}
 
-	void removeGhostNodes(void)
+	void                    removeGhostNodes(void)
 	{
 		if (this->_end->father)
 		{
@@ -794,7 +793,7 @@ template <class T> class  RBTree
 			this->_end->father = 0;
 		}
 	}
-	void removeGhostNodes(void) const
+	void                    removeGhostNodes(void) const
 	{
 		if (this->_end->father)
 		{
