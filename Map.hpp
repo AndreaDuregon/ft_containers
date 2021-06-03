@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <aduregon@42.fr>                  +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/01 14:43:42 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:03:41 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ namespace ft
 		//ok
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc) {}
 
-		//map (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-		//{
-		//
-		///}
+		//ok
+		map (iterator first, iterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(ft::RBTree<value_type>()), _comp(comp), _alloc(alloc)
+		{
+			this->insert(first,last);
+		}
 	
 		//ok
 		map (const map& x) : _tree(ft::RBTree<value_type>()), _comp(x._comp), _alloc(x._alloc)

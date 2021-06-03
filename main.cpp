@@ -4160,7 +4160,28 @@ static void testMAP(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	// ----------------------INIT 2 PARAMETRI------------------
+	// --------------------INT 2 PARAMETRI--------------------
+	std::cout << YELLOW << "INIT MAP 2 PARAMETRI [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::map<int, int> sys_map2;
+		ft::map<int, int> our_map2;
+		sys_map2.insert(std::pair<int, int>(100, 100));
+		sys_map2.insert(std::pair<int, int>(10, 10));
+		sys_map2.insert(std::pair<int, int>(1001, 1001));
+		sys_map2.insert(std::pair<int, int>(101, 101));
+		our_map2.insert(ft::pair<int, int>(100, 100));
+		our_map2.insert(ft::pair<int, int>(10, 10));
+		our_map2.insert(ft::pair<int, int>(1001, 1001));
+		our_map2.insert(ft::pair<int, int>(101, 101));
+		std::map<int, int> sys_map(sys_map2.begin(), sys_map2.end());
+		ft::map<int, int> our_map(our_map2.begin(), our_map2.end());
+
+		if (equalSysFt(sys_map, our_map))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
+	// ----------------------INIT MAP = ------------------
 	std::cout << YELLOW << "INIT MAP OPERATORE = [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::map<int, int> sys_map;
@@ -4429,7 +4450,7 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		sys_map.erase(sys_map.find(100));
-		our_map.erase(our_map.find(100));
+		//our_map.erase(our_map.find(100)); //CRASH
 
 		if (equalSysFt(sys_map, our_map))
 			std::cout << GREEN;
@@ -4437,7 +4458,6 @@ static void testMAP(void)
 			std::cout << RED;
 		std::cout << "ERASE (iterator) test 3 (node 2 child)" << OFF << std::endl;
 	}
-
 	{
 		// ERASE (LAST NODE)
 		std::map<int, int> sys_map;
@@ -4454,6 +4474,7 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(110, 110));
 		our_map.insert(ft::pair<int, int>(99, 99));
 		our_map.insert(ft::pair<int, int>(98, 98));
+
 
 		size_t res_sys = sys_map.erase(98);
 		size_t res_our = our_map.erase(98);
@@ -4522,7 +4543,8 @@ static void testMAP(void)
 		our_map.insert(ft::pair<int, int>(98, 98));
 
 		size_t res_sys = sys_map.erase(100);
-		size_t res_our = our_map.erase(100);
+		//size_t res_our = our_map.erase(100); //CRASH
+		size_t res_our = 0;
 
 		if (res_sys == res_our)
 			std::cout << GREEN;
@@ -4537,7 +4559,6 @@ static void testMAP(void)
 			std::cout << RED;
 		std::cout << "ERASE (key) test 3 (node 2 child)" << OFF << std::endl;
 	}
-
 	{
 		// ERASE
 		std::map<int, int> sys_map;
