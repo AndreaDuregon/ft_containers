@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 11:51:38 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/03 11:55:42 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ namespace ft
 		//ok
 		vector(vector const &copy)
 		{
-			this->vec = alloc.allocate(copy.vec_capacity);
 			*this = copy;
 		}
 		//ok
@@ -78,6 +77,8 @@ namespace ft
 		//ok
 		vector& operator = (const vector& x)
 		{
+			this->alloc = x.alloc;
+			this->vec = alloc.allocate(x.vec_capacity);
 			for (size_type i = 0; i < x.vec_size; i++)
 				this->vec[i] = x.vec[i];
 			this->vec_size = x.vec_size;

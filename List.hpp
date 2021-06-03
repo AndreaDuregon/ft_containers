@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/05/31 10:43:21 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/03 12:00:57 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ namespace ft
 	private:
 		ft::Node<T>		*_end;
 		size_t			_size;
+		Allocator		_alloc;
 	public:
 		/* MEMBER */
 		typedef T								value_type;
@@ -39,35 +40,39 @@ namespace ft
 		typedef size_t							size_type;
 
 		//ok
-		explicit list(/* args */) : _end(new Node<T>(0)), _size(0)
+		explicit list(const allocator_type& alloc = allocator_type()) : _end(new Node<T>(0)), _size(0)
 		{
+			this->_alloc = alloc;
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
 		};
 		//ok
-		explicit list(size_type n, const_reference val=value_type()) : _end(new Node<T>(0)), _size(0)
+		explicit list(size_type n, const_reference val=value_type(), const allocator_type& alloc = allocator_type()) : _end(new Node<T>(0)), _size(0)
 		{
+			this->_alloc = alloc;
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
 			for (size_type i = 0; i < n; i++)
 				this->push_back(val);
 		};
 		//ok
-		explicit list(iterator first, iterator last): _end(new Node<T>(0)), _size(0)
+		list(iterator first, iterator last, const allocator_type& alloc = allocator_type()): _end(new Node<T>(0)), _size(0)
 		{
+			this->_alloc = alloc;
 			this->_end->next = this->_end;
 			this->_end->prev = this->_end;
 			for (; first != last; ++first)
 				this->push_back(*first);
 		};
 		//ok
-		explicit list (const list& x) : _end(new Node<T>(0)), _size(0)
+		list (const list& x) : _end(new Node<T>(0)), _size(0)
 		{
 			*this = x;
 		}
 		//ok
 		list& operator = (const list& x)
 		{
+			this->_alloc = x._alloc;
 			this->clear();
 			this->_end->value = 0;
 			this->_size = 0;
@@ -547,6 +552,10 @@ namespace ft
 				it.operator++();
 				end.operator--();
 			}
+		}
+		allocator_type get_allocator() const
+		{
+			return this->_alloc;
 		}
 		//ok
 		template <class value_type, class Alloc>
