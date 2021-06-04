@@ -2759,6 +2759,219 @@ static void testVECTOR(void)
 			std::cout << RED;
 		std::cout << "END-- test 3" << OFF << std::endl;
 	}
+{
+		// BEGIN
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		std::vector<int>::reverse_iterator sys_it = sys_vector.rbegin();
+		ft::vector<int>::reverse_iterator our_it = our_vector.rbegin();
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN" << OFF << std::endl;
+	}
+	{
+		// ++BEGIN
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		std::vector<int>::reverse_iterator sys_it = sys_vector.rbegin();
+		ft::vector<int>::reverse_iterator our_it = our_vector.rbegin();
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 1" << OFF << std::endl;
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 3" << OFF << std::endl;
+	}
+	{
+		// BEGIN++
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		std::vector<int>::reverse_iterator sys_it = sys_vector.rbegin();
+		ft::vector<int>::reverse_iterator our_it = our_vector.rbegin();
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 1" << OFF << std::endl;
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 3" << OFF << std::endl;
+	}
+	{
+		// BEGIN--
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		std::vector<int>::reverse_iterator sys_it = sys_vector.rbegin();
+		ft::vector<int>::reverse_iterator our_it = our_vector.rbegin();
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN--" << OFF << std::endl;
+	}
+	{
+		// END++
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		std::vector<int>::reverse_iterator sys_it = sys_vector.rbegin();
+		ft::vector<int>::reverse_iterator our_it = our_vector.rbegin();
+		sys_it++;
+		our_it++;
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND++" << OFF << std::endl;
+	}
+	{
+		// --END
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		std::vector<int>::reverse_iterator sys_it = sys_vector.rend();
+		ft::vector<int>::reverse_iterator our_it = our_vector.rend();
+
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 1" << OFF << std::endl;
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 3" << OFF << std::endl;
+	}
+	{
+		// END--
+		std::vector<int> sys_vector;
+		ft::vector<int> our_vector;
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		sys_vector.push_back(1);
+		sys_vector.push_back(2);
+		sys_vector.push_back(32);
+		our_vector.push_back(1);
+		our_vector.push_back(2);
+		our_vector.push_back(32);
+		std::vector<int>::reverse_iterator sys_it = sys_vector.rend();
+		ft::vector<int>::reverse_iterator our_it = our_vector.rend();
+		sys_it--;
+		our_it--;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 1" << OFF << std::endl;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 3" << OFF << std::endl;
+	}
 	// ------------------OPERATORI----------------------
 	std::cout << YELLOW << "OPERATORE == [SYS vs OUR]" << OFF << std::endl;
 	{
