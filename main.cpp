@@ -6,6 +6,7 @@
 #include "Set.hpp"
 #include "MultiSet.hpp"
 #include "MultiMap.hpp"
+#include "deque.hpp"
 #include <list>
 #include <map>
 #include <set>
@@ -50,6 +51,19 @@ static void print_sys(std::vector<int> &vector)
 {
 	std::vector<int>::iterator sys_it_begin = vector.begin();
 	std::vector<int>::iterator sys_it_end = vector.end();
+	std::cout << "SYS: ";
+	while (sys_it_begin != sys_it_end)
+	{
+		std::cout << *sys_it_begin << " ";
+		++sys_it_begin;
+	}
+	std::cout << std::endl;
+}
+
+static void print_sys(std::deque<int> &vector)
+{
+	std::deque<int>::iterator sys_it_begin = vector.begin();
+	std::deque<int>::iterator sys_it_end = vector.end();
 	std::cout << "SYS: ";
 	while (sys_it_begin != sys_it_end)
 	{
@@ -128,6 +142,19 @@ static void print_our(ft::vector<int> &vector)
 {
 	ft::vector<int>::iterator our_it_begin = vector.begin();
 	ft::vector<int>::iterator our_it_end = vector.end();
+	std::cout << "OUR: ";
+	while (our_it_begin != our_it_end)
+	{
+		std::cout << *our_it_begin << " ";
+		++our_it_begin;
+	}
+	std::cout << std::endl;
+}
+
+static void print_our(ft::deque<int> &vector)
+{
+	ft::deque<int>::iterator our_it_begin = vector.begin();
+	ft::deque<int>::iterator our_it_end = vector.end();
 	std::cout << "OUR: ";
 	while (our_it_begin != our_it_end)
 	{
@@ -331,6 +358,87 @@ static bool equalSysFt(std::vector<int> &sys_vector, ft::vector<int> &our_vector
 	//if (sys_vector.max_size() != our_vector.max_size())
 	//{
 	//	std::cout << "MAX SIZE " << sys_vector.max_size() << " != " << our_vector.max_size() << " ";
+	//	return false;
+	//}
+	return true;
+}
+
+
+static bool equalSysFt(std::deque<int> &sys_deque, ft::deque<int> &our_deque)
+{
+	ft::deque<int>::iterator our_it_begin = our_deque.begin();
+	std::deque<int>::iterator sys_it_begin = sys_deque.begin();
+	ft::deque<int>::iterator our_it_end = our_deque.end();
+	std::deque<int>::iterator sys_it_end = sys_deque.end();
+
+	while (sys_it_begin != sys_it_end)
+	{
+		if (*sys_it_begin != *our_it_begin)
+		{
+			print_sys(sys_deque);
+			print_our(our_deque);
+			return false;
+		}
+		sys_it_begin++;
+		our_it_begin++;
+	}
+	for (size_t i = 0; i < sys_deque.size(); i++)
+	{
+		if (sys_deque[i] != our_deque[i] || sys_deque.at(i) != our_deque.at(i))
+		{
+			print_sys(sys_deque);
+			print_our(our_deque);
+			return false;
+		}
+	}
+
+	our_it_begin = our_deque.begin();
+	sys_it_begin = sys_deque.begin();
+
+	while (our_it_begin != our_it_end)
+	{
+		if (*sys_it_begin != *our_it_begin)
+		{
+			print_sys(sys_deque);
+			print_our(our_deque);
+			return false;
+		}
+		sys_it_begin++;
+		our_it_begin++;
+	}
+	for (size_t i = 0; i < our_deque.size(); i++)
+	{
+		if (our_deque[i] != sys_deque[i] || sys_deque.at(i) != our_deque.at(i))
+		{
+			print_sys(sys_deque);
+			print_our(our_deque);
+			return false;
+		}
+	}
+
+	if (sys_deque.size() != our_deque.size())
+	{
+		std::cout << "SIZE " << sys_deque.size() << " != " << our_deque.size() << " ";
+		return false;
+	}
+	if (sys_deque.empty() != our_deque.empty())
+	{
+		std::cout << "EMPTY " << sys_deque.empty() << " != " << our_deque.empty() << " ";
+		return false;
+	}
+	if (sys_deque.size() > 0 && sys_deque.front() != our_deque.front())
+	{
+		std::cout << "FRONT " << sys_deque.front() << " != " << our_deque.front() << " ";
+		return false;
+	}
+	if (sys_deque.size() > 0 && sys_deque.back() != our_deque.back())
+	{
+		std::cout << "BACK " << sys_deque.back() << " != " << our_deque.back() << " ";
+		return false;
+	}
+	//if (sys_deque.max_size() != our_deque.max_size())
+	//{
+	//	std::cout << "MAX SIZE " << sys_deque.max_size() << " != " << our_deque.max_size() << " ";
 	//	return false;
 	//}
 	return true;
@@ -8564,18 +8672,17 @@ static void testMULTISET(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	/*
 	// ----------------------MULTISET METHODS------------------
 	std::cout << YELLOW << "MULTISET METHODS [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::multiset<int> sys_multiset;
 		ft::multiset<int> our_multiset;
 		sys_multiset.insert(100);
-		std::pair<std::multiset<int>::iterator, bool> res_sys = sys_multiset.insert(10);
+		std::multiset<int>::iterator res_sys = sys_multiset.insert(10);
 		our_multiset.insert(100);
-		ft::pair<ft::multiset<int>::iterator, bool> res_our = our_multiset.insert(10);
+		ft::multiset<int>::iterator res_our = our_multiset.insert(10);
 
-		if (res_sys.second == res_our.second && *res_sys.first == *res_our.first)
+		if (*res_sys == *res_our)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -8595,11 +8702,11 @@ static void testMULTISET(void)
 		our_multiset.insert(100);
 		our_multiset.insert(10);
 		sys_multiset.insert(100);
-		std::pair<std::multiset<int>::iterator, bool> res_sys =  sys_multiset.insert(10);
+		std::multiset<int>::iterator res_sys =  sys_multiset.insert(10);
 		our_multiset.insert(100);
-		ft::pair<ft::multiset<int>::iterator, bool> res_our =  our_multiset.insert(10);
+		ft::multiset<int>::iterator res_our =  our_multiset.insert(10);
 
-		if (res_sys.second == res_our.second && *res_sys.first == *res_our.first)
+		if (*res_sys == *res_our)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
@@ -8644,7 +8751,6 @@ static void testMULTISET(void)
 			std::cout << RED;
 		std::cout << "INSERT (iterator, iterator) test 1" << OFF << std::endl;
 	}
-	*/
 	{
 		std::multiset<int> sys_multiset;
 		ft::multiset<int> our_multiset;
@@ -9388,10 +9494,9 @@ static void testMULTISET(void)
 	}
 }
 
-
-/*
 static void testDEQUE(void)
 {
+
 	std::cout << BLUE << "**** TEST DEQUE ****" << OFF << std::endl;
 	// ------------------ITERATOR METHODS----------------------
 	std::cout << YELLOW << "DEQUE ITERATOR OPERATOR [SYS vs OUR]" << OFF << std::endl;
@@ -9488,42 +9593,6 @@ static void testDEQUE(void)
 		std::cout << "BEGIN++ test 3" << OFF << std::endl;
 	}
 	{
-		// --BEGIN
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(1);
-		sys_deque.push_back(2);
-		sys_deque.push_back(32);
-		our_deque.push_back(1);
-		our_deque.push_back(2);
-		our_deque.push_back(32);
-		sys_deque.push_back(1);
-		sys_deque.push_back(2);
-		sys_deque.push_back(32);
-		our_deque.push_back(1);
-		our_deque.push_back(2);
-		our_deque.push_back(32);
-		std::deque<int>::iterator sys_it = sys_deque.begin();
-		ft::deque<int>::iterator our_it = our_deque.begin();
-		--sys_it;
-		--our_it;
-		if (*--sys_it == *--our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "--BEGIN test 1" << OFF << std::endl;
-		if (*--sys_it == *--our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "--BEGIN test 2" << OFF << std::endl;
-		if (*sys_it == *our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "--BEGIN test 3" << OFF << std::endl;
-	}
-	{
 		// BEGIN--
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9541,59 +9610,11 @@ static void testDEQUE(void)
 		our_deque.push_back(32);
 		std::deque<int>::iterator sys_it = sys_deque.begin();
 		ft::deque<int>::iterator our_it = our_deque.begin();
-		sys_it--;
-		our_it--;
-		sys_it--;
-		our_it--;
 		if (*sys_it-- == *our_it--)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "BEGIN-- test 1" << OFF << std::endl;
-		if (*sys_it-- == *our_it--)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "BEGIN-- test 2" << OFF << std::endl;
-		if (*sys_it == *our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "BEGIN-- test 3" << OFF << std::endl;
-	}
-	{
-		// ++END
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(1);
-		sys_deque.push_back(2);
-		sys_deque.push_back(32);
-		our_deque.push_back(1);
-		our_deque.push_back(2);
-		our_deque.push_back(32);
-		sys_deque.push_back(1);
-		sys_deque.push_back(2);
-		sys_deque.push_back(32);
-		our_deque.push_back(1);
-		our_deque.push_back(2);
-		our_deque.push_back(32);
-		std::deque<int>::iterator sys_it = sys_deque.end();
-		ft::deque<int>::iterator our_it = our_deque.end();
-		if (*++sys_it == *++our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "++END test 1" << OFF << std::endl;
-		if (*++sys_it == *++our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "++END test 2" << OFF << std::endl;
-		if (*sys_it == *our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "++END test 3" << OFF << std::endl;
+		std::cout << "BEGIN--" << OFF << std::endl;
 	}
 	{
 		// END++
@@ -9611,25 +9632,15 @@ static void testDEQUE(void)
 		our_deque.push_back(1);
 		our_deque.push_back(2);
 		our_deque.push_back(32);
-		std::deque<int>::iterator sys_it = sys_deque.end();
-		ft::deque<int>::iterator our_it = our_deque.end();
+		std::deque<int>::iterator sys_it = sys_deque.begin();
+		ft::deque<int>::iterator our_it = our_deque.begin();
 		sys_it++;
 		our_it++;
 		if (*sys_it++ == *our_it++)
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "END++ test 1" << OFF << std::endl;
-		if (*--sys_it == *--our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "END++ test 2" << OFF << std::endl;
-		if (*sys_it == *our_it)
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "END++ test 3" << OFF << std::endl;
+		std::cout << "END++" << OFF << std::endl;
 	}
 	{
 		// --END
@@ -9702,7 +9713,7 @@ static void testDEQUE(void)
 		std::cout << "END-- test 3" << OFF << std::endl;
 	}
 	// ------------------OPERATORI----------------------
-	std::cout << YELLOW << "DEQUE OPERATORE == [SYS vs OUR]" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE == [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9726,7 +9737,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE != [SYS vs OUR]" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE != [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9750,7 +9761,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE < [SYS vs OUR] test 1" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE < [SYS vs OUR] test 1" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9774,7 +9785,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE < [SYS vs OUR] test 2" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE < [SYS vs OUR] test 2" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9798,7 +9809,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE < [SYS vs OUR] test 3" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE < [SYS vs OUR] test 3" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9818,7 +9829,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE > [SYS vs OUR] test 1" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE > [SYS vs OUR] test 1" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9842,7 +9853,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE > [SYS vs OUR] test 2" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE > [SYS vs OUR] test 2" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9866,7 +9877,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE > [SYS vs OUR] test 3" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE > [SYS vs OUR] test 3" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9886,7 +9897,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE <= [SYS vs OUR] test 1" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE <= [SYS vs OUR] test 1" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9910,7 +9921,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE <= [SYS vs OUR] test 2" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE <= [SYS vs OUR] test 2" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9934,7 +9945,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE <= [SYS vs OUR] test 3" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE <= [SYS vs OUR] test 3" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9954,7 +9965,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE >= [SYS vs OUR] test 1" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE >= [SYS vs OUR] test 1" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -9978,7 +9989,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE >= [SYS vs OUR] test 2" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE >= [SYS vs OUR] test 2" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -10002,7 +10013,7 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	std::cout << YELLOW << "DEQUE OPERATORE >= [SYS vs OUR] test 3" << OFF << std::endl;
+	std::cout << YELLOW << "OPERATORE >= [SYS vs OUR] test 3" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -10023,7 +10034,7 @@ static void testDEQUE(void)
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
 	// -------------------INIT EMPTY---------------------
-	std::cout << YELLOW << "INIT DEQUEA VUOTA [SYS vs OUR]" << OFF << std::endl;
+	std::cout << YELLOW << "INIT DEQUE VUOTO [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
@@ -10035,7 +10046,7 @@ static void testDEQUE(void)
 	}
 
 	// --------------------INT 1 PARAMETRO--------------------
-	std::cout << YELLOW << "INIT DEQUEA 1 PARAMETRO (20) [SYS vs OUR]" << OFF << std::endl;
+	std::cout << YELLOW << "INIT DEQUE 1 PARAMETRO (20) [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::deque<int> sys_deque(20);
 		ft::deque<int> our_deque(20);
@@ -10045,62 +10056,58 @@ static void testDEQUE(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
+	// --------------------INT 1 PARAMETRO--------------------
+	std::cout << YELLOW << "INIT DEQUE 2 PARAMETRI (20, 5) [SYS vs OUR]" << OFF << std::endl;
+	{
+		std::deque<int> sys_deque(20, 5);
+		ft::deque<int> our_deque(20, 5);
 
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
+		else
+			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
+	}
 	// ----------------------INIT 2 PARAMETRI------------------
-	std::cout << YELLOW << "INIT DEQUEA 2 PARAMETRI (20,100) [SYS vs OUR]" << OFF << std::endl;
+	std::cout << YELLOW << "INIT DEQUE 2 PARAMETRI (iteratore, iteratore) [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::deque<int> sys_deque(20, 100);
-		ft::deque<int> our_deque(20, 100);
+		std::deque<int> sys_deque(5, 100);
+		ft::deque<int> our_deque(5, 100);
+		std::deque<int> sys_deque2(++sys_deque.begin(), --sys_deque.end());
+		ft::deque<int> our_deque2(++our_deque.begin(), --our_deque.end());
 
-		if (equalSysFt(sys_deque, our_deque))
+		if (equalSysFt(sys_deque2, our_deque2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-
-	// ----------------------INIT 2 ITERATORI------------------
-	std::cout << YELLOW << "INIT DEQUEA 2 ITERATORI (begin, end) [SYS vs OUR]" << OFF << std::endl;
+	// ----------------------INIT COPY CONSTRUCTOR------------------
+	std::cout << YELLOW << "INIT DEQUE COPY CONSTRUCTOR [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::deque<int> sys_deque2(5, 10);
-		std::deque<int> sys_deque(sys_deque2.begin(), sys_deque2.end());
-		ft::deque<int> our_deque2(5, 10);
-		ft::deque<int> our_deque(our_deque2.begin(), our_deque2.end());
+		std::deque<int> sys_deque(100);
+		ft::deque<int> our_deque(100);
+		std::deque<int> sys_deque2(sys_deque);
+		ft::deque<int> our_deque2(our_deque);
 
-		if (equalSysFt(sys_deque, our_deque))
+		if (equalSysFt(sys_deque2, our_deque2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	// ----------------------INIT COPY CONSTRUCOT------------------
-	std::cout << YELLOW << "INIT DEQUEA COPY CONSTRUCTOR (DEQUE) [SYS vs OUR]" << OFF << std::endl;
-	{
-		std::deque<int> copy_sys_deque(5, 10);
-		std::deque<int> sys_deque(copy_sys_deque);
-		ft::deque<int> copy_our_deque(5, 10);
-		ft::deque<int> our_deque(copy_our_deque);
-
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
-		else
-			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
-	}
-	// ----------------------INIT COPY CONSTRUCOT------------------
 	std::cout << YELLOW << "INIT DEQUE OPERATORE = [SYS vs OUR]" << OFF << std::endl;
 	{
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> copy_sys_deque(5, 10);
-		ft::deque<int> copy_our_deque(5, 10);
-		sys_deque = copy_sys_deque;
-		our_deque = copy_our_deque;
+		std::deque<int> sys_deque2;
+		ft::deque<int> our_deque2;
+		std::deque<int> sys_deque(100, 8);
+		ft::deque<int> our_deque(100, 8);
+		sys_deque = sys_deque2;
+		our_deque = our_deque2;
 
-		if (equalSysFt(sys_deque, our_deque))
+		if (equalSysFt(sys_deque2, our_deque2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-
-	// --------------------DEQUE METHODS--------------------
+	// --------------------LIST METHODS--------------------
 	std::cout << YELLOW << "DEQUE METHODS [SYS vs OUR]" << OFF << std::endl;
 	{
 		// PUSH BACK
@@ -10119,49 +10126,15 @@ static void testDEQUE(void)
 		std::cout << "PUSH BACK" << OFF << std::endl;
 	}
 	{
-		// PUSH FRONT
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_front(12);
-		our_deque.push_front(12);
-		sys_deque.push_front(85);
-		our_deque.push_front(85);
-		sys_deque.push_front(1);
-		our_deque.push_front(1);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "PUSH FRONT" << OFF << std::endl;
-	}
-	{
-		// POP FRONT
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_front(12);
-		our_deque.push_front(12);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_front(1);
-		our_deque.push_front(1);
-		sys_deque.pop_front();
-		our_deque.pop_front();
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "POP FRONT" << OFF << std::endl;
-	}
-	{
 		// POP BACK
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
-		sys_deque.push_front(12);
-		our_deque.push_front(12);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
 		sys_deque.push_back(85);
 		our_deque.push_back(85);
-		sys_deque.push_front(1);
-		our_deque.push_front(1);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
 		sys_deque.pop_back();
 		our_deque.pop_back();
 		if (equalSysFt(sys_deque, our_deque))
@@ -10171,303 +10144,243 @@ static void testDEQUE(void)
 		std::cout << "POP BACK" << OFF << std::endl;
 	}
 	{
-		// INSERT at 0
+		// RESIZE
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
-		sys_deque.insert(sys_deque.begin(), 999);
-		our_deque.insert(our_deque.begin(), 999);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.resize(12);
+		our_deque.resize(12);
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "INSERT (ITERATOR, NUMBER) test 1" << OFF << std::endl;
+		std::cout << "RESIZE (INT)" << OFF << std::endl;
 	}
 	{
-		// INSERT at 1
+		// RESIZE
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
-		sys_deque.insert(++sys_deque.begin(), 55);
-		our_deque.insert(++our_deque.begin(), 55);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.resize(12, 55);
+		our_deque.resize(12, 55);
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "INSERT (ITERATOR, NUMBER) test 2 " << OFF << std::endl;
+		std::cout << "RESIZE (INT, INT)" << OFF << std::endl;
 	}
 	{
-		// INSERT x
+		// RESIZE
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
-		sys_deque.insert(sys_deque.begin(), 3, 66);
-		our_deque.insert(our_deque.begin(), 3, 66);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "INSERT (ITERATOR, NUMBER, NUMBER)" << OFF << std::endl;
+		std::cout << "RESIZE (INT, INT)" << OFF << std::endl;
 	}
 	{
-		// INSERT OTHER DEQUE
+		// ASSIGN
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
 		std::deque<int> sys_deque2;
 		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque2.push_back(111);
+		our_deque2.push_back(111);
+		sys_deque2.push_back(120);
+		our_deque2.push_back(120);
+		sys_deque2.push_back(850);
+		our_deque2.push_back(850);
+		sys_deque.assign(sys_deque2.begin(), sys_deque2.end());
+		our_deque.assign(our_deque2.begin(), our_deque2.end());
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ASSIGN (ITERATOR, ITERATOR)" << OFF << std::endl;
+	}
+	{
+		// ASSIGN
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.assign(5, 99);
+		our_deque.assign(5, 99);
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "ASSIGN (INT, INT)" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.insert(sys_deque.begin(), 99);
+		our_deque.insert(our_deque.begin(), 99);
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT) test 1" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.insert(++sys_deque.begin(), 99);
+		our_deque.insert(++our_deque.begin(), 99);
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT) test 2" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.insert(sys_deque.begin(), 6, 85);
+		our_deque.insert(our_deque.begin(), 6, 85);
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT, INT) test 1" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.insert(++sys_deque.begin(), 6, 85);
+		our_deque.insert(++our_deque.begin(), 6, 85);
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (ITERATOR, INT, INT) test 2" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		std::deque<int> sys_deque2;
+		ft::deque<int> our_deque2;
+		sys_deque2.push_back(111);
+		our_deque2.push_back(111);
+		sys_deque2.push_back(120);
+		our_deque2.push_back(120);
+		sys_deque2.push_back(850);
+		our_deque2.push_back(850);
+		sys_deque.insert(sys_deque.begin(), sys_deque2.begin(), sys_deque2.end());
+		our_deque.insert(our_deque.begin(), our_deque2.begin(), our_deque2.end());
+		if (equalSysFt(sys_deque, our_deque))
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "INSERT (ITERATOR, ITERATOR, ITERATOR) test 1" << OFF << std::endl;
+	}
+	{
+		// INSERT
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		std::deque<int> sys_deque2;
+		ft::deque<int> our_deque2;
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque2.push_back(111);
+		our_deque2.push_back(111);
+		sys_deque2.push_back(120);
+		our_deque2.push_back(120);
+		sys_deque2.push_back(850);
+		our_deque2.push_back(850);
 		sys_deque.insert(++sys_deque.begin(), sys_deque2.begin(), sys_deque2.end());
 		our_deque.insert(++our_deque.begin(), our_deque2.begin(), our_deque2.end());
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
 			std::cout << RED;
-		std::cout << "INSERT (ITERATOR, ITERATOR, ITERATOR)" << OFF << std::endl;
+		std::cout << "INSERT (ITERATOR, ITERATOR, ITERATOR) test 2" << OFF << std::endl;
 	}
 	{
-		// REVERSE
+		// ERASE
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
-		sys_deque.push_front(12);
-		our_deque.push_front(12);
 		sys_deque.push_back(85);
 		our_deque.push_back(85);
-		sys_deque.push_front(1);
-		our_deque.push_front(1);
-		sys_deque.reverse();
-		our_deque.reverse();
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "REVERSE" << OFF << std::endl;
-	}
-	{
-		// UNIQUE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
 		sys_deque.push_back(1);
 		our_deque.push_back(1);
-		sys_deque.push_back(1);
-		our_deque.push_back(1);
-		sys_deque.push_back(1);
-		our_deque.push_back(1);
-		sys_deque.push_front(1);
-		our_deque.push_front(1);
-		sys_deque.unique();
-		our_deque.unique();
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "UNIQUE" << OFF << std::endl;
-	}
-	{
-		//UNIQUE PREDICATE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
-		sys_deque.push_back(1);
-		our_deque.push_back(1);
-		sys_deque.push_back(1);
-		our_deque.push_back(1);
-		sys_deque.push_back(1);
-		our_deque.push_back(1);
-		sys_deque.push_front(1);
-		our_deque.push_front(1);
-		sys_deque.unique(binaryINT);
-		our_deque.unique(binaryINT);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "UNIQUE PREDICATE" << OFF << std::endl;
-	}
-	{
-		// SORT
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
 		sys_deque.push_back(12);
 		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
-		sys_deque.push_back(1);
-		our_deque.push_back(1);
-		sys_deque.sort();
-		our_deque.sort();
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SORT" << OFF << std::endl;
-	}
-	{
-		//SORT COMPARE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
 		sys_deque.push_back(85);
 		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.push_front(33);
-		our_deque.push_front(33);
-		sys_deque.push_front(78);
-		our_deque.push_front(78);
-		sys_deque.push_back(1);
-		our_deque.push_back(1);
-		sys_deque.sort(binaryINT);
-		our_deque.sort(binaryINT);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SORT COMPARE" << OFF << std::endl;
-	}
-	{
-		// REMOVE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.push_front(200);
-		our_deque.push_front(200);
-		sys_deque.remove(200);
-		our_deque.remove(200);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "REMOVE" << OFF << std::endl;
-	}
-	{
-		// REMOVE IF
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.push_front(200);
-		our_deque.push_front(200);
-		sys_deque.remove_if(singleINT);
-		our_deque.remove_if(singleINT);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "REMOVE_IF" << OFF << std::endl;
-	}
-	{
-		// RESIZE (10)
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.resize(10);
-		our_deque.resize(10);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "RESIZE (NUMBER)" << OFF << std::endl;
-	}
-	{
-		// RESIZE (5, 100)
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.resize(5, 100);
-		our_deque.resize(5, 100);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "RESIZE (NUMBER, NUMBER)" << OFF << std::endl;
-	}
-	{
-		// ERASE (BEGIN)
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.erase(sys_deque.begin());
-		our_deque.erase(our_deque.begin());
+		sys_deque.erase(++sys_deque.begin());
+		our_deque.erase(++our_deque.begin());
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
@@ -10475,19 +10388,19 @@ static void testDEQUE(void)
 		std::cout << "ERASE (ITERATOR)" << OFF << std::endl;
 	}
 	{
-		// ERASE (BEGIN, END)
+		// ERASE
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
 		sys_deque.push_back(85);
 		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
 		sys_deque.push_back(12);
 		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.erase(sys_deque.begin(), sys_deque.end());
-		our_deque.erase(our_deque.begin(), our_deque.end());
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.erase(++sys_deque.begin(), sys_deque.end());
+		our_deque.erase(++our_deque.begin(), our_deque.end());
 		if (equalSysFt(sys_deque, our_deque))
 			std::cout << GREEN;
 		else
@@ -10495,374 +10408,27 @@ static void testDEQUE(void)
 		std::cout << "ERASE (ITERATOR, ITERATOR)" << OFF << std::endl;
 	}
 	{
-		// MERGE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque2.push_back(0);
-		our_deque2.push_back(0);
-		sys_deque2.push_back(56);
-		our_deque2.push_back(56);
-		sys_deque.merge(sys_deque2);
-		our_deque.merge(our_deque2);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "MERGE (OTHER DEQUE) test 1" << OFF << std::endl;
-	}
-	{
-		// MERGE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque2.push_back(0);
-		our_deque2.push_back(0);
-		sys_deque2.push_back(56);
-		our_deque2.push_back(56);
-		sys_deque2.merge(sys_deque);
-		our_deque2.merge(our_deque);
-		if (equalSysFt(sys_deque2, our_deque2))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "MERGE (OTHER DEQUE) test 2" << OFF << std::endl;
-	}
-	{
-		// MERGE DEQUE COMPARE test 1
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque2.push_back(0);
-		our_deque2.push_back(0);
-		sys_deque2.push_back(56);
-		our_deque2.push_back(56);
-		sys_deque.merge(sys_deque2, binaryINT);
-		our_deque.merge(our_deque2, binaryINT);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "MERGE (OTHER DEQUE, COMPARE) test 1" << OFF << std::endl;
-	}
-	{
-		//MERGE DEQUE COMPARE test 2
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque2.push_back(0);
-		our_deque2.push_back(0);
-		sys_deque2.push_back(56);
-		our_deque2.push_back(56);
-		sys_deque2.merge(sys_deque, binaryINT);
-		our_deque2.merge(our_deque, binaryINT);
-		if (equalSysFt(sys_deque2, our_deque2))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "MERGE (OTHER DEQUE, COMPARE) test 2" << OFF << std::endl;
-	}
-	{
-		// ASSIGN (IT, IT) test 2
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque2.push_back(0);
-		our_deque2.push_back(0);
-		sys_deque2.push_back(56);
-		our_deque2.push_back(56);
-		sys_deque.assign(sys_deque2.begin(), sys_deque2.end());
-		our_deque.assign(our_deque2.begin(), our_deque2.end());
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "ASSIGN (ITERATOR, ITERATOR) test 1" << OFF << std::endl;
-	}
-	{
-		// ASSIGN (IT, IT) test 2
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.assign(sys_deque2.begin(), sys_deque2.end());
-		our_deque.assign(our_deque2.begin(), our_deque2.end());
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "ASSIGN (ITERATOR, ITERATOR) test 2" << OFF << std::endl;
-	}
-
-	{
-		// ASSIGN (N, N) test 1
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(100);
-		our_deque.push_back(100);
-		sys_deque.push_back(85);
-		our_deque.push_back(85);
-		sys_deque.push_back(12);
-		our_deque.push_back(12);
-		sys_deque.push_back(200);
-		our_deque.push_back(200);
-		sys_deque.assign(5, 99);
-		our_deque.assign(5, 99);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "ASSIGN (NUMBER, NUMBER) test 1" << OFF << std::endl;
-	}
-	{
-		// ASSIGN (N, N) test 2
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.assign(10, -1);
-		our_deque.assign(10, -1);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "ASSIGN (NUMBER, NUMBER) test 2" << OFF << std::endl;
-	}
-	{
-		//SPLICE IT DEQUE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.splice(sys_deque.begin(), sys_deque2);
-		our_deque.splice(our_deque.begin(), our_deque2);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SPLICE (ITERATOR, DEQUE) test 1" << OFF << std::endl;
-	}
-	{
-		//SPLICE IT DEQUE
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.splice(sys_deque.begin(), sys_deque2);
-		our_deque.splice(our_deque.begin(), our_deque2);
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SPLICE (ITERATOR, DEQUE) test 2" << OFF << std::endl;
-	}
-	{
-		//SPLICE IT DEQUE IT
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.splice(sys_deque.begin(), sys_deque2, ++sys_deque2.begin());
-		our_deque.splice(our_deque.begin(), our_deque2, ++our_deque2.begin());
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SPLICE (ITERATOR, DEQUE, ITERATOR) test 1" << OFF << std::endl;
-	}
-	{
-		//SPLICE IT DEQUE IT
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.splice(sys_deque.begin(), sys_deque2, ++sys_deque2.begin());
-		our_deque.splice(our_deque.begin(), our_deque2, ++our_deque2.begin());
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SPLICE (ITERATOR, DEQUE, ITERATOR) test 2" << OFF << std::endl;
-	}
-	{
-		//SPLICE IT DEQUE IT IT
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.splice(sys_deque.begin(), sys_deque2, ++sys_deque2.begin(), sys_deque2.end());
-		our_deque.splice(our_deque.begin(), our_deque2, ++our_deque2.begin(), our_deque2.end());
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SPLICE (ITERATOR, DEQUE, ITERATOR, ITERATOR) test 1" << OFF << std::endl;
-	}
-	{
-		//SPLICE IT DEQUE IT IT
-		std::deque<int> sys_deque;
-		ft::deque<int> our_deque;
-		std::deque<int> sys_deque2;
-		ft::deque<int> our_deque2;
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque.splice(sys_deque.begin(), sys_deque2, sys_deque2.begin(), sys_deque2.end());
-		our_deque.splice(our_deque.begin(), our_deque2, our_deque2.begin(), our_deque2.end());
-		if (equalSysFt(sys_deque, our_deque))
-			std::cout << GREEN;
-		else
-			std::cout << RED;
-		std::cout << "SPLICE (ITERATOR, DEQUE, ITERATOR, ITERATOR) test 2" << OFF << std::endl;
-	}
-	{
 		// SWAP
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
 		std::deque<int> sys_deque2;
 		ft::deque<int> our_deque2;
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(34);
-		our_deque.push_back(34);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
-		sys_deque2.push_back(100);
-		our_deque2.push_back(100);
-		sys_deque2.push_back(85);
-		our_deque2.push_back(85);
-		sys_deque2.push_back(12);
-		our_deque2.push_back(12);
-		sys_deque2.push_back(200);
-		our_deque2.push_back(200);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque2.push_back(111);
+		our_deque2.push_back(111);
+		sys_deque2.push_back(120);
+		our_deque2.push_back(120);
+		sys_deque2.push_back(850);
+		our_deque2.push_back(850);
 		sys_deque.swap(sys_deque2);
 		our_deque.swap(our_deque2);
 		if (equalSysFt(sys_deque, our_deque))
@@ -10871,16 +10437,19 @@ static void testDEQUE(void)
 			std::cout << RED;
 		std::cout << "SWAP" << OFF << std::endl;
 	}
+
 	{
 		// CLEAR
 		std::deque<int> sys_deque;
 		ft::deque<int> our_deque;
-		sys_deque.push_back(0);
-		our_deque.push_back(0);
-		sys_deque.push_back(34);
-		our_deque.push_back(34);
-		sys_deque.push_back(56);
-		our_deque.push_back(56);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
+		sys_deque.push_back(1);
+		our_deque.push_back(1);
+		sys_deque.push_back(12);
+		our_deque.push_back(12);
+		sys_deque.push_back(85);
+		our_deque.push_back(85);
 		sys_deque.clear();
 		our_deque.clear();
 		if (equalSysFt(sys_deque, our_deque))
@@ -10890,7 +10459,6 @@ static void testDEQUE(void)
 		std::cout << "CLEAR" << OFF << std::endl;
 	}
 }
-*/
 
 
 // -----------------------------MAIN------------------
@@ -10906,7 +10474,7 @@ int main(int argc, char **argv)
 		testSET();
 		testMULTISET();
 		testMULTIMAP();
-		//testDEQUE();
+		testDEQUE();
 		return 0;
 	}
 	std::string test = argv[1];
@@ -10928,7 +10496,5 @@ int main(int argc, char **argv)
 	if (test == "multiset")
 		testMULTISET();
 	if (test == "deque")
-		return 0;
-
-		//testDeque();
+		testDEQUE();
 }

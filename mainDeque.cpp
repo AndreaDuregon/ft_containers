@@ -2,10 +2,12 @@
 // Created by simone giovo on 30/05/2021.
 //
 
-#include "deque.hpp"
+//#include "deque.hpp"
+#include "Ddeque.hpp"
+#include <deque>
 
 int main(){
-    
+/*
     ft::deque<int> d(10, 7);
     size_t  k = 0;
     ft::DequeIterator<int> it2(d.begin());
@@ -30,5 +32,10 @@ int main(){
 
     ft::DequeIterator<int> it3(d.end());
     ft::deque<int> d2(it2, it3); 
+*/
+    std::deque<int> test;
+    ft::deque<int> test1;
+
+    test1;
         
 };

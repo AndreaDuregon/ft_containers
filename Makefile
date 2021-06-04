@@ -129,8 +129,8 @@ runMultiset		:	all
 runMultimap		:	all
 				@./$(NAME) multimap
 
-runMap2	:		all
-				@clang++ mainTree.cpp && ./a.out
+runDeque		:	all
+				@./$(NAME) deque
 
 push		:	fclean
 				git add .
