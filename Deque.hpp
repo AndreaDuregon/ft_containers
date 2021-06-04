@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Deque.hpp                                          :+:      :+:    :+:   */
+/*   deque.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:21:23 by dmalori           #+#    #+#             */
-/*   Updated: 2021/06/04 11:19:48 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/04 12:32:37 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ namespace ft
 		typedef	value_type const &								const_reference;
 		typedef	value_type *									pointer;
 		typedef	value_type const *								const_pointer;
+		typedef	value_type ft::vector<value_type>				vector;
 		typedef size_t											size_type;
 		typedef	typename ft::VectorIterator<T>					iterator;
 		typedef	typename ft::constVectorIterator<T>				const_iterator;
@@ -281,6 +282,20 @@ namespace ft
 			}
 		}
 		//ok
+		void		push_front(const value_type& val)
+		{
+			if (this->vec_capacity == 0)
+				this->vec_capacity = 1;
+			if (this->vec_size >= this->vec_capacity)
+			{
+				reserve(this->vec_capacity * 2);
+			}
+			vector	*tmp;
+			tmp->push_back(val);
+			tmp->insert(this->begin(), this->end());
+			this->vec = tmp;
+		}
+		
 		void		push_back(const value_type& val)
 		{
 			if (this->vec_capacity == 0)
@@ -291,6 +306,15 @@ namespace ft
 			}
 			this->vec[this->vec_size] = val;
 			this->vec_size++;
+		}
+
+		void		pop_front()
+		{
+			vector	*tmp;
+			iterator	it(this->begin);
+			it++;
+			tmp->insert(it, this.end());
+			this->vec = tmp;
 		}
 		//ok
 		void 		pop_back()
