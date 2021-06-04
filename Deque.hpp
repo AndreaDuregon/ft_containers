@@ -6,13 +6,15 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:21:23 by dmalori           #+#    #+#             */
-/*   Updated: 2021/06/04 12:32:37 by forsili          ###   ########.fr       */
+/*   Updated: 2021/06/04 12:40:04 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include "IteratorDeque.hpp"
+#include "Vector.hpp"
 
 namespace ft
 {
@@ -26,7 +28,6 @@ namespace ft
 		typedef	value_type const &								const_reference;
 		typedef	value_type *									pointer;
 		typedef	value_type const *								const_pointer;
-		typedef	value_type ft::vector<value_type>				vector;
 		typedef size_t											size_type;
 		typedef	typename ft::VectorIterator<T>					iterator;
 		typedef	typename ft::constVectorIterator<T>				const_iterator;
@@ -290,7 +291,7 @@ namespace ft
 			{
 				reserve(this->vec_capacity * 2);
 			}
-			vector	*tmp;
+			ft::vector<T>	*tmp;
 			tmp->push_back(val);
 			tmp->insert(this->begin(), this->end());
 			this->vec = tmp;
@@ -310,10 +311,10 @@ namespace ft
 
 		void		pop_front()
 		{
-			vector	*tmp;
+			ft::vector<T>	*tmp;
 			iterator	it(this->begin);
 			it++;
-			tmp->insert(it, this.end());
+			tmp->insert(it, this->end());
 			this->vec = tmp;
 		}
 		//ok
