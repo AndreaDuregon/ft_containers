@@ -6,7 +6,7 @@
 #include "Set.hpp"
 #include "MultiSet.hpp"
 #include "MultiMap.hpp"
-#include "deque.hpp"
+#include "Deque.hpp"
 #include <list>
 #include <map>
 #include <set>
@@ -10437,7 +10437,6 @@ static void testDEQUE(void)
 			std::cout << RED;
 		std::cout << "SWAP" << OFF << std::endl;
 	}
-
 	{
 		// CLEAR
 		std::deque<int> sys_deque;
