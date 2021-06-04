@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/06/03 12:00:57 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 14:26:19 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ namespace ft
 		
 		reverse_iterator rbegin()
 		{
-			return reverse_iterator(this->_end->next);
+			return reverse_iterator(this->_end->prev);
 		}
 
 		const_reverse_iterator rbegin() const
 		{
-			return const_reverse_iterator(this->_end->next);
+			return const_reverse_iterator(this->_end->prev);
 		}
 
 		reverse_iterator rend()

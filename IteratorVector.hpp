@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IteratorVector.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:43:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/05/21 16:19:49 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/04 13:34:21 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ namespace ft
 		typedef value_type const *	const_pointer;
 		typedef value_type &		reference;
 		typedef value_type const &	const_reference;
-
 		pointer		vec_p;
-	public:
+
 		VectorIterator()	{};
 		VectorIterator(pointer p)
 		{
@@ -102,51 +101,75 @@ namespace ft
 	template <class T> class constVectorIterator : public VectorIterator<T>
 	{
 	public:
-		typedef T					value_type;
-		typedef std::ptrdiff_t 		difference_type;
-		typedef value_type *		pointer;
-		typedef value_type const *	const_pointer;
-		typedef value_type &		reference;
-		typedef value_type const &	const_reference;
-
 		constVectorIterator()	{};
-		constVectorIterator(pointer p) : VectorIterator<T>(p)	{}
-		constVectorIterator(constVectorIterator const &copy) : VectorIterator<T>(copy)	{}
+		constVectorIterator(T* p)
+		{
+			this->vec_p = p;
+		}
 
-		const_reference			operator * ()
+		constVectorIterator(constVectorIterator const &copy)
+		{
+			this->vec_p = copy.vec_p;
+		}
+
+		T const	operator * ()
 		{
 			return (*this->vec_p);
 		}
 
-		constVectorIterator		&operator ++ ()
+		constVectorIterator	operator ++ ()
 		{
-			pointer	temp = this->vec_p;
 			this->vec_p++;
-			return temp;
+			return *this;
 		}
 	
-		constVectorIterator		&operator ++ (int)
+		constVectorIterator	operator ++ (int)
 		{
+			constVectorIterator<T>	temp(this->vec_p);
 			this->vec_p++;
-			return this->vec_p;
+			return temp;
 		}
 		
-		constVectorIterator		&operator -- ()
+		constVectorIterator	operator -- ()
 		{
-			pointer	temp = this->vec_p;
+			this->vec_p--;
+			return *this;
+		}
+
+		constVectorIterator	operator -- (int)
+		{
+			constVectorIterator<T>	temp(this->vec_p);
 			this->vec_p--;
 			return temp;
 		}
 
-		constVectorIterator		&operator -- (int)
-		{
-			this->vec_p--;
-			return this->vec_p;
-		}
-
-		const_pointer			operator -> ()
+		T const			operator -> ()
 		{
 			return &(*this->vec_p);
+		}
+
+		bool			operator == (constVectorIterator const &other) const {
+			return (this->vec_p == other.vec_p);
+		}
+
+		bool			operator != (constVectorIterator const &other) const {
+			return (this->vec_p != other.vec_p);
+		}
+
+		bool			operator < (constVectorIterator const &other) const {
+			return (this->vec_p < other.vec_p);
+		}
+
+		bool			operator <= (constVectorIterator const &other) const {
+			return (this->vec_p <= other.vec_p);
+		}
+
+		bool			operator > (constVectorIterator const &other) const {
+			return (this->vec_p > other.vec_p);
+		}
+
+		bool			operator >= (constVectorIterator const &other) const {
+			return (this->vec_p >= other.vec_p);
 		}
 	};
 

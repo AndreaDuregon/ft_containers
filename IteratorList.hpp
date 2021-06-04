@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:58:47 by dmalori           #+#    #+#             */
-/*   Updated: 2021/05/21 16:41:18 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 14:27:01 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,71 +120,149 @@ namespace ft
 			{
 				return &this->curr->value;
 			}
-			clistIterator<T>	&operator ++ ()
+			
+			clistIterator<T> &operator = (clistIterator const &copy)
 			{
-				this->curr = this->curr->next;
-				return this->curr->prev;
+				this->_curr = copy._curr;
+				return *this;
 			}
 
-			clistIterator<T>	&operator ++ (int)
+			clistIterator<T>	operator++() 
 			{
-				this->curr = this->curr->next;
-				return this->curr;
+				//std::cout << "PREEEE" << std::endl;
+				this->_curr = this->_curr->next;
+				return *this;
 			}
 
-			clistIterator<T>	&operator -- ()
+			clistIterator<T>	operator++ (int)
 			{
-				this->curr = this->curr->prev;
-				return this->next;
+				//std::cout << "POST" << std::endl;
+				clistIterator<T> it(this->_curr);
+				this->operator++();
+				return it;
 			}
 
-			clistIterator<T>	&operator -- (int)
+			clistIterator<T>	operator-- ()
 			{
-				this->curr = this->curr->prev;
-				return this->curr;
+				this->_curr = this->_curr->prev;
+				return *this;
 			}
 
+			clistIterator<T>	operator-- (int)
+			{
+				clistIterator<T> temp(this->_curr);
+				this->operator--();
+				return temp;
+			}
+
+			bool operator==(clistIterator<T> const &other) const {
+			return (this->_curr == other._curr);
+			}
+
+			bool operator!=(clistIterator<T> const &other) const {
+				return (this->_curr != other._curr);
+			}
+
+			bool operator<(clistIterator<T> const &other) const {
+				return (this->_curr < other._curr);
+			}
+
+			bool operator<=(clistIterator<T> const &other) const {
+				return (this->_curr <= other._curr);
+			}
+
+			bool operator>(clistIterator<T> const &other) const {
+				return (this->_curr > other._curr);
+			}
+
+			bool operator>=(clistIterator<T> const &other) const {
+				return (this->_curr >= other._curr);
+			}
 
 	};
 	
 	template <class T> class rlistIterator : public listIterator<T>
 	{
 		public:
-			rlistIterator() {}
+			rlistIterator() {};
 			rlistIterator(Node<T> *curr) : listIterator<T>(curr) {}
 			rlistIterator(rlistIterator const &copy)
 			{
 				*this = copy;
 			}
-			rlistIterator<T>		&operator -- ()
+			T	&operator * ()
 			{
-				this->_curr = this->_curr->next;
-				return this->_curr->prev;
+				return this->_curr->value;
+			}
+			T	*operator -> ()
+			{
+				return &this->curr->value;
+			}
+			
+			rlistIterator<T> &operator = (rlistIterator const &copy)
+			{
+				this->_curr = copy._curr;
+				return *this;
 			}
 
-			rlistIterator<T>		&operator -- (int)
-			{
-				this->_curr = this->_curr->next;
-				return this->_curr;
-			}
-
-			rlistIterator<T>		&operator ++ ()
+			rlistIterator<T>	operator++() 
 			{
 				this->_curr = this->_curr->prev;
-				return this->_curr;
+				return *this;
 			}
 
-			rlistIterator<T>		&operator ++ (int)
+			rlistIterator<T>	operator++ (int)
 			{
-				this->_curr = this->_curr->prev;
-				return this->_curr;
+				//std::cout << "POST" << std::endl;
+				rlistIterator<T> it(this->_curr);
+				this->operator++();
+				return it;
 			}
+
+			rlistIterator<T>	operator-- ()
+			{
+				//std::cout << "PREEEE" << std::endl;
+				this->_curr = this->_curr->next;
+				return *this;
+			}
+
+			rlistIterator<T>	operator-- (int)
+			{
+				rlistIterator<T> temp(this->_curr);
+				this->operator--();
+				return temp;
+			}
+
+			bool operator==(rlistIterator<T> const &other) const {
+			return (this->_curr == other._curr);
+			}
+
+			bool operator!=(rlistIterator<T> const &other) const {
+				return (this->_curr != other._curr);
+			}
+
+			bool operator<(rlistIterator<T> const &other) const {
+				return (this->_curr < other._curr);
+			}
+
+			bool operator<=(rlistIterator<T> const &other) const {
+				return (this->_curr <= other._curr);
+			}
+
+			bool operator>(rlistIterator<T> const &other) const {
+				return (this->_curr > other._curr);
+			}
+
+			bool operator>=(rlistIterator<T> const &other) const {
+				return (this->_curr >= other._curr);
+			}
+
 	};
 
 	template <class T> class rclistIterator : public listIterator<T>
 	{
 		public:
-			rclistIterator() {}
+			rclistIterator() {};
 			rclistIterator(Node<T> *curr) : listIterator<T>(curr) {}
 			rclistIterator(rclistIterator const &copy)
 			{
@@ -198,28 +276,63 @@ namespace ft
 			{
 				return &this->curr->value;
 			}
-			rclistIterator<T>		&operator -- ()
+			
+			rclistIterator<T> &operator = (rclistIterator const &copy)
 			{
-				this->curr = this->curr->next;
-				return this->curr->prev;
+				this->_curr = copy._curr;
+				return *this;
 			}
 
-			rclistIterator<T>		&operator -- (int)
+			rclistIterator<T>	operator++() 
 			{
-				this->curr = this->curr->next;
-				return this->curr;
+				this->_curr = this->_curr->prev;
+				return *this;
 			}
 
-			rclistIterator<T>		&operator ++ ()
+			rclistIterator<T>	operator++ (int)
 			{
-				this->curr = this->curr->prev;
-				return this->curr;
+				//std::cout << "POST" << std::endl;
+				rclistIterator<T> it(this->_curr);
+				this->operator++();
+				return it;
 			}
 
-			rclistIterator<T>		&operator ++ (int)
+			rclistIterator<T>	operator-- ()
 			{
-				this->curr = this->curr->prev;
-				return this->curr;
+				//std::cout << "PREEEE" << std::endl;
+				this->_curr = this->_curr->next;
+				return *this;
+			}
+
+			rclistIterator<T>	operator-- (int)
+			{
+				rclistIterator<T> temp(this->_curr);
+				this->operator--();
+				return temp;
+			}
+
+			bool operator==(rclistIterator<T> const &other) const {
+			return (this->_curr == other._curr);
+			}
+
+			bool operator!=(rclistIterator<T> const &other) const {
+				return (this->_curr != other._curr);
+			}
+
+			bool operator<(rclistIterator<T> const &other) const {
+				return (this->_curr < other._curr);
+			}
+
+			bool operator<=(rclistIterator<T> const &other) const {
+				return (this->_curr <= other._curr);
+			}
+
+			bool operator>(rclistIterator<T> const &other) const {
+				return (this->_curr > other._curr);
+			}
+
+			bool operator>=(rclistIterator<T> const &other) const {
+				return (this->_curr >= other._curr);
 			}
 	};
 	

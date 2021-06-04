@@ -906,6 +906,172 @@ static void testLIST(void)
 		std::cout << "BEGIN-- test 3" << OFF << std::endl;
 	}
 	{
+		// RBEGIN
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::reverse_iterator sys_it = sys_list.rbegin();
+		ft::list<int>::reverse_iterator our_it = our_list.rbegin();
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN" << OFF << std::endl;
+	}
+	{
+		// ++RBEGIN
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::reverse_iterator sys_it = sys_list.rbegin();
+		ft::list<int>::reverse_iterator our_it = our_list.rbegin();
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 1" << OFF << std::endl;
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 3" << OFF << std::endl;
+	}
+	{
+		// RBEGIN++
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::reverse_iterator sys_it = sys_list.rbegin();
+		ft::list<int>::reverse_iterator our_it = our_list.rbegin();
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 1" << OFF << std::endl;
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 3" << OFF << std::endl;
+	}
+	{
+		// --RBEGIN
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::reverse_iterator sys_it = sys_list.rbegin();
+		ft::list<int>::reverse_iterator our_it = our_list.rbegin();
+		--sys_it;
+		--our_it;
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--RBEGIN test 1" << OFF << std::endl;
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--RBEGIN test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--RBEGIN test 3" << OFF << std::endl;
+	}
+	{
+		// RBEGIN--
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::reverse_iterator sys_it = sys_list.rbegin();
+		ft::list<int>::reverse_iterator our_it = our_list.rbegin();
+		sys_it--;
+		our_it--;
+		sys_it--;
+		our_it--;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN-- test 1" << OFF << std::endl;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN-- test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN-- test 3" << OFF << std::endl;
+	}
+	{
 		// ++END
 		std::list<int> sys_list;
 		ft::list<int> our_list;

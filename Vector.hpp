@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/04 10:38:47 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/04 13:31:51 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -465,11 +465,11 @@ namespace ft
 
 		//NON MEMBER FUNCTIONS
 		//ok
-		template <class value_type, class Alloc>
-		friend bool operator== (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
+		template <class v, class Alloc>
+		friend bool operator== (const ft::vector<v,Alloc>& lhs, const ft::vector<v,Alloc>& rhs)
 		{
-			ft::VectorIterator<value_type> it1(lhs.begin());
-			ft::VectorIterator<value_type> it2(rhs.begin());
+			ft::constVectorIterator<v> it1(lhs.begin());
+			ft::VectorIterator<v> it2(rhs.begin());
 			if (lhs.size() == rhs.size())
 			{
 				for (size_t i = 0; i < lhs.size(); i++)
@@ -571,8 +571,8 @@ namespace ft
 		template <class value_type, class Alloc>
   		friend bool operator>= (const ft::vector<value_type,Alloc>& lhs, const ft::vector<value_type,Alloc>& rhs)
 		{
-			ft::VectorIterator<value_type> it1(lhs.begin());
-			ft::VectorIterator<value_type> it2(rhs.begin());
+			ft::constVectorIterator<value_type> it1(lhs.begin());
+			ft::constVectorIterator<value_type> it2(rhs.begin());
 			
 			for (size_t i = 0; i < lhs.size(); i++)
 			{
