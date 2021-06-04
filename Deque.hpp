@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Deque.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:21:23 by dmalori           #+#    #+#             */
-/*   Updated: 2021/06/04 09:21:31 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 11:19:48 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ namespace ft
 		//ok
 		deque(deque const &copy)
 		{
+			this->_alloc = _alloc;
+			this->vec = this->_alloc.allocate(0);
+			this->vec_capacity = 0;
+			this->vec_size = 0;
 			*this = copy;
 		}
 		//ok
@@ -99,6 +103,7 @@ namespace ft
 		//ok
 		deque& operator = (const deque& x)
 		{
+			_alloc.deallocate(this->vec, this->vec_capacity);
 			this->_alloc = x._alloc;
 			this->vec = _alloc.allocate(x.vec_capacity);
 			for (size_type i = 0; i < x.vec_size; i++)
