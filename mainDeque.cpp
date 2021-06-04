@@ -27,4 +27,20 @@ int main()
     s.push_back(3);
     s.push_front(11);
     s.push_back(89);
+
+    ft::deque<int>::iterator    it_f(ft.begin());
+    std::deque<int>::iterator  it_s(s.begin());
+
+    while (it_f != ft.end())
+    {
+        std::cout << *it_f << " ";
+        it_f++;
+    }
+    std::cout << std::endl;
+    while (it_s != s.end())
+    {
+        std::cout << *it_s << " ";
+        it_s++;
+    }
+    
 }

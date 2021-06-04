@@ -6,14 +6,13 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:21:23 by dmalori           #+#    #+#             */
-/*   Updated: 2021/06/04 12:40:04 by forsili          ###   ########.fr       */
+/*   Updated: 2021/06/04 12:53:06 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-#include "IteratorDeque.hpp"
 #include "Vector.hpp"
 
 namespace ft
@@ -291,10 +290,10 @@ namespace ft
 			{
 				reserve(this->vec_capacity * 2);
 			}
-			ft::vector<T>	*tmp;
-			tmp->push_back(val);
-			tmp->insert(this->begin(), this->end());
-			this->vec = tmp;
+			ft::deque<value_type>	tmp;
+			tmp.push_back(val);
+			tmp.insert(++tmp.begin(), this->begin(), this->end());
+			*this = tmp;
 		}
 		
 		void		push_back(const value_type& val)
@@ -314,7 +313,7 @@ namespace ft
 			ft::vector<T>	*tmp;
 			iterator	it(this->begin);
 			it++;
-			tmp->insert(it, this->end());
+			tmp->insert(tmp->begin(), it, this->end());
 			this->vec = tmp;
 		}
 		//ok
