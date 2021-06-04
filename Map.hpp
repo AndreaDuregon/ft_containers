@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 16:57:31 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 15:08:21 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,12 @@ namespace ft
 
 		const_reverse_iterator rbegin() const
 		{
-			return reverse_iterator (this->_tree.rbegin()._curr);
+			return const_reverse_iterator (this->_tree.rbegin()._curr);
 		}
 
 		const_reverse_iterator rend() const
 		{
-			return reverse_iterator (this->_tree.rend()._curr);
+			return const_reverse_iterator (this->_tree.rend()._curr);
 		}
 		//ok
 		iterator find (const key_type& k)

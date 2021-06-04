@@ -643,6 +643,7 @@ template <class T> class  RBTree
 
     binaryTreeIterator<T>   begin(void)
 	{
+		//this->removeGhostNodes();
 		value_type *tmp = this->_root;
 		while(tmp->left)
 			tmp = tmp->left;
@@ -652,6 +653,7 @@ template <class T> class  RBTree
 
     binaryTreeIterator<T>   begin(void) const
 	{
+		//this->removeGhostNodes();
 		value_type *tmp = this->_root;
 		while(tmp->left)
 			tmp = tmp->left;
@@ -661,6 +663,7 @@ template <class T> class  RBTree
 
 	binaryTreeIterator<T>   rbegin(void)
 	{
+		//this->removeGhostNodes();
 		value_type *tmp = this->_root;
 		while(tmp->right->right)
 			tmp = tmp->right;
@@ -669,6 +672,7 @@ template <class T> class  RBTree
 
 	binaryTreeIterator<T>   rbegin(void) const
 	{
+		//this->removeGhostNodes();
 		value_type *tmp = this->_root;
 		while(tmp->right->right)
 			tmp = tmp->right;
@@ -703,7 +707,6 @@ template <class T> class  RBTree
 		value_type *tmp = this->_root;
 		while(tmp->left)
 			tmp = tmp->left;
-		std::cout << *tmp->value << std::endl;
 		tmp->left = this->_end;
 		this->_end->father = tmp;
 		return binaryTreeIterator<T>(this->_end);
@@ -715,7 +718,6 @@ template <class T> class  RBTree
 		value_type *tmp = this->_root;
 		while(tmp->left)
 			tmp = tmp->left;
-		std::cout << *tmp->value << std::endl;
 		tmp->left = this->_end;
 		this->_end->father = tmp;
 		return binaryTreeIterator<T>(this->_end);
@@ -789,7 +791,10 @@ template <class T> class  RBTree
 	{
 		if (this->_end->father)
 		{
-			this->_end->father->right = 0;
+			if (this->_end->father->right == this->_end)
+				this->_end->father->right = 0;
+			else
+				this->_end->father->left = 0;
 			this->_end->father = 0;
 		}
 	}
@@ -797,7 +802,10 @@ template <class T> class  RBTree
 	{
 		if (this->_end->father)
 		{
-			this->_end->father->right = 0;
+			if (this->_end->father->right == this->_end)
+				this->_end->father->right = 0;
+			else
+				this->_end->father->left = 0;
 			this->_end->father = 0;
 		}
 	}
