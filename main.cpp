@@ -1211,6 +1211,146 @@ static void testLIST(void)
 			std::cout << RED;
 		std::cout << "END-- test 3" << OFF << std::endl;
 	}
+	{
+		// ++REND
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::reverse_iterator sys_it = sys_list.rend();
+		ft::list<int>::reverse_iterator our_it = our_list.rend();
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++REND test 1" << OFF << std::endl;
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++REND test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++REND test 3" << OFF << std::endl;
+	}
+	{
+		// END++
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::reverse_iterator sys_it = sys_list.rend();
+		ft::list<int>::reverse_iterator our_it = our_list.rend();
+		sys_it++;
+		our_it++;
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND++ test 1" << OFF << std::endl;
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND++ test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND++ test 3" << OFF << std::endl;
+	}
+	{
+		// --END
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::iterator sys_it = sys_list.end();
+		ft::list<int>::iterator our_it = our_list.end();
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 1" << OFF << std::endl;
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 3" << OFF << std::endl;
+	}
+	{
+		// END--
+		std::list<int> sys_list;
+		ft::list<int> our_list;
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		sys_list.push_back(1);
+		sys_list.push_back(2);
+		sys_list.push_back(32);
+		our_list.push_back(1);
+		our_list.push_back(2);
+		our_list.push_back(32);
+		std::list<int>::iterator sys_it = sys_list.end();
+		ft::list<int>::iterator our_it = our_list.end();
+		sys_it--;
+		our_it--;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 1" << OFF << std::endl;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 3" << OFF << std::endl;
+	}
 	// ------------------OPERATORI----------------------
 	std::cout << YELLOW << "LIST OPERATORE == [SYS vs OUR]" << OFF << std::endl;
 	{
