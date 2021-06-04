@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/06/03 12:00:57 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 12:44:08 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -642,4 +642,9 @@ namespace ft
 		}
 
 	};
+
+	template <class T, class Alloc> void swap (ft::list<T,Alloc>& x, ft::list<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 } 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque.hpp                                          :+:      :+:    :+:   */
+/*   Deque.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:21:23 by dmalori           #+#    #+#             */
-/*   Updated: 2021/06/04 12:40:04 by forsili          ###   ########.fr       */
+/*   Updated: 2021/06/04 12:44:53 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -610,6 +610,11 @@ namespace ft
 			}
 			return true;
 		}
-};
+	};
+
+	template <class T, class Alloc> void swap (ft::deque<T,Alloc>& x, ft::deque<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 }
 
