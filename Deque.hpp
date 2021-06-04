@@ -6,7 +6,7 @@
 /*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:21:23 by dmalori           #+#    #+#             */
-/*   Updated: 2021/06/04 12:53:06 by forsili          ###   ########.fr       */
+/*   Updated: 2021/06/04 12:57:21 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,12 +284,6 @@ namespace ft
 		//ok
 		void		push_front(const value_type& val)
 		{
-			if (this->vec_capacity == 0)
-				this->vec_capacity = 1;
-			if (this->vec_size >= this->vec_capacity)
-			{
-				reserve(this->vec_capacity * 2);
-			}
 			ft::deque<value_type>	tmp;
 			tmp.push_back(val);
 			tmp.insert(++tmp.begin(), this->begin(), this->end());
@@ -310,11 +304,10 @@ namespace ft
 
 		void		pop_front()
 		{
-			ft::vector<T>	*tmp;
-			iterator	it(this->begin);
-			it++;
-			tmp->insert(tmp->begin(), it, this->end());
-			this->vec = tmp;
+			ft::deque<value_type>	tmp;
+			iterator	it(this->begin());
+			tmp.insert(tmp.begin(), ++it, this->end());
+			*this = tmp;
 		}
 		//ok
 		void 		pop_back()
@@ -609,6 +602,11 @@ namespace ft
 			}
 			return true;
 		}
-};
+	};
+
+	template <class T, class Alloc> void swap (ft::deque<T,Alloc>& x, ft::deque<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 }
 

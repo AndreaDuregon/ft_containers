@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/04 10:38:47 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/06/04 12:43:37 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -589,4 +589,9 @@ namespace ft
 			return true;
 		}
 	};
+
+	template <class T, class Alloc> void swap (ft::vector<T,Alloc>& x, ft::vector<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 }

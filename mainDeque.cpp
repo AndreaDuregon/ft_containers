@@ -42,5 +42,28 @@ int main()
         std::cout << *it_s << " ";
         it_s++;
     }
+    std::cout << std::endl;
+
+    ft.pop_front();
+    ft.pop_front();
+    ft.pop_front();
+
+    s.pop_front();
+    s.pop_front();
+    s.pop_front();
     
+    it_f = ft.begin();
+    it_s = s.begin();
+    while (it_f != ft.end())
+    {
+        std::cout << *it_f << " ";
+        it_f++;
+    }
+    std::cout << std::endl;
+    while (it_s != s.end())
+    {
+        std::cout << *it_s << " ";
+        it_s++;
+    }
+    std::cout << std::endl;
 }
