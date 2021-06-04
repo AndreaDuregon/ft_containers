@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 10:18:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 12:56:21 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 15:18:50 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ namespace ft
 {
     template <class T> class setIterator
     {
-    protected:
     public:
         ft::binaryTreeIterator<T> it;
         /* MEMBER */
         //typedef ???			iterator_category;
-        typedef T                   	value_type;
+        typedef T	value_type;
         typedef std::ptrdiff_t 	        difference_type;
         typedef value_type *	        pointer;
         typedef value_type &	        reference;
@@ -109,36 +108,90 @@ namespace ft
     template <class T>
     class csetIterator : public setIterator<T>
     {
-    protected:
     public:
         typedef T	value_type;
         csetIterator() {};
-        csetIterator(TreeNode<value_type> *curr) : setIterator<value_type>(curr) {}
+        csetIterator(TreeNode<value_type> *curr)
+        {
+            this->it = ft::binaryTreeIterator<value_type>(curr);
+        };
+
         csetIterator(csetIterator const &copy)
         {
             *this = copy;
         }
 
-        value_type const    &operator * ()
+        csetIterator &operator = (csetIterator const &copy)
+        {
+            this->it = copy.it;
+            return *this;
+        }
+
+        value_type		const	&operator * ()
         {
             return *this->it._curr->value;
         }
 
-        value_type const    *operator -> ()
+        csetIterator operator++()
+        {
+            //std::cout << "PREEEE" << std::endl;
+            this->it.operator++();
+            return *this;
+        }
+
+        csetIterator	operator++ (int)
+        {
+            //std::cout << "POST" << std::endl;
+            this->it.operator++(0);
+            return *this;
+        }
+
+        csetIterator	operator-- ()
+        {
+            this->it.operator--();
+            return *this;
+        }
+
+        csetIterator operator-- (int)
+        {
+            this->it.operator--(0);
+            return *this;
+        }
+
+        value_type		const	*operator -> ()
         {
             return this->it._curr->value;
         }
 
+        bool operator==(csetIterator const &other) const {
+            return (this->it == other.it);
+        }
+
+        bool operator!=(csetIterator const &other) const {
+            return (this->it != other.it);
+        }
+
+        bool operator<(csetIterator const &other) const {
+            return (this->it < other.it);
+        }
+
+        bool operator<=(csetIterator const &other) const {
+            return (this->it <= other.it);
+        }
+
+        bool operator>(csetIterator const &other) const {
+            return (this->it > other.it);
+        }
+
+        bool operator>=(csetIterator const &other) const {
+            return (this->it >= other.it);
+        }
     };
 
     template <class T> class reverseSetIterator : public setIterator<T>
     {
     public:
         typedef T	value_type;
-        typedef std::ptrdiff_t 	        difference_type;
-        typedef value_type *	        pointer;
-        typedef value_type &	        reference;
-
         reverseSetIterator() {};
         reverseSetIterator(TreeNode<value_type> *curr)
         {
@@ -150,9 +203,19 @@ namespace ft
             *this = copy;
         }
 
+        reverseSetIterator &operator = (reverseSetIterator const &copy)
+        {
+            this->it = copy.it;
+            return *this;
+        }
+
+        value_type		&operator * ()
+        {
+            return *this->it._curr->value;
+        }
+
         reverseSetIterator operator++()
         {
-            //std::cout << "PREEEE" << std::endl;
             this->it.operator--();
             return *this;
         }
@@ -166,6 +229,7 @@ namespace ft
 
         reverseSetIterator	operator-- ()
         {
+            //std::cout << "PREEEE" << std::endl;
             this->it.operator++();
             return *this;
         }
@@ -175,16 +239,41 @@ namespace ft
             this->it.operator++(0);
             return *this;
         }
+
+        value_type		*operator -> ()
+        {
+            return this->it._curr->value;
+        }
+
+        bool operator==(reverseSetIterator const &other) const {
+            return (this->it == other.it);
+        }
+
+        bool operator!=(reverseSetIterator const &other) const {
+            return (this->it != other.it);
+        }
+
+        bool operator<(reverseSetIterator const &other) const {
+            return (this->it < other.it);
+        }
+
+        bool operator<=(reverseSetIterator const &other) const {
+            return (this->it <= other.it);
+        }
+
+        bool operator>(reverseSetIterator const &other) const {
+            return (this->it > other.it);
+        }
+
+        bool operator>=(reverseSetIterator const &other) const {
+            return (this->it >= other.it);
+        }
     };
 
-    template <class T> class constReverseSetIterator : public reverseSetIterator<T>
+    template <class T> class constReverseSetIterator : public setIterator<T>
     {
     public:
         typedef T	value_type;
-        typedef std::ptrdiff_t 	        difference_type;
-        typedef value_type *	        pointer;
-        typedef value_type &	        reference;
-
         constReverseSetIterator() {};
         constReverseSetIterator(TreeNode<value_type> *curr)
         {
@@ -196,15 +285,70 @@ namespace ft
             *this = copy;
         }
 
-        value_type const		&operator * ()
+        constReverseSetIterator &operator = (constReverseSetIterator const &copy)
+        {
+            this->it = copy.it;
+            return *this;
+        }
+
+        value_type	const	&operator * ()
         {
             return *this->it._curr->value;
         }
 
-        value_type const		*operator -> ()
+        constReverseSetIterator operator++()
+        {
+            this->it.operator--();
+            return *this;
+        }
+
+        constReverseSetIterator	operator++ (int)
+        {
+            //std::cout << "POST" << std::endl;
+            this->it.operator++(0);
+            return *this;
+        }
+
+        constReverseSetIterator	operator-- ()
+        {
+            //std::cout << "PREEEE" << std::endl;
+            this->it.operator++();
+            return *this;
+        }
+
+        constReverseSetIterator operator-- (int)
+        {
+            this->it.operator--(0);
+            return *this;
+        }
+
+        value_type	const	*operator -> ()
         {
             return this->it._curr->value;
         }
 
+        bool operator==(constReverseSetIterator const &other) const {
+            return (this->it == other.it);
+        }
+
+        bool operator!=(constReverseSetIterator const &other) const {
+            return (this->it != other.it);
+        }
+
+        bool operator<(constReverseSetIterator const &other) const {
+            return (this->it < other.it);
+        }
+
+        bool operator<=(constReverseSetIterator const &other) const {
+            return (this->it <= other.it);
+        }
+
+        bool operator>(constReverseSetIterator const &other) const {
+            return (this->it > other.it);
+        }
+
+        bool operator>=(constReverseSetIterator const &other) const {
+            return (this->it >= other.it);
+        }
     };
 }

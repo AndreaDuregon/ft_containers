@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 09:35:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 14:25:00 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 15:20:15 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,7 +369,7 @@ namespace ft
 		template <class v, class c, class a>
 		friend bool operator < (const ft::set<v,c,a>& lhs, const ft::set<v,c,a>& rhs)
 		{
-			for (iterator it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
+			for (ft::csetIterator<v> it = lhs.begin(), it2 = rhs.begin(); it != lhs.end(); ++it, ++it2)
 			{
 				if (*it != *it2)
 				{

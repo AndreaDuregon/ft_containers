@@ -7649,6 +7649,175 @@ static void testSET(void)
 			std::cout << RED;
 		std::cout << "END-- test 3" << OFF << std::endl;
 	}
+	{
+		// BEGIN
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		our_set.insert(100);
+		our_set.insert(10);
+
+		std::set<int>::reverse_iterator sys_it = sys_set.rbegin();
+		ft::set<int>::reverse_iterator our_it = our_set.rbegin();
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN" << OFF << std::endl;
+	}
+	{
+		// ++BEGIN
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
+
+		std::set<int>::reverse_iterator sys_it = sys_set.rbegin();
+		ft::set<int>::reverse_iterator our_it = our_set.rbegin();
+
+		++sys_it;
+		++our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 1" << OFF << std::endl;
+		++sys_it;
+		++our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 2" << OFF << std::endl;
+		++sys_it;
+		++our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 3" << OFF << std::endl;
+	}
+	{
+		// BEGIN++
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
+
+		std::set<int>::reverse_iterator sys_it = sys_set.rbegin();
+		ft::set<int>::reverse_iterator our_it = our_set.rbegin();
+
+		sys_it++;
+		our_it++;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 1" << OFF << std::endl;
+		sys_it++;
+		our_it++;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 2" << OFF << std::endl;
+		sys_it++;
+		our_it++;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 3" << OFF << std::endl;
+	}
+	{
+		// --END
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
+
+		std::set<int>::reverse_iterator sys_it = sys_set.rend();
+		ft::set<int>::reverse_iterator our_it = our_set.rend();
+
+		--sys_it;
+		--our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 1" << OFF << std::endl;
+		--sys_it;
+		--our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 2" << OFF << std::endl;
+		--sys_it;
+		--our_it;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 3" << OFF << std::endl;
+	}
+	{
+		// END--
+		std::set<int> sys_set;
+		ft::set<int> our_set;
+		sys_set.insert(100);
+		sys_set.insert(10);
+		sys_set.insert(1);
+		sys_set.insert(123);
+		our_set.insert(100);
+		our_set.insert(10);
+		our_set.insert(1);
+		our_set.insert(123);
+
+		std::set<int>::reverse_iterator sys_it = sys_set.rend();
+		ft::set<int>::reverse_iterator our_it = our_set.rend();
+
+		sys_it--;
+		our_it--;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 1" << OFF << std::endl;
+		sys_it--;
+		our_it--;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 2" << OFF << std::endl;
+		sys_it--;
+		our_it--;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 3" << OFF << std::endl;
+	}
 	std::cout << YELLOW << "SET OPERATORE == [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::set<int> sys_set;
