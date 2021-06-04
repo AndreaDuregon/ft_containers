@@ -6,7 +6,7 @@
 /*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:56:49 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/06/04 14:26:19 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 14:28:04 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -642,4 +642,9 @@ namespace ft
 		}
 
 	};
+
+	template <class T, class Alloc> void swap (ft::list<T,Alloc>& x, ft::list<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 } 
