@@ -10917,6 +10917,218 @@ static void testDEQUE(void)
 			std::cout << RED;
 		std::cout << "END-- test 3" << OFF << std::endl;
 	}
+	{
+		// BEGIN
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		std::deque<int>::reverse_iterator sys_it = sys_deque.rbegin();
+		ft::deque<int>::reverse_iterator our_it = our_deque.rbegin();
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN" << OFF << std::endl;
+	}
+	{
+		// ++BEGIN
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		std::deque<int>::reverse_iterator sys_it = sys_deque.rbegin();
+		ft::deque<int>::reverse_iterator our_it = our_deque.rbegin();
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 1" << OFF << std::endl;
+		if (*++sys_it == *++our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "++RBEGIN test 3" << OFF << std::endl;
+	}
+	{
+		// BEGIN++
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		std::deque<int>::reverse_iterator sys_it = sys_deque.rbegin();
+		ft::deque<int>::reverse_iterator our_it = our_deque.rbegin();
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 1" << OFF << std::endl;
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN++ test 3" << OFF << std::endl;
+	}
+	{
+		// BEGIN--
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		std::deque<int>::reverse_iterator sys_it = sys_deque.rbegin();
+		ft::deque<int>::reverse_iterator our_it = our_deque.rbegin();
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "RBEGIN--" << OFF << std::endl;
+	}
+	{
+		// END++
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		std::deque<int>::reverse_iterator sys_it = sys_deque.rbegin();
+		ft::deque<int>::reverse_iterator our_it = our_deque.rbegin();
+		sys_it++;
+		our_it++;
+		if (*sys_it++ == *our_it++)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND++" << OFF << std::endl;
+	}
+	{
+		// --END
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		std::deque<int>::reverse_iterator sys_it = sys_deque.rend();
+		ft::deque<int>::reverse_iterator our_it = our_deque.rend();
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 1" << OFF << std::endl;
+		if (*--sys_it == *--our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "--REND test 3" << OFF << std::endl;
+	}
+	{
+		// END--
+		std::deque<int> sys_deque;
+		ft::deque<int> our_deque;
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		sys_deque.push_back(1);
+		sys_deque.push_back(2);
+		sys_deque.push_back(32);
+		our_deque.push_back(1);
+		our_deque.push_back(2);
+		our_deque.push_back(32);
+		std::deque<int>::reverse_iterator sys_it = sys_deque.rend();
+		ft::deque<int>::reverse_iterator our_it = our_deque.rend();
+		sys_it--;
+		our_it--;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 1" << OFF << std::endl;
+		if (*sys_it-- == *our_it--)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 2" << OFF << std::endl;
+		if (*sys_it == *our_it)
+			std::cout << GREEN;
+		else
+			std::cout << RED;
+		std::cout << "REND-- test 3" << OFF << std::endl;
+	}
 	// ------------------OPERATORI----------------------
 	std::cout << YELLOW << "OPERATORE == [SYS vs OUR]" << OFF << std::endl;
 	{
@@ -11702,3 +11914,5 @@ int main(int argc, char **argv)
 	if (test == "deque")
 		testDEQUE();
 }
+
+//COPIA STA ZORBA

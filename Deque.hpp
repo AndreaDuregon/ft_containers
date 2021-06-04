@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque.hpp                                          :+:      :+:    :+:   */
+/*   Deque.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <forsili@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:21:23 by dmalori           #+#    #+#             */
-/*   Updated: 2021/06/04 12:57:21 by forsili          ###   ########.fr       */
+/*   Updated: 2021/06/04 15:50:57 by dmalori          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ namespace ft
 		{
 			_alloc.deallocate(this->vec, this->vec_capacity); 
 		}
-
 		// ITERATOR
 		//ok
 		iterator 				begin()
@@ -143,25 +142,24 @@ namespace ft
 
 		reverse_iterator 		rbegin()
 		{
-			return iterator(&this->vec[this->vec_size - 1]);
+			return reverse_iterator(&this->vec[this->vec_size - 1]);
 			
 		}
 
 		const_reverse_iterator	rbegin() const
 		{
-			return const_iterator(&this->vec[this->vec_size - 1]);
+			return const_reverse_iterator(&this->vec[this->vec_size - 1]);
 		}
 
 		reverse_iterator		rend()
 		{
-			return iterator(this->vec - 1);
+			return reverse_iterator(&this->vec[-1]);
 		}
 		
 		const_reverse_iterator	rend() const
 		{
-			return const_iterator(this->vec - 1);
+			return const_reverse_iterator(&this->vec[-1]);
 		}
-
 		// CAPACITY
 		//ok
 		size_type	size() const
