@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmalori <dmalori@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:41:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/06/03 11:55:42 by dmalori          ###   ########.fr       */
+/*   Updated: 2021/06/04 10:38:47 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ namespace ft
 		//ok
 		vector(vector const &copy)
 		{
+			this->alloc = alloc;
+			this->vec = this->alloc.allocate(0);
+			this->vec_capacity = 0;
+			this->vec_size = 0;
 			*this = copy;
 		}
 		//ok
@@ -77,6 +81,7 @@ namespace ft
 		//ok
 		vector& operator = (const vector& x)
 		{
+			alloc.deallocate(this->vec, this->vec_capacity);
 			this->alloc = x.alloc;
 			this->vec = alloc.allocate(x.vec_capacity);
 			for (size_type i = 0; i < x.vec_size; i++)
@@ -88,7 +93,7 @@ namespace ft
 		//ok
 		~vector()
 		{
-			alloc.deallocate(this->vec, this->vec_capacity); 
+			alloc.deallocate(this->vec, this->vec_capacity);
 		}
 		// ITERATOR
 		//ok

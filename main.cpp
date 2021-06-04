@@ -2821,7 +2821,7 @@ static void testVECTOR(void)
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	// ----------------------INIT COPY CONSTRUCTOR------------------
+	//----------------------INIT COPY CONSTRUCTOR------------------
 	std::cout << YELLOW << "INIT VECTOR COPY CONSTRUCTOR [SYS vs OUR]" << OFF << std::endl;
 	{
 		std::vector<int> sys_vector(100);
@@ -2840,15 +2840,16 @@ static void testVECTOR(void)
 		ft::vector<int> our_vector2;
 		std::vector<int> sys_vector(100, 8);
 		ft::vector<int> our_vector(100, 8);
-		sys_vector = sys_vector2;
-		our_vector = our_vector2;
+		sys_vector2 = sys_vector;
+		our_vector2 = our_vector;
 
 		if (equalSysFt(sys_vector2, our_vector2))
 			std::cout << GREEN << "EQUAL 100%" << OFF << std::endl;
 		else
 			std::cout << RED << "NOT EQUAL" << OFF << std::endl;
 	}
-	// --------------------LIST METHODS--------------------
+	
+	//--------------------LIST METHODS--------------------
 	std::cout << YELLOW << "VECTOR METHODS [SYS vs OUR]" << OFF << std::endl;
 	{
 		// PUSH BACK
@@ -3012,6 +3013,7 @@ static void testVECTOR(void)
 			std::cout << RED;
 		std::cout << "ASSIGN (INT, INT)" << OFF << std::endl;
 	}
+
 	{
 		// INSERT
 		std::vector<int> sys_vector;
@@ -3217,6 +3219,7 @@ static void testVECTOR(void)
 			std::cout << RED;
 		std::cout << "CLEAR" << OFF << std::endl;
 	}
+	
 }
 
 static void testSTACK(void)
