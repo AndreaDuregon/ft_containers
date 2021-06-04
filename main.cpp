@@ -270,11 +270,11 @@ static bool equalSysFt(std::list<int> &sys_list, ft::list<int> &our_list)
 		std::cout << "BACK " << sys_list.back() << " != " << our_list.back() << " ";
 		return false;
 	}
-	//if (sys_list.max_size() != our_list.max_size())
-	//{
-	//	std::cout << "MAX SIZE " << sys_list.max_size() << " != " << our_list.max_size() << " ";
-	//	return false;
-	//}
+	if (sys_list.max_size() != our_list.max_size())
+	{
+		std::cout << "MAX SIZE " << sys_list.max_size() << " != " << our_list.max_size() << " ";
+		return false;
+	}
 	return true;
 }
 
@@ -355,11 +355,11 @@ static bool equalSysFt(std::vector<int> &sys_vector, ft::vector<int> &our_vector
 		std::cout << "BACK " << sys_vector.back() << " != " << our_vector.back() << " ";
 		return false;
 	}
-	//if (sys_vector.max_size() != our_vector.max_size())
-	//{
-	//	std::cout << "MAX SIZE " << sys_vector.max_size() << " != " << our_vector.max_size() << " ";
-	//	return false;
-	//}
+	if (sys_vector.max_size() != our_vector.max_size())
+	{
+		std::cout << "MAX SIZE " << sys_vector.max_size() << " != " << our_vector.max_size() << " ";
+		return false;
+	}
 	return true;
 }
 
@@ -436,11 +436,11 @@ static bool equalSysFt(std::deque<int> &sys_deque, ft::deque<int> &our_deque)
 		std::cout << "BACK " << sys_deque.back() << " != " << our_deque.back() << " ";
 		return false;
 	}
-	//if (sys_deque.max_size() != our_deque.max_size())
-	//{
-	//	std::cout << "MAX SIZE " << sys_deque.max_size() << " != " << our_deque.max_size() << " ";
-	//	return false;
-	//}
+	if (sys_deque.max_size() != our_deque.max_size())
+	{
+		std::cout << "MAX SIZE " << sys_deque.max_size() << " != " << our_deque.max_size() << " ";
+		return false;
+	}
 	return true;
 }
 
